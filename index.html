@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreDami — Everyday Tools. Life Made Simpler.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:        #9b8ec4;
+      --purple-dim:    rgba(155,142,196,0.10);
+      --purple-border: rgba(155,142,196,0.18);
+      --purple-glow:   rgba(155,142,196,0.08);
+      --bg:            #0f0f12;
+      --surface:       #141418;
+      --border:        rgba(255,255,255,0.06);
+      --text:          #eeeaf4;
+      --muted:         rgba(238,234,244,0.36);
+      --mid:           rgba(238,234,244,0.60);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Canvas wrap ── */
+    #cube-wrap {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #cube-canvas { position: absolute; top: 0; left: 0; opacity: 0.55; }
+
+    /* ── Soft purple hero glow ── */
+    .hero-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      width: 700px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(155,142,196,0.10), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(15,15,18,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; justify-content: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    nav > .lang-switcher { justify-self: end; }
+
+    /* ── Layout ── */
+    main { position: relative; z-index: 1; }
+    section { max-width: 1060px; margin: 0 auto; padding: 130px 56px; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 56px 100px;
+      max-width: 1060px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 32px;
+    }
+    .hero-title {
+      font-size: clamp(4rem, 11vw, 8.5rem);
+      font-weight: 900;
+      letter-spacing: -4px;
+      line-height: 0.9;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    .hero-divider {
+      width: 40px; height: 1px;
+      background: var(--purple);
+      opacity: 0.5;
+      margin: 0 auto 28px;
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 52px;
+      letter-spacing: 0.2px;
+    }
+    .hero-sub strong { color: var(--mid); font-weight: 500; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; }
+    .btn-main {
+      display: inline-block;
+      padding: 13px 32px;
+      border-radius: 10px;
+      background: var(--purple-dim);
+      border: 1px solid var(--purple-border);
+      color: var(--purple);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-main:hover { background: rgba(155,142,196,0.16); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block;
+      padding: 13px 32px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--mid);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--purple-border); color: var(--text); transform: translateY(-2px); }
+
+    .scroll-arrow {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      animation: scrollBob 2.4s ease-in-out infinite;
+      transition: opacity 0.2s;
+    }
+    .scroll-arrow-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple);
+      opacity: 0.5;
+    }
+    .scroll-arrow-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--purple-border);
+      background: var(--purple-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .scroll-arrow:hover .scroll-arrow-circle {
+      background: rgba(155,142,196,0.18);
+      border-color: rgba(155,142,196,0.4);
+    }
+    @keyframes scrollBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(9px); }
+    }
+
+    /* ── Section ── */
+    .sec-label { font-size: 0.67rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+    .sec-title { font-size: clamp(1.9rem, 3.8vw, 2.6rem); font-weight: 800; letter-spacing: -0.6px; line-height: 1.1; margin-bottom: 16px; }
+    .sec-desc { font-size: 0.97rem; color: var(--muted); line-height: 1.85; max-width: 480px; margin-bottom: 60px; }
+
+    /* Section separator */
+    .sep {
+      max-width: 1060px;
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple-border), transparent);
+    }
+
+    /* ── ABOUT ── */
+    #about { display: flex; gap: 80px; align-items: center; flex-wrap: wrap; }
+    .about-text { flex: 1; min-width: 280px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; flex: 0 0 auto; }
+    .stat-box {
+      padding: 28px 30px;
+      background: var(--surface);
+      text-align: center;
+      min-width: 128px;
+    }
+    .stat-box:first-child  { border-radius: 12px 0 0 0; }
+    .stat-box:nth-child(2) { border-radius: 0 12px 0 0; }
+    .stat-box:last-child   { border-radius: 0 0 12px 12px; grid-column: 1 / -1; }
+    .stat-num { font-size: 2.4rem; font-weight: 800; color: var(--purple); display: block; letter-spacing: -1px; }
+    .stat-lbl { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; display: block; }
+
+    /* ── APPS ── */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .app-card {
+      position: relative;
+      padding: 28px 26px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .app-card:hover {
+      border-color: var(--purple-border);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(155,142,196,0.08);
+    }
+    .app-icon { font-size: 1.9rem; margin-bottom: 16px; display: block; }
+    .app-tag {
+      display: inline-block; font-size: 0.6rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 6px;
+      background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border);
+      margin-bottom: 12px;
+    }
+    .app-name { font-size: 1.08rem; font-weight: 700; margin-bottom: 9px; letter-spacing: -0.2px; }
+    .app-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .app-platforms { display: flex; gap: 6px; flex-wrap: wrap; }
+    .platform-badge {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .app-status {
+      position: absolute; top: 16px; right: 16px;
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 6px;
+    }
+    .status-live { background: rgba(74,222,128,0.08); color: #74c99a; border: 1px solid rgba(74,222,128,0.15); }
+    .status-wip  { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border); }
+    .status-plan { background: rgba(255,255,255,0.03); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ── SLIDER ── */
+    .slider-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .slider-nav { display: flex; gap: 8px; }
+    .slider-btn {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--purple-border);
+      background: var(--purple-dim);
+      color: var(--purple);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .slider-btn:hover { background: rgba(155,142,196,0.2); transform: scale(1.05); }
+    .slider-btn:disabled { opacity: 0.25; cursor: default; transform: none; }
+
+    .slider-hint {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .slider-track-wrap {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+    .slider-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+      width: 560px;
+      max-width: 100%;
+    }
+    .slide {
+      flex: 0 0 560px;
+      max-width: 100%;
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .slide:hover {
+      border-color: var(--purple-border);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(155,142,196,0.1);
+    }
+    .slide-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .slide-icon { font-size: 2.2rem; }
+    .slide-name { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.2px; }
+    .slide-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.7; flex: 1; }
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .slide-arrow {
+      font-size: 1.1rem;
+      color: var(--purple);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .slide:hover .slide-arrow { opacity: 1; transform: translateX(0); }
+
+    .slider-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .slide-brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .slide-brand-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #9b8ec4, #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+    .slide-app-icon {
+      width: 80px; height: 80px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .slide-tagline {
+      font-size: 0.85rem;
+      color: var(--purple);
+      font-style: normal;
+      margin-top: 4px;
+    }
+    .slide-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .slide-feat {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--purple-dim);
+      border: 1px solid var(--purple-border);
+      color: var(--purple);
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 1px solid var(--purple-border);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, width 0.2s;
+    }
+    .dot.active {
+      background: var(--purple);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ── ROADMAP ── */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 40px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--purple-border), transparent);
+    }
+    .tl-item { position: relative; padding: 0 0 44px 32px; }
+    .tl-dot {
+      position: absolute; left: -4px; top: 6px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--purple); opacity: 0.7;
+    }
+    .tl-date { font-size: 0.66rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
+    .tl-title { font-size: 1rem; font-weight: 700; margin-bottom: 7px; }
+    .tl-text  { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    .contact-box {
+      display: inline-block;
+      padding: 72px 80px;
+      background: var(--surface);
+      border: 1px solid var(--purple-border);
+      border-radius: 20px;
+      box-shadow: 0 0 80px rgba(155,142,196,0.05);
+    }
+    .contact-title { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 14px; }
+    .contact-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 44px; max-width: 360px; margin-left: auto; margin-right: auto; }
+    .contact-link {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 10px;
+      background: var(--purple-dim);
+      border: 1px solid var(--purple-border);
+      color: var(--purple);
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-link:hover { background: rgba(155,142,196,0.16); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 64px;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      position: relative; z-index: 1; text-align: center;
+    }
+    .footer-logo { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .footer-tagline { font-size: 0.65rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.5px; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; }
+    .footer-links a { color: var(--muted); text-decoration: none; display: flex; align-items: center; transition: color 0.2s, transform 0.2s; }
+    .footer-links a:hover { color: var(--purple); transform: translateY(-2px); }
+    .footer-copy { font-size: 0.68rem; color: var(--muted); }
+
+    /* ── Lang Switcher ── */
+    .lang-switcher { position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 5px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.78rem; font-weight: 600;
+      padding: 4px 6px;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-family: inherit;
+      letter-spacing: 0.3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-chevron { transition: transform 0.2s; }
+    .lang-switcher.open .lang-chevron { transform: rotate(180deg); }
+    .lang-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: #18181d;
+      border: 1px solid var(--purple-border);
+      border-radius: 10px;
+      padding: 6px;
+      display: none; flex-direction: column; gap: 2px;
+      min-width: 130px;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .lang-switcher.open .lang-dropdown { display: flex; }
+    .lang-option {
+      background: none; border: none;
+      color: var(--muted);
+      font-size: 0.82rem; font-weight: 500;
+      padding: 8px 12px; border-radius: 6px;
+      cursor: pointer; text-align: left;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-option:hover { background: var(--purple-dim); color: var(--text); }
+    .lang-option.active { color: var(--purple); background: var(--purple-dim); }
+
+    /* ── Fade-in ── */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      #hero { padding: 120px 24px 80px; }
+      #about { flex-direction: column; gap: 40px; }
+      .contact-box { padding: 48px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cube background -->
+  <div id="cube-wrap"><canvas id="cube-canvas"></canvas></div>
+
+  <nav>
+    <div></div>
+    <ul class="nav-links">
+      <li><a href="#about" id="navAbout">About</a></li>
+      <li><a href="#apps" id="navProjects">Our Projects</a></li>
+      <li><a href="#contact" id="navContact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn" id="langBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+        <span id="langCurrent">EN</span>
+        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4l4 4 4-4"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-option active" data-lang="en">English</button>
+        <button class="lang-option" data-lang="ru">Русский</button>
+        <button class="lang-option" data-lang="fr">Français</button>
+        <button class="lang-option" data-lang="es">Español</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <div id="hero">
+      <div class="hero-glow"></div>
+      <h1 class="hero-title" style="background:linear-gradient(135deg,#9b8ec4,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GreDami</h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub" id="heroSub"><strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler</p>
+      <!--<div class="hero-actions">
+        <a href="#apps" class="btn-main">Our Projects</a>
+      </div> -->
+      <a href="#about" class="scroll-arrow">
+        <span class="scroll-arrow-label" id="scrollLabel">Scroll</span>
+        <div class="scroll-arrow-circle">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-text fade-up">
+        <p class="sec-label" id="aboutLabel">About</p>
+        <h2 class="sec-title" id="aboutTitle">Built by one<br>Made for many</h2>
+        <p class="sec-desc" id="aboutDesc1">GreDami is an independent digital studio focused on crafting practical, beautifully minimal tools that solve real everyday problems. No bloat, no noise — just software that works.</p>
+        <p class="sec-desc" id="aboutDesc2" style="margin-bottom:0;">Every product is designed with one principle: <strong style="color:var(--mid);">simplicity is the ultimate sophistication.</strong></p>
+      </div>
+      <div class="about-stats fade-up">
+        <div class="stat-box"><span class="stat-num">2+</span><span class="stat-lbl" id="statReleased">Projects Released</span></div>
+        <div class="stat-box"><span class="stat-num">1</span><span class="stat-lbl" id="statSoon">Coming Soon</span></div>
+        <div class="stat-box"><span class="stat-num">∞</span><span class="stat-lbl" id="statIdeas">Ideas</span></div>
+      </div>
+    </section>
+
+    <div class="sep"></div>
+
+    <!-- PROJECTS SLIDER -->
+    <section id="apps">
+      <div class="slider-header fade-up">
+        <div>
+          <h2 class="sec-title" id="projectsTitle">Our Projects</h2>
+          <p class="sec-desc" id="projectsDesc" style="margin-bottom:0;">Every project starts with a problem worth solving</p>
+        </div>
+        <div class="slider-nav">
+          <button class="slider-btn" id="prevBtn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13l-4-4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="slider-btn" id="nextBtn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 5l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <p class="slider-hint fade-up">↓ Click a card for more details</p>
+
+      <div class="slider-track-wrap fade-up">
+        <div class="slider-track" id="sliderTrack">
+
+          <a class="slide" href="https://mumisgreg.github.io/GoBag/" target="_blank">
+            <div class="slide-brand">
+              <img src="gobag-icon.png" alt="GoBag+" class="slide-app-icon" />
+              <span class="app-status status-live">Released</span>
+            </div>
+            <div>
+              <h3 class="slide-name" style="margin-top:8px;">GoBag+</h3>
+              <p class="slide-tagline">Be ready before disaster strikes</p>
+            </div>
+            <p class="slide-desc">Stay ready for any emergency. Build your go bag, track home supplies, get expiry alerts, and share with your family via iCloud.</p>
+            <div class="slide-footer">
+              <div class="app-platforms"><span class="platform-badge">iOS</span><span class="platform-badge">Mac</span></div>
+              <span class="slide-arrow">→</span>
+            </div>
+          </a>
+
+          <a class="slide slide-mplanner" href="https://mumisgreg.github.io/M.Planner/" target="_blank">
+            <div class="slide-brand">
+              <img src="mplanner-icon.png" alt="M. Planner" class="slide-app-icon" />
+              <span class="app-status status-live">Released</span>
+            </div>
+            <div>
+              <h3 class="slide-name" style="margin-top:8px;">M. Planner</h3>
+              <p class="slide-tagline">Track and Plan Your Service</p>
+            </div>
+            <p class="slide-desc">Track your ministry hours, plan future activities, and visualize your progress with this beautifully designed, multilingual planning app.</p>
+            <div class="slide-footer">
+              <div class="app-platforms"><span class="platform-badge">iOS</span><span class="platform-badge">Mac</span></div>
+              <span class="slide-arrow">→</span>
+            </div>
+          </a>
+
+          <div class="slide" style="cursor:default;">
+            <div class="slide-brand">
+              <img src="finix-icon.png" alt="Finix" class="slide-app-icon" />
+              <span class="app-status status-wip">Coming Soon</span>
+            </div>
+            <div>
+              <h3 class="slide-name" style="margin-top:8px;">Finix</h3>
+              <p class="slide-tagline"></p>
+            </div>
+            <p class="slide-desc">Something new is being built. Details coming soon.</p>
+            <div class="slide-footer">
+              <div class="app-platforms"><span class="platform-badge">iOS</span></div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <div class="sep"></div>
+
+    <!-- CONTACT -->
+    <section id="contact" style="padding-bottom:160px;">
+      <div class="contact-box fade-up">
+        <p class="sec-label" id="contactLabel" style="margin-bottom:14px;">Contact</p>
+        <h2 class="contact-title" id="contactTitle">Let's Talk</h2>
+        <p class="contact-desc" id="contactDesc">Have a project in mind, want to collaborate, or just curious about what GreDami is building next?</p>
+        <a href="mailto:hello@gredami.com" class="contact-link">hello@gredami.com</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>
+      <div class="footer-logo">GreDami</div>
+      <div class="footer-tagline" id="footerTagline">Everyday Tools — Life Made Simpler</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://x.com/GreDamiStudio" title="X" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61575396419069" title="Facebook" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@GreDami" title="YouTube" target="_blank">
+        <svg width="18" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/gredami/" title="Instagram" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 GreDami. All rights reserved.</p>
+  </footer>
+
+  <script>
+    /* ── Isometric cube canvas ── */
+    const canvas = document.getElementById('cube-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    const S = 50, IX = Math.cos(Math.PI/6)*S, IY = Math.sin(Math.PI/6)*S;
+
+    function pageH() {
+      return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, window.innerHeight);
+    }
+    function noiseH(c, r) {
+      const v = Math.sin(c*0.5+1.3)*Math.cos(r*0.4+0.7) + Math.cos(c*0.3-r*0.6)*0.6 + Math.sin((c+r)*0.35)*0.4;
+      return 14 + ((v+2)/4)*36;
+    }
+    function drawCube(c, r, h) {
+      const ox = W*0.5, oy = IY*4;
+      const sx = ox + (c-r)*IX, sy = oy + (c+r)*IY - h;
+
+      // Top face
+      ctx.beginPath();
+      ctx.moveTo(sx, sy); ctx.lineTo(sx+IX, sy+IY); ctx.lineTo(sx, sy+IY*2); ctx.lineTo(sx-IX, sy+IY);
+      ctx.closePath();
+      const tg = ctx.createLinearGradient(sx-IX, sy, sx+IX, sy+IY*2);
+      tg.addColorStop(0, '#1a1a1f'); tg.addColorStop(1, '#111116');
+      ctx.fillStyle = tg; ctx.fill();
+      ctx.strokeStyle = 'rgba(155,142,196,0.07)'; ctx.lineWidth = 0.6; ctx.stroke();
+
+      // Left face
+      ctx.beginPath();
+      ctx.moveTo(sx-IX, sy+IY); ctx.lineTo(sx, sy+IY*2); ctx.lineTo(sx, sy+IY*2+h); ctx.lineTo(sx-IX, sy+IY+h);
+      ctx.closePath();
+      const lg = ctx.createLinearGradient(sx-IX, sy+IY, sx-IX, sy+IY+h);
+      lg.addColorStop(0, '#0e0e12'); lg.addColorStop(1, '#08080b');
+      ctx.fillStyle = lg; ctx.fill();
+      ctx.strokeStyle = 'rgba(155,142,196,0.04)'; ctx.stroke();
+
+      // Right face
+      ctx.beginPath();
+      ctx.moveTo(sx, sy+IY*2); ctx.lineTo(sx+IX, sy+IY); ctx.lineTo(sx+IX, sy+IY+h); ctx.lineTo(sx, sy+IY*2+h);
+      ctx.closePath();
+      const rg = ctx.createLinearGradient(sx, sy+IY*2, sx+IX, sy+IY*2);
+      rg.addColorStop(0, '#0b0b0f'); rg.addColorStop(1, '#060608');
+      ctx.fillStyle = rg; ctx.fill();
+      ctx.strokeStyle = 'rgba(155,142,196,0.03)'; ctx.stroke();
+
+      // Top edge highlight
+      ctx.beginPath();
+      ctx.moveTo(sx-IX, sy+IY); ctx.lineTo(sx, sy); ctx.lineTo(sx+IX, sy+IY);
+      ctx.strokeStyle = 'rgba(155,142,196,0.12)'; ctx.lineWidth = 0.8; ctx.stroke();
+    }
+
+    function draw() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = pageH();
+      ctx.clearRect(0, 0, W, H);
+      const maxH = 50;
+      const halfD = Math.ceil(W/(2*IX))+3;
+      const depth = Math.ceil((H+maxH)/IY)+6;
+      const cMin = Math.floor(-halfD/2)-2, cMax = Math.ceil((halfD+depth)/2)+2;
+      const rMin = Math.floor(-halfD/2)-2, rMax = Math.ceil((depth+halfD)/2)+2;
+      const cubes = [];
+      for (let c = cMin; c <= cMax; c++) {
+        for (let r = rMin; r <= rMax; r++) {
+          const sx = W*0.5+(c-r)*IX, sy = IY*4+(c+r)*IY;
+          if (sx < -IX*3 || sx > W+IX*3 || sy < -maxH-IY*3 || sy > H+IY*3) continue;
+          cubes.push({c, r, h: noiseH(c, r)});
+        }
+      }
+      cubes.sort((a,b)=>(a.c+a.r)-(b.c+b.r));
+      cubes.forEach(({c,r,h})=>drawCube(c,r,h));
+    }
+
+    window.addEventListener('resize', draw);
+    window.addEventListener('load', draw);
+    draw();
+
+    /* ── Slider ── */
+    const track   = document.getElementById('sliderTrack');
+    const slides  = track.querySelectorAll('.slide');
+    const dotsWrap = document.getElementById('sliderDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let current = 0;
+
+    const visibleCount = () => 1;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(idx) {
+      const max = slides.length - visibleCount();
+      current = Math.max(0, Math.min(idx, max));
+      const slideW = slides[0].offsetWidth + 16;
+      track.style.transform = `translateX(-${current * slideW}px)`;
+      dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= max;
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+    dotsWrap.addEventListener('click', resetAuto);
+    window.addEventListener('resize', () => goTo(current));
+    goTo(0);
+
+    // Auto-advance
+    let autoTimer;
+    function autoPlay() {
+      autoTimer = setInterval(() => {
+        const max = slides.length - visibleCount();
+        goTo(current >= max ? 0 : current + 1);
+      }, 3500);
+    }
+    function resetAuto() { clearInterval(autoTimer); autoPlay(); }
+
+    // Pause on hover
+    track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    track.addEventListener('mouseleave', autoPlay);
+
+    autoPlay();
+
+    /* ── Fade-in on scroll ── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+  <script>
+    const T = {
+      en: {
+        nav:{ about:'About', projects:'Our Projects', contact:'Contact' },
+        heroSub: '<strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler',
+        scroll: 'Scroll',
+        aboutLabel: 'About',
+        aboutTitle: 'Built by one<br>Made for many',
+        aboutDesc1: 'GreDami is an independent digital studio focused on crafting practical, beautifully minimal tools that solve real everyday problems. No bloat, no noise — just software that works.',
+        aboutDesc2: 'Every product is designed with one principle: <strong style="color:var(--mid);">simplicity is the ultimate sophistication.</strong>',
+        statReleased:'Projects Released', statSoon:'Coming Soon', statIdeas:'Ideas',
+        projectsTitle:'Our Projects', projectsDesc:'Every project starts with a problem worth solving',
+        contactLabel:'Contact', contactTitle:"Let's Talk",
+        contactDesc:'Have a project in mind, want to collaborate, or just curious about what GreDami is building next?',
+        footerTagline:'Everyday Tools — Life Made Simpler',
+      },
+      ru: {
+        nav:{ about:'О нас', projects:'Проекты', contact:'Контакт' },
+        heroSub: '<strong>Инструменты для жизни</strong> &nbsp;—&nbsp; Просто и красиво',
+        scroll: 'Вниз',
+        aboutLabel: 'О нас',
+        aboutTitle: 'Один создаёт<br>Для многих',
+        aboutDesc1: 'GreDami — независимая цифровая студия, создающая практичные и минималистичные инструменты для повседневной жизни. Без лишнего — только то, что работает.',
+        aboutDesc2: 'Каждый продукт создаётся по одному принципу: <strong style="color:var(--mid);">простота — высшая форма совершенства.</strong>',
+        statReleased:'Проектов выпущено', statSoon:'В разработке', statIdeas:'Идей',
+        projectsTitle:'Наши Проекты', projectsDesc:'Каждый проект начинается с проблемы, достойной решения',
+        contactLabel:'Контакт', contactTitle:'Поговорим',
+        contactDesc:'Есть идея для проекта, хотите сотрудничать или просто интересно, что GreDami строит дальше?',
+        footerTagline:'Инструменты для жизни — Просто и красиво',
+      },
+      fr: {
+        nav:{ about:'À propos', projects:'Nos Projets', contact:'Contact' },
+        heroSub: '<strong>Outils du quotidien</strong> &nbsp;—&nbsp; La vie simplifiée',
+        scroll: 'Défiler',
+        aboutLabel: 'À propos',
+        aboutTitle: 'Créé par un<br>Pour tous',
+        aboutDesc1: "GreDami est un studio numérique indépendant spécialisé dans la création d'outils pratiques et minimalistes qui résolvent de vrais problèmes du quotidien. Sans superflu — juste des logiciels qui fonctionnent.",
+        aboutDesc2: 'Chaque produit est conçu selon un principe : <strong style="color:var(--mid);">la simplicité est la sophistication ultime.</strong>',
+        statReleased:'Projets lancés', statSoon:'Bientôt', statIdeas:'Idées',
+        projectsTitle:'Nos Projets', projectsDesc:"Chaque projet commence par un problème qui vaut la peine d'être résolu",
+        contactLabel:'Contact', contactTitle:'Parlons-en',
+        contactDesc:'Un projet en tête, envie de collaborer, ou curieux de ce que GreDami construit ensuite ?',
+        footerTagline:'Outils du quotidien — La vie simplifiée',
+      },
+      es: {
+        nav:{ about:'Acerca de', projects:'Proyectos', contact:'Contacto' },
+        heroSub: '<strong>Herramientas cotidianas</strong> &nbsp;—&nbsp; La vida más simple',
+        scroll: 'Bajar',
+        aboutLabel: 'Acerca de',
+        aboutTitle: 'Creado por uno<br>Para muchos',
+        aboutDesc1: 'GreDami es un estudio digital independiente enfocado en crear herramientas prácticas y minimalistas que resuelven problemas reales del día a día. Sin ruido — solo software que funciona.',
+        aboutDesc2: 'Cada producto se diseña con un principio: <strong style="color:var(--mid);">la simplicidad es la máxima sofisticación.</strong>',
+        statReleased:'Proyectos lanzados', statSoon:'Próximamente', statIdeas:'Ideas',
+        projectsTitle:'Nuestros Proyectos', projectsDesc:'Cada proyecto comienza con un problema que vale la pena resolver',
+        contactLabel:'Contacto', contactTitle:'Hablemos',
+        contactDesc:'¿Tienes un proyecto en mente, quieres colaborar o simplemente tienes curiosidad sobre lo que GreDami está construyendo?',
+        footerTagline:'Herramientas cotidianas — La vida más simple',
+      }
+    };
+
+    function setLang(lang) {
+      const t = T[lang];
+      const $ = id => document.getElementById(id);
+      document.getElementById('navAbout').textContent    = t.nav.about;
+      document.getElementById('navProjects').textContent = t.nav.projects;
+      document.getElementById('navContact').textContent  = t.nav.contact;
+      $('heroSub').innerHTML      = t.heroSub;
+      $('scrollLabel').textContent= t.scroll;
+      $('aboutLabel').textContent = t.aboutLabel;
+      $('aboutTitle').innerHTML   = t.aboutTitle;
+      $('aboutDesc1').textContent = t.aboutDesc1;
+      $('aboutDesc2').innerHTML   = t.aboutDesc2;
+      $('statReleased').textContent = t.statReleased;
+      $('statSoon').textContent     = t.statSoon;
+      $('statIdeas').textContent    = t.statIdeas;
+      $('projectsTitle').textContent = t.projectsTitle;
+      $('projectsDesc').textContent  = t.projectsDesc;
+      $('contactLabel').textContent  = t.contactLabel;
+      $('contactTitle').textContent  = t.contactTitle;
+      $('contactDesc').textContent   = t.contactDesc;
+      $('footerTagline').textContent = t.footerTagline;
+      $('langCurrent').textContent   = lang.toUpperCase();
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      localStorage.setItem('gredami-lang', lang);
+    }
+
+    const switcher = document.getElementById('langSwitcher');
+    document.getElementById('langBtn').addEventListener('click', e => {
+      e.stopPropagation();
+      switcher.classList.toggle('open');
+    });
+    document.addEventListener('click', () => switcher.classList.remove('open'));
+    document.querySelectorAll('.lang-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLang(btn.dataset.lang);
+        switcher.classList.remove('open');
+      });
+    });
+    const saved = localStorage.getItem('gredami-lang');
+    if (saved && T[saved]) setLang(saved);
+  </script>
+
+</body>
+</html>
