@@ -4,7 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreDami — Everyday Tools. Life Made Simpler.</title>
+  <!-- ══ Favicon — all platforms ══ -->
+  <!-- Modern browsers (Chrome, Firefox, Edge, Safari 12+) -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <!-- PNG fallbacks — href filled at runtime by the canvas script below -->
+  <link rel="icon" type="image/png" sizes="32x32"  id="fav-32">
+  <link rel="icon" type="image/png" sizes="16x16"  id="fav-16">
+  <!-- iOS / iPadOS home screen -->
+  <link rel="apple-touch-icon" sizes="180x180" id="fav-apple">
+  <!-- Safari pinned tab -->
+  <link rel="mask-icon" href="favicon.svg" color="#9b8ec4">
+  <!-- Android / PWA -->
+  <link rel="manifest" href="site.webmanifest">
+  <!-- Browser chrome & Windows tile -->
+  <meta name="theme-color" content="#0f0f12">
+  <meta name="msapplication-TileColor" content="#0f0f12">
+  <meta name="msapplication-TileImage" content="favicon.svg">
+  <!-- ════════════════════════════ -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -1315,6 +1332,29 @@
     });
     const saved = localStorage.getItem('gredami-lang');
     if (saved && T[saved]) setLang(saved);
+  </script>
+
+  <script>
+  /* ── Favicon PNG — fills id="fav-32/16/apple" link tags from SVG via canvas ── */
+  (function() {
+    var svgHref = 'favicon.svg';
+    var img = new Image();
+    img.onload = function() {
+      [['fav-32', 32], ['fav-16', 16], ['fav-apple', 180]].forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (!el) return;
+        var c = document.createElement('canvas');
+        c.width = c.height = pair[1];
+        c.getContext('2d').drawImage(img, 0, 0, pair[1], pair[1]);
+        el.href = c.toDataURL('image/png');
+      });
+    };
+    /* Use a Blob URL so canvas.toDataURL() works even on file:// */
+    fetch(svgHref)
+      .then(function(r) { return r.blob(); })
+      .then(function(blob) { img.src = URL.createObjectURL(blob); })
+      .catch(function() { img.src = svgHref; }); /* fallback for same-origin servers */
+  })();
   </script>
 
 </body>
