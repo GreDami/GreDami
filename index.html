@@ -4,23 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreDami — Everyday Tools. Life Made Simpler.</title>
-  <!-- ══ Favicon — all platforms ══ -->
-  <!-- Modern browsers (Chrome, Firefox, Edge, Safari 12+) -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <!-- PNG fallbacks — href filled at runtime by the canvas script below -->
-  <link rel="icon" type="image/png" sizes="32x32"  id="fav-32">
-  <link rel="icon" type="image/png" sizes="16x16"  id="fav-16">
-  <!-- iOS / iPadOS home screen -->
+  <link rel="icon" type="image/png" sizes="32x32" id="fav-32">
+  <link rel="icon" type="image/png" sizes="16x16" id="fav-16">
   <link rel="apple-touch-icon" sizes="180x180" id="fav-apple">
-  <!-- Safari pinned tab -->
   <link rel="mask-icon" href="favicon.svg" color="#9b8ec4">
-  <!-- Android / PWA -->
-  <link rel="manifest" href="site.webmanifest">
-  <!-- Browser chrome & Windows tile -->
   <meta name="theme-color" content="#0f0f12">
   <meta name="msapplication-TileColor" content="#0f0f12">
   <meta name="msapplication-TileImage" content="favicon.svg">
-  <!-- ════════════════════════════ -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -31,7 +22,6 @@
       --purple:        #9b8ec4;
       --purple-dim:    rgba(155,142,196,0.10);
       --purple-border: rgba(155,142,196,0.18);
-      --purple-glow:   rgba(155,142,196,0.08);
       --bg:            #0f0f12;
       --surface:       #141418;
       --border:        rgba(255,255,255,0.06);
@@ -194,10 +184,6 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; line-height: 1;
     }
-    .nav-logo-sub {
-      font-size: 0.52rem; font-weight: 600; letter-spacing: 2.5px;
-      text-transform: uppercase; color: var(--muted); line-height: 1;
-    }
 
     /* Links */
     .nav-links { display: flex; gap: 4px; list-style: none; justify-content: center; }
@@ -250,12 +236,6 @@
       margin: 0 auto;
       position: relative;
     }
-    .hero-label {
-      display: inline-block;
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--purple); margin-bottom: 32px;
-      opacity: 0; animation: heroIn 0.8s 0.2s ease forwards;
-    }
     .hero-title {
       font-size: clamp(4rem, 11vw, 8.5rem);
       font-weight: 900;
@@ -290,32 +270,6 @@
       animation: heroIn 0.7s 0.65s ease both;
     }
     .hero-sub strong { color: var(--mid); font-weight: 500; }
-    .hero-actions { display: flex; gap: 12px; justify-content: center; animation: heroIn 0.7s 0.8s ease both; }
-
-    .btn-main {
-      display: inline-block; padding: 13px 32px; border-radius: 10px;
-      background: var(--purple-dim); border: 1px solid var(--purple-border);
-      color: var(--purple); font-size: 0.88rem; font-weight: 600;
-      text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      position: relative; overflow: hidden;
-    }
-    .btn-main::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, transparent, rgba(155,142,196,0.15), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
-    }
-    .btn-main:hover::before { transform: translateX(100%); }
-    .btn-main:hover { background: rgba(155,142,196,0.16); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(155,142,196,0.15); }
-
-    .btn-ghost {
-      display: inline-block; padding: 13px 32px; border-radius: 10px;
-      background: transparent; border: 1px solid var(--border);
-      color: var(--mid); font-size: 0.88rem; font-weight: 500;
-      text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--purple-border); color: var(--text); transform: translateY(-2px); }
 
     @keyframes heroFadeIn {
       from { opacity: 0; }
@@ -444,22 +398,6 @@
       font-size: 0.66rem; color: var(--muted); letter-spacing: 0.2px;
     }
 
-    /* ── APPS ── */
-    .apps-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px;
-    }
-    .app-card {
-      position: relative; padding: 28px 26px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 14px; text-decoration: none; color: inherit;
-      display: block; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-      transform-style: preserve-3d;
-    }
-    .app-card:hover {
-      border-color: var(--purple-border); transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(155,142,196,0.08);
-    }
-
     /* ── PROJECTS GRID ── */
     .proj-grid {
       display: grid;
@@ -569,16 +507,6 @@
     }
     .proj-load-btn:hover { background: rgba(155,142,196,0.18); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(155,142,196,0.15); }
 
-    /* ── App status badges ── */
-    .app-icon { font-size: 1.9rem; margin-bottom: 16px; display: block; }
-    .app-tag {
-      display: inline-block; font-size: 0.6rem; font-weight: 600; letter-spacing: 1.5px;
-      text-transform: uppercase; padding: 3px 9px; border-radius: 6px;
-      background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border);
-      margin-bottom: 12px;
-    }
-    .app-name { font-size: 1.08rem; font-weight: 700; margin-bottom: 9px; letter-spacing: -0.2px; }
-    .app-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
     .app-platforms { display: flex; gap: 6px; flex-wrap: wrap; }
     .platform-badge {
       font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
@@ -605,7 +533,6 @@
       50%      { box-shadow: 0 0 0 4px rgba(116,201,154,0); }
     }
     .status-wip  { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border); }
-    .status-plan { background: rgba(255,255,255,0.03); color: var(--muted); border: 1px solid var(--border); }
 
     /* ── CONTACT ── */
     #contact { text-align: center; }
@@ -743,7 +670,6 @@
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .nav-logo-sub { display: none; }
       section { padding: 80px 24px; }
       #hero { padding: 120px 24px 80px; }
       #about { grid-template-columns: 1fr; gap: 40px; }
@@ -763,25 +689,18 @@
 </head>
 <body>
 
-  <!-- Scroll progress -->
   <div id="scroll-progress"></div>
-
-  <!-- Mouse glow -->
   <div id="mouse-glow"></div>
-
-  <!-- Ambient blobs -->
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
 
-  <!-- Back to top -->
   <button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M8 12V4M3 8l5-5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
 
-  <!-- Cube background -->
   <div id="cube-wrap"><canvas id="cube-canvas"></canvas></div>
 
   <nav id="main-nav">
@@ -912,7 +831,7 @@
           </div>
         </a>
 
-        <div class="proj-card" style="cursor:default;">
+        <a class="proj-card tilt-card" href="https://gredami.github.io/FinWall" target="_blank">
           <div class="proj-shimmer"></div>
           <div class="proj-top">
             <img src="FW.png" alt="FinWall" class="proj-icon" style="opacity:0.65;" />
@@ -923,15 +842,13 @@
           <p class="proj-desc">Details coming soon. Stay tuned for something exciting.</p>
           <div class="proj-footer">
             <div class="app-platforms"><span class="platform-badge">iOS</span></div>
+            <span class="proj-cta">Explore <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-        </div>
+        </a>
 
       </div>
 
-      <!-- Infinite-scroll sentinel -->
       <div class="proj-sentinel" id="projSentinel"></div>
-
-      <!-- Load more (shown only when there are hidden cards) -->
       <div class="proj-load-wrap hidden" id="projLoadWrap">
         <button class="proj-load-btn" id="projLoadBtn">
           Load more
@@ -958,13 +875,11 @@
     <div class="footer-glow"></div>
 
     <div class="footer-inner">
-      <!-- Brand -->
       <div class="footer-brand">
         <span class="footer-logo-name">GreDami</span>
         <p class="footer-tagline" id="footerTagline">Everyday Tools — Life Made Simpler</p>
       </div>
 
-      <!-- Nav links -->
       <div class="footer-nav-col">
         <p class="footer-nav-label">Navigate</p>
         <a href="#about">About</a>
@@ -972,7 +887,6 @@
         <a href="#contact">Contact</a>
       </div>
 
-      <!-- Socials -->
       <div class="footer-socials-col">
         <p class="footer-social-label">Follow</p>
         <div class="footer-social-row">
@@ -999,9 +913,6 @@
   </footer>
 
   <script>
-    /* ══════════════════════════════════════════
-       1. ISOMETRIC CUBE CANVAS
-    ══════════════════════════════════════════ */
     const canvas = document.getElementById('cube-canvas');
     const ctx = canvas.getContext('2d');
     let W, H;
@@ -1065,9 +976,6 @@
     window.addEventListener('load', draw);
     draw();
 
-    /* ══════════════════════════════════════════
-       2. SCROLL PROGRESS BAR
-    ══════════════════════════════════════════ */
     const progressBar = document.getElementById('scroll-progress');
     function updateProgress() {
       const scrolled = window.scrollY;
@@ -1076,20 +984,13 @@
     }
     window.addEventListener('scroll', updateProgress, { passive: true });
 
-    /* ══════════════════════════════════════════
-       3. NAV: SCROLLED STATE + ACTIVE SECTION
-    ══════════════════════════════════════════ */
     const mainNav = document.getElementById('main-nav');
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = ['about', 'apps', 'contact'].map(id => document.getElementById(id));
 
     function updateNav() {
       mainNav.classList.toggle('scrolled', window.scrollY > 20);
-
-      // Back to top
       document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
-
-      // Active section
       let current = '';
       sections.forEach(sec => {
         if (sec && window.scrollY >= sec.offsetTop - 120) current = sec.id;
@@ -1102,9 +1003,6 @@
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
 
-    /* ══════════════════════════════════════════
-       4. MOUSE GLOW FOLLOWER
-    ══════════════════════════════════════════ */
     const mouseGlow = document.getElementById('mouse-glow');
     let mx = window.innerWidth/2, my = window.innerHeight/2;
     let glowX = mx, glowY = my;
@@ -1121,9 +1019,6 @@
       requestAnimationFrame(animateGlow);
     })();
 
-    /* ══════════════════════════════════════════
-       5. CARD SPOTLIGHT + 3D TILT
-    ══════════════════════════════════════════ */
     document.querySelectorAll('.tilt-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
@@ -1141,9 +1036,6 @@
       });
     });
 
-    /* ══════════════════════════════════════════
-       6. ANIMATED STAT COUNTERS
-    ══════════════════════════════════════════ */
     function animateCount(el) {
       const target = parseInt(el.dataset.count, 10);
       const suffix = el.dataset.suffix || '';
@@ -1168,57 +1060,36 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObserver.observe(el));
 
-    /* ══════════════════════════════════════════
-       7. PROJECT GRID — reveal + infinite scroll
-    ══════════════════════════════════════════ */
     (function() {
-      const BATCH   = 6;   // cards revealed per scroll / click
-      const grid    = document.getElementById('projGrid');
-      const sentinel= document.getElementById('projSentinel');
-      const loadWrap= document.getElementById('projLoadWrap');
+      const BATCH = 6;
+      const grid = document.getElementById('projGrid');
+      const sentinel = document.getElementById('projSentinel');
+      const loadWrap = document.getElementById('projLoadWrap');
       const loadBtn = document.getElementById('projLoadBtn');
       if (!grid) return;
-
       const cards = Array.from(grid.querySelectorAll('.proj-card'));
       let revealed = 0;
-
-      /* Reveal up to `n` more cards with a staggered animation */
       function revealBatch(n) {
         const batch = cards.slice(revealed, revealed + n);
-        batch.forEach((card, i) => {
-          setTimeout(() => card.classList.add('revealed'), i * 60);
-        });
+        batch.forEach((card, i) => setTimeout(() => card.classList.add('revealed'), i * 60));
         revealed += batch.length;
-        // hide Load More if all revealed
-        if (revealed >= cards.length) loadWrap.classList.add('hidden');
-        else loadWrap.classList.remove('hidden');
+        loadWrap.classList.toggle('hidden', revealed >= cards.length);
       }
-
-      /* Initial reveal */
       revealBatch(BATCH);
-
-      /* Spotlight tracking for proj-cards */
       cards.forEach(card => {
         card.addEventListener('mousemove', e => {
           const r = card.getBoundingClientRect();
           card.style.setProperty('--sx', (e.clientX - r.left) + 'px');
-          card.style.setProperty('--sy', (e.clientY - r.top)  + 'px');
+          card.style.setProperty('--sy', (e.clientY - r.top) + 'px');
         });
       });
-
-      /* Infinite scroll via IntersectionObserver on sentinel */
       const io = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting && revealed < cards.length) revealBatch(BATCH);
       }, { rootMargin: '0px 0px 200px 0px' });
       io.observe(sentinel);
-
-      /* Manual load-more fallback */
       loadBtn && loadBtn.addEventListener('click', () => revealBatch(BATCH));
     })();
 
-    /* ══════════════════════════════════════════
-       8. FADE-IN ON SCROLL
-    ══════════════════════════════════════════ */
     const fadeObserver = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
@@ -1231,9 +1102,6 @@
   </script>
 
   <script>
-    /* ══════════════════════════════════════════
-       9. MULTILINGUAL
-    ══════════════════════════════════════════ */
     const T = {
       en: {
         nav:{ about:'About', projects:'Our Projects', contact:'Contact' },
@@ -1335,7 +1203,6 @@
   </script>
 
   <script>
-  /* ── Favicon PNG — fills id="fav-32/16/apple" link tags from SVG via canvas ── */
   (function() {
     var svgHref = 'favicon.svg';
     var img = new Image();
@@ -1349,11 +1216,10 @@
         el.href = c.toDataURL('image/png');
       });
     };
-    /* Use a Blob URL so canvas.toDataURL() works even on file:// */
     fetch(svgHref)
       .then(function(r) { return r.blob(); })
       .then(function(blob) { img.src = URL.createObjectURL(blob); })
-      .catch(function() { img.src = svgHref; }); /* fallback for same-origin servers */
+      .catch(function() { img.src = svgHref; });
   })();
   </script>
 
