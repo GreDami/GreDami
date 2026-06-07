@@ -15,7 +15,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800;900&family=Archivo:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -33,7 +33,7 @@
 
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: 'Figtree', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -130,21 +130,9 @@
     }
     #cube-canvas { position: absolute; top: 0; left: 0; opacity: 0.38; }
 
-    /* ── Soft hero glow ── */
-    .hero-glow {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -60%);
-      width: 900px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(163,148,204,0.10), transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-      animation: glowPulse 7s ease-in-out infinite;
-    }
     @keyframes glowPulse {
-      0%,100% { opacity: 1; transform: translate(-50%,-60%) scale(1); }
-      50%      { opacity: 0.65; transform: translate(-50%,-60%) scale(1.07); }
+      0%,100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      50%      { opacity: 0.6; transform: translateX(-50%) scale(1.04); }
     }
 
     /* ── Nav — floating pill ── */
@@ -180,7 +168,7 @@
       text-decoration: none;
     }
     .nav-logo-name {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px;
       background: linear-gradient(120deg, #ede8f5 30%, #a394cc 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -190,7 +178,7 @@
     /* Links */
     .nav-links { display: flex; gap: 2px; list-style: none; justify-content: center; }
     .nav-links a {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 500;
       letter-spacing: 0.1px;
       padding: 5px 14px; border-radius: 8px;
@@ -226,6 +214,22 @@
     main { position: relative; z-index: 1; }
     section { max-width: 1060px; margin: 0 auto; padding: 130px 56px; }
 
+    /* ── Hero zone (parts 1 + 2 share one halo) ── */
+    #hero-zone {
+      position: relative;
+    }
+    .hero-zone-glow {
+      position: absolute;
+      top: 10%; left: 50%;
+      transform: translateX(-50%);
+      width: 1400px; height: 1200px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center 30%, rgba(163,148,204,0.10), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
@@ -240,10 +244,10 @@
       position: relative;
     }
     .hero-title {
-      font-family: 'Syne', system-ui, sans-serif;
-      font-size: clamp(4.5rem, 12vw, 9.5rem);
+      font-family: 'Unbounded', system-ui, sans-serif;
+      font-size: clamp(3rem, 9vw, 7.5rem);
       font-weight: 900;
-      letter-spacing: -5px;
+      letter-spacing: -3px;
       line-height: 0.88;
       background: linear-gradient(135deg, #d4c8f5 0%, #a394cc 35%, #6d28d9 68%, #a394cc 100%);
       background-size: 300% 300%;
@@ -268,7 +272,7 @@
       animation: heroIn 0.7s 0.5s ease both;
     }
     .hero-sub {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: clamp(0.95rem, 1.8vw, 1.15rem);
       font-weight: 300; color: var(--muted); line-height: 1.8;
       margin-bottom: 56px; letter-spacing: 0.3px;
@@ -290,7 +294,7 @@
       transition: opacity 0.2s;
     }
     .scroll-arrow-label {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); opacity: 0.5;
     }
     .scroll-arrow-circle {
@@ -309,11 +313,11 @@
 
     /* ── Section labels ── */
     .sec-label {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.63rem; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: var(--purple); margin-bottom: 14px;
     }
     .sec-title {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: clamp(1.9rem, 3.8vw, 2.6rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.08; margin-bottom: 16px;
     }
     .sec-desc { font-size: 0.96rem; color: var(--muted); line-height: 1.85; max-width: 480px; margin-bottom: 60px; }
@@ -332,7 +336,7 @@
     }
     .about-left { display: flex; flex-direction: column; }
     .about-title {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: clamp(2.4rem, 4.8vw, 3.4rem);
       font-weight: 900;
       letter-spacing: -2px;
@@ -351,7 +355,7 @@
       padding: 10px 0 10px 20px;
       margin: 0 0 32px;
       color: var(--mid);
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.92rem;
       line-height: 1.7;
       font-style: italic;
@@ -365,7 +369,7 @@
     }
     .about-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .about-tag {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px;
       text-transform: uppercase; padding: 5px 14px; border-radius: 100px;
       border: 1px solid var(--purple-border); color: var(--purple);
@@ -403,7 +407,7 @@
     .stat-row:hover { background: rgba(163,148,204,0.04); }
     .stat-row + .stat-row { border-top: 1px solid var(--border); }
     .stat-num {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1;
       background: linear-gradient(135deg, #d4c8f5 0%, #a394cc 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -413,7 +417,7 @@
     .stat-row:hover .stat-num { transform: scale(1.06); }
     .stat-info { display: flex; flex-direction: column; gap: 3px; }
     .stat-lbl {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.78rem; font-weight: 600; color: var(--text); letter-spacing: -0.1px;
     }
     .stat-sub {
@@ -492,11 +496,11 @@
 
     /* Text */
     .proj-name {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 1rem; font-weight: 700; letter-spacing: -0.3px; line-height: 1.15; position: relative; z-index: 1;
     }
     .proj-tagline {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.7rem; color: var(--purple); font-weight: 500; margin-top: 3px; position: relative; z-index: 1;
     }
     .proj-desc {
@@ -509,7 +513,7 @@
       position: relative; z-index: 1;
     }
     .proj-cta {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.7rem; font-weight: 700; color: var(--purple);
       display: flex; align-items: center; gap: 3px;
       opacity: 0; transform: translateX(-6px);
@@ -531,7 +535,7 @@
       padding: 11px 30px; border-radius: 10px;
       background: var(--purple-dim); border: 1px solid var(--purple-border);
       color: var(--purple); font-size: 0.83rem; font-weight: 600;
-      cursor: pointer; font-family: 'Archivo', system-ui, sans-serif;
+      cursor: pointer; font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .proj-load-btn:hover { background: rgba(163,148,204,0.18); transform: translateY(-2px); box-shadow: 0 8px 26px rgba(163,148,204,0.15); }
@@ -539,14 +543,14 @@
 
     .app-platforms { display: flex; gap: 6px; flex-wrap: wrap; }
     .platform-badge {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
       padding: 3px 9px; border-radius: 6px; background: rgba(255,255,255,0.04);
       border: 1px solid var(--border); color: var(--muted);
     }
     .app-status {
       position: absolute; top: 16px; right: 16px;
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.57rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
       padding: 3px 9px; border-radius: 6px;
     }
@@ -583,14 +587,14 @@
       pointer-events: none;
     }
     .contact-title {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 14px;
     }
     .contact-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 44px; max-width: 360px; margin-left: auto; margin-right: auto; }
     .contact-link {
       display: inline-block; padding: 14px 36px; border-radius: 10px;
       background: var(--purple-dim); border: 1px solid var(--purple-border);
-      color: var(--purple); font-family: 'Archivo', system-ui, sans-serif;
+      color: var(--purple); font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.92rem; font-weight: 600;
       text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       position: relative; overflow: hidden; cursor: pointer;
@@ -623,7 +627,7 @@
     }
     .footer-brand { display: flex; flex-direction: column; gap: 10px; }
     .footer-logo-name {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px;
       background: linear-gradient(120deg, #ede8f5 30%, #a394cc 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -632,11 +636,11 @@
     .footer-tagline { font-size: 0.67rem; color: var(--muted); letter-spacing: 0.3px; line-height: 1.65; max-width: 200px; }
     .footer-nav-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .footer-nav-label {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.57rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; opacity: 0.6;
     }
     .footer-nav-col a {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.82rem; color: var(--muted); text-decoration: none; font-weight: 500;
       padding: 4px 12px; border-radius: 6px;
       transition: color 0.2s, background 0.2s;
@@ -646,7 +650,7 @@
     .footer-nav-col a:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; border-radius: 6px; }
     .footer-socials-col { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
     .footer-social-label {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.57rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); opacity: 0.6;
     }
     .footer-social-row { display: flex; gap: 8px; }
@@ -672,7 +676,7 @@
     }
     .footer-copy { font-size: 0.65rem; color: var(--muted); }
     .footer-bottom-tag {
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
       color: var(--purple); opacity: 0.45;
     }
@@ -683,7 +687,7 @@
       display: flex; align-items: center; gap: 5px;
       background: transparent; border: none;
       color: var(--muted); font-size: 0.78rem; font-weight: 600;
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       padding: 4px 6px; cursor: pointer; transition: color 0.2s;
       letter-spacing: 0.3px;
     }
@@ -702,7 +706,7 @@
     .lang-switcher.open .lang-dropdown { display: flex; }
     .lang-option {
       background: none; border: none; color: var(--muted);
-      font-family: 'Archivo', system-ui, sans-serif;
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
       font-size: 0.82rem; font-weight: 500;
       padding: 8px 12px; border-radius: 8px;
       cursor: pointer; text-align: left;
@@ -795,9 +799,12 @@
 
   <main>
 
-    <!-- HERO -->
+    <!-- HERO ZONE: part 1 (title) + part 2 (about) share one halo -->
+    <div id="hero-zone">
+    <div class="hero-zone-glow"></div>
+
+    <!-- Part 1 — title -->
     <div id="hero">
-      <div class="hero-glow"></div>
       <h1 class="hero-title">GreDami</h1>
       <div class="hero-divider"></div>
       <p class="hero-sub" id="heroSub"><strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler</p>
@@ -811,9 +818,7 @@
       </a>
     </div>
 
-    <div class="sep"></div>
-
-    <!-- ABOUT -->
+    <!-- Part 2 — about, still inside hero-zone -->
     <section id="about">
 
       <div class="about-left fade-up">
@@ -854,6 +859,7 @@
       </div>
 
     </section>
+    </div><!-- /hero-zone -->
 
     <div class="sep"></div>
 
