@@ -215,12 +215,6 @@
     /* ── Hero zone (parts 1 + 2 share one halo) ── */
     #hero-zone {
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 64px;
-      align-items: start;
     }
     .hero-zone-glow {
       position: absolute;
@@ -236,25 +230,16 @@
 
     /* ── HERO ── */
     #hero {
-      position: sticky;
-      top: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 100px 56px 140px 0;
-    }
-    #hero::after {
-      content: '';
-      position: absolute;
-      right: 0; top: 10%; bottom: 10%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(163,148,204,0.22) 30%, rgba(163,148,204,0.22) 70%, transparent);
-      pointer-events: none;
-    }
-    .hero-top {
-      display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 64px;
+      max-width: 1060px;
+      margin: 0 auto;
+      position: relative;
       animation: heroIn 1.0s 0.1s ease both;
     }
     .hero-eyebrow {
@@ -266,7 +251,7 @@
     }
     .hero-title {
       font-family: 'Cormorant', serif;
-      font-size: clamp(3.8rem, 8vw, 8rem);
+      font-size: clamp(4.5rem, 11vw, 9.5rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 0.88;
@@ -275,8 +260,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradShift 16s ease-in-out infinite, heroIn 0.9s 0.5s ease both;
-      margin-bottom: 0;
+      animation: gradShift 16s ease-in-out infinite;
+      margin-bottom: 28px;
     }
     @keyframes gradShift {
       0%,100% { background-position: 0% 50%; }
@@ -290,7 +275,7 @@
       width: 44px; height: 1px;
       background: linear-gradient(90deg, var(--purple), transparent);
       opacity: 0.55;
-      margin: 0 0 28px;
+      margin: 0 auto 28px;
     }
     .hero-sub {
       font-family: 'Jost', system-ui, sans-serif;
@@ -350,12 +335,10 @@
 
     /* ── ABOUT ── */
     #about {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-      padding: 100px 0 100px 56px;
-      max-width: none;
-      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
     }
     .about-left { display: flex; flex-direction: column; }
     .about-title {
@@ -747,10 +730,8 @@
     @media (max-width: 1024px) {
       nav { padding: 0 22px; }
       section { padding: 100px 40px; }
-      #hero-zone { grid-template-columns: 1fr; padding: 0 40px; }
-      #hero { position: static; height: auto; min-height: 100vh; padding: 100px 40px 140px; }
-      #hero::after { display: none; }
-      #about { padding: 0 40px 100px; gap: 40px; }
+      #hero { padding: 100px 40px; }
+      #about { gap: 48px; padding: 80px 40px; }
       .proj-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-inner { padding: 48px 40px 32px; }
       .footer-bottom { padding: 16px 40px; }
@@ -769,15 +750,11 @@
 
       section { padding: 72px 20px; }
 
-      #hero-zone { padding: 0 20px; }
       #hero {
         min-height: 100vh;
         min-height: 100dvh;
         padding: 110px 20px 90px;
-        text-align: center;
-        align-items: center;
       }
-      .hero-top { align-items: center; }
       .hero-eyebrow { text-align: center; }
       .hero-divider { margin: 0 auto 24px; }
       .hero-title {
@@ -789,6 +766,7 @@
       .hero-sub { font-size: 1rem; }
 
       #about {
+        grid-template-columns: 1fr;
         gap: 32px;
         padding: 56px 20px 72px;
       }
@@ -946,16 +924,12 @@
     <div id="hero-zone">
     <div class="hero-zone-glow"></div>
 
-    <!-- Part 1 — left column: eyebrow/rule/tagline at top, title anchored at bottom -->
     <div id="hero">
 
-      <div class="hero-top">
-        <p class="hero-eyebrow">Independent Studio</p>
-        <div class="hero-divider"></div>
-        <p class="hero-sub" id="heroSub"><strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler</p>
-      </div>
-
+      <p class="hero-eyebrow">Independent Studio</p>
+      <div class="hero-divider"></div>
       <h1 class="hero-title">GreDami</h1>
+      <p class="hero-sub" id="heroSub"><strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler</p>
 
       <a href="#about" class="scroll-arrow">
         <span class="scroll-arrow-label" id="scrollLabel">Scroll</span>
@@ -968,7 +942,7 @@
 
     </div>
 
-    <!-- Part 2 — right column: about content -->
+    <!-- Part 2 — about -->
     <section id="about">
 
       <div class="about-left fade-up">
