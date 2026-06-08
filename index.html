@@ -40,6 +40,18 @@
       position: relative;
     }
 
+    /* ── Ambient purple glows ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 12% 28%, rgba(109,40,217,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 38% at 88% 78%, rgba(163,148,204,0.13) 0%, transparent 65%);
+    }
+
     /* ── Grain noise overlay ── */
     body::before {
       content: '';
@@ -92,16 +104,16 @@
     .sh-i {
       width: 100%; height: 100%;
       border-radius: 9999px;
-      border: 1px solid rgba(163,148,204,0.13);
-      background: linear-gradient(135deg, rgba(163,148,204,0.07), transparent 80%);
-      box-shadow: 0 8px 32px rgba(163,148,204,0.05);
+      border: 1px solid rgba(163,148,204,0.26);
+      background: linear-gradient(135deg, rgba(163,148,204,0.12), rgba(109,40,217,0.05) 60%, transparent 85%);
+      box-shadow: 0 8px 48px rgba(109,40,217,0.12), 0 0 0 1px rgba(163,148,204,0.06) inset;
       position: relative;
       animation: shFloat 12s ease-in-out infinite;
     }
     .sh-i::after {
       content: '';
       position: absolute; inset: 0; border-radius: 9999px;
-      background: radial-gradient(circle at 50% 50%, rgba(163,148,204,0.08), transparent 70%);
+      background: radial-gradient(circle at 50% 30%, rgba(163,148,204,0.18), transparent 65%);
     }
     .sh-2 .sh-i { animation-duration: 14s; animation-delay: -3s; }
     .sh-3 .sh-i { animation-duration: 10s; animation-delay: -5s; }
@@ -203,6 +215,12 @@
     /* ── Hero zone (parts 1 + 2 share one halo) ── */
     #hero-zone {
       position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 64px;
+      align-items: start;
     }
     .hero-zone-glow {
       position: absolute;
@@ -210,7 +228,7 @@
       transform: translateX(-50%);
       width: 1400px; height: 1200px;
       border-radius: 50%;
-      background: radial-gradient(ellipse at center 30%, rgba(163,148,204,0.07), transparent 60%);
+      background: radial-gradient(ellipse at center 30%, rgba(109,40,217,0.13) 0%, rgba(163,148,204,0.07) 35%, transparent 60%);
       pointer-events: none;
       z-index: 0;
       animation: glowPulse 8s ease-in-out infinite;
@@ -218,34 +236,26 @@
 
     /* ── HERO ── */
     #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 100px 64px;
-      max-width: 1060px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .hero-left {
-      padding-right: 60px;
-      position: relative;
-      animation: heroIn 1.0s 0.1s ease both;
-    }
-    .hero-left::after {
-      content: '';
-      position: absolute;
-      right: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 1px; height: 200px;
-      background: linear-gradient(to bottom, transparent, rgba(163,148,204,0.22), transparent);
-    }
-    .hero-right {
-      padding-left: 60px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      animation: heroIn 0.9s 0.35s ease both;
+      justify-content: space-between;
+      padding: 100px 56px 140px 0;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(163,148,204,0.22) 30%, rgba(163,148,204,0.22) 70%, transparent);
+      pointer-events: none;
+    }
+    .hero-top {
+      display: flex;
+      flex-direction: column;
+      animation: heroIn 1.0s 0.1s ease both;
     }
     .hero-eyebrow {
       font-family: 'Jost', system-ui, sans-serif;
@@ -265,7 +275,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradShift 16s ease-in-out infinite;
+      animation: gradShift 16s ease-in-out infinite, heroIn 0.9s 0.5s ease both;
       margin-bottom: 0;
     }
     @keyframes gradShift {
@@ -340,10 +350,12 @@
 
     /* ── ABOUT ── */
     #about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      padding: 100px 0 100px 56px;
+      max-width: none;
+      margin: 0;
     }
     .about-left { display: flex; flex-direction: column; }
     .about-title {
@@ -735,10 +747,10 @@
     @media (max-width: 1024px) {
       nav { padding: 0 22px; }
       section { padding: 100px 40px; }
-      #hero { padding: 100px 40px; gap: 0; }
-      .hero-left { padding-right: 40px; }
-      .hero-right { padding-left: 40px; }
-      #about { gap: 48px; padding: 80px 40px; }
+      #hero-zone { grid-template-columns: 1fr; padding: 0 40px; }
+      #hero { position: static; height: auto; min-height: 100vh; padding: 100px 40px 140px; }
+      #hero::after { display: none; }
+      #about { padding: 0 40px 100px; gap: 40px; }
       .proj-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-inner { padding: 48px 40px 32px; }
       .footer-bottom { padding: 16px 40px; }
@@ -757,16 +769,15 @@
 
       section { padding: 72px 20px; }
 
+      #hero-zone { padding: 0 20px; }
       #hero {
         min-height: 100vh;
         min-height: 100dvh;
-        grid-template-columns: 1fr;
         padding: 110px 20px 90px;
         text-align: center;
+        align-items: center;
       }
-      .hero-left { padding-right: 0; text-align: center; }
-      .hero-left::after { display: none; }
-      .hero-right { padding-left: 0; align-items: center; text-align: center; }
+      .hero-top { align-items: center; }
       .hero-eyebrow { text-align: center; }
       .hero-divider { margin: 0 auto 24px; }
       .hero-title {
@@ -778,7 +789,6 @@
       .hero-sub { font-size: 1rem; }
 
       #about {
-        grid-template-columns: 1fr;
         gap: 32px;
         padding: 56px 20px 72px;
       }
@@ -847,7 +857,7 @@
       .hero-sub { font-size: 0.92rem; }
       .scroll-arrow { bottom: 32px; }
 
-      #about { padding: 48px 16px 60px; }
+      #about { padding: 40px 16px 60px; }
       .about-title { font-size: clamp(2rem, 10vw, 2.8rem); }
       .about-desc { font-size: 0.9rem; }
       .stat-row { padding: 18px 18px; }
@@ -873,7 +883,6 @@
         min-height: auto;
         padding: 90px 20px 60px;
       }
-      #hero { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: -0.01em; }
       .scroll-arrow { display: none; }
     }
@@ -937,18 +946,16 @@
     <div id="hero-zone">
     <div class="hero-zone-glow"></div>
 
-    <!-- Part 1 — title, split into two columns -->
+    <!-- Part 1 — left column: eyebrow/rule/tagline at top, title anchored at bottom -->
     <div id="hero">
 
-      <div class="hero-left">
-        <h1 class="hero-title">GreDami</h1>
-      </div>
-
-      <div class="hero-right">
+      <div class="hero-top">
         <p class="hero-eyebrow">Independent Studio</p>
         <div class="hero-divider"></div>
         <p class="hero-sub" id="heroSub"><strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler</p>
       </div>
+
+      <h1 class="hero-title">GreDami</h1>
 
       <a href="#about" class="scroll-arrow">
         <span class="scroll-arrow-label" id="scrollLabel">Scroll</span>
@@ -961,7 +968,7 @@
 
     </div>
 
-    <!-- Part 2 — about, still inside hero-zone -->
+    <!-- Part 2 — right column: about content -->
     <section id="about">
 
       <div class="about-left fade-up">
