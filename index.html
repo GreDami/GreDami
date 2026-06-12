@@ -428,6 +428,27 @@
     }
 
     /* ── PROJECTS GRID ── */
+    .proj-tabs {
+      display: flex; gap: 8px; margin-bottom: 36px;
+    }
+    .proj-tab {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-size: 0.63rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      padding: 7px 20px; border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      cursor: pointer; transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .proj-tab:hover { color: var(--text); border-color: var(--purple-border); }
+    .proj-tab.active { background: var(--purple-dim); border-color: var(--purple-border); color: var(--purple); }
+    .proj-empty {
+      display: none; grid-column: 1 / -1;
+      text-align: center; padding: 72px 20px;
+      color: var(--muted);
+      font-family: 'Jost', system-ui, sans-serif; font-size: 0.88rem; line-height: 1.7;
+    }
+    .proj-empty-icon { font-size: 2rem; margin-bottom: 12px; opacity: 0.3; }
+
     .proj-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1006,9 +1027,14 @@
         <p class="sec-desc" id="projectsDesc" style="margin-bottom:0;">Every project starts with a problem worth solving</p>
       </div>
 
+      <div class="proj-tabs" role="tablist">
+        <button class="proj-tab active" data-tab="apps" role="tab">Apps</button>
+        <button class="proj-tab" data-tab="sites" role="tab">Sites &amp; SaaS</button>
+      </div>
+
       <div class="proj-grid" id="projGrid">
 
-        <a class="proj-card tilt-card" href="https://gredami.github.io/GoBag" target="_blank">
+        <a class="proj-card tilt-card" data-cat="apps" href="https://gredami.github.io/GoBag" target="_blank">
           <div class="proj-shimmer"></div>
           <div class="proj-top">
             <img src="gobag-icon.png" alt="GoBag+ app icon" class="proj-icon" />
@@ -1023,7 +1049,7 @@
           </div>
         </a>
 
-        <a class="proj-card tilt-card" href="https://gredami.github.io/M.Planner" target="_blank">
+        <a class="proj-card tilt-card" data-cat="apps" href="https://gredami.github.io/M.Planner" target="_blank">
           <div class="proj-shimmer"></div>
           <div class="proj-top">
             <img src="mplanner-icon.png" alt="M. Planner app icon" class="proj-icon" />
@@ -1038,7 +1064,7 @@
           </div>
         </a>
 
-        <a class="proj-card tilt-card" href="https://gredami.github.io/FinWall" target="_blank">
+        <a class="proj-card tilt-card" data-cat="apps" href="https://gredami.github.io/FinWall" target="_blank">
           <div class="proj-shimmer"></div>
           <div class="proj-top">
             <img src="FW.png" alt="FinWall app icon" class="proj-icon" />
@@ -1052,6 +1078,11 @@
             <span class="proj-cta"><span class="proj-cta-txt">Explore</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </a>
+
+        <div class="proj-empty" id="projEmpty">
+          <div class="proj-empty-icon">◇</div>
+          Nothing here yet — something is on the way.
+        </div>
 
       </div>
 
@@ -1213,6 +1244,28 @@
       }, { rootMargin: '0px 0px 200px 0px' });
       io.observe(sentinel);
       loadBtn && loadBtn.addEventListener('click', () => revealBatch(BATCH));
+    })();
+
+    // Project category tabs
+    (function() {
+      const tabs  = document.querySelectorAll('.proj-tab');
+      const grid  = document.getElementById('projGrid');
+      const empty = document.getElementById('projEmpty');
+      if (!grid) return;
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const cat = tab.dataset.tab;
+          let visible = 0;
+          grid.querySelectorAll('.proj-card').forEach(card => {
+            const show = card.dataset.cat === cat;
+            card.style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+          if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+        });
+      });
     })();
 
     const fadeObserver = new IntersectionObserver(entries => {
