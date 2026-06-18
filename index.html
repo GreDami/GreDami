@@ -1031,7 +1031,7 @@
       </div>
 
       <div class="proj-tabs" role="tablist">
-        <button class="proj-tab active" data-tab="all" role="tab">All</button>
+        <button class="proj-tab" data-tab="all" role="tab">All</button>
         <button class="proj-tab" data-tab="apps" role="tab">Apps</button>
         <button class="proj-tab" data-tab="tools" role="tab">Tools</button>
         <button class="proj-tab" data-tab="sites" role="tab">Sites</button>
@@ -1239,53 +1239,40 @@
     document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObserver.observe(el));
 
     (function() {
-      const BATCH = 6;
-      const grid = document.getElementById('projGrid');
-      const sentinel = document.getElementById('projSentinel');
-      const loadWrap = document.getElementById('projLoadWrap');
-      const loadBtn = document.getElementById('projLoadBtn');
+      const grid  = document.getElementById('projGrid');
+      const empty = document.getElementById('projEmpty');
+      const tabs  = document.querySelectorAll('.proj-tab');
       if (!grid) return;
-      const cards = Array.from(grid.querySelectorAll('.proj-card'));
-      let revealed = 0;
-      function revealBatch(n) {
-        const batch = cards.slice(revealed, revealed + n);
-        batch.forEach((card, i) => setTimeout(() => card.classList.add('revealed'), i * 60));
-        revealed += batch.length;
-        loadWrap.classList.toggle('hidden', revealed >= cards.length);
-      }
-      revealBatch(BATCH);
-      cards.forEach(card => {
+
+      const allCards = Array.from(grid.querySelectorAll('.proj-card'));
+
+      // Tilt + spotlight
+      allCards.forEach(card => {
         card.addEventListener('mousemove', e => {
           const r = card.getBoundingClientRect();
           card.style.setProperty('--sx', (e.clientX - r.left) + 'px');
           card.style.setProperty('--sy', (e.clientY - r.top) + 'px');
         });
       });
-      const io = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && revealed < cards.length) revealBatch(BATCH);
-      }, { rootMargin: '0px 0px 200px 0px' });
-      io.observe(sentinel);
-      loadBtn && loadBtn.addEventListener('click', () => revealBatch(BATCH));
-    })();
 
-    // Project category tabs
-    (function() {
-      const tabs  = document.querySelectorAll('.proj-tab');
-      const grid  = document.getElementById('projGrid');
-      const empty = document.getElementById('projEmpty');
-      if (!grid) return;
+      // All cards hidden on load
+      allCards.forEach(c => c.style.display = 'none');
+
+      function filterCards(cat) {
+        const matching = allCards.filter(c => cat === 'all' || c.dataset.cat === cat);
+        allCards.forEach(c => { c.classList.remove('revealed'); c.style.display = 'none'; });
+        if (empty) empty.style.display = matching.length === 0 ? 'block' : 'none';
+        matching.forEach((c, i) => {
+          c.style.display = '';
+          setTimeout(() => c.classList.add('revealed'), 20 + i * 90);
+        });
+      }
+
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
           tabs.forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
-          const cat = tab.dataset.tab;
-          let visible = 0;
-          grid.querySelectorAll('.proj-card').forEach(card => {
-            const show = cat === 'all' || card.dataset.cat === cat;
-            card.style.display = show ? '' : 'none';
-            if (show) visible++;
-          });
-          if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+          filterCards(tab.dataset.tab);
         });
       });
     })();
