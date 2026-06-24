@@ -110,18 +110,6 @@
       position: relative;
     }
 
-    /* ── Ambient purple glows ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 55% 45% at 12% 28%, rgba(109,40,217,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 38% at 88% 78%, rgba(163,148,204,0.13) 0%, transparent 65%);
-    }
-
     /* ── Grain noise overlay ── */
     body::before {
       content: '';
@@ -144,12 +132,6 @@
       z-index: 1000;
       transition: width 0.08s linear;
       box-shadow: 0 0 10px rgba(163,148,204,0.55);
-    }
-
-
-    @keyframes glowPulse {
-      0%,100% { opacity: 1; transform: translateX(-50%) scale(1); }
-      50%      { opacity: 0.6; transform: translateX(-50%) scale(1.04); }
     }
 
     /* ── Floating shapes background ── */
@@ -286,18 +268,6 @@
     #hero-zone {
       position: relative;
     }
-    .hero-zone-glow {
-      position: absolute;
-      top: 10%; left: 50%;
-      transform: translateX(-50%);
-      width: 1400px; height: 1200px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center 30%, rgba(109,40,217,0.13) 0%, rgba(163,148,204,0.07) 35%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-      animation: glowPulse 8s ease-in-out infinite;
-    }
-
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
@@ -917,8 +887,6 @@
 
       #back-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
 
-      .hero-zone-glow { width: 100vw; height: 800px; top: 5%; }
-
       /* Disable 3D tilt on touch */
       .tilt-card { will-change: auto; }
 
@@ -1027,7 +995,6 @@
 
     <!-- HERO ZONE: part 1 (title) + part 2 (about) share one halo -->
     <div id="hero-zone">
-    <div class="hero-zone-glow"></div>
 
     <div id="hero">
 
