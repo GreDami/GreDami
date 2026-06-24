@@ -1109,7 +1109,7 @@
 
       <div class="proj-grid" id="projGrid">
 
-        <a class="proj-card tilt-card" data-cat="apps" href="https://gobag.gredami.com" target="_blank">
+        <a class="proj-card tilt-card" data-cat="apps sites" href="https://gobag.gredami.com" target="_blank">
           <div class="proj-shimmer"></div>
           <div class="proj-top">
             <img src="gobag-icon.png" alt="GoBag+ app icon" class="proj-icon" />
@@ -1125,7 +1125,7 @@
         </a>
 
 
-        <a class="proj-card tilt-card" data-cat="apps" href="https://gredami.github.io/FinWall" target="_blank">
+        <a class="proj-card tilt-card" data-cat="apps sites" href="https://gredami.github.io/FinWall" target="_blank">
           <div class="proj-shimmer"></div>
           <div class="proj-top">
             <img src="FW.png" alt="FinWall app icon" class="proj-icon" />
@@ -1325,7 +1325,7 @@
       allCards.forEach(c => c.style.display = 'none');
 
       function filterCards(cat) {
-        const matching = allCards.filter(c => cat === 'all' || c.dataset.cat === cat);
+        const matching = allCards.filter(c => cat === 'all' || c.dataset.cat.split(' ').includes(cat));
         allCards.forEach(c => { c.classList.remove('revealed'); c.style.display = 'none'; });
         if (empty) empty.style.display = matching.length === 0 ? 'block' : 'none';
         matching.forEach((c, i) => {
