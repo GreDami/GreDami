@@ -155,6 +155,20 @@
     }
     .mic-note { font-size: 0.78rem; color: var(--purple); margin-top: 8px; display: none; }
 
+    .mic-lang-row { display: flex; align-items: center; gap: 6px; margin-top: 10px; }
+    .mic-lang-row[hidden] { display: none; }
+    .mic-lang-label { font-size: 0.72rem; color: var(--muted); margin-right: 2px; }
+    .mic-lang-btn {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.5px;
+      padding: 4px 11px; border-radius: 100px;
+      border: 1px solid rgba(163,148,204,0.18);
+      background: transparent; color: var(--muted);
+      cursor: pointer; transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .mic-lang-btn:hover { color: var(--text); border-color: rgba(163,148,204,0.4); }
+    .mic-lang-btn.active { background: var(--purple-dim); border-color: var(--purple); color: var(--purple); }
+
     .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     .submit-btn {
@@ -257,6 +271,13 @@
           </button>
         </div>
         <p class="mic-note" id="micNote">Listening — speak now, click the mic again to stop.</p>
+        <div class="mic-lang-row" id="micLangRow">
+          <span class="mic-lang-label">Dictation language:</span>
+          <button type="button" class="mic-lang-btn" data-lang="en">EN</button>
+          <button type="button" class="mic-lang-btn" data-lang="ru">RU</button>
+          <button type="button" class="mic-lang-btn" data-lang="fr">FR</button>
+          <button type="button" class="mic-lang-btn" data-lang="es">ES</button>
+        </div>
       </div>
 
       <div class="row-2">
@@ -300,31 +321,63 @@
       const micBtn = document.getElementById('micBtn');
       const desc = document.getElementById('desc');
       const micNote = document.getElementById('micNote');
+      const micLangRow = document.getElementById('micLangRow');
+      const langBtns = document.querySelectorAll('.mic-lang-btn');
       const SpeechRecognitionImpl = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognitionImpl) {
         micBtn.hidden = true;
+        micLangRow.hidden = true;
         return;
       }
 
+      const LOCALES = { en: 'en-US', ru: 'ru-RU', fr: 'fr-FR', es: 'es-ES' };
+      const LANG_NAMES = { en: 'English', ru: 'Russian', fr: 'French', es: 'Spanish' };
+
+      function detectDefaultLang() {
+        const saved = localStorage.getItem('gredami-lang');
+        if (saved && LOCALES[saved]) return saved;
+        const prefix = (navigator.language || 'en').toLowerCase().split('-')[0];
+        return LOCALES[prefix] ? prefix : 'en';
+      }
+
+      let currentLang = detectDefaultLang();
       let recognition = null;
       let listening = false;
       let baseText = '';
+      let restartAfterStop = false;
 
-      micBtn.addEventListener('click', function () {
-        if (listening) {
-          recognition.stop();
-          return;
-        }
+      function setActiveLangBtn() {
+        langBtns.forEach(function (btn) {
+          btn.classList.toggle('active', btn.dataset.lang === currentLang);
+        });
+      }
+      setActiveLangBtn();
 
+      langBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.dataset.lang === currentLang) return;
+          currentLang = btn.dataset.lang;
+          setActiveLangBtn();
+          localStorage.setItem('gredami-lang', currentLang);
+          if (listening) {
+            restartAfterStop = true;
+            recognition.stop();
+          }
+        });
+      });
+
+      function startRecognition() {
         baseText = desc.value.trim() ? desc.value.trim() + ' ' : '';
         recognition = new SpeechRecognitionImpl();
         recognition.continuous = true;
         recognition.interimResults = true;
+        recognition.lang = LOCALES[currentLang] || 'en-US';
 
         recognition.onstart = function () {
           listening = true;
           micBtn.classList.add('listening');
+          micNote.textContent = 'Listening in ' + LANG_NAMES[currentLang] + ' — speak now, click the mic again to stop.';
           micNote.style.display = 'block';
         };
 
@@ -344,9 +397,21 @@
           listening = false;
           micBtn.classList.remove('listening');
           micNote.style.display = 'none';
+          if (restartAfterStop) {
+            restartAfterStop = false;
+            startRecognition();
+          }
         };
 
         recognition.start();
+      }
+
+      micBtn.addEventListener('click', function () {
+        if (listening) {
+          recognition.stop();
+        } else {
+          startRecognition();
+        }
       });
     })();
   </script>
