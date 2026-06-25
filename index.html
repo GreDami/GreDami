@@ -263,10 +263,6 @@
     main { position: relative; z-index: 1; }
     section { max-width: 1060px; margin: 0 auto; padding: 150px 64px; }
 
-    /* ── Hero zone (parts 1 + 2 share one halo) ── */
-    #hero-zone {
-      position: relative;
-    }
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
@@ -999,9 +995,6 @@
 
   <main>
 
-    <!-- HERO ZONE: part 1 (title) + part 2 (about) share one halo -->
-    <div id="hero-zone">
-
     <div id="hero">
 
       <p class="hero-eyebrow">Independent Studio</p>
@@ -1009,7 +1002,7 @@
       <h1 class="hero-title">GreDami</h1>
       <p class="hero-sub" id="heroSub"><strong>Everyday Tools</strong> &nbsp;—&nbsp; Life Made Simpler</p>
 
-      <a href="#about" class="scroll-arrow">
+      <a href="#contact" class="scroll-arrow">
         <span class="scroll-arrow-label" id="scrollLabel">Scroll</span>
         <div class="scroll-arrow-circle">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -1019,6 +1012,23 @@
       </a>
 
     </div>
+
+    <div class="sep"></div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-box fade-up">
+        <p class="sec-label" id="contactLabel" style="margin-bottom:14px;">Contact</p>
+        <h2 class="contact-title" id="contactTitle">Let's Talk</h2>
+        <p class="contact-desc" id="contactDesc">Have a project in mind, want to collaborate, or just curious about what GreDami is building next?</p>
+        <a href="start.html" class="contact-link">
+          Get in Touch
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline-block;vertical-align:middle;margin-left:8px;opacity:0.75;"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <div class="sep"></div>
 
     <!-- Part 2 — about -->
     <section id="about">
@@ -1061,12 +1071,11 @@
       </div>
 
     </section>
-    </div><!-- /hero-zone -->
 
     <div class="sep"></div>
 
     <!-- PROJECTS GRID -->
-    <section id="apps">
+    <section id="apps" style="padding-bottom:160px;">
       <div class="fade-up" style="margin-bottom:44px;">
         <p class="sec-label" id="projectsLabel">Projects</p>
         <h2 class="sec-title" id="projectsTitle">Our Projects</h2>
@@ -1153,21 +1162,6 @@
           <span id="loadMoreText">Load more</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-      </div>
-    </section>
-
-    <div class="sep"></div>
-
-    <!-- CONTACT -->
-    <section id="contact" style="padding-bottom:160px;">
-      <div class="contact-box fade-up">
-        <p class="sec-label" id="contactLabel" style="margin-bottom:14px;">Contact</p>
-        <h2 class="contact-title" id="contactTitle">Let's Talk</h2>
-        <p class="contact-desc" id="contactDesc">Have a project in mind, want to collaborate, or just curious about what GreDami is building next?</p>
-        <a href="start.html" class="contact-link">
-          Get in Touch
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline-block;vertical-align:middle;margin-left:8px;opacity:0.75;"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
       </div>
     </section>
 
