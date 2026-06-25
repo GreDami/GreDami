@@ -133,6 +133,28 @@
     textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
     ::placeholder { color: var(--muted); }
 
+    .textarea-wrap { position: relative; }
+    #desc { padding-right: 52px; }
+    .mic-btn {
+      position: absolute; top: 10px; right: 10px;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--purple-dim); border: 1px solid var(--purple-border);
+      color: var(--purple); cursor: pointer; padding: 0;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .mic-btn:hover { background: rgba(163,148,204,0.18); }
+    .mic-btn[hidden] { display: none; }
+    .mic-btn.listening {
+      background: rgba(224,100,100,0.15); border-color: rgba(224,100,100,0.45); color: #e08a8a;
+      animation: micPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes micPulse {
+      0%,100%  { box-shadow: 0 0 0 0 rgba(224,100,100,0.35); }
+      50%      { box-shadow: 0 0 0 7px rgba(224,100,100,0); }
+    }
+    .mic-note { font-size: 0.78rem; color: var(--purple); margin-top: 8px; display: none; }
+
     .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     .submit-btn {
@@ -228,7 +250,13 @@
 
       <div>
         <label class="field-label" for="desc">What are you trying to achieve?</label>
-        <textarea id="desc" name="description" placeholder="Describe your idea, the problem it solves, or what you have in mind so far…" required></textarea>
+        <div class="textarea-wrap">
+          <textarea id="desc" name="description" placeholder="Describe your idea, the problem it solves, or what you have in mind so far…" required></textarea>
+          <button type="button" class="mic-btn" id="micBtn" title="Dictate with your microphone" aria-label="Dictate with your microphone">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </button>
+        </div>
+        <p class="mic-note" id="micNote">Listening — speak now, click the mic again to stop.</p>
       </div>
 
       <div class="row-2">
@@ -266,6 +294,62 @@
       </a>
     </div>
   </main>
+
+  <script>
+    (function () {
+      const micBtn = document.getElementById('micBtn');
+      const desc = document.getElementById('desc');
+      const micNote = document.getElementById('micNote');
+      const SpeechRecognitionImpl = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognitionImpl) {
+        micBtn.hidden = true;
+        return;
+      }
+
+      let recognition = null;
+      let listening = false;
+      let baseText = '';
+
+      micBtn.addEventListener('click', function () {
+        if (listening) {
+          recognition.stop();
+          return;
+        }
+
+        baseText = desc.value.trim() ? desc.value.trim() + ' ' : '';
+        recognition = new SpeechRecognitionImpl();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        recognition.onstart = function () {
+          listening = true;
+          micBtn.classList.add('listening');
+          micNote.style.display = 'block';
+        };
+
+        recognition.onresult = function (e) {
+          let transcript = '';
+          for (let i = 0; i < e.results.length; i++) {
+            transcript += e.results[i][0].transcript;
+          }
+          desc.value = baseText + transcript;
+        };
+
+        recognition.onerror = function (e) {
+          console.warn('Speech recognition error:', e.error);
+        };
+
+        recognition.onend = function () {
+          listening = false;
+          micBtn.classList.remove('listening');
+          micNote.style.display = 'none';
+        };
+
+        recognition.start();
+      });
+    })();
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
