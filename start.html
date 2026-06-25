@@ -151,6 +151,24 @@
 
     .form-note { font-size: 0.78rem; color: var(--muted); margin-top: -8px; }
 
+    .submit-btn:disabled { opacity: 0.6; cursor: default; transform: none !important; filter: none !important; }
+
+    .error-msg {
+      display: none;
+      font-size: 0.82rem; color: #e0a3a3;
+      background: rgba(224,100,100,0.08); border: 1px solid rgba(224,100,100,0.22);
+      border-radius: 10px; padding: 12px 16px; margin-top: -8px;
+    }
+
+    .success-box { display: none; text-align: left; }
+    .success-box .page-eyebrow { color: var(--purple); }
+    .success-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--purple-dim); border: 1px solid var(--purple-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--purple); margin-bottom: 24px;
+    }
+
     @media (max-width: 600px) {
       .type-grid { grid-template-columns: repeat(2, 1fr); }
       .row-2 { grid-template-columns: 1fr; }
@@ -168,6 +186,7 @@
   </div>
 
   <main>
+    <div id="formView">
     <p class="page-eyebrow">Start a Project</p>
     <h1 class="page-title">Tell me what you're<br>trying to build.</h1>
     <p class="page-desc">Answer a few quick questions and I'll get back to you with how I can help — fast.</p>
@@ -224,37 +243,70 @@
       </div>
 
       <div>
+        <p class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email me directly at <a href="mailto:hidtresuh@gmail.com" style="color:#e0a3a3;text-decoration:underline;">hidtresuh@gmail.com</a>.</p>
         <button type="submit" class="submit-btn" id="submitBtn">
-          Send
+          <span id="submitBtnText">Send</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="form-note" style="margin-top:14px;">This opens your email app with your answers pre-filled, ready to send.</p>
+        <p class="form-note" style="margin-top:14px;">I'll get back to you by email, usually within a day or two.</p>
       </div>
     </form>
+    </div>
+
+    <div class="success-box" id="successBox">
+      <div class="success-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <p class="page-eyebrow">Message Sent</p>
+      <h1 class="page-title">Thanks — got it.</h1>
+      <p class="page-desc">I'll read through what you sent and get back to you by email soon. Talk soon.</p>
+      <a href="index.html" class="top-back" style="display:inline-flex;">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3 2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to home
+      </a>
+    </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    document.getElementById('inquiryForm').addEventListener('submit', function (e) {
+    const supabaseClient = window.supabase.createClient(
+      'https://kpqvfaqtxaglzaufqzcu.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwcXZmYXF0eGFnbHphdWZxemN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNzM3MDMsImV4cCI6MjA5Nzk0OTcwM30.u0X9WybIZHBk260gdpFFSOd4qP6fLNjGAxEikPOEbSE'
+    );
+
+    document.getElementById('inquiryForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const form = e.target;
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
+
       const type = form.querySelector('input[name="type"]:checked').value;
       const description = form.description.value.trim();
       const name = form.name.value.trim();
       const email = form.email.value.trim();
 
-      const subject = `New project inquiry — ${type}`;
-      const body =
-        `Project type: ${type}\n\n` +
-        `Description:\n${description}\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}`;
+      const submitBtn = document.getElementById('submitBtn');
+      const submitBtnText = document.getElementById('submitBtnText');
+      const errorMsg = document.getElementById('errorMsg');
 
-      window.location.href =
-        `mailto:hidtresuh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      errorMsg.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtnText.textContent = 'Sending…';
+
+      const { error } = await supabaseClient.from('leads').insert({ type, description, name, email });
+
+      if (error) {
+        console.error(error);
+        submitBtn.disabled = false;
+        submitBtnText.textContent = 'Send';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('successBox').style.display = 'block';
     });
   </script>
 
