@@ -65,8 +65,6 @@
     }
     .top-back:hover { color: var(--text); }
 
-    .top-right { display: flex; align-items: center; gap: 18px; }
-
     main {
       max-width: 720px; margin: 0 auto; padding: 56px 24px 120px;
     }
@@ -217,12 +215,6 @@
 
   <div class="top">
     <a href="index.html" class="top-logo">GreDami</a>
-    <div class="top-right">
-      <a href="index.html" class="top-back">
-        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3 2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span id="topBackText">Back to home</span>
-      </a>
-    </div>
   </div>
 
   <main>
@@ -403,7 +395,6 @@
       currentPageLang = PAGE_T[lang] ? lang : 'en';
       document.documentElement.lang = currentPageLang;
       document.title = t.docTitle;
-      document.getElementById('topBackText').textContent = t.topBack;
       document.getElementById('pageEyebrow').textContent = t.pageEyebrow;
       document.getElementById('pageTitle').innerHTML = t.pageTitleHtml;
       document.getElementById('pageDesc').textContent = t.pageDesc;
