@@ -66,17 +66,6 @@
     .top-back:hover { color: var(--text); }
 
     .top-right { display: flex; align-items: center; gap: 18px; }
-    .top-lang { display: flex; gap: 4px; }
-    .top-lang-btn {
-      font-family: 'Jost', system-ui, sans-serif;
-      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.5px;
-      padding: 4px 10px; border-radius: 100px;
-      border: 1px solid rgba(163,148,204,0.18);
-      background: transparent; color: var(--muted);
-      cursor: pointer; transition: color 0.2s, background 0.2s, border-color 0.2s;
-    }
-    .top-lang-btn:hover { color: var(--text); border-color: rgba(163,148,204,0.4); }
-    .top-lang-btn.active { background: var(--purple-dim); border-color: var(--purple); color: var(--purple); }
 
     main {
       max-width: 720px; margin: 0 auto; padding: 56px 24px 120px;
@@ -229,11 +218,6 @@
   <div class="top">
     <a href="index.html" class="top-logo">GreDami</a>
     <div class="top-right">
-      <div class="top-lang" id="topLangRow">
-        <button type="button" class="top-lang-btn" data-page-lang="en">EN</button>
-        <button type="button" class="top-lang-btn" data-page-lang="fr">FR</button>
-        <button type="button" class="top-lang-btn" data-page-lang="ru">RU</button>
-      </div>
       <a href="index.html" class="top-back">
         <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3 2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span id="topBackText">Back to home</span>
@@ -445,22 +429,17 @@
       micBtnEl.title = t.micTitle;
       micBtnEl.setAttribute('aria-label', t.micTitle);
 
-      document.querySelectorAll('.top-lang-btn').forEach(function (btn) {
-        btn.classList.toggle('active', btn.dataset.pageLang === currentPageLang);
-      });
-
       localStorage.setItem('gredami-lang', currentPageLang);
     }
 
     (function () {
       const saved = localStorage.getItem('gredami-lang');
-      applyPageLang(PAGE_T[saved] ? saved : 'en');
-
-      document.querySelectorAll('.top-lang-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          applyPageLang(btn.dataset.pageLang);
-        });
-      });
+      if (saved && PAGE_T[saved]) {
+        applyPageLang(saved);
+      } else {
+        const detected = (navigator.language || 'en').toLowerCase().split('-')[0];
+        applyPageLang(PAGE_T[detected] ? detected : 'en');
+      }
     })();
   </script>
 

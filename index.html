@@ -237,7 +237,6 @@
     .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
     .nav-links a.active { color: var(--purple); background: var(--purple-dim); }
     .nav-links a:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; border-radius: 8px; }
-    nav > .lang-switcher { justify-self: end; }
 
     /* ── Back to top ── */
     #back-top {
@@ -759,40 +758,6 @@
       color: var(--purple); opacity: 0.4;
     }
 
-    /* ── Lang Switcher ── */
-    .lang-switcher { position: relative; }
-    .lang-btn {
-      display: flex; align-items: center; gap: 5px;
-      background: transparent; border: none;
-      color: var(--muted); font-size: 0.78rem; font-weight: 600;
-      font-family: 'Jost', system-ui, sans-serif;
-      padding: 4px 6px; cursor: pointer; transition: color 0.2s;
-      letter-spacing: 0.3px;
-    }
-    .lang-btn:hover { color: var(--text); }
-    .lang-btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; border-radius: 6px; }
-    .lang-chevron { transition: transform 0.2s; }
-    .lang-switcher.open .lang-chevron { transform: rotate(180deg); }
-    .lang-dropdown {
-      position: absolute; top: calc(100% + 10px); right: 0;
-      background: var(--surface); border: 1px solid var(--purple-border);
-      border-radius: 12px; padding: 6px;
-      display: none; flex-direction: column; gap: 2px;
-      min-width: 130px; z-index: 200;
-      box-shadow: 0 16px 56px rgba(0,0,0,0.75);
-    }
-    .lang-switcher.open .lang-dropdown { display: flex; }
-    .lang-option {
-      background: none; border: none; color: var(--muted);
-      font-family: 'Jost', system-ui, sans-serif;
-      font-size: 0.82rem; font-weight: 500;
-      padding: 8px 12px; border-radius: 8px;
-      cursor: pointer; text-align: left;
-      transition: background 0.15s, color 0.15s;
-    }
-    .lang-option:hover { background: var(--purple-dim); color: var(--text); }
-    .lang-option.active { color: var(--purple); background: var(--purple-dim); }
-    .lang-option:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
 
     /* ── Fade-in ── */
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -900,7 +865,6 @@
     @media (max-width: 480px) {
       nav { width: calc(100% - 16px); height: 50px; }
       .nav-logo-name { font-size: 1rem; }
-      .lang-btn { font-size: 0.72rem; }
 
       #hero { padding: 100px 16px 80px; }
       .hero-title {
@@ -978,19 +942,6 @@
       <li><a href="#apps" id="navProjects">Our Projects</a></li>
       <li><a href="#contact" id="navContact">Contact</a></li>
     </ul>
-    <div class="lang-switcher" id="langSwitcher">
-      <button class="lang-btn" id="langBtn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
-        <span id="langCurrent">EN</span>
-        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4l4 4 4-4"/></svg>
-      </button>
-      <div class="lang-dropdown" id="langDropdown">
-        <button class="lang-option active" data-lang="en">English</button>
-        <button class="lang-option" data-lang="ru">Русский</button>
-        <button class="lang-option" data-lang="fr">Français</button>
-        <button class="lang-option" data-lang="es">Español</button>
-      </div>
-    </div>
   </nav>
 
   <main>
@@ -1511,24 +1462,16 @@
       $('footerSocialLabel').textContent = t.footerSocialLabel;
       $('footerCopy').textContent     = t.footerCopy;
       $('footerBottomTag').textContent= t.footerBottomTag;
-      $('langCurrent').textContent    = lang.toUpperCase();
-      document.querySelectorAll('.lang-option').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
       localStorage.setItem('gredami-lang', lang);
     }
 
-    const switcher = document.getElementById('langSwitcher');
-    document.getElementById('langBtn').addEventListener('click', e => {
-      e.stopPropagation();
-      switcher.classList.toggle('open');
-    });
-    document.addEventListener('click', () => switcher.classList.remove('open'));
-    document.querySelectorAll('.lang-option').forEach(btn => {
-      btn.addEventListener('click', () => { setLang(btn.dataset.lang); switcher.classList.remove('open'); });
-    });
     const saved = localStorage.getItem('gredami-lang');
-    if (saved && T[saved]) setLang(saved);
+    if (saved && T[saved]) {
+      setLang(saved);
+    } else {
+      const detected = (navigator.language || 'en').toLowerCase().split('-')[0];
+      setLang(T[detected] ? detected : 'en');
+    }
   </script>
 
   <script>
