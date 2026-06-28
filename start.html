@@ -65,6 +65,19 @@
     }
     .top-back:hover { color: var(--text); }
 
+    .top-right { display: flex; align-items: center; gap: 18px; }
+    .top-lang { display: flex; gap: 4px; }
+    .top-lang-btn {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.5px;
+      padding: 4px 10px; border-radius: 100px;
+      border: 1px solid rgba(163,148,204,0.18);
+      background: transparent; color: var(--muted);
+      cursor: pointer; transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .top-lang-btn:hover { color: var(--text); border-color: rgba(163,148,204,0.4); }
+    .top-lang-btn.active { background: var(--purple-dim); border-color: var(--purple); color: var(--purple); }
+
     main {
       max-width: 720px; margin: 0 auto; padding: 56px 24px 120px;
     }
@@ -215,55 +228,62 @@
 
   <div class="top">
     <a href="index.html" class="top-logo">GreDami</a>
-    <a href="index.html" class="top-back">
-      <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3 2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back to home
-    </a>
+    <div class="top-right">
+      <div class="top-lang" id="topLangRow">
+        <button type="button" class="top-lang-btn" data-page-lang="en">EN</button>
+        <button type="button" class="top-lang-btn" data-page-lang="fr">FR</button>
+        <button type="button" class="top-lang-btn" data-page-lang="ru">RU</button>
+      </div>
+      <a href="index.html" class="top-back">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3 2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="topBackText">Back to home</span>
+      </a>
+    </div>
   </div>
 
   <main>
     <div id="formView">
-    <p class="page-eyebrow">Start a Project</p>
-    <h1 class="page-title">Tell me what you're<br>trying to build.</h1>
-    <p class="page-desc">Answer a few quick questions and I'll get back to you with how I can help — fast.</p>
+    <p class="page-eyebrow" id="pageEyebrow">Start a Project</p>
+    <h1 class="page-title" id="pageTitle">Tell me what you're<br>trying to build.</h1>
+    <p class="page-desc" id="pageDesc">Answer a few quick questions and I'll get back to you with how I can help — fast.</p>
 
     <form id="inquiryForm">
       <fieldset>
-        <legend>What do you want to create?</legend>
+        <legend id="typeLegend">What do you want to create?</legend>
         <div class="type-grid">
           <div class="type-card">
             <input type="radio" name="type" id="type-site" value="Site" required>
             <label for="type-site">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-              Site
+              <span id="typeSiteLabel">Site</span>
             </label>
           </div>
           <div class="type-card">
             <input type="radio" name="type" id="type-app" value="App">
             <label for="type-app">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
-              App
+              <span id="typeAppLabel">App</span>
             </label>
           </div>
           <div class="type-card">
             <input type="radio" name="type" id="type-tool" value="Tool">
             <label for="type-tool">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              Tool
+              <span id="typeToolLabel">Tool</span>
             </label>
           </div>
           <div class="type-card">
             <input type="radio" name="type" id="type-unsure" value="Not sure yet">
             <label for="type-unsure">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 2.5-3 4.5"/><path d="M12 17.5h.01"/></svg>
-              Not sure
+              <span id="typeUnsureLabel">Not sure</span>
             </label>
           </div>
         </div>
       </fieldset>
 
       <div>
-        <label class="field-label" for="desc">What are you trying to achieve?</label>
+        <label class="field-label" for="desc" id="descLabel">What are you trying to achieve?</label>
         <div class="textarea-wrap">
           <textarea id="desc" name="description" placeholder="Describe your idea, the problem it solves, or what you have in mind so far…" required></textarea>
           <button type="button" class="mic-btn" id="micBtn" title="Dictate with your microphone" aria-label="Dictate with your microphone">
@@ -272,7 +292,7 @@
         </div>
         <p class="mic-note" id="micNote">Listening — speak now, click the mic again to stop.</p>
         <div class="mic-lang-row" id="micLangRow">
-          <span class="mic-lang-label">Dictation language:</span>
+          <span class="mic-lang-label" id="micLangLabel">Dictation language:</span>
           <button type="button" class="mic-lang-btn" data-lang="en">EN</button>
           <button type="button" class="mic-lang-btn" data-lang="ru">RU</button>
           <button type="button" class="mic-lang-btn" data-lang="fr">FR</button>
@@ -282,22 +302,22 @@
 
       <div class="row-2">
         <div>
-          <label class="field-label" for="name">Your name</label>
+          <label class="field-label" for="name" id="nameLabel">Your name</label>
           <input type="text" id="name" name="name" placeholder="Jane Doe" required>
         </div>
         <div>
-          <label class="field-label" for="email">Your email</label>
+          <label class="field-label" for="email" id="emailLabel">Your email</label>
           <input type="email" id="email" name="email" placeholder="jane@example.com" required>
         </div>
       </div>
 
       <div>
-        <p class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email me directly at <a href="mailto:hidtresuh@gmail.com" style="color:#e0a3a3;text-decoration:underline;">hidtresuh@gmail.com</a>.</p>
+        <p class="error-msg" id="errorMsg"><span id="errorMsgText">Something went wrong sending your message. Please try again, or email me directly at</span> <a href="mailto:hidtresuh@gmail.com" style="color:#e0a3a3;text-decoration:underline;">hidtresuh@gmail.com</a>.</p>
         <button type="submit" class="submit-btn" id="submitBtn">
           <span id="submitBtnText">Send</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="form-note" style="margin-top:14px;">I'll get back to you by email, usually within a day or two.</p>
+        <p class="form-note" id="formNote" style="margin-top:14px;">I'll get back to you by email, usually within a day or two.</p>
       </div>
     </form>
     </div>
@@ -306,15 +326,143 @@
       <div class="success-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
-      <p class="page-eyebrow">Message Sent</p>
-      <h1 class="page-title">Thanks — got it.</h1>
-      <p class="page-desc">I'll read through what you sent and get back to you by email soon. Talk soon.</p>
+      <p class="page-eyebrow" id="successEyebrow">Message Sent</p>
+      <h1 class="page-title" id="successTitle">Thanks — got it.</h1>
+      <p class="page-desc" id="successDesc">I'll read through what you sent and get back to you by email soon. Talk soon.</p>
       <a href="index.html" class="top-back" style="display:inline-flex;">
         <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3 2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to home
+        <span id="successBackText">Back to home</span>
       </a>
     </div>
   </main>
+
+  <script>
+    const PAGE_T = {
+      en: {
+        docTitle: 'Start a Project — GreDami',
+        topBack: 'Back to home',
+        pageEyebrow: 'Start a Project',
+        pageTitleHtml: "Tell me what you're<br>trying to build.",
+        pageDesc: "Answer a few quick questions and I'll get back to you with how I can help — fast.",
+        typeLegend: 'What do you want to create?',
+        typeSite: 'Site', typeApp: 'App', typeTool: 'Tool', typeUnsure: 'Not sure',
+        descLabel: 'What are you trying to achieve?',
+        descPlaceholder: 'Describe your idea, the problem it solves, or what you have in mind so far…',
+        micTitle: 'Dictate with your microphone',
+        micLangLabel: 'Dictation language:',
+        listeningTemplate: 'Listening in {lang} — speak now, click the mic again to stop.',
+        langNames: { en: 'English', ru: 'Russian', fr: 'French', es: 'Spanish' },
+        nameLabel: 'Your name',
+        emailLabel: 'Your email',
+        errorMsgText: 'Something went wrong sending your message. Please try again, or email me directly at',
+        sendText: 'Send',
+        sendingText: 'Sending…',
+        formNote: "I'll get back to you by email, usually within a day or two.",
+        successEyebrow: 'Message Sent',
+        successTitle: 'Thanks — got it.',
+        successDesc: "I'll read through what you sent and get back to you by email soon. Talk soon.",
+      },
+      fr: {
+        docTitle: 'Démarrer un projet — GreDami',
+        topBack: "Retour à l'accueil",
+        pageEyebrow: 'Démarrer un projet',
+        pageTitleHtml: 'Dites-moi ce que vous<br>voulez créer.',
+        pageDesc: 'Répondez à quelques questions rapides et je vous recontacterai pour vous dire comment je peux vous aider — rapidement.',
+        typeLegend: 'Que voulez-vous créer ?',
+        typeSite: 'Site', typeApp: 'Appli', typeTool: 'Outil', typeUnsure: 'Pas sûr',
+        descLabel: "Qu'essayez-vous d'accomplir ?",
+        descPlaceholder: "Décrivez votre idée, le problème qu'elle résout, ou ce que vous avez en tête pour l'instant…",
+        micTitle: 'Dicter avec votre microphone',
+        micLangLabel: 'Langue de dictée :',
+        listeningTemplate: 'Écoute en {lang} — parlez maintenant, cliquez à nouveau sur le micro pour arrêter.',
+        langNames: { en: 'anglais', ru: 'russe', fr: 'français', es: 'espagnol' },
+        nameLabel: 'Votre nom',
+        emailLabel: 'Votre email',
+        errorMsgText: "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer, ou m'écrire directement à",
+        sendText: 'Envoyer',
+        sendingText: 'Envoi…',
+        formNote: "Je vous répondrai par email, généralement dans un délai d'un à deux jours.",
+        successEyebrow: 'Message envoyé',
+        successTitle: 'Merci — reçu.',
+        successDesc: 'Je vais lire votre message et vous répondre par email bientôt. À très vite.',
+      },
+      ru: {
+        docTitle: 'Начать проект — GreDami',
+        topBack: 'Назад на главную',
+        pageEyebrow: 'Начать проект',
+        pageTitleHtml: 'Расскажите, что вы<br>хотите создать.',
+        pageDesc: 'Ответьте на несколько быстрых вопросов, и я свяжусь с вами и расскажу, как могу помочь — быстро.',
+        typeLegend: 'Что вы хотите создать?',
+        typeSite: 'Сайт', typeApp: 'Приложение', typeTool: 'Инструмент', typeUnsure: 'Не уверен',
+        descLabel: 'Чего вы хотите достичь?',
+        descPlaceholder: 'Опишите вашу идею, проблему, которую она решает, или то, что у вас уже есть на уме…',
+        micTitle: 'Диктовать с помощью микрофона',
+        micLangLabel: 'Язык диктовки:',
+        listeningTemplate: 'Слушаю на {lang} — говорите, нажмите на микрофон ещё раз, чтобы остановить.',
+        langNames: { en: 'английском', ru: 'русском', fr: 'французском', es: 'испанском' },
+        nameLabel: 'Ваше имя',
+        emailLabel: 'Ваш email',
+        errorMsgText: 'Не удалось отправить сообщение. Попробуйте ещё раз или напишите мне напрямую на',
+        sendText: 'Отправить',
+        sendingText: 'Отправка…',
+        formNote: 'Я отвечу вам по email, обычно в течение одного-двух дней.',
+        successEyebrow: 'Сообщение отправлено',
+        successTitle: 'Спасибо — получено.',
+        successDesc: 'Я прочитаю ваше сообщение и скоро отвечу по email. До связи.',
+      },
+    };
+
+    let currentPageLang = 'en';
+
+    function applyPageLang(lang) {
+      const t = PAGE_T[lang] || PAGE_T.en;
+      currentPageLang = PAGE_T[lang] ? lang : 'en';
+      document.documentElement.lang = currentPageLang;
+      document.title = t.docTitle;
+      document.getElementById('topBackText').textContent = t.topBack;
+      document.getElementById('pageEyebrow').textContent = t.pageEyebrow;
+      document.getElementById('pageTitle').innerHTML = t.pageTitleHtml;
+      document.getElementById('pageDesc').textContent = t.pageDesc;
+      document.getElementById('typeLegend').textContent = t.typeLegend;
+      document.getElementById('typeSiteLabel').textContent = t.typeSite;
+      document.getElementById('typeAppLabel').textContent = t.typeApp;
+      document.getElementById('typeToolLabel').textContent = t.typeTool;
+      document.getElementById('typeUnsureLabel').textContent = t.typeUnsure;
+      document.getElementById('descLabel').textContent = t.descLabel;
+      document.getElementById('desc').placeholder = t.descPlaceholder;
+      document.getElementById('micLangLabel').textContent = t.micLangLabel;
+      document.getElementById('nameLabel').textContent = t.nameLabel;
+      document.getElementById('emailLabel').textContent = t.emailLabel;
+      document.getElementById('errorMsgText').textContent = t.errorMsgText;
+      document.getElementById('submitBtnText').textContent = t.sendText;
+      document.getElementById('formNote').textContent = t.formNote;
+      document.getElementById('successEyebrow').textContent = t.successEyebrow;
+      document.getElementById('successTitle').textContent = t.successTitle;
+      document.getElementById('successDesc').textContent = t.successDesc;
+      document.getElementById('successBackText').textContent = t.topBack;
+
+      const micBtnEl = document.getElementById('micBtn');
+      micBtnEl.title = t.micTitle;
+      micBtnEl.setAttribute('aria-label', t.micTitle);
+
+      document.querySelectorAll('.top-lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.pageLang === currentPageLang);
+      });
+
+      localStorage.setItem('gredami-lang', currentPageLang);
+    }
+
+    (function () {
+      const saved = localStorage.getItem('gredami-lang');
+      applyPageLang(PAGE_T[saved] ? saved : 'en');
+
+      document.querySelectorAll('.top-lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyPageLang(btn.dataset.pageLang);
+        });
+      });
+    })();
+  </script>
 
   <script>
     (function () {
@@ -332,7 +480,6 @@
       }
 
       const LOCALES = { en: 'en-US', ru: 'ru-RU', fr: 'fr-FR', es: 'es-ES' };
-      const LANG_NAMES = { en: 'English', ru: 'Russian', fr: 'French', es: 'Spanish' };
 
       function detectDefaultLang() {
         const saved = localStorage.getItem('gredami-lang');
@@ -377,7 +524,8 @@
         recognition.onstart = function () {
           listening = true;
           micBtn.classList.add('listening');
-          micNote.textContent = 'Listening in ' + LANG_NAMES[currentLang] + ' — speak now, click the mic again to stop.';
+          const t = PAGE_T[currentPageLang] || PAGE_T.en;
+          micNote.textContent = t.listeningTemplate.replace('{lang}', t.langNames[currentLang] || currentLang);
           micNote.style.display = 'block';
         };
 
@@ -442,14 +590,14 @@
 
       errorMsg.style.display = 'none';
       submitBtn.disabled = true;
-      submitBtnText.textContent = 'Sending…';
+      submitBtnText.textContent = (PAGE_T[currentPageLang] || PAGE_T.en).sendingText;
 
       const { error } = await supabaseClient.from('leads').insert({ type, description, name, email });
 
       if (error) {
         console.error(error);
         submitBtn.disabled = false;
-        submitBtnText.textContent = 'Send';
+        submitBtnText.textContent = (PAGE_T[currentPageLang] || PAGE_T.en).sendText;
         errorMsg.style.display = 'block';
         return;
       }
