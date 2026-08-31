@@ -1639,22 +1639,6 @@ nav.scrolled::after { opacity: 1; }
   to   { transform: translate3d(4%, -3%, 0) scale(1.09); }
 }
 
-/* the word the headline lands on: the sweep travels through it rather than
-   sitting still, which is the one piece of movement above the fold */
-.hero-title em {
-  background: linear-gradient(100deg,
-    var(--accent-deep) 0%, var(--accent) 22%, var(--accent-lit) 44%,
-    var(--accent2) 68%, var(--accent) 100%);
-  background-size: 280% 100%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: word-sweep 11s ease-in-out infinite alternate;
-}
-@keyframes word-sweep {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
-}
-
 /* the proof line alternates the two hues and breathes */
 .hero-proof span::before { animation: pip 3.4s ease-in-out infinite; }
 .hero-proof span:nth-child(even)::before {
@@ -1841,7 +1825,6 @@ nav.scrolled::after { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .hero-glow, .final-cta::after { animation: none; }
   .hero-proof span::before, .eyebrow::before { animation: none; opacity: 1; transform: none; }
-  .hero-title em { animation: none; background-position: 30% 50%; }
   .build::after, .svc::after, .line::after { display: none; }
   .build::before, .svc::before, .line::before,
   .build-link::after, .work-link::after, .line-link::after { transition: none; }
