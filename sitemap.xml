@@ -1,9 +1,284 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gredami.com/</loc>
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/"/>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/services.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/services.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/services.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/services.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/websites.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/websites.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/websites.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/websites.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/websites.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/websites.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/websites.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/websites.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/apps.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/apps.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/apps.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/apps.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/apps.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/apps.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/apps.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/apps.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/apps.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/saas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/saas.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/saas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/saas.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/saas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/saas.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/saas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/saas.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/saas.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/methodology.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/methodology.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/methodology.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/methodology.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/start.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/start.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/start.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/start.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/start.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/start.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/start.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/start.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
