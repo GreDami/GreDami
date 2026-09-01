@@ -94,27 +94,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ── reveal on scroll ── */
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var reveals = document.querySelectorAll('.reveal');
-  if (reduced || !('IntersectionObserver' in window)) {
-    reveals.forEach(function (el) { el.classList.add('in'); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function (el) { io.observe(el); });
-    setTimeout(function () {
-      reveals.forEach(function (el) {
-        var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
-      });
-    }, 1200);
-  }
 
   /* ── pointer spotlight on the tiled cards ──
      The pool of colour under the cursor is a CSS gradient centred on --mx/--my;
