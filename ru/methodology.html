@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Наш подход — пять шагов, без сюрпризов | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Как устроен проект в GreDami — от структурного аудита до масштабирования: что происходит на каждом шаге, сколько это стоит и что остаётся у вас" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/ru/methodology.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/methodology.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/methodology.html" />
+  <link rel="canonical" href="https://gredami.com/ru/methodology" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/methodology" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/methodology" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/ru/methodology.html" />
+  <meta property="og:url" content="https://gredami.com/ru/methodology" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Наш подход — пять шагов, без сюрпризов | GreDami" />
   <meta property="og:description" content="Как устроен проект в GreDami — от структурного аудита до масштабирования: что происходит на каждом шаге, сколько это стоит и что остаётся у вас" />
@@ -2023,12 +2031,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../ru/">Главная</a></li>
         <li><a href="../ru/#build">Что мы делаем</a></li>
-        <li><a href="../ru/services.html">Услуги</a></li>
+        <li><a href="../ru/services">Услуги</a></li>
         <li><a href="../ru/#about">О студии</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../ru/start.html" class="nav-cta">Начать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../ru/start" class="nav-cta">Начать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Сменить язык">
@@ -2036,10 +2044,10 @@ nav.scrolled::after { opacity: 1; }
             <span>RU</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../methodology.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/methodology.html" hreflang="fr" lang="fr">Français</a>
-            <a href="../ru/methodology.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
-            <a href="../es/methodology.html" hreflang="es" lang="es">Español</a>
+            <a href="../methodology" hreflang="en" lang="en">English</a>
+            <a href="../fr/methodology" hreflang="fr" lang="fr">Français</a>
+            <a href="../ru/methodology" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+            <a href="../es/methodology" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2061,16 +2069,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../ru/">Главная</a></li>
       <li><a href="../ru/#build">Что мы делаем</a></li>
-      <li><a href="../ru/services.html">Услуги</a></li>
+      <li><a href="../ru/services">Услуги</a></li>
       <li><a href="../ru/#about">О студии</a></li>
     </ul>
-    <a href="../ru/start.html" class="drawer-cta">Начать проект</a>
-    <a href="../ru/start.html" class="drawer-cta ghost">Начать</a>
+    <a href="../ru/start" class="drawer-cta">Начать проект</a>
+    <a href="../ru/start" class="drawer-cta ghost">Начать</a>
     <div class="drawer-langs">
-      <a href="../methodology.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/methodology.html" hreflang="fr" lang="fr">Français</a>
-      <a href="../ru/methodology.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
-      <a href="../es/methodology.html" hreflang="es" lang="es">Español</a>
+      <a href="../methodology" hreflang="en" lang="en">English</a>
+      <a href="../fr/methodology" hreflang="fr" lang="fr">Français</a>
+      <a href="../ru/methodology" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+      <a href="../es/methodology" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2128,10 +2136,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Наметим кратчайший путь до запуска</p>
           <p class="final-body">Расскажите, над чем вы работаете, и мы вернёмся с тем, что бы сделали, что убрали бы из первой версии и сколько это стоит. Заявка займёт две минуты</p>
           <div class="final-actions">
-            <a href="../ru/start.html" class="btn btn-primary">
+            <a href="../ru/start" class="btn btn-primary">
               <span>Начать проект</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../ru/services.html" class="btn btn-ghost">Все услуги</a>
+            <a href="../ru/services" class="btn btn-ghost">Все услуги</a>
           </div>
           <p class="final-note">Отвечаем по почте, обычно за день-два</p>
         </div>
@@ -2153,18 +2161,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Услуги</p>
-        <a href="../ru/services.html">Веб-сайты</a>
-        <a href="../ru/services.html">iOS и macOS</a>
-        <a href="../ru/services.html">SaaS-платформы</a>
-        <a href="../ru/services.html">Продуктовый дизайн</a>
-        <a href="../ru/services.html">Рост и видимость</a>
+        <a href="../ru/services">Веб-сайты</a>
+        <a href="../ru/services">iOS и macOS</a>
+        <a href="../ru/services">SaaS-платформы</a>
+        <a href="../ru/services">Продуктовый дизайн</a>
+        <a href="../ru/services">Рост и видимость</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Проекты</p>
-        <a href="../ru/websites.html">Сайты</a>
-        <a href="../ru/apps.html">Приложения</a>
-        <a href="../ru/saas.html">SaaS</a>
+        <a href="../ru/websites">Сайты</a>
+        <a href="../ru/apps">Приложения</a>
+        <a href="../ru/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2173,8 +2181,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Студия</p>
         <a href="../ru/#about">О студии</a>
-        <a href="../ru/methodology.html">Процесс</a>
-        <a href="../ru/start.html">Начать проект</a>
+        <a href="../ru/methodology">Процесс</a>
+        <a href="../ru/start">Начать проект</a>
       </div>
     </div>
 

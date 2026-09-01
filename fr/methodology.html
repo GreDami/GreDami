@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notre méthode — Cinq étapes, sans surprise | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Comment se déroule un projet GreDami, de l&#x27;audit structurel au passage à l&#x27;échelle : ce qui se passe à chaque étape, ce que ça coûte et ce que vous gardez" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/fr/methodology.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/methodology.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/methodology.html" />
+  <link rel="canonical" href="https://gredami.com/fr/methodology" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/methodology" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/methodology" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/methodology" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/methodology" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/methodology" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/fr/methodology.html" />
+  <meta property="og:url" content="https://gredami.com/fr/methodology" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Notre méthode — Cinq étapes, sans surprise | GreDami" />
   <meta property="og:description" content="Comment se déroule un projet GreDami, de l&#x27;audit structurel au passage à l&#x27;échelle : ce qui se passe à chaque étape, ce que ça coûte et ce que vous gardez" />
@@ -2023,12 +2031,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../fr/">Accueil</a></li>
         <li><a href="../fr/#build">Ce que nous créons</a></li>
-        <li><a href="../fr/services.html">Services</a></li>
+        <li><a href="../fr/services">Services</a></li>
         <li><a href="../fr/#about">À propos</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../fr/start.html" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../fr/start" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Changer de langue">
@@ -2036,10 +2044,10 @@ nav.scrolled::after { opacity: 1; }
             <span>FR</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../methodology.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/methodology.html" hreflang="fr" lang="fr" aria-current="true">Français</a>
-            <a href="../ru/methodology.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="../es/methodology.html" hreflang="es" lang="es">Español</a>
+            <a href="../methodology" hreflang="en" lang="en">English</a>
+            <a href="../fr/methodology" hreflang="fr" lang="fr" aria-current="true">Français</a>
+            <a href="../ru/methodology" hreflang="ru" lang="ru">Русский</a>
+            <a href="../es/methodology" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2061,16 +2069,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../fr/">Accueil</a></li>
       <li><a href="../fr/#build">Ce que nous créons</a></li>
-      <li><a href="../fr/services.html">Services</a></li>
+      <li><a href="../fr/services">Services</a></li>
       <li><a href="../fr/#about">À propos</a></li>
     </ul>
-    <a href="../fr/start.html" class="drawer-cta">Démarrer un projet</a>
-    <a href="../fr/start.html" class="drawer-cta ghost">Commencer</a>
+    <a href="../fr/start" class="drawer-cta">Démarrer un projet</a>
+    <a href="../fr/start" class="drawer-cta ghost">Commencer</a>
     <div class="drawer-langs">
-      <a href="../methodology.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/methodology.html" hreflang="fr" lang="fr" aria-current="true">Français</a>
-      <a href="../ru/methodology.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="../es/methodology.html" hreflang="es" lang="es">Español</a>
+      <a href="../methodology" hreflang="en" lang="en">English</a>
+      <a href="../fr/methodology" hreflang="fr" lang="fr" aria-current="true">Français</a>
+      <a href="../ru/methodology" hreflang="ru" lang="ru">Русский</a>
+      <a href="../es/methodology" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2128,10 +2136,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Traçons le chemin le plus court vers le lancement</p>
           <p class="final-body">Dites-nous sur quoi vous travaillez et nous reviendrons avec ce que nous construirions, ce que nous couperions pour une première version, et le coût. Le brief prend deux minutes</p>
           <div class="final-actions">
-            <a href="../fr/start.html" class="btn btn-primary">
+            <a href="../fr/start" class="btn btn-primary">
               <span>Démarrer un projet</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../fr/services.html" class="btn btn-ghost">Voir tous les services</a>
+            <a href="../fr/services" class="btn btn-ghost">Voir tous les services</a>
           </div>
           <p class="final-note">Nous répondons par e-mail, généralement sous un ou deux jours</p>
         </div>
@@ -2153,18 +2161,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Services</p>
-        <a href="../fr/services.html">Sites web</a>
-        <a href="../fr/services.html">iOS et macOS</a>
-        <a href="../fr/services.html">Plateformes SaaS</a>
-        <a href="../fr/services.html">Design produit</a>
-        <a href="../fr/services.html">Croissance et visibilité</a>
+        <a href="../fr/services">Sites web</a>
+        <a href="../fr/services">iOS et macOS</a>
+        <a href="../fr/services">Plateformes SaaS</a>
+        <a href="../fr/services">Design produit</a>
+        <a href="../fr/services">Croissance et visibilité</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Projets</p>
-        <a href="../fr/websites.html">Sites web</a>
-        <a href="../fr/apps.html">Applications</a>
-        <a href="../fr/saas.html">SaaS</a>
+        <a href="../fr/websites">Sites web</a>
+        <a href="../fr/apps">Applications</a>
+        <a href="../fr/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2173,8 +2181,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Studio</p>
         <a href="../fr/#about">À propos</a>
-        <a href="../fr/methodology.html">Méthode</a>
-        <a href="../fr/start.html">Démarrer un projet</a>
+        <a href="../fr/methodology">Méthode</a>
+        <a href="../fr/start">Démarrer un projet</a>
       </div>
     </div>
 

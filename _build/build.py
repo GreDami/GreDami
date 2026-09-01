@@ -101,9 +101,16 @@ def e(s):
     return html.escape(str(s), quote=True)
 
 
+def clean(page):
+    """The file name as the site addresses it: services.html is served, and
+    linked, as /services. GitHub Pages answers the extensionless form, and one
+    address per page keeps the pair from competing as duplicates."""
+    return page[:-5] if page.endswith(".html") else page
+
+
 def url(lang, page):
     """Absolute URL — for canonical, hreflang and the sitemap only."""
-    return SITE + base(lang).rstrip("/") + ("/" + page if page else "/")
+    return SITE + base(lang).rstrip("/") + ("/" + clean(page) if page else "/")
 
 
 def up(lang):
@@ -119,7 +126,7 @@ def href(from_lang, to_lang, page="index.html"):
         # Link to the directory, not the literal file, so the address bar
         # doesn't pick up a visible /index.html when the link is followed.
         return dir_part or "./"
-    return dir_part + page
+    return dir_part + clean(page)
 
 
 def asset(lang, path):
@@ -145,16 +152,19 @@ def lang_links(lang, page, indent):
     return "\n".join(rows)
 
 
-# GitHub Pages answers both /index.html and / with this page, so a visitor who
-# follows an old link — or a search result carrying the file name — lands on the
-# longer URL. Nothing on the site links to it (see href() above) and canonical
-# points at the directory; this sends the address bar there too, before the
-# analytics tag fires, so the pageview is recorded against the clean URL.
+# GitHub Pages answers /services.html and /services — and /index.html and / —
+# with the same page, so a visitor following an old link or a stale search
+# result lands on the file-name form. Nothing on the site links to it and
+# canonical points at the clean URL; this sends the address bar there too,
+# before the analytics tag fires, so the pageview is recorded against the clean
+# URL. Skipped off http(s): on file:// the file name is the address.
 CLEAN_URL = """  <script>
     (function () {
-      var p = location.pathname;
-      if (p.slice(-11) === '/index.html')
-        location.replace(p.slice(0, -10) + location.search + location.hash);
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
     })();
   </script>"""
 
@@ -167,7 +177,7 @@ def head(lang, page, title, desc, extra=""):
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{e(title)}</title>
-{CLEAN_URL if page == '' else ''}
+{CLEAN_URL}
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];

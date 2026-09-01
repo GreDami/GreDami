@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Servicios — Diseño, apps, sitios web, SaaS y crecimiento | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Seis líneas de servicio bajo un mismo techo: diseño de producto, apps para iOS y macOS, sitios web, plataformas SaaS, crecimiento y visibilidad, y mantenimiento tras el lanzamiento" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/es/services.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/services.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/services.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/services.html" />
+  <link rel="canonical" href="https://gredami.com/es/services" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/services" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/services" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/services" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/es/services.html" />
+  <meta property="og:url" content="https://gredami.com/es/services" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Servicios — Diseño, apps, sitios web, SaaS y crecimiento | GreDami" />
   <meta property="og:description" content="Seis líneas de servicio bajo un mismo techo: diseño de producto, apps para iOS y macOS, sitios web, plataformas SaaS, crecimiento y visibilidad, y mantenimiento tras el lanzamiento" />
@@ -47,7 +55,7 @@
   "@context": "https://schema.org",
   "@type": "OfferCatalog",
   "name": "Todos los servicios, un solo estudio",
-  "url": "https://gredami.com/es/services.html",
+  "url": "https://gredami.com/es/services",
   "description": "El diseño, la ingeniería y todo lo que ocurre después del lanzamiento están bajo un mismo techo. Cada línea alimenta a la siguiente: nada se pierde en un traspaso y nadie te cobra dos veces por la misma decisión",
   "provider": {
     "@type": "ProfessionalService",
@@ -2101,12 +2109,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../es/">Inicio</a></li>
         <li><a href="../es/#build">Qué creamos</a></li>
-        <li><a href="../es/services.html" aria-current="page">Servicios</a></li>
+        <li><a href="../es/services" aria-current="page">Servicios</a></li>
         <li><a href="../es/#about">Estudio</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../es/start.html" class="nav-cta">Empezar <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../es/start" class="nav-cta">Empezar <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
@@ -2114,10 +2122,10 @@ nav.scrolled::after { opacity: 1; }
             <span>ES</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../services.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/services.html" hreflang="fr" lang="fr">Français</a>
-            <a href="../ru/services.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="../es/services.html" hreflang="es" lang="es" aria-current="true">Español</a>
+            <a href="../services" hreflang="en" lang="en">English</a>
+            <a href="../fr/services" hreflang="fr" lang="fr">Français</a>
+            <a href="../ru/services" hreflang="ru" lang="ru">Русский</a>
+            <a href="../es/services" hreflang="es" lang="es" aria-current="true">Español</a>
           </div>
         </div>
 
@@ -2139,16 +2147,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../es/">Inicio</a></li>
       <li><a href="../es/#build">Qué creamos</a></li>
-      <li><a href="../es/services.html" aria-current="page">Servicios</a></li>
+      <li><a href="../es/services" aria-current="page">Servicios</a></li>
       <li><a href="../es/#about">Estudio</a></li>
     </ul>
-    <a href="../es/start.html" class="drawer-cta">Empezar un proyecto</a>
-    <a href="../es/start.html" class="drawer-cta ghost">Empezar</a>
+    <a href="../es/start" class="drawer-cta">Empezar un proyecto</a>
+    <a href="../es/start" class="drawer-cta ghost">Empezar</a>
     <div class="drawer-langs">
-      <a href="../services.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/services.html" hreflang="fr" lang="fr">Français</a>
-      <a href="../ru/services.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="../es/services.html" hreflang="es" lang="es" aria-current="true">Español</a>
+      <a href="../services" hreflang="en" lang="en">English</a>
+      <a href="../fr/services" hreflang="fr" lang="fr">Français</a>
+      <a href="../ru/services" hreflang="ru" lang="ru">Русский</a>
+      <a href="../es/services" hreflang="es" lang="es" aria-current="true">Español</a>
     </div>
   </div>
 
@@ -2162,10 +2170,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="sp-sub">Seis líneas de trabajo y un mismo equipo detrás</p>
           <p class="page-sub">El diseño, la ingeniería y todo lo que ocurre después del lanzamiento están bajo un mismo techo. Cada línea alimenta a la siguiente: nada se pierde en un traspaso y nadie te cobra dos veces por la misma decisión</p>
           <div class="sp-actions">
-            <a href="../es/start.html" class="btn btn-primary">
+            <a href="../es/start" class="btn btn-primary">
               <span>Empezar un proyecto</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../es/methodology.html" class="btn btn-ghost">Nuestra metodología</a>
+            <a href="../es/methodology" class="btn btn-ghost">Nuestra metodología</a>
           </div>
         </div>
 
@@ -2182,7 +2190,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Accesibilidad y contraste</li>
               <li>Prototipos navegables</li>
             </ul>
-            <a class="line-link" href="../es/start.html">
+            <a class="line-link" href="../es/start">
               <span>Hablemos de esto</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2199,7 +2207,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Rondas de beta en TestFlight</li>
               <li>Revisión de App Store gestionada</li>
             </ul>
-            <a class="line-link" href="../es/start.html">
+            <a class="line-link" href="../es/start">
               <span>Hablemos de esto</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2216,7 +2224,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Core Web Vitals en verde</li>
               <li>Hosting y despliegues configurados</li>
             </ul>
-            <a class="line-link" href="../es/start.html">
+            <a class="line-link" href="../es/start">
               <span>Hablemos de esto</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2233,7 +2241,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Integraciones con terceros</li>
               <li>Despliegues por fases</li>
             </ul>
-            <a class="line-link" href="../es/start.html">
+            <a class="line-link" href="../es/start">
               <span>Hablemos de esto</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2250,7 +2258,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Analítica y seguimiento de eventos</li>
               <li>Textos de lanzamiento y actualizaciones</li>
             </ul>
-            <a class="line-link" href="../es/start.html">
+            <a class="line-link" href="../es/start">
               <span>Hablemos de esto</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2267,7 +2275,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Actualizaciones de dependencias y seguridad</li>
               <li>Documentación de traspaso si lo internalizas</li>
             </ul>
-            <a class="line-link" href="../es/start.html">
+            <a class="line-link" href="../es/start">
               <span>Hablemos de esto</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2326,7 +2334,7 @@ nav.scrolled::after { opacity: 1; }
         </div>
 
         <div class="stages-note">
-          <a class="build-link" href="../es/methodology.html">
+          <a class="build-link" href="../es/methodology">
             <span>Leer la metodología completa</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -2341,10 +2349,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Tracemos el camino más corto hasta el lanzamiento</p>
           <p class="final-body">Cuéntanos en qué estás trabajando y volvemos con qué construiríamos, qué recortaríamos para una primera versión y cuánto cuesta. El brief lleva dos minutos</p>
           <div class="final-actions">
-            <a href="../es/start.html" class="btn btn-primary">
+            <a href="../es/start" class="btn btn-primary">
               <span>Empezar un proyecto</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../es/methodology.html" class="btn btn-ghost">Nuestra metodología</a>
+            <a href="../es/methodology" class="btn btn-ghost">Nuestra metodología</a>
           </div>
           <p class="final-note">Respondemos por correo, normalmente en uno o dos días</p>
         </div>
@@ -2366,18 +2374,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Servicios</p>
-        <a href="../es/services.html">Sitios web</a>
-        <a href="../es/services.html">iOS y macOS</a>
-        <a href="../es/services.html">Plataformas SaaS</a>
-        <a href="../es/services.html">Diseño de producto</a>
-        <a href="../es/services.html">Crecimiento y visibilidad</a>
+        <a href="../es/services">Sitios web</a>
+        <a href="../es/services">iOS y macOS</a>
+        <a href="../es/services">Plataformas SaaS</a>
+        <a href="../es/services">Diseño de producto</a>
+        <a href="../es/services">Crecimiento y visibilidad</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Proyectos</p>
-        <a href="../es/websites.html">Sitios web</a>
-        <a href="../es/apps.html">Apps</a>
-        <a href="../es/saas.html">SaaS</a>
+        <a href="../es/websites">Sitios web</a>
+        <a href="../es/apps">Apps</a>
+        <a href="../es/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2386,8 +2394,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Estudio</p>
         <a href="../es/#about">Estudio</a>
-        <a href="../es/methodology.html">Proceso</a>
-        <a href="../es/start.html">Empezar un proyecto</a>
+        <a href="../es/methodology">Proceso</a>
+        <a href="../es/start">Empezar un proyecto</a>
       </div>
     </div>
 

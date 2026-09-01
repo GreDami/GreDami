@@ -6,9 +6,11 @@
   <title>GreDami — Sites, applications et produits SaaS conçus pour faire grandir</title>
   <script>
     (function () {
-      var p = location.pathname;
-      if (p.slice(-11) === '/index.html')
-        location.replace(p.slice(0, -10) + location.search + location.hash);
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
     })();
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
@@ -2065,12 +2067,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="#hero">Accueil</a></li>
         <li><a href="#build">Ce que nous créons</a></li>
-        <li><a href="../fr/services.html">Services</a></li>
+        <li><a href="../fr/services">Services</a></li>
         <li><a href="#about">À propos</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../fr/start.html" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../fr/start" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Changer de langue">
@@ -2103,11 +2105,11 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="#hero">Accueil</a></li>
       <li><a href="#build">Ce que nous créons</a></li>
-      <li><a href="../fr/services.html">Services</a></li>
+      <li><a href="../fr/services">Services</a></li>
       <li><a href="#about">À propos</a></li>
     </ul>
-    <a href="../fr/start.html" class="drawer-cta">Démarrer un projet</a>
-    <a href="../fr/start.html" class="drawer-cta ghost">Commencer</a>
+    <a href="../fr/start" class="drawer-cta">Démarrer un projet</a>
+    <a href="../fr/start" class="drawer-cta ghost">Commencer</a>
     <div class="drawer-langs">
       <a href="../" hreflang="en" lang="en">English</a>
       <a href="../fr/" hreflang="fr" lang="fr" aria-current="true">Français</a>
@@ -2127,10 +2129,10 @@ nav.scrolled::after { opacity: 1; }
         <div class="hero-body">
           <p class="hero-sub">GreDami est un studio numérique indépendant spécialisé dans la création d&#x27;outils pratiques qui résolvent de vrais problèmes du quotidien. Sans superflu — juste des logiciels qui fonctionnent, et qui font grandir l&#x27;entreprise derrière eux</p>
           <div class="hero-cta">
-            <a href="../fr/start.html" class="btn btn-primary">
+            <a href="../fr/start" class="btn btn-primary">
               <span>Découvrir nos solutions</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../fr/methodology.html" class="btn btn-ghost">Notre méthode</a>
+            <a href="../fr/methodology" class="btn btn-ghost">Notre méthode</a>
           </div>
         </div>
         </div>
@@ -2154,7 +2156,7 @@ nav.scrolled::after { opacity: 1; }
             <p class="build-n">01</p>
             <h3>Sites web</h3>
             <p>Sites vitrines, pages produit et landing pages qui rendent une entreprise facile à trouver, facile à croire et facile à acheter — rapides sur tous les téléphones, dans toutes les langues où vous vendez</p>
-            <a class="build-link" href="../fr/websites.html">
+            <a class="build-link" href="../fr/websites">
               <span>Voir les projets de sites</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2163,7 +2165,7 @@ nav.scrolled::after { opacity: 1; }
             <p class="build-n">02</p>
             <h3>Applications</h3>
             <p>Des applications iOS et macOS natives que les gens gardent sur leur écran d&#x27;accueil. Du premier croquis à la publication sur l&#x27;App Store — fiche de store comprise, celle qui décide si l&#x27;on télécharge ou non</p>
-            <a class="build-link" href="../fr/apps.html">
+            <a class="build-link" href="../fr/apps">
               <span>Voir les projets d\&#x27;applications</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2172,7 +2174,7 @@ nav.scrolled::after { opacity: 1; }
             <p class="build-n">03</p>
             <h3>Produits SaaS</h3>
             <p>Des outils web avec comptes, paiement et synchronisation cloud — le genre de produit qui cesse d&#x27;être un projet parallèle pour devenir une activité à part entière</p>
-            <a class="build-link" href="../fr/saas.html">
+            <a class="build-link" href="../fr/saas">
               <span>Voir les projets SaaS</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2227,7 +2229,7 @@ nav.scrolled::after { opacity: 1; }
           </article>
         </div>
         <div class="stages-note">
-          <a class="build-link" href="../fr/services.html">
+          <a class="build-link" href="../fr/services">
             <span>Voir tous les services</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -2255,10 +2257,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Traçons le chemin le plus court vers le lancement</p>
           <p class="final-body">Dites-nous sur quoi vous travaillez et nous reviendrons avec ce que nous construirions, ce que nous couperions pour une première version, et le coût. Le brief prend deux minutes</p>
           <div class="final-actions">
-            <a href="../fr/start.html" class="btn btn-primary">
+            <a href="../fr/start" class="btn btn-primary">
               <span>Démarrer un projet</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../fr/methodology.html" class="btn btn-ghost">Notre méthode</a>
+            <a href="../fr/methodology" class="btn btn-ghost">Notre méthode</a>
           </div>
           <p class="final-note">Nous répondons par e-mail, généralement sous un ou deux jours</p>
         </div>
@@ -2280,18 +2282,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Services</p>
-        <a href="../fr/services.html">Sites web</a>
-        <a href="../fr/services.html">iOS et macOS</a>
-        <a href="../fr/services.html">Plateformes SaaS</a>
-        <a href="../fr/services.html">Design produit</a>
-        <a href="../fr/services.html">Croissance et visibilité</a>
+        <a href="../fr/services">Sites web</a>
+        <a href="../fr/services">iOS et macOS</a>
+        <a href="../fr/services">Plateformes SaaS</a>
+        <a href="../fr/services">Design produit</a>
+        <a href="../fr/services">Croissance et visibilité</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Projets</p>
-        <a href="../fr/websites.html">Sites web</a>
-        <a href="../fr/apps.html">Applications</a>
-        <a href="../fr/saas.html">SaaS</a>
+        <a href="../fr/websites">Sites web</a>
+        <a href="../fr/apps">Applications</a>
+        <a href="../fr/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2300,8 +2302,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Studio</p>
         <a href="../fr/#about">À propos</a>
-        <a href="../fr/methodology.html">Méthode</a>
-        <a href="../fr/start.html">Démarrer un projet</a>
+        <a href="../fr/methodology">Méthode</a>
+        <a href="../fr/start">Démarrer un projet</a>
       </div>
     </div>
 

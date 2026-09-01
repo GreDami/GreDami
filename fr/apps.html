@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projets d&#x27;applications — apps iOS et macOS conçues par GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="GoBag+ et FinWall sur l&#x27;App Store : ce que fait chaque application, sur quoi elle tourne et ce que nous avons livré en interne" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/fr/apps.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/apps.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/apps.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/apps.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/apps.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/apps.html" />
+  <link rel="canonical" href="https://gredami.com/fr/apps" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/apps" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/apps" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/apps" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/apps" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/apps" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/fr/apps.html" />
+  <meta property="og:url" content="https://gredami.com/fr/apps" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Projets d&#x27;applications — apps iOS et macOS conçues par GreDami" />
   <meta property="og:description" content="GoBag+ et FinWall sur l&#x27;App Store : ce que fait chaque application, sur quoi elle tourne et ce que nous avons livré en interne" />
@@ -47,7 +55,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Des applications menées du croquis à l'App Store",
-  "url": "https://gredami.com/fr/apps.html",
+  "url": "https://gredami.com/fr/apps",
   "description": "Des produits natifs sur l'App Store. Nous avons dessiné l'interface, écrit le code, fait l'icône et déposé la fiche — et nous publions encore les mises à jour",
   "mainEntity": {
     "@type": "ItemList",
@@ -2072,12 +2080,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../fr/">Accueil</a></li>
         <li><a href="../fr/#build">Ce que nous créons</a></li>
-        <li><a href="../fr/services.html">Services</a></li>
+        <li><a href="../fr/services">Services</a></li>
         <li><a href="../fr/#about">À propos</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../fr/start.html" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../fr/start" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Changer de langue">
@@ -2085,10 +2093,10 @@ nav.scrolled::after { opacity: 1; }
             <span>FR</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../apps.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/apps.html" hreflang="fr" lang="fr" aria-current="true">Français</a>
-            <a href="../ru/apps.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="../es/apps.html" hreflang="es" lang="es">Español</a>
+            <a href="../apps" hreflang="en" lang="en">English</a>
+            <a href="../fr/apps" hreflang="fr" lang="fr" aria-current="true">Français</a>
+            <a href="../ru/apps" hreflang="ru" lang="ru">Русский</a>
+            <a href="../es/apps" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2110,16 +2118,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../fr/">Accueil</a></li>
       <li><a href="../fr/#build">Ce que nous créons</a></li>
-      <li><a href="../fr/services.html">Services</a></li>
+      <li><a href="../fr/services">Services</a></li>
       <li><a href="../fr/#about">À propos</a></li>
     </ul>
-    <a href="../fr/start.html" class="drawer-cta">Démarrer un projet</a>
-    <a href="../fr/start.html" class="drawer-cta ghost">Commencer</a>
+    <a href="../fr/start" class="drawer-cta">Démarrer un projet</a>
+    <a href="../fr/start" class="drawer-cta ghost">Commencer</a>
     <div class="drawer-langs">
-      <a href="../apps.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/apps.html" hreflang="fr" lang="fr" aria-current="true">Français</a>
-      <a href="../ru/apps.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="../es/apps.html" hreflang="es" lang="es">Español</a>
+      <a href="../apps" hreflang="en" lang="en">English</a>
+      <a href="../fr/apps" hreflang="fr" lang="fr" aria-current="true">Français</a>
+      <a href="../ru/apps" hreflang="ru" lang="ru">Русский</a>
+      <a href="../es/apps" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2137,10 +2145,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="page-sub">Des produits natifs sur l&#x27;App Store. Nous avons dessiné l&#x27;interface, écrit le code, fait l&#x27;icône et déposé la fiche — et nous publions encore les mises à jour</p>
 
           <div class="sp-actions">
-            <a href="../fr/start.html" class="btn btn-primary">
+            <a href="../fr/start" class="btn btn-primary">
               <span>Démarrer un projet</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../fr/services.html" class="btn btn-ghost">Voir tous les services</a>
+            <a href="../fr/services" class="btn btn-ghost">Voir tous les services</a>
           </div>
         </div>
 
@@ -2186,7 +2194,7 @@ nav.scrolled::after { opacity: 1; }
                     </div>
                     <div class="work-links">
                       <a class="work-link" href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener"><span>App Store</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-                      <a class="proj-xref" href="../fr/websites.html#site-gobag"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Voir son site</span></a>
+                      <a class="proj-xref" href="../fr/websites#site-gobag"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Voir son site</span></a>
                     </div>
                   </aside>
                 </div>
@@ -2231,7 +2239,7 @@ nav.scrolled::after { opacity: 1; }
                     </div>
                     <div class="work-links">
                       <a class="work-link" href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener"><span>App Store</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-                      <a class="proj-xref" href="../fr/websites.html#site-finwall"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Voir son site</span></a>
+                      <a class="proj-xref" href="../fr/websites#site-finwall"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Voir son site</span></a>
                     </div>
                   </aside>
                 </div>
@@ -2245,10 +2253,10 @@ nav.scrolled::after { opacity: 1; }
             <h2 class="group-title">Autres projets</h2>
           </div>
           <div class="sp-actions" style="margin-top:0;gap:28px;">
-            <a class="build-link" href="../fr/websites.html">
+            <a class="build-link" href="../fr/websites">
               <span>Voir les projets de sites</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a class="build-link" href="../fr/saas.html">
+            <a class="build-link" href="../fr/saas">
               <span>Voir les projets SaaS</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -2264,10 +2272,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Traçons le chemin le plus court vers le lancement</p>
           <p class="final-body">Dites-nous sur quoi vous travaillez et nous reviendrons avec ce que nous construirions, ce que nous couperions pour une première version, et le coût. Le brief prend deux minutes</p>
           <div class="final-actions">
-            <a href="../fr/start.html" class="btn btn-primary">
+            <a href="../fr/start" class="btn btn-primary">
               <span>Démarrer un projet</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../fr/methodology.html" class="btn btn-ghost">Notre méthode</a>
+            <a href="../fr/methodology" class="btn btn-ghost">Notre méthode</a>
           </div>
           <p class="final-note">Nous répondons par e-mail, généralement sous un ou deux jours</p>
         </div>
@@ -2289,18 +2297,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Services</p>
-        <a href="../fr/services.html">Sites web</a>
-        <a href="../fr/services.html">iOS et macOS</a>
-        <a href="../fr/services.html">Plateformes SaaS</a>
-        <a href="../fr/services.html">Design produit</a>
-        <a href="../fr/services.html">Croissance et visibilité</a>
+        <a href="../fr/services">Sites web</a>
+        <a href="../fr/services">iOS et macOS</a>
+        <a href="../fr/services">Plateformes SaaS</a>
+        <a href="../fr/services">Design produit</a>
+        <a href="../fr/services">Croissance et visibilité</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Projets</p>
-        <a href="../fr/websites.html">Sites web</a>
-        <a href="../fr/apps.html">Applications</a>
-        <a href="../fr/saas.html">SaaS</a>
+        <a href="../fr/websites">Sites web</a>
+        <a href="../fr/apps">Applications</a>
+        <a href="../fr/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2309,8 +2317,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Studio</p>
         <a href="../fr/#about">À propos</a>
-        <a href="../fr/methodology.html">Méthode</a>
-        <a href="../fr/start.html">Démarrer un projet</a>
+        <a href="../fr/methodology">Méthode</a>
+        <a href="../fr/start">Démarrer un projet</a>
       </div>
     </div>
 

@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Услуги — дизайн, приложения, сайты, SaaS и рост | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Шесть направлений в одной студии: продуктовый дизайн, приложения для iOS и macOS, сайты, SaaS-платформы, рост и видимость, поддержка после запуска" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/ru/services.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/services.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/services.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/services.html" />
+  <link rel="canonical" href="https://gredami.com/ru/services" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/services" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/services" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/services" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/services" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/services" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/ru/services.html" />
+  <meta property="og:url" content="https://gredami.com/ru/services" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Услуги — дизайн, приложения, сайты, SaaS и рост | GreDami" />
   <meta property="og:description" content="Шесть направлений в одной студии: продуктовый дизайн, приложения для iOS и macOS, сайты, SaaS-платформы, рост и видимость, поддержка после запуска" />
@@ -47,7 +55,7 @@
   "@context": "https://schema.org",
   "@type": "OfferCatalog",
   "name": "Все услуги — одна студия",
-  "url": "https://gredami.com/ru/services.html",
+  "url": "https://gredami.com/ru/services",
   "description": "Дизайн, разработка и всё, что происходит после запуска, собраны в одном месте. Каждое направление продолжает предыдущее: ничего не теряется при передаче, и никто не берёт с вас дважды за одно и то же решение",
   "provider": {
     "@type": "ProfessionalService",
@@ -2101,12 +2109,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../ru/">Главная</a></li>
         <li><a href="../ru/#build">Что мы делаем</a></li>
-        <li><a href="../ru/services.html" aria-current="page">Услуги</a></li>
+        <li><a href="../ru/services" aria-current="page">Услуги</a></li>
         <li><a href="../ru/#about">О студии</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../ru/start.html" class="nav-cta">Начать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../ru/start" class="nav-cta">Начать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Сменить язык">
@@ -2114,10 +2122,10 @@ nav.scrolled::after { opacity: 1; }
             <span>RU</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../services.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/services.html" hreflang="fr" lang="fr">Français</a>
-            <a href="../ru/services.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
-            <a href="../es/services.html" hreflang="es" lang="es">Español</a>
+            <a href="../services" hreflang="en" lang="en">English</a>
+            <a href="../fr/services" hreflang="fr" lang="fr">Français</a>
+            <a href="../ru/services" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+            <a href="../es/services" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2139,16 +2147,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../ru/">Главная</a></li>
       <li><a href="../ru/#build">Что мы делаем</a></li>
-      <li><a href="../ru/services.html" aria-current="page">Услуги</a></li>
+      <li><a href="../ru/services" aria-current="page">Услуги</a></li>
       <li><a href="../ru/#about">О студии</a></li>
     </ul>
-    <a href="../ru/start.html" class="drawer-cta">Начать проект</a>
-    <a href="../ru/start.html" class="drawer-cta ghost">Начать</a>
+    <a href="../ru/start" class="drawer-cta">Начать проект</a>
+    <a href="../ru/start" class="drawer-cta ghost">Начать</a>
     <div class="drawer-langs">
-      <a href="../services.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/services.html" hreflang="fr" lang="fr">Français</a>
-      <a href="../ru/services.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
-      <a href="../es/services.html" hreflang="es" lang="es">Español</a>
+      <a href="../services" hreflang="en" lang="en">English</a>
+      <a href="../fr/services" hreflang="fr" lang="fr">Français</a>
+      <a href="../ru/services" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+      <a href="../es/services" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2162,10 +2170,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="sp-sub">Шесть направлений и одна команда за ними</p>
           <p class="page-sub">Дизайн, разработка и всё, что происходит после запуска, собраны в одном месте. Каждое направление продолжает предыдущее: ничего не теряется при передаче, и никто не берёт с вас дважды за одно и то же решение</p>
           <div class="sp-actions">
-            <a href="../ru/start.html" class="btn btn-primary">
+            <a href="../ru/start" class="btn btn-primary">
               <span>Начать проект</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../ru/methodology.html" class="btn btn-ghost">Наш подход</a>
+            <a href="../ru/methodology" class="btn btn-ghost">Наш подход</a>
           </div>
         </div>
 
@@ -2182,7 +2190,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Доступность и контраст</li>
               <li>Кликабельные прототипы</li>
             </ul>
-            <a class="line-link" href="../ru/start.html">
+            <a class="line-link" href="../ru/start">
               <span>Обсудить это</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2199,7 +2207,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Бета-раунды в TestFlight</li>
               <li>Прохождение проверки App Store</li>
             </ul>
-            <a class="line-link" href="../ru/start.html">
+            <a class="line-link" href="../ru/start">
               <span>Обсудить это</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2216,7 +2224,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Core Web Vitals в зелёной зоне</li>
               <li>Настроенные хостинг и деплой</li>
             </ul>
-            <a class="line-link" href="../ru/start.html">
+            <a class="line-link" href="../ru/start">
               <span>Обсудить это</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2233,7 +2241,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Интеграции со сторонними сервисами</li>
               <li>Поэтапные выкатки</li>
             </ul>
-            <a class="line-link" href="../ru/start.html">
+            <a class="line-link" href="../ru/start">
               <span>Обсудить это</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2250,7 +2258,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Аналитика и отслеживание событий</li>
               <li>Тексты релизов и обновлений</li>
             </ul>
-            <a class="line-link" href="../ru/start.html">
+            <a class="line-link" href="../ru/start">
               <span>Обсудить это</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2267,7 +2275,7 @@ nav.scrolled::after { opacity: 1; }
               <li>Обновления зависимостей и безопасности</li>
               <li>Документация при передаче в вашу команду</li>
             </ul>
-            <a class="line-link" href="../ru/start.html">
+            <a class="line-link" href="../ru/start">
               <span>Обсудить это</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </article>
@@ -2326,7 +2334,7 @@ nav.scrolled::after { opacity: 1; }
         </div>
 
         <div class="stages-note">
-          <a class="build-link" href="../ru/methodology.html">
+          <a class="build-link" href="../ru/methodology">
             <span>Читать методологию целиком</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -2341,10 +2349,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Наметим кратчайший путь до запуска</p>
           <p class="final-body">Расскажите, над чем вы работаете, и мы вернёмся с тем, что бы сделали, что убрали бы из первой версии и сколько это стоит. Заявка займёт две минуты</p>
           <div class="final-actions">
-            <a href="../ru/start.html" class="btn btn-primary">
+            <a href="../ru/start" class="btn btn-primary">
               <span>Начать проект</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../ru/methodology.html" class="btn btn-ghost">Наш подход</a>
+            <a href="../ru/methodology" class="btn btn-ghost">Наш подход</a>
           </div>
           <p class="final-note">Отвечаем по почте, обычно за день-два</p>
         </div>
@@ -2366,18 +2374,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Услуги</p>
-        <a href="../ru/services.html">Веб-сайты</a>
-        <a href="../ru/services.html">iOS и macOS</a>
-        <a href="../ru/services.html">SaaS-платформы</a>
-        <a href="../ru/services.html">Продуктовый дизайн</a>
-        <a href="../ru/services.html">Рост и видимость</a>
+        <a href="../ru/services">Веб-сайты</a>
+        <a href="../ru/services">iOS и macOS</a>
+        <a href="../ru/services">SaaS-платформы</a>
+        <a href="../ru/services">Продуктовый дизайн</a>
+        <a href="../ru/services">Рост и видимость</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Проекты</p>
-        <a href="../ru/websites.html">Сайты</a>
-        <a href="../ru/apps.html">Приложения</a>
-        <a href="../ru/saas.html">SaaS</a>
+        <a href="../ru/websites">Сайты</a>
+        <a href="../ru/apps">Приложения</a>
+        <a href="../ru/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2386,8 +2394,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Студия</p>
         <a href="../ru/#about">О студии</a>
-        <a href="../ru/methodology.html">Процесс</a>
-        <a href="../ru/start.html">Начать проект</a>
+        <a href="../ru/methodology">Процесс</a>
+        <a href="../ru/start">Начать проект</a>
       </div>
     </div>
 

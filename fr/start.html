@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Construisons ce qui fait grandir | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Parlez à GreDami de votre site, application ou produit SaaS et recevez une réponse réfléchie sous un ou deux jours" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://gredami.com/fr/start.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/start.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/start.html" />
+  <link rel="canonical" href="https://gredami.com/fr/start" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/start" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/start" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/start" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/fr/start.html" />
+  <meta property="og:url" content="https://gredami.com/fr/start" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Contact — Construisons ce qui fait grandir | GreDami" />
   <meta property="og:description" content="Parlez à GreDami de votre site, application ou produit SaaS et recevez une réponse réfléchie sous un ou deux jours" />
@@ -2023,12 +2031,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../fr/">Accueil</a></li>
         <li><a href="../fr/#build">Ce que nous créons</a></li>
-        <li><a href="../fr/services.html">Services</a></li>
+        <li><a href="../fr/services">Services</a></li>
         <li><a href="../fr/#about">À propos</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../fr/start.html" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../fr/start" class="nav-cta">Commencer <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Changer de langue">
@@ -2036,10 +2044,10 @@ nav.scrolled::after { opacity: 1; }
             <span>FR</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../start.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/start.html" hreflang="fr" lang="fr" aria-current="true">Français</a>
-            <a href="../ru/start.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="../es/start.html" hreflang="es" lang="es">Español</a>
+            <a href="../start" hreflang="en" lang="en">English</a>
+            <a href="../fr/start" hreflang="fr" lang="fr" aria-current="true">Français</a>
+            <a href="../ru/start" hreflang="ru" lang="ru">Русский</a>
+            <a href="../es/start" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2061,16 +2069,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../fr/">Accueil</a></li>
       <li><a href="../fr/#build">Ce que nous créons</a></li>
-      <li><a href="../fr/services.html">Services</a></li>
+      <li><a href="../fr/services">Services</a></li>
       <li><a href="../fr/#about">À propos</a></li>
     </ul>
-    <a href="../fr/start.html" class="drawer-cta">Démarrer un projet</a>
-    <a href="../fr/start.html" class="drawer-cta ghost">Commencer</a>
+    <a href="../fr/start" class="drawer-cta">Démarrer un projet</a>
+    <a href="../fr/start" class="drawer-cta ghost">Commencer</a>
     <div class="drawer-langs">
-      <a href="../start.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/start.html" hreflang="fr" lang="fr" aria-current="true">Français</a>
-      <a href="../ru/start.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="../es/start.html" hreflang="es" lang="es">Español</a>
+      <a href="../start" hreflang="en" lang="en">English</a>
+      <a href="../fr/start" hreflang="fr" lang="fr" aria-current="true">Français</a>
+      <a href="../ru/start" hreflang="ru" lang="ru">Русский</a>
+      <a href="../es/start" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2363,18 +2371,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Services</p>
-        <a href="../fr/services.html">Sites web</a>
-        <a href="../fr/services.html">iOS et macOS</a>
-        <a href="../fr/services.html">Plateformes SaaS</a>
-        <a href="../fr/services.html">Design produit</a>
-        <a href="../fr/services.html">Croissance et visibilité</a>
+        <a href="../fr/services">Sites web</a>
+        <a href="../fr/services">iOS et macOS</a>
+        <a href="../fr/services">Plateformes SaaS</a>
+        <a href="../fr/services">Design produit</a>
+        <a href="../fr/services">Croissance et visibilité</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Projets</p>
-        <a href="../fr/websites.html">Sites web</a>
-        <a href="../fr/apps.html">Applications</a>
-        <a href="../fr/saas.html">SaaS</a>
+        <a href="../fr/websites">Sites web</a>
+        <a href="../fr/apps">Applications</a>
+        <a href="../fr/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2383,8 +2391,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Studio</p>
         <a href="../fr/#about">À propos</a>
-        <a href="../fr/methodology.html">Méthode</a>
-        <a href="../fr/start.html">Démarrer un projet</a>
+        <a href="../fr/methodology">Méthode</a>
+        <a href="../fr/start">Démarrer un projet</a>
       </div>
     </div>
 

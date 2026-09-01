@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Let&#x27;s Build Something That Grows | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Tell GreDami about your website, app or SaaS project and get a considered reply within a day or two" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://gredami.com/start.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/start.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/start.html" />
+  <link rel="canonical" href="https://gredami.com/start" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/start" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/start" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/start" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/start.html" />
+  <meta property="og:url" content="https://gredami.com/start" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Contact — Let&#x27;s Build Something That Grows | GreDami" />
   <meta property="og:description" content="Tell GreDami about your website, app or SaaS project and get a considered reply within a day or two" />
@@ -2023,12 +2031,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="./">Home</a></li>
         <li><a href="./#build">What we build</a></li>
-        <li><a href="services.html">Services</a></li>
+        <li><a href="services">Services</a></li>
         <li><a href="./#about">About</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="start.html" class="nav-cta">Get started <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="start" class="nav-cta">Get started <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
@@ -2036,10 +2044,10 @@ nav.scrolled::after { opacity: 1; }
             <span>EN</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="start.html" hreflang="en" lang="en" aria-current="true">English</a>
-            <a href="fr/start.html" hreflang="fr" lang="fr">Français</a>
-            <a href="ru/start.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="es/start.html" hreflang="es" lang="es">Español</a>
+            <a href="start" hreflang="en" lang="en" aria-current="true">English</a>
+            <a href="fr/start" hreflang="fr" lang="fr">Français</a>
+            <a href="ru/start" hreflang="ru" lang="ru">Русский</a>
+            <a href="es/start" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2061,16 +2069,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="./">Home</a></li>
       <li><a href="./#build">What we build</a></li>
-      <li><a href="services.html">Services</a></li>
+      <li><a href="services">Services</a></li>
       <li><a href="./#about">About</a></li>
     </ul>
-    <a href="start.html" class="drawer-cta">Start a project</a>
-    <a href="start.html" class="drawer-cta ghost">Get started</a>
+    <a href="start" class="drawer-cta">Start a project</a>
+    <a href="start" class="drawer-cta ghost">Get started</a>
     <div class="drawer-langs">
-      <a href="start.html" hreflang="en" lang="en" aria-current="true">English</a>
-      <a href="fr/start.html" hreflang="fr" lang="fr">Français</a>
-      <a href="ru/start.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="es/start.html" hreflang="es" lang="es">Español</a>
+      <a href="start" hreflang="en" lang="en" aria-current="true">English</a>
+      <a href="fr/start" hreflang="fr" lang="fr">Français</a>
+      <a href="ru/start" hreflang="ru" lang="ru">Русский</a>
+      <a href="es/start" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2363,18 +2371,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Services</p>
-        <a href="services.html">Websites</a>
-        <a href="services.html">iOS &amp; macOS</a>
-        <a href="services.html">SaaS platforms</a>
-        <a href="services.html">Product design</a>
-        <a href="services.html">Growth &amp; visibility</a>
+        <a href="services">Websites</a>
+        <a href="services">iOS &amp; macOS</a>
+        <a href="services">SaaS platforms</a>
+        <a href="services">Product design</a>
+        <a href="services">Growth &amp; visibility</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Projects</p>
-        <a href="websites.html">Websites</a>
-        <a href="apps.html">Apps</a>
-        <a href="saas.html">SaaS</a>
+        <a href="websites">Websites</a>
+        <a href="apps">Apps</a>
+        <a href="saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2383,8 +2391,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Company</p>
         <a href="./#about">About</a>
-        <a href="methodology.html">Process</a>
-        <a href="start.html">Start a project</a>
+        <a href="methodology">Process</a>
+        <a href="start">Start a project</a>
       </div>
     </div>
 

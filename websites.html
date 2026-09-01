@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Website Projects — Product Sites Built by GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="The GoBag+ and FinWall product sites: what each one is for, what it runs on, and the job it does in a single scroll" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/websites.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/websites.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/websites.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/websites.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/websites.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/websites.html" />
+  <link rel="canonical" href="https://gredami.com/websites" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/websites" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/websites" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/websites" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/websites" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/websites" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/websites.html" />
+  <meta property="og:url" content="https://gredami.com/websites" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Website Projects — Product Sites Built by GreDami" />
   <meta property="og:description" content="The GoBag+ and FinWall product sites: what each one is for, what it runs on, and the job it does in a single scroll" />
@@ -47,7 +55,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Sites we wrote, designed and deployed",
-  "url": "https://gredami.com/websites.html",
+  "url": "https://gredami.com/websites",
   "description": "Product sites that carry a launch: the positioning, the screenshots and the one button that matters. Written, designed and deployed by us",
   "mainEntity": {
     "@type": "ItemList",
@@ -2068,12 +2076,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="./">Home</a></li>
         <li><a href="./#build">What we build</a></li>
-        <li><a href="services.html">Services</a></li>
+        <li><a href="services">Services</a></li>
         <li><a href="./#about">About</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="start.html" class="nav-cta">Get started <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="start" class="nav-cta">Get started <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
@@ -2081,10 +2089,10 @@ nav.scrolled::after { opacity: 1; }
             <span>EN</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="websites.html" hreflang="en" lang="en" aria-current="true">English</a>
-            <a href="fr/websites.html" hreflang="fr" lang="fr">Français</a>
-            <a href="ru/websites.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="es/websites.html" hreflang="es" lang="es">Español</a>
+            <a href="websites" hreflang="en" lang="en" aria-current="true">English</a>
+            <a href="fr/websites" hreflang="fr" lang="fr">Français</a>
+            <a href="ru/websites" hreflang="ru" lang="ru">Русский</a>
+            <a href="es/websites" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2106,16 +2114,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="./">Home</a></li>
       <li><a href="./#build">What we build</a></li>
-      <li><a href="services.html">Services</a></li>
+      <li><a href="services">Services</a></li>
       <li><a href="./#about">About</a></li>
     </ul>
-    <a href="start.html" class="drawer-cta">Start a project</a>
-    <a href="start.html" class="drawer-cta ghost">Get started</a>
+    <a href="start" class="drawer-cta">Start a project</a>
+    <a href="start" class="drawer-cta ghost">Get started</a>
     <div class="drawer-langs">
-      <a href="websites.html" hreflang="en" lang="en" aria-current="true">English</a>
-      <a href="fr/websites.html" hreflang="fr" lang="fr">Français</a>
-      <a href="ru/websites.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="es/websites.html" hreflang="es" lang="es">Español</a>
+      <a href="websites" hreflang="en" lang="en" aria-current="true">English</a>
+      <a href="fr/websites" hreflang="fr" lang="fr">Français</a>
+      <a href="ru/websites" hreflang="ru" lang="ru">Русский</a>
+      <a href="es/websites" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2133,10 +2141,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="page-sub">Product sites that carry a launch: the positioning, the screenshots and the one button that matters. Written, designed and deployed by us</p>
 
           <div class="sp-actions">
-            <a href="start.html" class="btn btn-primary">
+            <a href="start" class="btn btn-primary">
               <span>Start a project</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="services.html" class="btn btn-ghost">See all services</a>
+            <a href="services" class="btn btn-ghost">See all services</a>
           </div>
         </div>
 
@@ -2227,10 +2235,10 @@ nav.scrolled::after { opacity: 1; }
             <h2 class="group-title">Other projects</h2>
           </div>
           <div class="sp-actions" style="margin-top:0;gap:28px;">
-            <a class="build-link" href="apps.html">
+            <a class="build-link" href="apps">
               <span>Explore app projects</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a class="build-link" href="saas.html">
+            <a class="build-link" href="saas">
               <span>Explore SaaS projects</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -2246,10 +2254,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Let&#x27;s map the shortest path to launch</p>
           <p class="final-body">Tell us what you are working on and we will come back with what we would build, what we would cut for a first version, and what it costs. The brief takes two minutes</p>
           <div class="final-actions">
-            <a href="start.html" class="btn btn-primary">
+            <a href="start" class="btn btn-primary">
               <span>Start a project</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="methodology.html" class="btn btn-ghost">Our methodology</a>
+            <a href="methodology" class="btn btn-ghost">Our methodology</a>
           </div>
           <p class="final-note">We reply by email, usually within a day or two</p>
         </div>
@@ -2271,18 +2279,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Services</p>
-        <a href="services.html">Websites</a>
-        <a href="services.html">iOS &amp; macOS</a>
-        <a href="services.html">SaaS platforms</a>
-        <a href="services.html">Product design</a>
-        <a href="services.html">Growth &amp; visibility</a>
+        <a href="services">Websites</a>
+        <a href="services">iOS &amp; macOS</a>
+        <a href="services">SaaS platforms</a>
+        <a href="services">Product design</a>
+        <a href="services">Growth &amp; visibility</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Projects</p>
-        <a href="websites.html">Websites</a>
-        <a href="apps.html">Apps</a>
-        <a href="saas.html">SaaS</a>
+        <a href="websites">Websites</a>
+        <a href="apps">Apps</a>
+        <a href="saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2291,8 +2299,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Company</p>
         <a href="./#about">About</a>
-        <a href="methodology.html">Process</a>
-        <a href="start.html">Start a project</a>
+        <a href="methodology">Process</a>
+        <a href="start">Start a project</a>
       </div>
     </div>
 

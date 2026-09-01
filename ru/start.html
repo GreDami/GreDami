@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Контакты — построим то, что будет расти | GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="Расскажите GreDami о вашем сайте, приложении или SaaS-продукте и получите продуманный ответ за день-два" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://gredami.com/ru/start.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/start.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/start.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/start.html" />
+  <link rel="canonical" href="https://gredami.com/ru/start" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/start" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/start" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/start" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/start" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/ru/start.html" />
+  <meta property="og:url" content="https://gredami.com/ru/start" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Контакты — построим то, что будет расти | GreDami" />
   <meta property="og:description" content="Расскажите GreDami о вашем сайте, приложении или SaaS-продукте и получите продуманный ответ за день-два" />
@@ -2023,12 +2031,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../ru/">Главная</a></li>
         <li><a href="../ru/#build">Что мы делаем</a></li>
-        <li><a href="../ru/services.html">Услуги</a></li>
+        <li><a href="../ru/services">Услуги</a></li>
         <li><a href="../ru/#about">О студии</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../ru/start.html" class="nav-cta">Начать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../ru/start" class="nav-cta">Начать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Сменить язык">
@@ -2036,10 +2044,10 @@ nav.scrolled::after { opacity: 1; }
             <span>RU</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../start.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/start.html" hreflang="fr" lang="fr">Français</a>
-            <a href="../ru/start.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
-            <a href="../es/start.html" hreflang="es" lang="es">Español</a>
+            <a href="../start" hreflang="en" lang="en">English</a>
+            <a href="../fr/start" hreflang="fr" lang="fr">Français</a>
+            <a href="../ru/start" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+            <a href="../es/start" hreflang="es" lang="es">Español</a>
           </div>
         </div>
 
@@ -2061,16 +2069,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../ru/">Главная</a></li>
       <li><a href="../ru/#build">Что мы делаем</a></li>
-      <li><a href="../ru/services.html">Услуги</a></li>
+      <li><a href="../ru/services">Услуги</a></li>
       <li><a href="../ru/#about">О студии</a></li>
     </ul>
-    <a href="../ru/start.html" class="drawer-cta">Начать проект</a>
-    <a href="../ru/start.html" class="drawer-cta ghost">Начать</a>
+    <a href="../ru/start" class="drawer-cta">Начать проект</a>
+    <a href="../ru/start" class="drawer-cta ghost">Начать</a>
     <div class="drawer-langs">
-      <a href="../start.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/start.html" hreflang="fr" lang="fr">Français</a>
-      <a href="../ru/start.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
-      <a href="../es/start.html" hreflang="es" lang="es">Español</a>
+      <a href="../start" hreflang="en" lang="en">English</a>
+      <a href="../fr/start" hreflang="fr" lang="fr">Français</a>
+      <a href="../ru/start" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+      <a href="../es/start" hreflang="es" lang="es">Español</a>
     </div>
   </div>
 
@@ -2363,18 +2371,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Услуги</p>
-        <a href="../ru/services.html">Веб-сайты</a>
-        <a href="../ru/services.html">iOS и macOS</a>
-        <a href="../ru/services.html">SaaS-платформы</a>
-        <a href="../ru/services.html">Продуктовый дизайн</a>
-        <a href="../ru/services.html">Рост и видимость</a>
+        <a href="../ru/services">Веб-сайты</a>
+        <a href="../ru/services">iOS и macOS</a>
+        <a href="../ru/services">SaaS-платформы</a>
+        <a href="../ru/services">Продуктовый дизайн</a>
+        <a href="../ru/services">Рост и видимость</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Проекты</p>
-        <a href="../ru/websites.html">Сайты</a>
-        <a href="../ru/apps.html">Приложения</a>
-        <a href="../ru/saas.html">SaaS</a>
+        <a href="../ru/websites">Сайты</a>
+        <a href="../ru/apps">Приложения</a>
+        <a href="../ru/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2383,8 +2391,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Студия</p>
         <a href="../ru/#about">О студии</a>
-        <a href="../ru/methodology.html">Процесс</a>
-        <a href="../ru/start.html">Начать проект</a>
+        <a href="../ru/methodology">Процесс</a>
+        <a href="../ru/start">Начать проект</a>
       </div>
     </div>
 

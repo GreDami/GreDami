@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proyectos SaaS — plataformas web creadas por GreDami</title>
-
+  <script>
+    (function () {
+      if (location.protocol.indexOf('http') !== 0) return;
+      var p = location.pathname, c = null;
+      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
+      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
+      if (c) location.replace(c + location.search + location.hash);
+    })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,15 +28,15 @@
   <meta name="description" content="LokalShot: una plataforma de localización de capturas con cuentas y sincronización en la nube, nacida de un problema que encontrábamos una y otra vez" />
   <meta name="author" content="GreDami" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gredami.com/es/saas.html" />
-  <link rel="alternate" hreflang="en" href="https://gredami.com/saas.html" />
-  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/saas.html" />
-  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/saas.html" />
-  <link rel="alternate" hreflang="es" href="https://gredami.com/es/saas.html" />
-  <link rel="alternate" hreflang="x-default" href="https://gredami.com/saas.html" />
+  <link rel="canonical" href="https://gredami.com/es/saas" />
+  <link rel="alternate" hreflang="en" href="https://gredami.com/saas" />
+  <link rel="alternate" hreflang="fr" href="https://gredami.com/fr/saas" />
+  <link rel="alternate" hreflang="ru" href="https://gredami.com/ru/saas" />
+  <link rel="alternate" hreflang="es" href="https://gredami.com/es/saas" />
+  <link rel="alternate" hreflang="x-default" href="https://gredami.com/saas" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gredami.com/es/saas.html" />
+  <meta property="og:url" content="https://gredami.com/es/saas" />
   <meta property="og:site_name" content="GreDami" />
   <meta property="og:title" content="Proyectos SaaS — plataformas web creadas por GreDami" />
   <meta property="og:description" content="LokalShot: una plataforma de localización de capturas con cuentas y sincronización en la nube, nacida de un problema que encontrábamos una y otra vez" />
@@ -47,7 +55,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Plataformas que funcionan en el navegador y se ganan su sitio",
-  "url": "https://gredami.com/es/saas.html",
+  "url": "https://gredami.com/es/saas",
   "description": "Software que vive en un servidor y se gana su sitio cada mes. Basta una cuenta, sincronización en la nube y un navegador",
   "mainEntity": {
     "@type": "ItemList",
@@ -2055,12 +2063,12 @@ nav.scrolled::after { opacity: 1; }
       <ul class="nav-links">
         <li><a href="../es/">Inicio</a></li>
         <li><a href="../es/#build">Qué creamos</a></li>
-        <li><a href="../es/services.html">Servicios</a></li>
+        <li><a href="../es/services">Servicios</a></li>
         <li><a href="../es/#about">Estudio</a></li>
       </ul>
 
       <div class="nav-tools">
-        <a href="../es/start.html" class="nav-cta">Empezar <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="../es/start" class="nav-cta">Empezar <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <div class="lang" id="lang">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
@@ -2068,10 +2076,10 @@ nav.scrolled::after { opacity: 1; }
             <span>ES</span>
           </button>
           <div class="lang-menu" id="langMenu">
-            <a href="../saas.html" hreflang="en" lang="en">English</a>
-            <a href="../fr/saas.html" hreflang="fr" lang="fr">Français</a>
-            <a href="../ru/saas.html" hreflang="ru" lang="ru">Русский</a>
-            <a href="../es/saas.html" hreflang="es" lang="es" aria-current="true">Español</a>
+            <a href="../saas" hreflang="en" lang="en">English</a>
+            <a href="../fr/saas" hreflang="fr" lang="fr">Français</a>
+            <a href="../ru/saas" hreflang="ru" lang="ru">Русский</a>
+            <a href="../es/saas" hreflang="es" lang="es" aria-current="true">Español</a>
           </div>
         </div>
 
@@ -2093,16 +2101,16 @@ nav.scrolled::after { opacity: 1; }
     <ul class="drawer-links">
       <li><a href="../es/">Inicio</a></li>
       <li><a href="../es/#build">Qué creamos</a></li>
-      <li><a href="../es/services.html">Servicios</a></li>
+      <li><a href="../es/services">Servicios</a></li>
       <li><a href="../es/#about">Estudio</a></li>
     </ul>
-    <a href="../es/start.html" class="drawer-cta">Empezar un proyecto</a>
-    <a href="../es/start.html" class="drawer-cta ghost">Empezar</a>
+    <a href="../es/start" class="drawer-cta">Empezar un proyecto</a>
+    <a href="../es/start" class="drawer-cta ghost">Empezar</a>
     <div class="drawer-langs">
-      <a href="../saas.html" hreflang="en" lang="en">English</a>
-      <a href="../fr/saas.html" hreflang="fr" lang="fr">Français</a>
-      <a href="../ru/saas.html" hreflang="ru" lang="ru">Русский</a>
-      <a href="../es/saas.html" hreflang="es" lang="es" aria-current="true">Español</a>
+      <a href="../saas" hreflang="en" lang="en">English</a>
+      <a href="../fr/saas" hreflang="fr" lang="fr">Français</a>
+      <a href="../ru/saas" hreflang="ru" lang="ru">Русский</a>
+      <a href="../es/saas" hreflang="es" lang="es" aria-current="true">Español</a>
     </div>
   </div>
 
@@ -2120,10 +2128,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="page-sub">Software que vive en un servidor y se gana su sitio cada mes. Basta una cuenta, sincronización en la nube y un navegador</p>
 
           <div class="sp-actions">
-            <a href="../es/start.html" class="btn btn-primary">
+            <a href="../es/start" class="btn btn-primary">
               <span>Empezar un proyecto</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../es/services.html" class="btn btn-ghost">Ver todos los servicios</a>
+            <a href="../es/services" class="btn btn-ghost">Ver todos los servicios</a>
           </div>
         </div>
 
@@ -2187,10 +2195,10 @@ nav.scrolled::after { opacity: 1; }
             <h2 class="group-title">Otros proyectos</h2>
           </div>
           <div class="sp-actions" style="margin-top:0;gap:28px;">
-            <a class="build-link" href="../es/websites.html">
+            <a class="build-link" href="../es/websites">
               <span>Ver proyectos web</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a class="build-link" href="../es/apps.html">
+            <a class="build-link" href="../es/apps">
               <span>Ver proyectos de apps</span> <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -2206,10 +2214,10 @@ nav.scrolled::after { opacity: 1; }
           <p class="final-sub">Tracemos el camino más corto hasta el lanzamiento</p>
           <p class="final-body">Cuéntanos en qué estás trabajando y volvemos con qué construiríamos, qué recortaríamos para una primera versión y cuánto cuesta. El brief lleva dos minutos</p>
           <div class="final-actions">
-            <a href="../es/start.html" class="btn btn-primary">
+            <a href="../es/start" class="btn btn-primary">
               <span>Empezar un proyecto</span> <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="../es/methodology.html" class="btn btn-ghost">Nuestra metodología</a>
+            <a href="../es/methodology" class="btn btn-ghost">Nuestra metodología</a>
           </div>
           <p class="final-note">Respondemos por correo, normalmente en uno o dos días</p>
         </div>
@@ -2231,18 +2239,18 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Servicios</p>
-        <a href="../es/services.html">Sitios web</a>
-        <a href="../es/services.html">iOS y macOS</a>
-        <a href="../es/services.html">Plataformas SaaS</a>
-        <a href="../es/services.html">Diseño de producto</a>
-        <a href="../es/services.html">Crecimiento y visibilidad</a>
+        <a href="../es/services">Sitios web</a>
+        <a href="../es/services">iOS y macOS</a>
+        <a href="../es/services">Plataformas SaaS</a>
+        <a href="../es/services">Diseño de producto</a>
+        <a href="../es/services">Crecimiento y visibilidad</a>
       </div>
 
       <div class="footer-col">
         <p class="footer-col-lbl">Proyectos</p>
-        <a href="../es/websites.html">Sitios web</a>
-        <a href="../es/apps.html">Apps</a>
-        <a href="../es/saas.html">SaaS</a>
+        <a href="../es/websites">Sitios web</a>
+        <a href="../es/apps">Apps</a>
+        <a href="../es/saas">SaaS</a>
         <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
         <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
         <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
@@ -2251,8 +2259,8 @@ nav.scrolled::after { opacity: 1; }
       <div class="footer-col">
         <p class="footer-col-lbl">Estudio</p>
         <a href="../es/#about">Estudio</a>
-        <a href="../es/methodology.html">Proceso</a>
-        <a href="../es/start.html">Empezar un proyecto</a>
+        <a href="../es/methodology">Proceso</a>
+        <a href="../es/start">Empezar un proyecto</a>
       </div>
     </div>
 
