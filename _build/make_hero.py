@@ -104,11 +104,20 @@ canvas.paste(soft, (0, 0))
 # run together instead of butting
 canvas.paste(art, (SEAM, 0), ramp([(0, 0), (0.055, 1), (1, 1)], S, H))
 
-# sink it into the page: full paint at the join, a breath of colour under the copy
+# sink it into the page: full paint at the join, a wash under the copy.
+# The band crops the left ~38% of this image away, so the far end of the ramp is
+# never seen — what the page shows as its own left edge is around 0.38. The early
+# steps used to fall to almost nothing there, which was right while the copy
+# started at the page gutter and the strip was read as the paper under the
+# headline; the copy now stands on the card column further in, and that left the
+# strip reading as an empty margin instead. They are lifted so the wall is
+# already present at the band's edge. #hero::after was lightened to match: it is
+# the paper laid over this, and at its old strength it took back most of what is
+# added here.
 canvas = Image.composite(
     canvas, Image.new("RGB", (W, H), PAPER),
-    ramp([(0.00, 0.115), (0.30, 0.130), (0.48, 0.165), (0.585, 0.25),
-          (0.645, 0.47), (0.676, 1.00), (1.00, 1.00)]))
+    ramp([(0.00, 0.30), (0.30, 0.34), (0.48, 0.42), (0.585, 0.50),
+          (0.645, 0.63), (0.676, 1.00), (1.00, 1.00)]))
 
 # paper grain, so the thin areas do not band once webp has had them
 grain = Image.merge("RGB", [Image.effect_noise((W, H), 7).filter(
