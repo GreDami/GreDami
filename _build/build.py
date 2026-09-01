@@ -187,7 +187,7 @@ def head(lang, page, title, desc, extra=""):
   </script>
 
   <link rel="icon" type="image/svg+xml" href="{FAVICON}">
-  <link rel="mask-icon" href="{FAVICON}" color="#241052">
+  <link rel="mask-icon" href="{FAVICON}" color="#36187C">
   <meta name="theme-color" content="#FAFAFB">
 
   <meta name="description" content="{e(desc)}" />

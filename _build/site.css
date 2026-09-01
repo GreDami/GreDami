@@ -12,22 +12,22 @@
       --faint:       #6E6979;
       --hair:        #E2E0E7;
       --hair-soft:   #EDECF1;
-      --accent:      #241052;
+      --accent:      #36187C;
       --accent-ink:  #FFFFFF;
-      --accent-soft: rgba(36,16,82,0.07);
-      --accent-line: rgba(36,16,82,0.22);
+      --accent-soft: rgba(54,24,124,0.07);
+      --accent-line: rgba(54,24,124,0.22);
       /* the two steps either side of the accent — the payoff end of the
          process leans on these rather than on a second hue */
-      --accent-lit:  #241052;
-      --accent-deep: #241052;
+      --accent-lit:  #36187C;
+      --accent-deep: #36187C;
 
       /* The service tiles run on a two-colour set of their own: a violet held
          far below the accent, so four of them still read as paper rather than
          as four buttons, and a near-black with a violet cast for the icon
          plate and for the tile under the pointer. */
-      --tile-wash:  rgba(36,16,82,0.10);
-      --tile-wash2: rgba(36,16,82,0.07);
-      --tile-line:  rgba(36,16,82,0.17);
+      --tile-wash:  rgba(54,24,124,0.10);
+      --tile-wash2: rgba(54,24,124,0.07);
+      --tile-line:  rgba(54,24,124,0.17);
       --tile-ink:   #15121D;
 
       /* The second step of the same violet, not a second hue. The accent
@@ -35,10 +35,10 @@
          progress, a card under the pointer, the word the headline lands on.
          --accent2 clears 4.8:1 on paper and is safe for text; --accent2-lit
          is for glows and washes only. */
-      --accent2:      #241052;
-      --accent2-lit:  #241052;
-      --accent2-soft: rgba(36,16,82,0.09);
-      --accent2-line: rgba(36,16,82,0.26);
+      --accent2:      #36187C;
+      --accent2-lit:  #36187C;
+      --accent2-soft: rgba(54,24,124,0.09);
+      --accent2-line: rgba(54,24,124,0.26);
       /* the travel from deep to light, reused by every moving edge */
       --sweep: linear-gradient(90deg, var(--accent-deep), var(--accent) 30%, var(--accent-lit) 62%, var(--accent2-lit) 100%);
       --shadow:      0 1px 2px rgba(15,14,19,0.05), 0 8px 24px rgba(15,14,19,0.05);
@@ -113,6 +113,14 @@
     .sec-head { margin-bottom: clamp(32px, 4.6vw, 52px); }
     .sec-head .eyebrow { display: block; margin-bottom: 14px; }
     .sec-head .sec-desc { margin-top: 16px; }
+
+    /* The two card sections centre their contents, so the header above them
+       is centred too — a left-hung title over a centred row reads as a
+       mistake. The description is width-capped, so it needs the auto margins
+       as well as the text alignment. */
+    #build .sec-head, #services .sec-head { text-align: center; }
+    #build .sec-head .sec-desc,
+    #services .sec-head .sec-desc { margin-inline: auto; }
 
     section { padding: clamp(64px, 9vw, 118px) 0; }
 
@@ -321,7 +329,7 @@
       font-size: 15.5px; font-weight: 600;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.22),
                   0 4px 0 color-mix(in srgb, var(--accent) 60%, #000),
-                  0 12px 22px -12px rgba(36,16,82,0.6);
+                  0 12px 22px -12px rgba(54,24,124,0.6);
       transition: transform 0.14s ease, box-shadow 0.14s ease;
     }
     .drawer-cta:active {
@@ -519,7 +527,7 @@
       /* the plate stays near-black, so the glyph inverts to white — the one
          purple is the ground it sits on, not the mark */
       color: #FFFFFF;
-      border: 1px solid rgba(36,16,82,0.30);
+      border: 1px solid rgba(54,24,124,0.30);
       box-shadow: 0 5px 14px rgba(21,18,29,0.20),
                   inset 0 1px 0 rgba(255,255,255,0.07);
       margin-bottom: 14px;
@@ -595,8 +603,8 @@
       padding: clamp(18px, 2.4vw, 34px);
       border: 1px solid var(--hair-soft);
       background:
-        radial-gradient(88% 128% at 2% 0%, rgba(36,16,82,0.16), transparent 60%),
-        radial-gradient(88% 128% at 98% 100%, rgba(36,16,82,0.22), transparent 60%),
+        radial-gradient(88% 128% at 2% 0%, rgba(54,24,124,0.16), transparent 60%),
+        radial-gradient(88% 128% at 98% 100%, rgba(54,24,124,0.22), transparent 60%),
         var(--sunken);
     }
 
@@ -656,9 +664,9 @@
     .step:last-child {
       background: linear-gradient(150deg, var(--accent-lit), var(--accent) 58%, var(--accent-deep));
       border-color: var(--accent-deep);
-      box-shadow: 0 10px 30px rgba(36,16,82,0.26);
+      box-shadow: 0 10px 30px rgba(54,24,124,0.26);
     }
-    .step:last-child:hover { box-shadow: 0 18px 44px rgba(36,16,82,0.38); }
+    .step:last-child:hover { box-shadow: 0 18px 44px rgba(54,24,124,0.38); }
     .step:last-child h3 { color: var(--accent-ink); }
     .step:last-child p { color: rgba(255,255,255,0.78); }
     .step:last-child .step-n { color: rgba(255,255,255,0.26); }
@@ -850,7 +858,7 @@
       font-size: 13.5px; font-weight: 600; white-space: nowrap;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.24),
                   0 3px 0 color-mix(in srgb, var(--accent) 60%, #000),
-                  0 8px 16px -8px rgba(36,16,82,0.55);
+                  0 8px 16px -8px rgba(54,24,124,0.55);
       transition: background 0.18s ease, transform 0.14s ease, box-shadow 0.14s ease;
     }
     .nav-cta svg { transition: transform 0.2s cubic-bezier(0.2, 0.75, 0.25, 1); }
@@ -859,7 +867,7 @@
       transform: translateY(-2px);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.28),
                   0 5px 0 color-mix(in srgb, var(--accent) 56%, #000),
-                  0 13px 24px -10px rgba(36,16,82,0.6);
+                  0 13px 24px -10px rgba(54,24,124,0.6);
     }
     .nav-cta:hover svg { transform: translateX(3px); }
     .nav-cta:active {
@@ -932,8 +940,8 @@
        the row reads as a set rather than three identical tiles. Nothing
        here moves or lights up on hover: the colour is the whole statement. */
     .build-grid .build:nth-child(2n + 1) {
-      background: #241052;
-      border-color: #241052;
+      background: #36187C;
+      border-color: #36187C;
     }
     .build-grid .build:nth-child(2n + 1) h3 { color: #FFFFFF; }
     .build-grid .build:nth-child(2n + 1) p { color: rgba(255,255,255,0.70); }
@@ -1036,7 +1044,7 @@
        the accent has to stay bright enough to carry buttons and links on
        paper, while down here it only has to be dark enough to sit still. */
     footer {
-      --f-ground: #241052;
+      --f-ground: #36187C;
       --f-ink:   #FFFFFF;
       --f-mid:   rgba(237,233,254,0.78);
       --f-faint: rgba(221,214,254,0.70);
@@ -1053,8 +1061,8 @@
     footer::before {
       content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
       background:
-        radial-gradient(46% 62% at 12% 0%, rgba(36,16,82,0.10), transparent 68%),
-        radial-gradient(40% 56% at 88% 100%, rgba(36,16,82,0.14), transparent 70%);
+        radial-gradient(46% 62% at 12% 0%, rgba(54,24,124,0.10), transparent 68%),
+        radial-gradient(40% 56% at 88% 100%, rgba(54,24,124,0.14), transparent 70%);
     }
 
     footer .footer-logo { color: var(--f-ink); }
@@ -1700,8 +1708,8 @@ nav.scrolled::after { opacity: 1; }
 .hero-glow {
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(36% 44% at 16% 26%, rgba(36,16,82,0.16), transparent 68%),
-    radial-gradient(34% 42% at 44% 82%, rgba(36,16,82,0.22), transparent 70%);
+    radial-gradient(36% 44% at 16% 26%, rgba(54,24,124,0.16), transparent 68%),
+    radial-gradient(34% 42% at 44% 82%, rgba(54,24,124,0.22), transparent 70%);
   animation: drift 24s ease-in-out infinite alternate;
 }
 @keyframes drift {
@@ -1792,7 +1800,7 @@ nav.scrolled::after { opacity: 1; }
    accent for this row; the shared light violet read as a smudge on black. */
 .svc::after {
   background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%),
-              rgba(36,16,82,0.20), transparent 70%);
+              rgba(54,24,124,0.20), transparent 70%);
 }
 
 /* This row does not wipe its top edge in — it is lit from the start, in the
@@ -1818,7 +1826,7 @@ nav.scrolled::after { opacity: 1; }
 }
 .svc:hover {
   background-color: var(--tile-ink);
-  border-color: rgba(36,16,82,0.42);
+  border-color: rgba(54,24,124,0.42);
   box-shadow: 0 2px 6px rgba(21,18,29,0.20), 0 20px 46px rgba(21,18,29,0.30);
 }
 .svc:hover h3 { color: #FFFFFF; }
@@ -1839,7 +1847,7 @@ nav.scrolled::after { opacity: 1; }
   background: linear-gradient(150deg, var(--accent-lit), var(--accent-deep));
   color: #FFFFFF;
   border-color: rgba(255,255,255,0.5);
-  box-shadow: 0 8px 20px rgba(36,16,82,0.38);
+  box-shadow: 0 8px 20px rgba(54,24,124,0.38);
   transform: translateY(-2px) rotate(-5deg);
 }
 
@@ -1894,8 +1902,8 @@ nav.scrolled::after { opacity: 1; }
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 26px -12px rgba(36,16,82,0.65),
-              0 6px 16px -10px rgba(36,16,82,0.45);
+  box-shadow: 0 12px 26px -12px rgba(54,24,124,0.65),
+              0 6px 16px -10px rgba(54,24,124,0.45);
 }
 .btn-primary:hover::after { opacity: 1; animation: sheen 0.8s ease-out; }
 .btn-primary:active { transform: translateY(0); }
@@ -1921,8 +1929,8 @@ nav.scrolled::after { opacity: 1; }
   content: ""; position: absolute; inset: -30% -12%; z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(42% 40% at 20% 12%, rgba(36,16,82,0.13), transparent 70%),
-    radial-gradient(40% 38% at 84% 88%, rgba(36,16,82,0.20), transparent 70%);
+    radial-gradient(42% 40% at 20% 12%, rgba(54,24,124,0.13), transparent 70%),
+    radial-gradient(40% 38% at 84% 88%, rgba(54,24,124,0.20), transparent 70%);
   animation: drift 28s ease-in-out infinite alternate;
 }
 
