@@ -114,7 +114,12 @@ def up(lang):
 def href(from_lang, to_lang, page="index.html"):
     """Relative link between two pages. Works on file://, in subdirectories
     and when deployed, which a leading-slash path does not."""
-    return up(from_lang) + ("" if to_lang == "en" else to_lang + "/") + page
+    dir_part = up(from_lang) + ("" if to_lang == "en" else to_lang + "/")
+    if page == "index.html":
+        # Link to the directory, not the literal file, so the address bar
+        # doesn't pick up a visible /index.html when the link is followed.
+        return dir_part or "./"
+    return dir_part + page
 
 
 def asset(lang, path):

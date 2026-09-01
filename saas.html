@@ -567,28 +567,28 @@
        The gap is kept small so four of them still read as one band. */
     .svc-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: clamp(12px, 1.3vw, 18px);
+      gap: clamp(10px, 1.1vw, 14px);
     }
     .svc {
-      background: var(--surface); padding: clamp(24px, 3vw, 34px);
+      background: var(--surface); padding: clamp(18px, 2.2vw, 26px) clamp(14px, 1.6vw, 18px);
       display: flex; flex-direction: column;
       border: 1px solid var(--hair); border-radius: 14px; overflow: hidden;
       box-shadow: 0 1px 2px rgba(15,14,19,0.04);
     }
     .svc-icon {
-      width: 42px; height: 42px; border-radius: 11px;
+      width: 36px; height: 36px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       background: var(--accent-soft); color: var(--accent);
       border: 1px solid var(--accent-line);
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
     .svc h3 {
       font-family: var(--f-display); font-weight: 700;
-      font-size: 24px; letter-spacing: -0.015em; line-height: 1.2;
-      margin-bottom: 11px;
+      font-size: 19px; letter-spacing: -0.015em; line-height: 1.2;
+      margin-bottom: 7px;
     }
     .svc p {
-      font-size: 15px; line-height: 1.65; color: var(--mid); margin-bottom: 20px;
+      font-size: 14.5px; line-height: 1.55; color: var(--mid); margin-bottom: 14px;
     }
     .svc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
     .chip {
@@ -935,28 +935,28 @@
        ══════════════════════════════════════════ */
     .build-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: clamp(12px, 1.3vw, 18px);
+      gap: clamp(10px, 1.1vw, 14px);
     }
     .build {
-      background: var(--surface); padding: clamp(26px, 3.2vw, 38px);
+      background: var(--surface); padding: clamp(18px, 2.2vw, 26px) clamp(14px, 1.6vw, 18px);
       display: flex; flex-direction: column;
       border: 1px solid var(--hair); border-radius: 14px; overflow: hidden;
       box-shadow: 0 1px 2px rgba(15,14,19,0.04);
     }
     .build-n {
-      font-family: var(--f-display); font-size: 15px; font-weight: 600;
+      font-family: var(--f-display); font-size: 14px; font-weight: 600;
       color: var(--accent); letter-spacing: 0.05em;
       font-variant-numeric: tabular-nums;
-      padding-bottom: 16px; margin-bottom: 20px;
+      padding-bottom: 10px; margin-bottom: 14px;
       border-bottom: 1px solid var(--hair);
     }
     .build h3 {
       font-family: var(--f-display); font-weight: 700;
-      font-size: clamp(23px, 2.6vw, 28px); letter-spacing: -0.018em;
-      line-height: 1.15; margin-bottom: 13px;
+      font-size: clamp(19px, 2.1vw, 22px); letter-spacing: -0.018em;
+      line-height: 1.15; margin-bottom: 8px;
     }
     .build p {
-      font-size: 15px; line-height: 1.65; color: var(--mid); margin-bottom: 24px;
+      font-size: 14.5px; line-height: 1.55; color: var(--mid); margin-bottom: 16px;
     }
     .build-link {
       display: inline-flex; align-items: center; gap: 7px; margin-top: auto;
@@ -1236,10 +1236,10 @@ input:focus, select:focus, textarea:focus {
    rows, so all three answer the pointer the same way */
 .line-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(12px, 1.3vw, 18px);
+  gap: clamp(10px, 1.1vw, 14px);
 }
 .line {
-  background: var(--surface); padding: clamp(24px, 3vw, 34px);
+  background: var(--surface); padding: clamp(18px, 2.2vw, 26px) clamp(14px, 1.6vw, 18px);
   display: flex; flex-direction: column;
   border: 1px solid var(--hair); border-radius: 14px; overflow: hidden;
   box-shadow: 0 1px 2px rgba(15,14,19,0.04);
@@ -1247,20 +1247,20 @@ input:focus, select:focus, textarea:focus {
 .line-cat {
   font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--accent);
-  padding-bottom: 14px; margin-bottom: 17px;
+  padding-bottom: 9px; margin-bottom: 12px;
   border-bottom: 1px solid var(--hair);
 }
 .line h3 {
   font-family: var(--f-display); font-weight: 700;
-  font-size: clamp(21px, 2.3vw, 25px); letter-spacing: -0.016em;
-  line-height: 1.18; margin-bottom: 11px;
+  font-size: clamp(18px, 2vw, 21px); letter-spacing: -0.016em;
+  line-height: 1.18; margin-bottom: 7px;
 }
 .line-desc {
-  font-size: 15px; line-height: 1.65; color: var(--mid); margin-bottom: 22px;
+  font-size: 14.5px; line-height: 1.55; color: var(--mid); margin-bottom: 14px;
 }
 .line-list {
-  list-style: none; display: flex; flex-direction: column; gap: 10px;
-  margin-bottom: 26px;
+  list-style: none; display: flex; flex-direction: column; gap: 7px;
+  margin-bottom: 16px;
 }
 .line-list li {
   position: relative; padding-left: 23px;
@@ -1850,13 +1850,13 @@ nav.scrolled::after { opacity: 1; }
 
   <nav id="nav">
     <div class="nav-in">
-      <a href="index.html" class="nav-logo"><span class="nav-mark" aria-hidden="true"></span><span>Gre<em>Dami</em></span></a>
+      <a href="./" class="nav-logo"><span class="nav-mark" aria-hidden="true"></span><span>Gre<em>Dami</em></span></a>
 
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#build">What we build</a></li>
+        <li><a href="./">Home</a></li>
+        <li><a href="./#build">What we build</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="index.html#about">About</a></li>
+        <li><a href="./#about">About</a></li>
       </ul>
 
       <div class="nav-tools">
@@ -1891,10 +1891,10 @@ nav.scrolled::after { opacity: 1; }
       </button>
     </div>
     <ul class="drawer-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#build">What we build</a></li>
+      <li><a href="./">Home</a></li>
+      <li><a href="./#build">What we build</a></li>
       <li><a href="services.html">Services</a></li>
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="./#about">About</a></li>
     </ul>
     <a href="start.html" class="drawer-cta">Start a project</a>
     <a href="start.html" class="drawer-cta ghost">Get started</a>
@@ -2050,7 +2050,7 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Company</p>
-        <a href="index.html#about">About</a>
+        <a href="./#about">About</a>
         <a href="methodology.html">Process</a>
         <a href="start.html">Start a project</a>
       </div>
