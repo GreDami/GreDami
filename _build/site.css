@@ -502,22 +502,35 @@
       max-width: 1080px;
       margin: 0 auto;
     }
-    /* The face carries colour before the pointer arrives: a violet wash
-       poured from the top-left corner and answered in the bottom-right, over
-       a background-colour that is white here and black on hover — so the one
-       gradient reads as a tint on paper and as violet light on the dark
-       tile without having to be swapped for another. */
+    /* These are the build panels in another row: a flat tinted ground, no
+       wash, no light arriving on hover. The colour is the statement. */
     .svc {
-      background-color: var(--surface);
-      background-image:
-        radial-gradient(120% 95% at 0% 0%, var(--tile-wash), transparent 58%),
-        radial-gradient(100% 85% at 100% 100%, var(--tile-wash2), transparent 60%);
+      background: var(--surface);
       padding: clamp(14px, 1.8vw, 20px) clamp(12px, 1.3vw, 16px);
       display: flex; flex-direction: column; align-items: center;
       text-align: center;
-      border: 1px solid var(--tile-line); border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--hair); border-radius: 14px; overflow: hidden;
       box-shadow: 0 1px 2px rgba(15,14,19,0.04);
+      position: relative;
     }
+
+    /* ── the four panels are coloured, and that is all they do ──
+       The same two tints the build wall carries, alternating across the row:
+       the site purple laid on paper at a low alpha, answered by the ink at
+       the same strength. Nothing here moves or lights up on hover. */
+    .svc-grid .svc:nth-child(odd) {
+      background: rgba(54,24,124,0.045);
+      border-color: rgba(54,24,124,0.11);
+    }
+    .svc-grid .svc:nth-child(even) {
+      background: rgba(15,14,19,0.055);
+      border-color: rgba(15,14,19,0.13);
+    }
+
+    /* the type is the ordinary paper set — muted means the ground is tinted,
+       not that the words have to shout over it */
+    .svc-grid .svc h3 { color: var(--ink); }
+    .svc-grid .svc p { color: var(--mid); }
     /* the one hard note on the tile: a black plate with the glyph drawn in
        light violet, so the pair of colours is stated at the top of the card */
     .svc-icon {
@@ -978,17 +991,17 @@
        The depth comes from perspective on the grid, so the row shares one
        camera and the outer panels turn slightly off-axis, the way three real
        cards on a table would. site.js keeps --ax / --ay / --ang current. */
-    .build-grid { perspective: 1500px; }
-    .build {
+    .build-grid, .svc-grid { perspective: 1500px; }
+    .build, .svc {
       rotate: var(--ax, 1) var(--ay, 0) 0 var(--ang, 0deg);
     }
 
     @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-      .build {
+      .build, .svc {
         transition: rotate 0.26s cubic-bezier(0.2, 0.75, 0.25, 1),
                     scale 0.26s cubic-bezier(0.2, 0.75, 0.25, 1);
       }
-      .build:hover { scale: 1.015; z-index: 2; }
+      .build:hover, .svc:hover { scale: 1.015; z-index: 2; }
     }
 
     /* ══════════════════════════════════════════
@@ -1724,21 +1737,20 @@ nav.scrolled::after { opacity: 1; }
   animation: pip 2.8s ease-in-out infinite;
 }
 
-/* ── the card grids ──
-   An edge wipes in along the top of each card. On the service lines a soft
-   pool of the second hue also follows the pointer across the card; the
-   capability wall stays flat under the pointer and only takes the lift. The
-   build wall opted out of both: it carries flat colour instead. */
-.svc, .line {
+/* ── the service lines ──
+   An edge wipes in along the top and a soft pool of the second hue follows
+   the pointer across the card. The build wall and the capability wall both
+   opted out: they carry flat colour and turn toward the pointer instead. */
+.line {
   position: relative; isolation: isolate;
 }
-.svc::before, .line::before {
+.line::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
   background: var(--sweep);
   transform: scaleX(0); transform-origin: 0 50%;
   transition: transform 0.42s cubic-bezier(0.2, 0.75, 0.25, 1);
 }
-.svc:hover::before, .line:hover::before { transform: scaleX(1); }
+.line:hover::before { transform: scaleX(1); }
 
 .line::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -1755,12 +1767,12 @@ nav.scrolled::after { opacity: 1; }
    raised z-index keeps the open shadow over its neighbours rather than under
    them. This is the move the process cards have always made; it is now what
    every card on the site does. */
-.svc, .line, .site, .proj, .next-card {
+.line, .site, .proj, .next-card {
   transition: transform 0.28s cubic-bezier(0.2, 0.75, 0.25, 1),
               box-shadow 0.28s ease, border-color 0.2s ease,
               background-color 0.36s ease;
 }
-.svc:hover, .line:hover,
+.line:hover,
 .site:hover, .proj:hover, .next-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lift);
@@ -1777,29 +1789,10 @@ nav.scrolled::after { opacity: 1; }
 }
 .js .line-grid:hover .line:not(:hover) { opacity: 0.78; }
 
-/* This row does not wipe its top edge in — it is lit from the start, in the
-   same black and violet, and a highlight travels along it every few seconds
-   so the band has a pulse of its own while nobody is pointing at it. */
-.svc::before {
-  background: linear-gradient(90deg,
-              var(--tile-ink) 0%, var(--accent) 24%, var(--accent-lit) 36%,
-              var(--tile-ink) 60%, var(--tile-ink) 100%);
-  background-size: 260% 100%;
-  transform: none; opacity: 0.8;
-  animation: tile-edge 11s linear infinite;
-  transition: opacity 0.28s ease, height 0.28s ease;
-}
-.svc:hover::before { height: 3px; opacity: 1; }
-@keyframes tile-edge {
-  from { background-position: 145% 0; }
-  to   { background-position: -125% 0; }
-}
-
 /* cards arrive in sequence rather than all at once — an animation, not the
    shared reveal transition, so the hover states above stay free to run once
    it has finished (fill: backwards holds the start during the delay only) */
 .js .next-grid .reveal.in,
-.js .svc-grid .reveal.in,
 .js .line-grid .reveal.in {
   animation: rise 0.6s cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
 }
@@ -1809,9 +1802,6 @@ nav.scrolled::after { opacity: 1; }
 }
 .js .next-grid .next-card:nth-child(2) { animation-delay: 0.10s; }
 .js .next-grid .next-card:nth-child(3) { animation-delay: 0.20s; }
-.js .svc-grid .svc:nth-child(2) { animation-delay: 0.08s; }
-.js .svc-grid .svc:nth-child(3) { animation-delay: 0.16s; }
-.js .svc-grid .svc:nth-child(4) { animation-delay: 0.24s; }
 
 /* ── inline links ──
    The plain bottom border is replaced by an underline that draws itself in
@@ -1891,8 +1881,7 @@ nav.scrolled::after { opacity: 1; }
   .final-cta::after { animation: none; }
   .hero-proof span::before, .eyebrow::before { animation: none; opacity: 1; transform: none; }
   .line::after { display: none; }
-  .svc::before { animation: none; }
-  .svc::before, .line::before,
+  .line::before,
   .build-link::after, .work-link::after, .line-link::after { transition: none; }
   .btn-primary:hover { transform: none; }
   .btn-primary::after { display: none; }
@@ -1902,6 +1891,6 @@ nav.scrolled::after { opacity: 1; }
   .build:hover, .svc:hover, .line:hover,
   .site:hover, .proj:hover, .next-card:hover,
   .step:hover, .site:hover .chrome { transform: none; }
-  .build { transition: none; }
+  .build, .svc { transition: none; }
   nav::after { transition: none; }
 }
