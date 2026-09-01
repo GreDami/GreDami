@@ -523,7 +523,14 @@
         rgba(250, 250, 251, 0.30) 40%,
         rgba(250, 250, 251, 0) 56%);
     }
-    #hero .shell { width: 100%; }
+    /* The copy column stands on the same edge as the card grids in the
+       sections below, which sit on a centred 1080 column rather than on the
+       page gutter. The max() tracks that edge at every width: the column wins
+       on a wide screen, the gutter takes over once 1080 no longer fits. */
+    #hero .shell {
+      width: 100%;
+      padding-inline: max(var(--gut), calc((100% - 1080px) / 2));
+    }
     .hero-inner { max-width: 768px; }
 
     .hero-eyebrow {
