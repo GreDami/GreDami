@@ -121,11 +121,11 @@
      all this does is keep those two numbers current. One listener per grid,
      coalesced into a frame, and only where there is a real pointer to follow. */
   if (!reduced && window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.build-grid, .svc-grid, .line-grid').forEach(function (grid) {
+    document.querySelectorAll('.svc-grid, .line-grid').forEach(function (grid) {
       var frame = null;
       grid.addEventListener('pointermove', function (e) {
         if (frame) return;
-        var card = e.target.closest ? e.target.closest('.build, .svc, .line') : null;
+        var card = e.target.closest ? e.target.closest('.svc, .line') : null;
         if (!card) return;
         var x = e.clientX, y = e.clientY;
         frame = requestAnimationFrame(function () {
@@ -137,6 +137,46 @@
       }, { passive: true });
     });
   }
+
+  /* ── the build panels turn toward the pointer ──
+     A panel tips away from wherever the pointer is on it: across the panel
+     turns it about its vertical axis, down the panel about its horizontal
+     one. Both are folded into the single axis-and-angle the CSS `rotate`
+     property takes — at these angles the difference between that and two
+     stacked rotations is not visible, and one property is one thing to
+     transition. The turn is offered only where there is a pointer to
+     follow and motion is welcome — a touch screen gets nothing. */
+  var panels = document.querySelectorAll('.build');
+  var canTurn = !reduced && window.matchMedia('(hover: hover)').matches;
+
+  panels.forEach(function (card) {
+    var frame = null;
+
+    if (canTurn) {
+      card.addEventListener('pointermove', function (e) {
+        if (frame) return;
+        var x = e.clientX, y = e.clientY;
+        frame = requestAnimationFrame(function () {
+          frame = null;
+          var r = card.getBoundingClientRect();
+          var ax = -((y - r.top) / r.height - 0.5) * 3;    /* rotation about x */
+          var ay = ((x - r.left) / r.width - 0.5) * 4.5;  /* rotation about y */
+          var ang = Math.sqrt(ax * ax + ay * ay);
+          if (ang < 0.01) return;
+          card.style.setProperty('--ax', ax.toFixed(3));
+          card.style.setProperty('--ay', ay.toFixed(3));
+          card.style.setProperty('--ang', ang.toFixed(2) + 'deg');
+        });
+      }, { passive: true });
+
+      /* it settles back flat rather than snapping from wherever it was */
+      card.addEventListener('pointerleave', function () {
+        if (frame) { cancelAnimationFrame(frame); frame = null; }
+        card.style.setProperty('--ang', '0deg');
+      }, { passive: true });
+    }
+
+  });
 
   if (location.hash === '#apps') {
     var work = document.getElementById('work');

@@ -164,7 +164,7 @@ def head(lang, page, title, desc, extra=""):
 
   <link rel="icon" type="image/svg+xml" href="{FAVICON}">
   <link rel="mask-icon" href="{FAVICON}" color="#5B21B6">
-  <meta name="theme-color" content="#FAFAF8">
+  <meta name="theme-color" content="#FAFAFB">
 
   <meta name="description" content="{e(desc)}" />
   <meta name="author" content="GreDami" />
@@ -708,6 +708,13 @@ SVC_ICONS = [
     '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17.5 9 11l4 4 7.5-7.5"/><path d="M15 7.5h5.5V13"/></svg>',
 ]
 
+# the studio's home, marked next to the about copy
+PIN = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" '
+       'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" '
+       'stroke-linejoin="round" aria-hidden="true">'
+       '<path d="M12 21.2s7-5.9 7-11.2a7 7 0 1 0-14 0c0 5.3 7 11.2 7 11.2z"/>'
+       '<circle cx="12" cy="10" r="2.6"/></svg>')
+
 # key, the chips under it — technical names, so they stay in English everywhere
 SVC_DATA = [
     ("design", ["UI systems", "App icons", "Screenshots", "Accessibility"]),
@@ -729,6 +736,8 @@ def home(lang):
         "image": SITE + "/og-image.png",
         "description": t["footer.tagline"],
         "email": EMAIL,
+        "address": {"@type": "PostalAddress",
+                    "addressLocality": "Paris", "addressCountry": "FR"},
         "knowsAbout": ["iOS Development", "SwiftUI", "Web Development", "SaaS",
                        "Product Design", "App Store Optimization", "Localization"],
         "availableLanguage": LANGS,
@@ -830,6 +839,7 @@ def home(lang):
           <span class="eyebrow" style="display:block;margin-bottom:14px;">{e(t["about.label"])}</span>
           <h2 class="about-title">{t["about.title"]}</h2>
           <p class="about-desc">{e(t["about.desc"])}</p>
+          <p class="about-loc">{PIN} <span>{e(t["about.location"])}</span></p>
         </div>
       </div>
     </section>
