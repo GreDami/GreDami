@@ -1047,9 +1047,10 @@
     .build-link:hover { border-bottom-color: currentColor; }
 
     /* ── the three panels are coloured, and that is all they do ──
-       All three are the site purple laid on paper at a low alpha, so the row
-       reads pale and muted rather than as three solid blocks. The middle one
-       carries a touch more of it — the set still steps, it just steps quietly.
+       The outer two are the site purple laid on paper at a low alpha; the
+       middle one is the ink at the same strength, so the row still alternates
+       purple / black the way it always did — only pale and muted now, a tint
+       on paper rather than three solid blocks.
        Nothing here moves or lights up on hover: the colour is the statement. */
     .build-grid .build:nth-child(2n + 1) {
       background: rgba(54,24,124,0.045);
@@ -1060,11 +1061,11 @@
     }
 
     .build-grid .build:nth-child(2) {
-      background: rgba(54,24,124,0.085);
-      border-color: rgba(54,24,124,0.15);
+      background: rgba(15,14,19,0.055);
+      border-color: rgba(15,14,19,0.13);
     }
     .build-grid .build:nth-child(2) .build-n {
-      border-bottom-color: rgba(54,24,124,0.18);
+      border-bottom-color: rgba(15,14,19,0.16);
     }
 
     /* the type on all three is the ordinary paper set — muted means the
