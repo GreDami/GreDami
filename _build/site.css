@@ -481,10 +481,12 @@
        The gap is kept small so four of them still read as one band. */
     .svc-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: clamp(10px, 1.1vw, 14px);
+      gap: clamp(8px, 0.9vw, 12px);
+      max-width: 1080px;
+      margin: 0 auto;
     }
     .svc {
-      background: var(--surface); padding: clamp(18px, 2.2vw, 26px) clamp(14px, 1.6vw, 18px);
+      background: var(--surface); padding: clamp(14px, 1.8vw, 20px) clamp(12px, 1.3vw, 16px);
       display: flex; flex-direction: column;
       border: 1px solid var(--hair); border-radius: 14px; overflow: hidden;
       box-shadow: 0 1px 2px rgba(15,14,19,0.04);
@@ -849,10 +851,12 @@
        ══════════════════════════════════════════ */
     .build-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: clamp(10px, 1.1vw, 14px);
+      gap: clamp(8px, 0.9vw, 12px);
+      max-width: 1080px;
+      margin: 0 auto;
     }
     .build {
-      background: var(--surface); padding: clamp(18px, 2.2vw, 26px) clamp(14px, 1.6vw, 18px);
+      background: var(--surface); padding: clamp(14px, 1.8vw, 20px) clamp(12px, 1.3vw, 16px);
       display: flex; flex-direction: column;
       border: 1px solid var(--hair); border-radius: 14px; overflow: hidden;
       box-shadow: 0 1px 2px rgba(15,14,19,0.04);
@@ -1613,6 +1617,17 @@ nav.scrolled::after { opacity: 1; }
   box-shadow: var(--shadow-lift);
   border-color: var(--accent-line);
   z-index: 2;
+}
+
+/* ── the build panels turn toward the pointer ──
+   `rotate` is a standalone property, so this composes with the lift above
+   instead of fighting it inside one `transform`. The fallbacks hold the
+   card flat until the JS (site.js) starts writing --ax/--ay/--ang; on
+   touch or prefers-reduced-motion it never does, so this stays inert. */
+.build-grid { perspective: 800px; }
+.build {
+  rotate: var(--ax, 0) var(--ay, 0) 0 var(--ang, 0deg);
+  transition: rotate 0.25s cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 /* the rest of the row steps back a little while one card is being read */
