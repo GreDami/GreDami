@@ -110,6 +110,9 @@
          copy starts near the edge instead of drifting inwards on a wide screen */
       --shell: none;
       --gut:   clamp(20px, 7vw, 180px);
+      /* the card rows are centred on this rather than filling the shell, and
+         the hero copy stands on its edge — one number for the whole column */
+      --col:   1240px;
       --nav-h: 68px;
     }
 
@@ -503,7 +506,7 @@
        on a wide screen, the gutter takes over once 1080 no longer fits. */
     #hero .shell {
       width: 100%;
-      padding-inline: max(var(--gut), calc((100% - 1080px) / 2));
+      padding-inline: max(var(--gut), calc((100% - var(--col)) / 2));
     }
     .hero-inner { max-width: 768px; }
 
@@ -569,7 +572,7 @@
     .svc-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: clamp(8px, 0.9vw, 12px);
-      max-width: 1080px;
+      max-width: var(--col);
       margin: 0 auto;
     }
     /* These are the build panels in another row: a flat tinted ground, no
@@ -972,7 +975,7 @@
     .build-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: clamp(8px, 0.9vw, 12px);
-      max-width: 1080px;
+      max-width: var(--col);
       margin: 0 auto;
     }
     .build {
