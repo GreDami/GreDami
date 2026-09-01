@@ -145,8 +145,9 @@
      property takes — at these angles the difference between that and two
      stacked rotations is not visible, and one property is one thing to
      transition. The turn is offered only where there is a pointer to
-     follow and motion is welcome — a touch screen gets nothing. */
-  var panels = document.querySelectorAll('.build');
+     follow and motion is welcome — a touch screen gets nothing. The
+     capability wall is the same panel in another row, so it turns too. */
+  var panels = document.querySelectorAll('.build, .svc');
   var canTurn = !reduced && window.matchMedia('(hover: hover)').matches;
 
   panels.forEach(function (card) {

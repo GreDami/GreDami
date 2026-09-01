@@ -21,13 +21,8 @@
       --accent-lit:  #36187C;
       --accent-deep: #36187C;
 
-      /* The service tiles run on a two-colour set of their own: a violet held
-         far below the accent, so four of them still read as paper rather than
-         as four buttons, and a near-black with a violet cast for the icon
-         plate and for the tile under the pointer. */
-      --tile-wash:  rgba(54,24,124,0.10);
-      --tile-wash2: rgba(54,24,124,0.07);
-      --tile-line:  rgba(54,24,124,0.17);
+      /* The near-black with a violet cast that the service-tile icon plates
+         are drawn on. */
       --tile-ink:   #15121D;
 
       /* The second step of the same violet, not a second hue. The accent
@@ -414,7 +409,9 @@
        those depend on the band's height, which the image cannot know. */
     #hero::before {
       content: ""; position: absolute; z-index: -1;
-      inset: 0;
+      /* the same gutter the cards and the copy stand on, so the painted band
+         is a block in the page's column rather than a full-bleed backdrop */
+      inset: 0 var(--gut);
       background-image: var(--img-hero);
       background-size: cover;
       background-position: 100% 46%;
@@ -427,12 +424,12 @@
        part that has to stay quiet is set here, in the band's own proportions,
        and runs out before it reaches the painting. */
     #hero::after {
-      content: ""; position: absolute; z-index: -1; inset: 0;
+      content: ""; position: absolute; z-index: -1; inset: 0 var(--gut);
       background: linear-gradient(96deg,
-        rgba(250, 250, 251, 0.72) 0%,
-        rgba(250, 250, 251, 0.62) 20%,
-        rgba(250, 250, 251, 0.30) 40%,
-        rgba(250, 250, 251, 0) 56%);
+        rgba(250, 250, 251, 0.74) 0%,
+        rgba(250, 250, 251, 0.66) 22%,
+        rgba(250, 250, 251, 0.44) 44%,
+        rgba(250, 250, 251, 0) 64%);
     }
     #hero .shell { width: 100%; }
     .hero-inner { max-width: 768px; }
@@ -499,8 +496,6 @@
     .svc-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: clamp(8px, 0.9vw, 12px);
-      max-width: 1080px;
-      margin: 0 auto;
     }
     /* These are the build panels in another row: a flat tinted ground, no
        wash, no light arriving on hover. The colour is the statement. */
@@ -908,8 +903,6 @@
     .build-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: clamp(8px, 0.9vw, 12px);
-      max-width: 1080px;
-      margin: 0 auto;
     }
     .build {
       background: var(--surface); padding: clamp(14px, 1.8vw, 20px) clamp(12px, 1.3vw, 16px);
