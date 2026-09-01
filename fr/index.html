@@ -1034,30 +1034,32 @@
     .build-link:hover { border-bottom-color: currentColor; }
 
     /* ── the three panels are coloured, and that is all they do ──
-       Outer two take a light violet wash, the middle one inverts to ink so
-       the row reads as a set rather than three identical tiles. Nothing
-       here moves or lights up on hover: the colour is the whole statement. */
+       All three are the site purple laid on paper at a low alpha, so the row
+       reads pale and muted rather than as three solid blocks. The middle one
+       carries a touch more of it — the set still steps, it just steps quietly.
+       Nothing here moves or lights up on hover: the colour is the statement. */
     .build-grid .build:nth-child(2n + 1) {
-      background: #36187C;
-      border-color: #36187C;
+      background: rgba(54,24,124,0.045);
+      border-color: rgba(54,24,124,0.11);
     }
-    .build-grid .build:nth-child(2n + 1) h3 { color: #FFFFFF; }
-    .build-grid .build:nth-child(2n + 1) p { color: rgba(255,255,255,0.70); }
-    .build-grid .build:nth-child(2n + 1) .build-link { color: #FFFFFF; }
     .build-grid .build:nth-child(2n + 1) .build-n {
-      color: #FFFFFF; border-bottom-color: rgba(255,255,255,0.16);
+      border-bottom-color: rgba(54,24,124,0.14);
     }
 
     .build-grid .build:nth-child(2) {
-      background: var(--ink);
-      border-color: var(--ink);
+      background: rgba(54,24,124,0.085);
+      border-color: rgba(54,24,124,0.15);
     }
-    .build-grid .build:nth-child(2) h3 { color: #FFFFFF; }
-    .build-grid .build:nth-child(2) p { color: rgba(255,255,255,0.70); }
     .build-grid .build:nth-child(2) .build-n {
-      color: #FFFFFF; border-bottom-color: rgba(255,255,255,0.16);
+      border-bottom-color: rgba(54,24,124,0.18);
     }
-    .build-grid .build:nth-child(2) .build-link { color: #FFFFFF; }
+
+    /* the type on all three is the ordinary paper set — muted means the
+       ground is tinted, not that the words have to shout over it */
+    .build-grid .build h3 { color: var(--ink); }
+    .build-grid .build p { color: var(--mid); }
+    .build-grid .build .build-n,
+    .build-grid .build .build-link { color: var(--accent); }
 
     /* the panels opt out of the shared card motion entirely */
     .build .build-link::after { display: none; }
@@ -1485,7 +1487,7 @@ input:focus, select:focus, textarea:focus {
   line-height: 1.25; margin-bottom: 9px;
 }
 .stage p { font-size: 15.5px; line-height: 1.65; color: var(--mid); max-width: 62ch; }
-.stages-note { margin-top: 30px; }
+.stages-note { margin-top: 30px; text-align: center; }
 
 @media (max-width: 1000px) {
   .line-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1797,19 +1799,9 @@ nav::after {
 nav.scrolled::after { opacity: 1; }
 
 /* ── hero ──
-   A slow two-step violet drift laid between the painting and the paper wash:
-   it lifts the artwork and is veiled again where the copy falls across it, so
-   the headline never has to read off a moving ground. */
-/* the glow drifts past the band's edges, so the band clips it — otherwise the
-   overflow would add height to the page and bleed into the section below */
+   No wash of its own: the band is the painting and the paper it thins into.
+   The overflow rule stays — the painting is pinned past the band's right edge. */
 #hero { overflow: hidden; }
-.hero-glow {
-  position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(36% 44% at 16% 26%, rgba(54,24,124,0.16), transparent 68%),
-    radial-gradient(34% 42% at 44% 82%, rgba(54,24,124,0.22), transparent 70%);
-  animation: drift 24s ease-in-out infinite alternate;
-}
 @keyframes drift {
   from { transform: translate3d(-2%, 1.5%, 0) scale(1); }
   to   { transform: translate3d(4%, -3%, 0) scale(1.09); }
@@ -2042,7 +2034,7 @@ nav.scrolled::after { opacity: 1; }
    pointer pool and the wiping edges are dropped, and every element is left
    in the state it would have ended in. */
 @media (prefers-reduced-motion: reduce) {
-  .hero-glow, .final-cta::after { animation: none; }
+  .final-cta::after { animation: none; }
   .hero-proof span::before, .eyebrow::before { animation: none; opacity: 1; transform: none; }
   .svc::after, .line::after { display: none; }
   .svc::before { animation: none; }
@@ -2129,7 +2121,6 @@ nav.scrolled::after { opacity: 1; }
   <main id="main">
 
     <section id="hero">
-      <span class="hero-glow" aria-hidden="true"></span>
       <div class="shell">
         <div class="hero-inner">
         <h1 class="hero-title">La simplicité<br>qui <em>fait<br>grandir</em></h1>

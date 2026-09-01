@@ -799,7 +799,6 @@ def home(lang):
   <main id="main">
 
     <section id="hero">
-      <span class="hero-glow" aria-hidden="true"></span>
       <div class="shell">
         <div class="hero-inner">
         <h1 class="hero-title">{t["hero.title"]}</h1>
