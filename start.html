@@ -1793,10 +1793,10 @@ nav.scrolled::after { opacity: 1; }
 }
 
 /* ── the card grids ──
-   An edge wipes in along the top and a soft pool of the second hue follows
-   the pointer across the card. The capability wall and the service lines are
-   the same component, so they behave identically. The build wall opted out:
-   it carries flat colour instead. */
+   An edge wipes in along the top of each card. On the service lines a soft
+   pool of the second hue also follows the pointer across the card; the
+   capability wall stays flat under the pointer and only takes the lift. The
+   build wall opted out of both: it carries flat colour instead. */
 .svc, .line {
   position: relative; isolation: isolate;
 }
@@ -1808,13 +1808,13 @@ nav.scrolled::after { opacity: 1; }
 }
 .svc:hover::before, .line:hover::before { transform: scaleX(1); }
 
-.svc::after, .line::after {
+.line::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
               var(--accent2-soft), transparent 70%);
   opacity: 0; transition: opacity 0.3s ease;
 }
-.svc:hover::after, .line:hover::after { opacity: 1; }
+.line:hover::after { opacity: 1; }
 
 /* ── the lift ──
    Every card answers the pointer the same way: it comes up off the paper, its
@@ -1836,27 +1836,14 @@ nav.scrolled::after { opacity: 1; }
   z-index: 2;
 }
 
-/* the rest of the row steps back a little while one card is being read */
-.js .svc-grid .svc,
+/* the rest of the service lines step back a little while one is being read */
 .js .line-grid .line {
   transition: opacity 0.28s ease,
               transform 0.28s cubic-bezier(0.2, 0.75, 0.25, 1),
               box-shadow 0.28s ease, border-color 0.2s ease,
               background-color 0.36s ease;
 }
-.js .svc-grid:hover .svc:not(:hover),
 .js .line-grid:hover .line:not(:hover) { opacity: 0.78; }
-
-/* ── the service tiles trade their two colours ──
-   Under the pointer the tile inverts: the face fills to the black the plate
-   was carrying, the copy comes up white, and the plate is the thing that
-   lights violet. Nothing new arrives on hover — the two colours the card was
-   already wearing simply change places. The pointer pool is swapped to the
-   accent for this row; the shared light violet read as a smudge on black. */
-.svc::after {
-  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%),
-              rgba(54,24,124,0.20), transparent 70%);
-}
 
 /* This row does not wipe its top edge in — it is lit from the start, in the
    same black and violet, and a highlight travels along it every few seconds
@@ -1874,36 +1861,6 @@ nav.scrolled::after { opacity: 1; }
 @keyframes tile-edge {
   from { background-position: 145% 0; }
   to   { background-position: -125% 0; }
-}
-
-.svc h3, .svc p, .svc .chip {
-  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-}
-.svc:hover {
-  background-color: var(--tile-ink);
-  border-color: rgba(54,24,124,0.42);
-  box-shadow: 0 2px 6px rgba(21,18,29,0.20), 0 20px 46px rgba(21,18,29,0.30);
-}
-.svc:hover h3 { color: #FFFFFF; }
-.svc:hover p  { color: rgba(233,229,246,0.74); }
-.svc:hover .chip {
-  background-color: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.22);
-  color: rgba(233,229,246,0.82);
-}
-
-/* the plate is the inversion: black on paper, violet on black */
-.svc-icon {
-  transition: color 0.24s ease, background 0.24s ease, border-color 0.24s ease,
-              box-shadow 0.28s ease,
-              transform 0.32s cubic-bezier(0.2, 0.75, 0.25, 1);
-}
-.svc:hover .svc-icon {
-  background: linear-gradient(150deg, var(--accent-lit), var(--accent-deep));
-  color: #FFFFFF;
-  border-color: rgba(255,255,255,0.5);
-  box-shadow: 0 8px 20px rgba(54,24,124,0.38);
-  transform: translateY(-2px) rotate(-5deg);
 }
 
 /* cards arrive in sequence rather than all at once — an animation, not the
@@ -2001,14 +1958,13 @@ nav.scrolled::after { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .final-cta::after { animation: none; }
   .hero-proof span::before, .eyebrow::before { animation: none; opacity: 1; transform: none; }
-  .svc::after, .line::after { display: none; }
+  .line::after { display: none; }
   .svc::before { animation: none; }
   .svc::before, .line::before,
   .build-link::after, .work-link::after, .line-link::after { transition: none; }
-  .js .svc-grid:hover .svc:not(:hover) { opacity: 1; }
   .btn-primary:hover { transform: none; }
   .btn-primary::after { display: none; }
-  .svc:hover .svc-icon, #back-top:hover { transform: none; }
+  #back-top:hover { transform: none; }
   /* the cards keep the shadow and the accent edge, they just do not travel —
      including the two that were lifting before any of this was added */
   .build:hover, .svc:hover, .line:hover,
@@ -2033,7 +1989,7 @@ nav.scrolled::after { opacity: 1; }
         <li><a href="./">Home</a></li>
         <li><a href="./#build">What we build</a></li>
         <li><a href="services">Services</a></li>
-        <li><a href="./#about">About</a></li>
+        <li><a href="about">About</a></li>
       </ul>
 
       <div class="nav-tools">
@@ -2071,7 +2027,7 @@ nav.scrolled::after { opacity: 1; }
       <li><a href="./">Home</a></li>
       <li><a href="./#build">What we build</a></li>
       <li><a href="services">Services</a></li>
-      <li><a href="./#about">About</a></li>
+      <li><a href="about">About</a></li>
     </ul>
     <a href="start" class="drawer-cta">Start a project</a>
     <a href="start" class="drawer-cta ghost">Get started</a>
@@ -2391,7 +2347,7 @@ nav.scrolled::after { opacity: 1; }
 
       <div class="footer-col">
         <p class="footer-col-lbl">Company</p>
-        <a href="./#about">About</a>
+        <a href="about">About</a>
         <a href="methodology">Process</a>
         <a href="start">Start a project</a>
       </div>
@@ -2531,11 +2487,11 @@ nav.scrolled::after { opacity: 1; }
      all this does is keep those two numbers current. One listener per grid,
      coalesced into a frame, and only where there is a real pointer to follow. */
   if (!reduced && window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.svc-grid, .line-grid').forEach(function (grid) {
+    document.querySelectorAll('.line-grid').forEach(function (grid) {
       var frame = null;
       grid.addEventListener('pointermove', function (e) {
         if (frame) return;
-        var card = e.target.closest ? e.target.closest('.svc, .line') : null;
+        var card = e.target.closest ? e.target.closest('.line') : null;
         if (!card) return;
         var x = e.clientX, y = e.clientY;
         frame = requestAnimationFrame(function () {

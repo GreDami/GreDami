@@ -8,8 +8,8 @@ All copy lives in _build/site.json. Edit that file, then run:
 
 Sources in _build/ : site.json (all copy), site.css, site.js, contact.js
 Writes: index.html, services.html, websites.html, apps.html, saas.html,
-        methodology.html, start.html, the same seven under {fr,ru,es}/,
-        sitemap.xml, robots.txt
+        methodology.html, about.html, start.html, the same eight under
+        {fr,ru,es}/, sitemap.xml, robots.txt
 
 Every generated page is self-contained — CSS, JS and the product icons are
 inlined — so a page renders correctly when opened straight from disk. Safari
@@ -82,6 +82,7 @@ LANGS = ["en", "fr", "ru", "es"]
 CONTACT = "start.html"
 SERVICES = "services.html"
 METHOD = "methodology.html"
+ABOUT = "about.html"
 # The work is not one shelf but three, because websites, apps and SaaS are
 # three different things to commission: each kind gets its own page, reached
 # from the card on the home page that offers to build that kind of thing.
@@ -228,12 +229,13 @@ def nav(lang, page, t):
     anchor = (lambda a: "#" + a) if page == "" else (lambda a: home + "#" + a)
     # Home leads the menu: an in-page jump on the home page, a link back to it
     # from anywhere else. Work and the methodology keep pages of their own, but
-    # they are reached from the about section and the footer, not from the menu.
+    # they are reached from the cards on the home page and from the footer, not
+    # from the menu.
     items = [
         ("#hero" if page == "" else home, "nav.home", False),
         (anchor("build"), "nav.build", False),
         (href(lang, lang, SERVICES), "nav.services", page == SERVICES),
-        (anchor("about"), "nav.about", False),
+        (href(lang, lang, ABOUT), "nav.about", page == ABOUT),
     ]
 
     def links(indent):
@@ -335,7 +337,7 @@ def footer(lang, t, extra_js=""):
 
       <div class="footer-col">
         <p class="footer-col-lbl">{e(t["footer.companyLabel"])}</p>
-        <a href="{home}#about">{e(t["nav.about"])}</a>
+        <a href="{href(lang, lang, ABOUT)}">{e(t["nav.about"])}</a>
         <a href="{href(lang, lang, METHOD)}">{e(t["nav.process"])}</a>
         <a href="{href(lang, lang, "start.html")}">{e(t["cta.start"])}</a>
       </div>
@@ -732,7 +734,7 @@ SVC_ICONS = [
     '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17.5 9 11l4 4 7.5-7.5"/><path d="M15 7.5h5.5V13"/></svg>',
 ]
 
-# the studio's home, marked next to the about copy
+# the studio's home, marked under the about copy
 PIN = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" '
        'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" '
        'stroke-linejoin="round" aria-hidden="true">'
@@ -854,19 +856,6 @@ def home(lang):
       </div>
     </section>
 
-    <div class="shell"><div class="rule"></div></div>
-
-    <section id="about">
-      <div class="shell">
-        <div class="reveal">
-          <span class="eyebrow" style="display:block;margin-bottom:14px;">{e(t["about.label"])}</span>
-          <h2 class="about-title">{t["about.title"]}</h2>
-          <p class="about-desc">{e(t["about.desc"])}</p>
-          <p class="about-loc">{PIN} <span>{e(t["about.location"])}</span></p>
-        </div>
-      </div>
-    </section>
-
 {final_cta(lang, t, href(lang, lang, METHOD), "cta.methodology")}  </main>
 
 """
@@ -972,6 +961,87 @@ def method_page(lang):
                     ("proc.label", "proc.title", "proc.desc",
                      "proc.meta.title", "proc.meta.desc"),
                     inner, SERVICES, "cta.allServices")
+
+
+# ── about page ──────────────────────────────────────────────────────────
+# The three habits are the three words that used to sit under the about copy
+# as bare tags; on a page of their own each one gets the sentence that says
+# what it costs us to keep.
+ABOUT_ICONS = [
+    # minimal — a box with one line taken out of it
+    '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M8.5 12h7"/></svg>',
+    # practical — a tool
+    '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.6 6.3a1 1 0 0 0 0 1.4l1.7 1.7a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9l-3.8 3.8z"/></svg>',
+    # focused — a mark with one thing in the middle of it
+    '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r="0.9"/></svg>',
+]
+
+
+def about_page(lang):
+    """Who the studio is, on a page of its own: the studio copy that used to
+    close the home page, the city it works from, then the three habits behind
+    the work and the usual closing call."""
+    t = T[lang]
+
+    ld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": t["about.meta.title"],
+        "url": url(lang, ABOUT),
+        "description": t["about.meta.desc"],
+        "mainEntity": {
+            "@type": "ProfessionalService",
+            "name": "GreDami",
+            "url": url(lang, ""),
+            "logo": SITE + "/favicon.svg",
+            "description": t["about.desc"],
+            "email": EMAIL,
+            "address": {"@type": "PostalAddress",
+                        "addressLocality": "Paris", "addressCountry": "FR"},
+            "availableLanguage": LANGS,
+        },
+    }, ensure_ascii=False, indent=2)
+
+    cards = ""
+    for i in ["1", "2", "3"]:
+        cards += f"""          <article class="next-card reveal">
+            <span class="next-n">{ABOUT_ICONS[int(i) - 1]}</span>
+            <p class="next-t">{e(t["about.tag" + i])}</p>
+            <p class="next-d">{e(t["about.tag" + i + ".desc"])}</p>
+          </article>
+
+"""
+
+    body = f"""
+  <main id="main">
+
+    <section>
+      <div class="shell">
+        <div class="page-head">
+          <span class="eyebrow" style="display:block;margin-bottom:16px;">{e(t["about.label"])}</span>
+          <h1 class="page-title">{t["about.title"]}</h1>
+          <p class="page-sub">{e(t["about.desc"])}</p>
+          <p class="about-loc">{PIN} <span>{e(t["about.location"])}</span></p>
+        </div>
+
+        <div class="next">
+          <div class="next-head">
+            <span class="eyebrow" style="display:block;margin-bottom:14px;">{e(t["about.values.label"])}</span>
+            <h2 class="sec-title">{e(t["about.values.title"])}</h2>
+          </div>
+          <div class="next-grid">
+{cards.rstrip()}
+          </div>
+        </div>
+      </div>
+    </section>
+
+{final_cta(lang, t, href(lang, lang, METHOD), "cta.methodology")}  </main>
+
+"""
+    extra = '\n  <script type="application/ld+json">\n' + ld + "\n  </script>\n"
+    return (head(lang, ABOUT, t["about.meta.title"], t["about.meta.desc"], extra)
+            + nav(lang, ABOUT, t) + body + footer(lang, t))
 
 
 # ── contact page ────────────────────────────────────────────────────────
@@ -1140,13 +1210,15 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
         pages = [("index.html", home(lang)), (SERVICES, services_page(lang))]
         pages += [(CAT_PAGE[k], cat_page(lang, k)) for k in CATS]
-        pages += [(METHOD, method_page(lang)), (CONTACT, contact(lang))]
+        pages += [(METHOD, method_page(lang)), (ABOUT, about_page(lang)),
+                  (CONTACT, contact(lang))]
         for name, page in pages:
             (d / name).write_text(page, encoding="utf-8")
             written.append(str((d / name).relative_to(ROOT)))
 
     rows = []
-    for page in ["", SERVICES] + [CAT_PAGE[k] for k in CATS] + [METHOD, CONTACT]:
+    for page in (["", SERVICES] + [CAT_PAGE[k] for k in CATS]
+                 + [METHOD, ABOUT, CONTACT]):
         for lang in LANGS:
             alts = "".join(
                 '\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>' % (l, url(l, page))

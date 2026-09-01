@@ -242,6 +242,46 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://gredami.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/about"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/fr/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/about"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/ru/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/about"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gredami.com/es/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://gredami.com/ru/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gredami.com/es/about"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://gredami.com/start</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://gredami.com/start"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://gredami.com/fr/start"/>

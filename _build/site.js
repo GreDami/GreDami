@@ -121,11 +121,11 @@
      all this does is keep those two numbers current. One listener per grid,
      coalesced into a frame, and only where there is a real pointer to follow. */
   if (!reduced && window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.svc-grid, .line-grid').forEach(function (grid) {
+    document.querySelectorAll('.line-grid').forEach(function (grid) {
       var frame = null;
       grid.addEventListener('pointermove', function (e) {
         if (frame) return;
-        var card = e.target.closest ? e.target.closest('.svc, .line') : null;
+        var card = e.target.closest ? e.target.closest('.line') : null;
         if (!card) return;
         var x = e.clientX, y = e.clientY;
         frame = requestAnimationFrame(function () {
