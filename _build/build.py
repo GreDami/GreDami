@@ -145,6 +145,20 @@ def lang_links(lang, page, indent):
     return "\n".join(rows)
 
 
+# GitHub Pages answers both /index.html and / with this page, so a visitor who
+# follows an old link — or a search result carrying the file name — lands on the
+# longer URL. Nothing on the site links to it (see href() above) and canonical
+# points at the directory; this sends the address bar there too, before the
+# analytics tag fires, so the pageview is recorded against the clean URL.
+CLEAN_URL = """  <script>
+    (function () {
+      var p = location.pathname;
+      if (p.slice(-11) === '/index.html')
+        location.replace(p.slice(0, -10) + location.search + location.hash);
+    })();
+  </script>"""
+
+
 # ── head ────────────────────────────────────────────────────────────────
 def head(lang, page, title, desc, extra=""):
     return f"""<!DOCTYPE html>
@@ -153,7 +167,7 @@ def head(lang, page, title, desc, extra=""):
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{e(title)}</title>
-
+{CLEAN_URL if page == '' else ''}
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCXQ2KD3SZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -163,7 +177,7 @@ def head(lang, page, title, desc, extra=""):
   </script>
 
   <link rel="icon" type="image/svg+xml" href="{FAVICON}">
-  <link rel="mask-icon" href="{FAVICON}" color="#5B21B6">
+  <link rel="mask-icon" href="{FAVICON}" color="#241052">
   <meta name="theme-color" content="#FAFAFB">
 
   <meta name="description" content="{e(desc)}" />
