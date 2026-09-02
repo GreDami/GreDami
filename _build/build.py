@@ -432,11 +432,12 @@ def prose(lang, sections):
 def consent(lang, t):
     """Rendered on every page and hidden until script decides. Building it
     server-side and hiding it, rather than building it in script, is what keeps
-    it from flashing past a visitor who answered the question months ago."""
+    it from flashing past a visitor who answered the question months ago. One
+    line and two buttons: the title only names the region for a screen reader,
+    because a sentence this short does not need a heading over it."""
     body = inline(lang, t["consent.body"])
     return f"""  <div class="consent" id="consent" role="region"
-       aria-labelledby="consentTitle" hidden>
-    <p class="consent-title" id="consentTitle">{e(t["consent.title"])}</p>
+       aria-label="{e(t["consent.title"])}" hidden>
     <p class="consent-body">{body}</p>
     <div class="consent-actions">
       <button type="button" class="consent-accept" id="consentAccept">{e(t["consent.accept"])}</button>
