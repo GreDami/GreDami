@@ -22,6 +22,7 @@
     <clipPath id="lensA"><rect x="8.95" y="11.35" width="4.5" height="3.35" rx="1.45"/></clipPath>
     <clipPath id="lensB"><rect x="14.15" y="11.35" width="3.75" height="3.05" rx="1.35"/></clipPath>
   </defs>
+  <g transform="translate(39.60 0) scale(-1 1)">
 
   <!-- the ridge cap it is perched on, drawn behind the bird so the tail
        hangs over the far slope the way it does in the photograph -->
@@ -80,4 +81,5 @@
     <rect x="13.3" y="11.8" width="0.95" height="0.6" rx="0.3" fill="#DCEDE3"/>
     <rect x="8.95" y="11.02" width="8.7" height="0.64" rx="0.32" fill="#E0EFE6"/>
   </g>
+</g>
 </svg>

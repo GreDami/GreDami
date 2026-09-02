@@ -108,6 +108,13 @@ def favicon_svg():
     box = 'viewBox="%.2f %.2f %.2f %.2f"' % (
         x + w / 2 - side / 2, y + h / 2 - side / 2, side, side)
     s = s.replace(m.group(0), box, 1)
+    # and turned to face the same way as the painting. This is the only place
+    # the drawn bird still appears, so left to itself it was the one mark on
+    # the site looking the other way — and on a pinned tab, right beside the
+    # tabs carrying the painted one.
+    s = s.replace("</defs>", '</defs>\n  <g transform="translate(%.2f 0) scale(-1 1)">'
+                  % (2 * (x + w / 2 - side / 2) + side), 1)
+    s = s.replace("</svg>", "</g>\n</svg>", 1)
     return s.replace("<defs>", """<style>
     @media (prefers-color-scheme: dark) {
       .s0 { stop-color: #7DA0FF; }
@@ -127,8 +134,12 @@ FAVICON_URI = "data:image/svg+xml;base64," + base64.b64encode(
     FAVICON_SVG.encode("utf-8")).decode("ascii")
 
 
+FAVICON_V = "favicon.svg" if STANDALONE else "favicon.svg?v=" + hashlib.sha256(
+    FAVICON_SVG.encode("utf-8")).hexdigest()[:8]
+
+
 def favicon(lang):
-    return FAVICON_URI if STANDALONE else asset(lang, "favicon.svg")
+    return FAVICON_URI if STANDALONE else asset(lang, FAVICON_V)
 
 LANGS = ["en", "fr", "ru", "es"]
 # the pages that are not the home page, by file name
@@ -196,6 +207,26 @@ def href(from_lang, to_lang, page="index.html"):
 
 def asset(lang, path):
     return up(lang) + path.lstrip("/")
+
+
+def ver(rel):
+    """`rel` with a cache key made out of the file's own bytes.
+
+    The stylesheet gets this treatment by being renamed; an icon cannot be,
+    because half of them are fetched by a name the browser already knows —
+    /favicon.ico and /apple-touch-icon.png are probed whether or not anything
+    links to them. So the name stays and the query moves instead. Without it a
+    redrawn icon keeps the URL its old bytes are cached under, and a browser
+    that has the old one has no reason ever to ask again: favicons are held in
+    a store of their own that an ordinary reload does not touch.
+
+    Standalone gets the bare name: a file:// URL carrying a query string does
+    not resolve, and there is no cache to defeat when the page is the disk.
+    """
+    if STANDALONE:
+        return rel
+    return rel + "?v=" + hashlib.sha256(
+        (ROOT / rel).read_bytes()).hexdigest()[:8]
 
 
 def alternates(page):
@@ -271,10 +302,10 @@ def head(lang, page, title, desc, extra="", noindex=False, canonical=True):
   <title>{e(title)}</title>
 {CLEAN_URL}
 
-  <link rel="icon" href="{asset(lang, "favicon.ico")}" sizes="32x32">
-  <link rel="icon" type="image/png" href="{asset(lang, "favicon.png")}" sizes="192x192">
+  <link rel="icon" href="{asset(lang, ver("favicon.ico"))}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{asset(lang, ver("favicon.png"))}" sizes="192x192">
   <link rel="mask-icon" href="{favicon(lang)}" color="#36187C">
-  <link rel="apple-touch-icon" href="{asset(lang, "apple-touch-icon.png")}">
+  <link rel="apple-touch-icon" href="{asset(lang, ver("apple-touch-icon.png"))}">
   <link rel="manifest" href="{asset(lang, "site.webmanifest")}">
   <meta name="theme-color" content="#FAFAFB">
 
@@ -1512,12 +1543,12 @@ def main():
         "background_color": "#FAFAFB",
         "theme_color": "#FAFAFB",
         "icons": [
-            {"src": "/favicon.png", "type": "image/png", "sizes": "192x192",
-             "purpose": "any"},
-            {"src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180",
-             "purpose": "any"},
-            {"src": "/icon-maskable.webp", "type": "image/webp", "sizes": "512x512",
-             "purpose": "maskable"},
+            {"src": "/" + ver("favicon.png"), "type": "image/png",
+             "sizes": "192x192", "purpose": "any"},
+            {"src": "/" + ver("apple-touch-icon.png"), "type": "image/png",
+             "sizes": "180x180", "purpose": "any"},
+            {"src": "/" + ver("icon-maskable.webp"), "type": "image/webp",
+             "sizes": "512x512", "purpose": "maskable"},
         ],
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     written.append("site.webmanifest")
