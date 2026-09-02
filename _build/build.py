@@ -7,7 +7,9 @@ All copy lives in _build/site.json. Edit that file, then run:
     python3 _build/build.py
 
 Sources in _build/ : site.json (all copy), site.css, site.js, contact.js,
-fonts.css (written by fetch_fonts.py). Writes: index.html, services.html,
+fonts.css (written by fetch_fonts.py). The mark and the icon set are not built
+here: make_mark.py cuts them out of the painting in _build/src and writes them
+to the root, and this only points at them. Writes: index.html, services.html,
 websites.html, apps.html, saas.html, methodology.html, about.html, start.html,
 privacy.html, legal.html, the same ten under {fr,ru,es}/, plus 404.html,
 sitemap.xml, robots.txt, site.webmanifest and assets/site.<hash>.css.
@@ -66,7 +68,7 @@ def css_head(prefix):
         return (":root{\n"
                 "  --ic-gobag: " + data_uri("gobag-icon.webp", "image/webp") + ";\n"
                 "  --ic-fw: " + data_uri("FW.webp", "image/webp") + ";\n"
-                "  --ic-mark: " + data_uri("halo-mark.svg", "image/svg+xml") + ";\n"
+                "  --ic-mark: " + data_uri("mark.webp", "image/webp") + ";\n"
                 "  --img-hero: " + data_uri("halo-hero.webp", "image/webp") + ";\n"
                 # inlining the small one too would double the weight to save
                 # nothing: standalone is a preview, not the deployed site
@@ -74,7 +76,7 @@ def css_head(prefix):
     return (":root{\n"
             '  --ic-gobag: url("%(p)sgobag-icon.webp");\n'
             '  --ic-fw: url("%(p)sFW.webp");\n'
-            '  --ic-mark: url("%(p)shalo-mark.svg");\n'
+            '  --ic-mark: url("%(p)smark.webp");\n'
             '  --img-hero: url("%(p)shalo-hero.webp");\n'
             '  --img-hero-sm: url("%(p)shalo-hero-sm.webp");\n}\n\n' % {"p": prefix})
 
@@ -91,9 +93,11 @@ CSS = stylesheet("../")
 CSS_HREF = "assets/site.%s.css" % hashlib.sha256(CSS.encode("utf-8")).hexdigest()[:10]
 
 
-# The favicon is the company mark itself, so the two can never drift apart:
-# the same bird on a square field with a little air around it, and lighter
-# blues under a dark tab strip, where the deep gradient sinks into the chrome.
+# Safari's pinned tab wants a vector, and it wants one it can flatten to a
+# single colour — a painting is no use to it. So the drawn bird stays on as the
+# mask icon: the same bird as the painting, squared off with a little air around
+# it so it never touches the edge of the tab, and lighter blues under a dark tab
+# strip where the deep gradient would otherwise sink into the chrome.
 def favicon_svg():
     # square off the mark's own box and leave a margin, so the bird never
     # touches the edge of a tab whatever the drawing grows into
@@ -267,9 +271,10 @@ def head(lang, page, title, desc, extra="", noindex=False, canonical=True):
   <title>{e(title)}</title>
 {CLEAN_URL}
 
-  <link rel="icon" type="image/svg+xml" href="{favicon(lang)}">
+  <link rel="icon" href="{asset(lang, "favicon.ico")}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{asset(lang, "favicon.png")}" sizes="192x192">
   <link rel="mask-icon" href="{favicon(lang)}" color="#36187C">
-  <link rel="apple-touch-icon" href="{asset(lang, "favicon.png")}">
+  <link rel="apple-touch-icon" href="{asset(lang, "apple-touch-icon.png")}">
   <link rel="manifest" href="{asset(lang, "site.webmanifest")}">
   <meta name="theme-color" content="#FAFAFB">
 
@@ -457,7 +462,7 @@ def footer(lang, t, extra_js=""):
     return f"""  <footer>
     <div class="footer-in">
       <div>
-        <span class="footer-logo">Gre<em>Dami</em></span>
+        <span class="footer-logo"><span class="nav-mark" aria-hidden="true"></span><span>Gre<em>Dami</em></span></span>
         <p class="footer-tagline">{e(t["footer.tagline"])}</p>
         <div class="footer-social">
           <a href="https://www.youtube.com/@GreDami" aria-label="GreDami · YouTube" target="_blank" rel="noopener">{YOUTUBE}</a>
@@ -910,7 +915,7 @@ def home(lang):
         "@type": "ProfessionalService",
         "name": "GreDami",
         "url": url(lang, ""),
-        "logo": SITE + "/favicon.svg",
+        "logo": SITE + "/favicon.png",
         "image": SITE + "/og-image.png",
         "description": t["footer.tagline"],
         "email": EMAIL,
@@ -1145,7 +1150,7 @@ def about_page(lang):
             "@type": "ProfessionalService",
             "name": "GreDami",
             "url": url(lang, ""),
-            "logo": SITE + "/favicon.svg",
+            "logo": SITE + "/favicon.png",
             "description": t["about.desc"],
             "email": EMAIL,
             "address": {"@type": "PostalAddress",
@@ -1507,8 +1512,12 @@ def main():
         "background_color": "#FAFAFB",
         "theme_color": "#FAFAFB",
         "icons": [
-            {"src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any"},
-            {"src": "/favicon.png", "type": "image/png", "sizes": "512x512"},
+            {"src": "/favicon.png", "type": "image/png", "sizes": "192x192",
+             "purpose": "any"},
+            {"src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180",
+             "purpose": "any"},
+            {"src": "/icon-maskable.webp", "type": "image/webp", "sizes": "512x512",
+             "purpose": "maskable"},
         ],
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     written.append("site.webmanifest")

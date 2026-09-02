@@ -165,7 +165,10 @@
     }
 
     /* The company label: the bird stands free on the paper, no plate behind
-       it and no movement — it sits still while the nav keys do the reacting. */
+       it and no movement — it sits still while the nav keys do the reacting.
+       The mark is the painting with the sheet keyed out from under it, so what
+       the bar carries is the bird's own edge and not a tile of cream; the box
+       below is his proportions, not a square he has been fitted into. */
     .nav-logo {
       display: inline-flex; align-items: center; gap: 9px;
       font-family: var(--f-display);
@@ -173,12 +176,12 @@
       color: var(--ink); flex-shrink: 0;
     }
     .nav-mark {
-      width: 26px; height: 28px; flex-shrink: 0;
+      width: 25px; height: 29px; flex-shrink: 0;
       background: var(--ic-mark) center / contain no-repeat;
     }
     @media (max-width: 420px) {
       .nav-logo { gap: 7px; }
-      .nav-mark { width: 23px; height: 25px; }
+      .nav-mark { width: 22px; height: 26px; }
     }
     .nav-logo em {
       font-style: normal; color: var(--accent);
@@ -737,8 +740,10 @@
     }
     .footer-logo {
       font-family: var(--f-display); font-size: 26px; font-weight: 800;
-      letter-spacing: -0.02em; display: block; margin-bottom: 10px;
+      letter-spacing: -0.02em;
+      display: inline-flex; align-items: center; gap: 11px; margin-bottom: 10px;
     }
+    .footer-logo .nav-mark { width: 33px; height: 38px; }
     .footer-logo em { font-style: normal; color: var(--accent); }
     .footer-tagline { font-size: 14.5px; color: var(--mid); line-height: 1.6; max-width: 34ch; }
     .footer-col-lbl {
