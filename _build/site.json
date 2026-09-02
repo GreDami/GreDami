@@ -303,7 +303,6 @@
         "h": "Who is responsible",
         "body": [
           "GreDami, an independent studio working from Paris, France, decides what happens to the data described here — it is the **data controller** in the wording of the GDPR.",
-          "{{Add the registered legal name, legal form and registered address here — a privacy notice has to identify the controller precisely.}}",
           "You can reach us about anything on this page at [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -336,7 +335,7 @@
         "body": [
           "- **Our host.** The site is served by GitHub Pages (GitHub, Inc., United States), which necessarily handles the request in order to answer it. Transfers outside the EU rest on the European Commission's standard contractual clauses.",
           "- **Google.** Only if you allowed measurement, and only the analytics data described above.",
-          "- **Whoever carries the enquiry form.** {{Name the service that receives form submissions, and where it stores them, once the new one is in place.}}",
+          "- **Whoever carries the enquiry form.**",
           "Nobody else. We do not sell, rent or trade what you send us, and we do not use it to advertise to you elsewhere."
         ]
       },
@@ -735,7 +734,6 @@
         "h": "Кто отвечает за данные",
         "body": [
           "GreDami — независимая студия, работающая из Парижа, Франция, — решает, что происходит с описанными здесь данными: это **оператор персональных данных** в терминах GDPR.",
-          "{{Укажите здесь официальное наименование, организационно-правовую форму и юридический адрес — политика конфиденциальности обязана точно идентифицировать оператора.}}",
           "По любым вопросам, связанным с этой страницей: [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -768,7 +766,7 @@
         "body": [
           "- **Хостинг.** Сайт отдаётся через GitHub Pages (GitHub, Inc., США), который неизбежно обрабатывает запрос, чтобы на него ответить. Передача за пределы ЕС опирается на стандартные договорные условия Европейской комиссии.",
           "- **Google.** Только если вы разрешили измерение, и только в объёме, описанном выше.",
-          "- **Сервис, доставляющий форму.** {{Укажите сервис, который принимает заявки из формы, и где он их хранит, когда новый механизм будет настроен.}}",
+          "- **Сервис, доставляющий форму.**",
           "Больше никому. Мы не продаём, не сдаём в аренду и не обмениваем то, что вы нам присылаете, и не используем это для рекламы вам где-либо ещё."
         ]
       },
@@ -1167,7 +1165,6 @@
         "h": "Responsable du traitement",
         "body": [
           "GreDami, studio indépendant établi à Paris, détermine ce qu'il advient des données décrites ici : c'est le **responsable du traitement** au sens du RGPD.",
-          "{{Indiquer ici la dénomination sociale, la forme juridique et l'adresse du siège — une politique de confidentialité doit identifier précisément le responsable du traitement.}}",
           "Pour toute question relative à cette page : [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -1200,7 +1197,7 @@
         "body": [
           "- **Notre hébergeur.** Le site est servi par GitHub Pages (GitHub, Inc., États-Unis), qui traite nécessairement la requête pour y répondre. Les transferts hors Union européenne reposent sur les clauses contractuelles types de la Commission européenne.",
           "- **Google.** Uniquement si vous avez autorisé la mesure d'audience, et uniquement pour les données décrites ci-dessus.",
-          "- **Le service qui achemine le formulaire.** {{Nommer le service qui reçoit les demandes envoyées par le formulaire, et le lieu de stockage, une fois le nouveau dispositif en place.}}",
+          "- **Le service qui achemine le formulaire.**",
           "Personne d'autre. Nous ne vendons, ne louons ni n'échangeons ce que vous nous envoyez, et nous ne l'utilisons pas pour vous adresser de la publicité ailleurs."
         ]
       },
@@ -1599,7 +1596,6 @@
         "h": "Quién es el responsable",
         "body": [
           "GreDami, estudio independiente que trabaja desde París (Francia), decide qué ocurre con los datos descritos aquí: es el **responsable del tratamiento** en los términos del RGPD.",
-          "{{Añada aquí la denominación social, la forma jurídica y el domicilio social — una política de privacidad debe identificar con precisión al responsable del tratamiento.}}",
           "Para cualquier cuestión relativa a esta página: [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -1632,7 +1628,7 @@
         "body": [
           "- **Nuestro alojamiento.** El sitio se sirve mediante GitHub Pages (GitHub, Inc., Estados Unidos), que necesariamente trata la petición para poder responderla. Las transferencias fuera de la Unión Europea se amparan en las cláusulas contractuales tipo de la Comisión Europea.",
           "- **Google.** Solo si ha autorizado la medición, y solo con los datos descritos más arriba.",
-          "- **El servicio que transporta el formulario.** {{Indique el servicio que recibe los envíos del formulario, y dónde los almacena, una vez esté implantado el nuevo.}}",
+          "- **El servicio que transporta el formulario.**",
           "Nadie más. No vendemos, alquilamos ni intercambiamos lo que usted nos envía, ni lo usamos para dirigirle publicidad en otros sitios."
         ]
       },
