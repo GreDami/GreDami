@@ -2,38 +2,56 @@
 """
 Builds halo-hero.webp — the painted backdrop for the whole hero band.
 
-The watercolour is a 480px square. On the page it sat at the right of the band
-with the copy beside it on bare paper; this carries the wall in the painting on
-past its own left edge, so the headline has the picture's paper under it instead
-of white.
+The source is a pen-and-wash sheet: two birds on the cornices of an ochre
+palazzo, drawn on the left of the paper with the right two-thirds left bare.
+That bare paper is the whole idea here. The old backdrop had to invent a wall
+to put behind the headline, because its painting was a full-bleed square with
+no room in it; this one arrives with the room already in it. So the band is not
+a picture with a wash bolted onto its side — it is one sheet of paper, the
+drawing held at the right end of it and the copy standing on the same sheet.
 
-The wash is made out of the painting — slabs of its own wall laid leftwards and
-dissolved into one another, at native scale where they meet the painting and at
-widening scale as they recede, then blurred and sunk into the page colour by
-distance from the join. Nothing is invented, so the palette cannot drift: it is
-the same paint, thinning out. The slabs are translated, never mirrored — a
-mirror folds the blue batten into a chevron at the join — and they are cut from
-the parts of the square that hold neither the bird nor the roof, so the subject
-is never repeated behind the copy.
+What is built, therefore, is mostly paper:
+
+  * the sheet itself — the drawing's own blank corner, tiled out to the full
+    band with its grain and its unevenness intact, so the paper under the
+    headline is the paper the drawing is on and not a flat fill;
+  * a haze — the drawing blurred past recognition and stretched sideways, laid
+    just to the left of the join and gone within a third of the width, so the
+    ochre does not stop dead at the drawing's edge;
+  * the drawing, every edge but its right one dissolved into that haze —
+    the right runs off the band.
+
+Nothing is mirrored and nothing is invented: the palette cannot drift, because
+every pixel here comes off the one sheet. The result is light enough that the
+copy sits on it without a veil having to be dragged back over the top — the
+previous backdrop needed one, and it was what made the band look muddy.
 
     python3 _build/make_hero.py
 """
 import pathlib
 import random
 
-from PIL import Image, ImageChops, ImageFilter, ImageStat
+from PIL import Image, ImageChops, ImageEnhance, ImageFilter, ImageStat
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SRC = ROOT / "_build" / "src" / "halo1.jpg"
+SRC = ROOT / "_build" / "src" / "halo2.jpg"
 OUT = ROOT / "halo-hero.webp"
+SMALL = ROOT / "halo-hero-sm.webp"
 
-PAPER = (250, 250, 248)          # --paper
-S = 1100                          # the painting, square, at hero-band height
-SEAM = 2460                       # where the painting's own left edge falls
-W, H = SEAM + S, S
-JOIN = SEAM / W                   # the join, as a fraction of the whole width
+PAPER = (250, 250, 248)           # --paper
 
-random.seed(11)
+# the scan carries a dark deckle on three sides; this is the sheet inside it
+TRIM = (2, 26, 882, 1182)
+# the bare corner of that sheet — grain, no drawing
+BARE = (545, 30, 875, 640)
+
+W, H = 3200, 1100                 # the band, at hero-band height
+ART_H = 0.90                      # the drawing, as a multiple of band height
+BLEED_R = 30                      # how far it runs off the right edge
+HAZE = 0.42                       # the haze at the join, before it dies off
+HAZE_END = 0.40                   # where it has died out, as a fraction of W
+
+random.seed(7)
 
 
 def ramp(points, w=W, h=H):
@@ -54,84 +72,108 @@ def ramp(points, w=W, h=H):
     return row.resize((w, h), Image.BILINEAR)
 
 
-def feather(w, h, edge=0.34):
-    """Soft-sided rectangle, so overlapping slabs dissolve instead of butting."""
+def feather(w, h, edge=0.3):
+    """Soft-sided rectangle, so overlapping patches dissolve instead of butting."""
     return ramp([(0, 0), (edge, 1), (1 - edge, 1), (1, 0)], w, 1).resize(
         (w, h), Image.BILINEAR)
 
 
-art = Image.open(SRC).convert("RGB").resize((S, S), Image.LANCZOS)
-# the three pieces of wall the bird and the roof never reach. The two tall ones
-# barely have to be stretched, so they stay as crisp as the painting and can
-# meet it at the join; the wide band carries the cream battens and is kept for
-# the far end, where everything is a wash anyway.
-PALE = art.crop((180, 0, 470, 950))
-MOSS = art.crop((790, 0, 1090, 930))
-BAND = art.crop((180, 0, S, 470))
+def edges(w, h, left, cap):
+    """The drawing's own outline, dissolved: `left` of the width fading in at
+    the join, `cap` of the height fading in at top and bottom. The right side
+    is not touched — it runs off the band. Without this the sheet is a rectangle
+    of slightly different paper sitting on the page, and at any scale small
+    enough to be quiet the band's own top and bottom fades no longer cover its
+    corners: you see the join as a line rather than as weather."""
+    side = ramp([(0, 0), (left, 1), (1, 1)], w, h)
+    # the same ramp stood on end: built along h, then turned a quarter turn
+    ends = ramp([(0, 0), (cap, 1), (1 - cap, 1), (1, 0)], h, 1).transpose(
+        Image.ROTATE_90).resize((w, h), Image.BILINEAR)
+    return ImageChops.multiply(side, ends)
 
-# a base coat under the slabs — the wall's own average, taken back towards the
-# paper, so no gap between slabs can read as a hole
-base = tuple(int(c + (p - c) * 0.3)
-             for c, p in zip(ImageStat.Stat(BAND).mean, PAPER))
+
+sheet = Image.open(SRC).convert("RGB").crop(TRIM)
+aw = int(round(H * ART_H * sheet.width / sheet.height))
+ah = int(round(H * ART_H))
+art = sheet.resize((aw, ah), Image.LANCZOS)
+ax = W - aw + BLEED_R             # the join: the drawing's own left edge
+JOIN = ax / W
+
+# ── the sheet ────────────────────────────────────────────────────────────────
+# The bare corner, laid over the band in overlapping patches at a few sizes and
+# never at the same offset twice, so the grain reads as paper rather than as a
+# repeat. It is a light, low-contrast crop to begin with; pulled back towards
+# the page colour it is barely there, which is the point — you should read it
+# as paper, not as texture.
+bare = sheet.crop(BARE)
+base = tuple(int(c + (p - c) * 0.55)
+             for c, p in zip(ImageStat.Stat(bare).mean, PAPER))
 field = Image.new("RGB", (W, H), base)
+for mag in (2.6, 1.7, 1.1):
+    w = int(bare.width * mag)
+    h = int(bare.height * mag)
+    patch = bare.resize((w, h), Image.LANCZOS)
+    mask = feather(w, h)
+    x = -random.randint(0, w // 3)
+    while x < W:
+        field.paste(patch, (x, random.randint(-h // 3, H - h * 2 // 3)), mask)
+        x += int(w * 0.62)
+field = Image.blend(field, Image.new("RGB", (W, H), base), 0.35)
 
-# the slabs, walking left from the join: native scale where they meet the
-# painting, widening as they recede, each dissolved into the last
-x, mag = SEAM, 1.0
-while x > -700:
-    src = random.choice((PALE, MOSS) if mag < 1.9 else (PALE, MOSS, BAND, BAND))
-    w = int(src.width * mag)
-    h = int(H * random.uniform(1.04, 1.22))
-    slab = src.resize((w, h), Image.LANCZOS)
-    if random.random() < 0.5:                      # the battens lean, so let them
-        slab = slab.rotate(random.uniform(0.6, 2.6), Image.BICUBIC, fillcolor=base)
-    x -= int(w * 0.55)
-    field.paste(slab, (x, random.randint(H - h, 0)), feather(w, h))
-    mag *= 1.16
+# ── the haze ─────────────────────────────────────────────────────────────────
+# The drawing itself, blurred until nothing in it can be named and stretched
+# sideways so even its rhythm is gone, carried leftwards off the join. All that
+# survives is the warmth: ochre leaving the drawing instead of stopping at it.
+haze = art.filter(ImageFilter.GaussianBlur(int(aw * 0.16)))
+haze = ImageEnhance.Color(haze).enhance(0.66)
+hw = int(aw * 2.9)
+haze = haze.resize((hw, H), Image.LANCZOS)
+veil = Image.new("RGB", (W, H), base)
+# run it off the right edge rather than ending it under the drawing: the
+# drawing's own edges are dissolved, so anything laid behind them that stops
+# in mid-air shows through the dissolve as a straight line
+veil.paste(haze, (W - hw, 0))
+# how much of the haze is let through: nothing at the far end, HAZE at the join
+field = Image.composite(veil, field, ramp(
+    [(0.0, 0.0), (HAZE_END, 0.0), (JOIN, HAZE), (1.0, HAZE)]))
 
-# dissolve with distance: as crisp as the painting where it leaves it, a wash by
-# the time it reaches the headline
-levels = [(72, 0.00), (48, 0.30), (26, 0.54), (13, 0.72), (5, 0.87), (0, 0.96)]
-soft = field.filter(ImageFilter.GaussianBlur(levels[0][0]))
-for radius, at in levels[1:]:
-    step = field.filter(ImageFilter.GaussianBlur(radius)) if radius else field
-    soft = Image.composite(step, soft, ramp(
-        [(0, 0), (max(0.0, at - 0.12) * JOIN, 0), (min(1.0, at + 0.12) * JOIN, 1), (1, 1)]))
+# ── the drawing ──────────────────────────────────────────────────────────────
+# The sheet was photographed cool, and the field is mixed from a crop of it
+# that has been walked towards the page colour — so the two papers do not match,
+# and an unmatched paper shows up as a seam however soft the feather is. The
+# drawing is put on the field's white point before it is laid down: its own bare
+# corner is measured and the gain that takes it there is applied to the whole
+# drawing, which moves the paper and leaves the ink where it is.
+kx, ky = aw / sheet.width, ah / sheet.height
+corner = art.crop((int(BARE[0] * kx), int(BARE[1] * ky),
+                   int(BARE[2] * kx), int(BARE[3] * ky)))
+lift = [f / a for f, a in zip(base, ImageStat.Stat(corner).mean)]
+art = Image.merge("RGB", [ch.point(lambda v, g=g: min(255, int(v * g)))
+                          for ch, g in zip(art.split(), lift)])
 
 canvas = Image.new("RGB", (W, H), PAPER)
-canvas.paste(soft, (0, 0))
-# the painting itself, its left edge feathered over the wash so the two washes
-# run together instead of butting
-canvas.paste(art, (SEAM, 0), ramp([(0, 0), (0.055, 1), (1, 1)], S, H))
+canvas.paste(field, (0, 0))
+canvas.paste(art, (ax, (H - ah) // 2), edges(aw, ah, 0.17, 0.11))
 
-# sink it into the page: full paint at the join, a wash under the copy.
-# The band crops the left ~38% of this image away, so the far end of the ramp is
-# never seen — what the page shows as its own left edge is around 0.38. The early
-# steps used to fall to almost nothing there, which was right while the copy
-# started at the page gutter and the strip was read as the paper under the
-# headline; the copy now stands on the card column further in, and that left the
-# strip reading as an empty margin instead. They are lifted so the wall is
-# already present at the band's edge. #hero::after was lightened to match: it is
-# the paper laid over this, and at its old strength it took back most of what is
-# added here.
+# sink the whole band into the page colour — a little everywhere so the paper
+# never sits brighter or duller than the sections under it, and more at the far
+# left, where there is nothing to see and the copy has to be legible over it
 canvas = Image.composite(
     canvas, Image.new("RGB", (W, H), PAPER),
-    ramp([(0.00, 0.30), (0.30, 0.34), (0.48, 0.42), (0.585, 0.50),
-          (0.645, 0.63), (0.676, 1.00), (1.00, 1.00)]))
+    ramp([(0.00, 0.42), (0.34, 0.52), (0.62, 0.72), (0.82, 0.90), (1.00, 0.94)]))
 
 # paper grain, so the thin areas do not band once webp has had them
-grain = Image.merge("RGB", [Image.effect_noise((W, H), 7).filter(
+grain = Image.merge("RGB", [Image.effect_noise((W, H), 6).filter(
     ImageFilter.GaussianBlur(0.5))] * 3)
 canvas = Image.blend(canvas, ImageChops.soft_light(canvas, grain), 0.5)
 
-canvas.save(OUT, "WEBP", quality=76, method=6)
+canvas.save(OUT, "WEBP", quality=78, method=6)
 print("%s  %dx%d  %.0f KB" % (OUT.name, W, H, OUT.stat().st_size / 1024))
 
-# A phone never sees this at full size: below 640px the band drops the wash to
-# 0.3 opacity at 62% height in one corner, so a third of the width carries it
-# with nothing to see. Quality goes down with it — what is left is a blur.
-SMALL = ROOT / "halo-hero-sm.webp"
-sw = W // 3
-canvas.resize((sw, H // 3), Image.LANCZOS).save(
-    SMALL, "WEBP", quality=62, method=6)
-print("%s  %dx%d  %.0f KB" % (SMALL.name, sw, H // 3, SMALL.stat().st_size / 1024))
+# A phone never sees this at full size: below 640px the band drops the drawing
+# into one corner at low opacity, so a third of the width carries it with
+# nothing to see. Quality goes down with it — what is left is a blur.
+canvas.resize((W // 3, H // 3), Image.LANCZOS).save(
+    SMALL, "WEBP", quality=64, method=6)
+print("%s  %dx%d  %.0f KB" % (SMALL.name, W // 3, H // 3,
+                              SMALL.stat().st_size / 1024))

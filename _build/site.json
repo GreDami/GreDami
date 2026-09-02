@@ -362,7 +362,7 @@
       }
     ],
     "legal.meta.title": "Legal notice — GreDami",
-    "legal.meta.desc": "Publisher, publication director, host and terms of use for gredami.com",
+    "legal.meta.desc": "Publisher, host and terms of use for gredami.com",
     "legal.label": "Legal notice",
     "legal.title": "Legal notice",
     "legal.sub": "Who publishes this site, who hosts it, and what may be done with what is on it",
@@ -372,14 +372,7 @@
         "h": "Publisher",
         "body": [
           "This site is published by GreDami, working from Paris, France.",
-          "{{Complete the publisher's block: registered legal name, legal form (micro-entreprise, SASU, SARL…), registered address, SIREN or RCS registration number, and intra-community VAT number if the business is registered for VAT.}}",
           "Email: [contact@gredami.com](mailto:contact@gredami.com)"
-        ]
-      },
-      {
-        "h": "Publication director",
-        "body": [
-          "{{Name the person responsible for publication — normally the founder or legal representative.}}"
         ]
       },
       {
@@ -793,7 +786,7 @@
       }
     ],
     "legal.meta.title": "Правовая информация — GreDami",
-    "legal.meta.desc": "Издатель, ответственный за публикацию, хостинг и условия использования gredami.com",
+    "legal.meta.desc": "Издатель, хостинг и условия использования gredami.com",
     "legal.label": "Правовая информация",
     "legal.title": "Правовая информация",
     "legal.sub": "Кто издаёт этот сайт, кто его размещает и что можно делать с его содержимым",
@@ -803,14 +796,7 @@
         "h": "Издатель сайта",
         "body": [
           "Сайт издаётся студией GreDami, работающей из Парижа, Франция.",
-          "{{Заполните блок издателя: официальное наименование, организационно-правовая форма (micro-entreprise, SASU, SARL…), юридический адрес, номер SIREN или регистрации в RCS, а также внутриевропейский номер НДС, если компания является плательщиком НДС.}}",
           "Электронная почта: [contact@gredami.com](mailto:contact@gredami.com)"
-        ]
-      },
-      {
-        "h": "Ответственный за публикацию",
-        "body": [
-          "{{Укажите лицо, отвечающее за публикацию, — как правило, основателя или законного представителя.}}"
         ]
       },
       {
@@ -1224,7 +1210,7 @@
       }
     ],
     "legal.meta.title": "Mentions légales — GreDami",
-    "legal.meta.desc": "Éditeur, directeur de la publication, hébergeur et conditions d'utilisation de gredami.com",
+    "legal.meta.desc": "Éditeur, hébergeur et conditions d'utilisation de gredami.com",
     "legal.label": "Mentions légales",
     "legal.title": "Mentions légales",
     "legal.sub": "Qui édite ce site, qui l'héberge, et ce qui peut être fait de son contenu",
@@ -1234,14 +1220,7 @@
         "h": "Éditeur du site",
         "body": [
           "Ce site est édité par GreDami, établi à Paris, France.",
-          "{{Compléter le bloc éditeur : dénomination sociale, forme juridique (micro-entreprise, SASU, SARL…), adresse du siège, numéro SIREN ou d'immatriculation au RCS, et numéro de TVA intracommunautaire si l'entreprise y est assujettie.}}",
           "Courriel : [contact@gredami.com](mailto:contact@gredami.com)"
-        ]
-      },
-      {
-        "h": "Directeur de la publication",
-        "body": [
-          "{{Indiquer la personne responsable de la publication — en principe le fondateur ou le représentant légal.}}"
         ]
       },
       {
@@ -1655,7 +1634,7 @@
       }
     ],
     "legal.meta.title": "Aviso legal — GreDami",
-    "legal.meta.desc": "Editor, director de publicación, alojamiento y condiciones de uso de gredami.com",
+    "legal.meta.desc": "Editor, alojamiento y condiciones de uso de gredami.com",
     "legal.label": "Aviso legal",
     "legal.title": "Aviso legal",
     "legal.sub": "Quién edita este sitio, quién lo aloja y qué puede hacerse con su contenido",
@@ -1665,14 +1644,7 @@
         "h": "Editor del sitio",
         "body": [
           "Este sitio está editado por GreDami, con actividad en París (Francia).",
-          "{{Complete el bloque del editor: denominación social, forma jurídica (micro-entreprise, SASU, SARL…), domicilio social, número SIREN o de inscripción en el RCS, y número de IVA intracomunitario si la empresa está sujeta a IVA.}}",
           "Correo electrónico: [contact@gredami.com](mailto:contact@gredami.com)"
-        ]
-      },
-      {
-        "h": "Director de la publicación",
-        "body": [
-          "{{Indique la persona responsable de la publicación — normalmente el fundador o el representante legal.}}"
         ]
       },
       {
