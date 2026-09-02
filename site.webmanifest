@@ -1,0 +1,22 @@
+{
+  "name": "GreDami",
+  "short_name": "GreDami",
+  "description": "An independent studio building websites, apps and SaaS products that help a business grow",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#FAFAFB",
+  "theme_color": "#FAFAFB",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

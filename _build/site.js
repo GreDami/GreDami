@@ -63,32 +63,47 @@
   /* ── scroll state ── */
   var nav = document.getElementById('nav');
   var backTop = document.getElementById('back-top');
-  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+  var docEl = document.documentElement;
   var ticking = false;
 
-  var docEl = document.documentElement;
+  /* Each in-page nav link paired with the section it points at. Resolved once:
+     the scroll handler used to run a querySelector per link per frame. */
+  var navAnchors = [];
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.nav-links a[href^="#"]'), function (a) {
+      var sec = document.querySelector(a.getAttribute('href'));
+      if (sec) navAnchors.push({ a: a, sec: sec, top: 0 });
+    });
+
+  /* Reading offsetTop or scrollHeight forces the browser to lay the page out.
+     Neither changes while the page merely scrolls, so both are taken here and
+     not in the frame. */
+  var run = 0;
+  function measure() {
+    run = docEl.scrollHeight - window.innerHeight;
+    navAnchors.forEach(function (n) { n.top = n.sec.offsetTop; });
+  }
 
   function onScroll() {
     var y = window.scrollY;
     if (nav) nav.classList.toggle('scrolled', y > 8);
     /* how far down the page we are, 0 to 1 — the nav's bottom edge is scaled
        by this, so the bar doubles as the progress indicator */
-    var run = docEl.scrollHeight - window.innerHeight;
     docEl.style.setProperty('--scroll', run > 0 ? (y / run).toFixed(4) : '0');
     if (backTop) backTop.classList.toggle('visible', y > 600);
-    var current = '';
-    navAnchors.forEach(function (a) {
-      var sec = document.querySelector(a.getAttribute('href'));
-      if (sec && y >= sec.offsetTop - 140) current = a.getAttribute('href');
-    });
-    navAnchors.forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('href') === current);
-    });
+    var current = null;
+    navAnchors.forEach(function (n) { if (y >= n.top - 140) current = n; });
+    navAnchors.forEach(function (n) { n.a.classList.toggle('active', n === current); });
     ticking = false;
   }
   window.addEventListener('scroll', function () {
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
+  /* The page grows as the fonts land and images settle, so the measurement is
+     taken again on resize and once the load is done. */
+  window.addEventListener('resize', function () { measure(); onScroll(); });
+  window.addEventListener('load', function () { measure(); onScroll(); });
+  measure();
   onScroll();
   if (backTop) backTop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -159,8 +174,68 @@
 
   });
 
-  if (location.hash === '#apps') {
-    var work = document.getElementById('work');
-    if (work) work.scrollIntoView();
+  /* ── analytics, and the consent it waits for ──
+     Nothing is loaded from Google until someone says yes: no tag, no cookie,
+     no request carrying an IP address. The answer is kept per browser, the
+     banner is only built for a visitor who has not given one, and the footer
+     link reopens it so a yes can be taken back. */
+  var CONSENT_KEY = 'gd-consent';
+  var GA_ID = document.documentElement.getAttribute('data-ga');
+
+  function remember(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch (err) { /* private mode */ }
   }
+  function recall() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch (err) { return null; }
+  }
+
+  var loaded = false;
+  function loadAnalytics() {
+    if (loaded || !GA_ID) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+  }
+
+  var banner = document.getElementById('consent');
+  var reopener = null;
+
+  /* Focus moves only when the notice was asked for. On first load it appears
+     without taking the caret: it is a region, not a modal, and a page that
+     grabs focus as it opens is a page a keyboard has to climb back out of. */
+  function showBanner(from) {
+    if (!banner) return;
+    reopener = from || null;
+    banner.hidden = false;
+    if (from) document.getElementById('consentAccept').focus();
+  }
+  function answer(value) {
+    remember(value);
+    if (banner) banner.hidden = true;
+    if (value === 'granted') loadAnalytics();
+    /* hand the caret back to whatever opened this, rather than to the top */
+    if (reopener && reopener.focus) reopener.focus();
+    reopener = null;
+  }
+
+  if (banner) {
+    document.getElementById('consentAccept')
+      .addEventListener('click', function () { answer('granted'); });
+    document.getElementById('consentDecline')
+      .addEventListener('click', function () { answer('denied'); });
+  }
+  Array.prototype.forEach.call(
+    document.querySelectorAll('[data-consent-reopen]'), function (b) {
+      b.addEventListener('click', function (e) { e.preventDefault(); showBanner(b); });
+    });
+
+  var answered = recall();
+  if (answered === 'granted') loadAnalytics();
+  else if (answered !== 'denied') showBanner();
 })();

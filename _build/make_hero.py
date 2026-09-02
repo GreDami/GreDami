@@ -24,7 +24,7 @@ import random
 from PIL import Image, ImageChops, ImageFilter, ImageStat
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SRC = ROOT / "halo1.jpg"
+SRC = ROOT / "_build" / "src" / "halo1.jpg"
 OUT = ROOT / "halo-hero.webp"
 
 PAPER = (250, 250, 248)          # --paper
@@ -126,3 +126,12 @@ canvas = Image.blend(canvas, ImageChops.soft_light(canvas, grain), 0.5)
 
 canvas.save(OUT, "WEBP", quality=76, method=6)
 print("%s  %dx%d  %.0f KB" % (OUT.name, W, H, OUT.stat().st_size / 1024))
+
+# A phone never sees this at full size: below 640px the band drops the wash to
+# 0.3 opacity at 62% height in one corner, so a third of the width carries it
+# with nothing to see. Quality goes down with it — what is left is a blur.
+SMALL = ROOT / "halo-hero-sm.webp"
+sw = W // 3
+canvas.resize((sw, H // 3), Image.LANCZOS).save(
+    SMALL, "WEBP", quality=62, method=6)
+print("%s  %dx%d  %.0f KB" % (SMALL.name, sw, H // 3, SMALL.stat().st_size / 1024))

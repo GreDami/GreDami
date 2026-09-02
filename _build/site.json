@@ -284,7 +284,152 @@
     "chip.responsive": "Responsive",
     "chip.ownDomain": "Own domain",
     "chip.staticHost": "Static hosting",
-    "chip.cloudSync": "Cloud sync"
+    "chip.cloudSync": "Cloud sync",
+    "consent.title": "A word about measurement",
+    "consent.body": "We would like to count visits to understand which pages are useful. Nothing is loaded and no cookie is set until you agree, and you can change your mind at any time from the footer. [Privacy](PRIVACY)",
+    "consent.accept": "Allow",
+    "consent.decline": "No thanks",
+    "consent.reopen": "Cookie choice",
+    "footer.privacy": "Privacy",
+    "footer.legal": "Legal notice",
+    "priv.meta.title": "Privacy — GreDami",
+    "priv.meta.desc": "What GreDami collects, why, how long it is kept, and the rights you have over it",
+    "priv.label": "Privacy",
+    "priv.title": "What we collect, and why",
+    "priv.sub": "Short version: we keep what you send us so we can answer it, we count visits only if you say yes, and we sell nothing to anyone",
+    "priv.updated": "Last updated 2 September 2026",
+    "priv.sections": [
+      {
+        "h": "Who is responsible",
+        "body": [
+          "GreDami, an independent studio working from Paris, France, decides what happens to the data described here — it is the **data controller** in the wording of the GDPR.",
+          "{{Add the registered legal name, legal form and registered address here — a privacy notice has to identify the controller precisely.}}",
+          "You can reach us about anything on this page at [contact@gredami.com](mailto:contact@gredami.com)."
+        ]
+      },
+      {
+        "h": "What we collect",
+        "body": [
+          "**When you write to us.** The enquiry form asks for your name and email address, and optionally your company and phone number. It also carries whatever you type into the message, the kind of work you picked, and which language version of the site you were reading.",
+          "**If you allow measurement.** Analytics records the pages you opened, roughly where in the world you are, the kind of device and browser you used, and the site that sent you here. It never receives your name or your email address, and it is not loaded at all unless you allow it.",
+          "**What the server writes down.** Our host keeps ordinary access logs — an IP address, a timestamp, the page requested. We do not control these and do not use them.",
+          "We do not ask for anything else. There is no account to create, no tracking pixel, and no advertising network anywhere on this site."
+        ]
+      },
+      {
+        "h": "Why, and on what legal basis",
+        "body": [
+          "- **To answer you.** Everything the enquiry form collects exists so a person can read it and reply. The basis is the step towards a contract you asked us to take, and our legitimate interest in running a studio that answers its post — GDPR Article 6(1)(b) and 6(1)(f).",
+          "- **To see which pages are useful.** Analytics runs on your consent alone, and on nothing else — GDPR Article 6(1)(a). Refusing costs you nothing: the site behaves identically either way."
+        ]
+      },
+      {
+        "h": "Cookies and measurement",
+        "body": [
+          "No cookie is written and no measurement script is fetched before you answer the banner. Decline, and the site never contacts Google at all.",
+          "If you allow it, we use Google Analytics 4 with IP anonymisation switched on. You can withdraw that at any time — the **Cookie choice** link at the foot of every page reopens the question, and declining stops the collection from that moment.",
+          "The typefaces this site is set in are served from our own domain, so reading a page never announces your visit to a font provider."
+        ]
+      },
+      {
+        "h": "Who else sees it",
+        "body": [
+          "- **Our host.** The site is served by GitHub Pages (GitHub, Inc., United States), which necessarily handles the request in order to answer it. Transfers outside the EU rest on the European Commission's standard contractual clauses.",
+          "- **Google.** Only if you allowed measurement, and only the analytics data described above.",
+          "- **Whoever carries the enquiry form.** {{Name the service that receives form submissions, and where it stores them, once the new one is in place.}}",
+          "Nobody else. We do not sell, rent or trade what you send us, and we do not use it to advertise to you elsewhere."
+        ]
+      },
+      {
+        "h": "How long we keep it",
+        "body": [
+          "- **Enquiries:** three years from our last exchange with you, which is the usual French commercial limitation period, then deleted.",
+          "- **Analytics:** fourteen months, the shortest retention Google Analytics 4 offers.",
+          "- **Host logs:** whatever our host keeps them for; we neither extend nor read them."
+        ]
+      },
+      {
+        "h": "Your rights",
+        "body": [
+          "Under the GDPR you may ask us for a copy of what we hold about you, ask us to correct it, ask us to delete it, ask us to stop or restrict what we do with it, ask for it in a portable form, or object to it altogether. Where we rely on your consent, you can withdraw it without giving a reason and without affecting what was lawful before.",
+          "Write to [contact@gredami.com](mailto:contact@gredami.com) and we will answer within a month. If our answer does not satisfy you, you may complain to the French supervisory authority, the [CNIL](https://www.cnil.fr/en/plaintes), or to the authority where you live."
+        ]
+      },
+      {
+        "h": "Changes to this notice",
+        "body": [
+          "If what we do changes, this page changes with it and the date below moves. Nothing here is applied retroactively to data already collected under an earlier version."
+        ]
+      }
+    ],
+    "legal.meta.title": "Legal notice — GreDami",
+    "legal.meta.desc": "Publisher, publication director, host and terms of use for gredami.com",
+    "legal.label": "Legal notice",
+    "legal.title": "Legal notice",
+    "legal.sub": "Who publishes this site, who hosts it, and what may be done with what is on it",
+    "legal.updated": "Last updated 2 September 2026",
+    "legal.sections": [
+      {
+        "h": "Publisher",
+        "body": [
+          "This site is published by GreDami, working from Paris, France.",
+          "{{Complete the publisher's block: registered legal name, legal form (micro-entreprise, SASU, SARL…), registered address, SIREN or RCS registration number, and intra-community VAT number if the business is registered for VAT.}}",
+          "Email: [contact@gredami.com](mailto:contact@gredami.com)"
+        ]
+      },
+      {
+        "h": "Publication director",
+        "body": [
+          "{{Name the person responsible for publication — normally the founder or legal representative.}}"
+        ]
+      },
+      {
+        "h": "Host",
+        "body": [
+          "The site is hosted by GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States — [github.com](https://github.com)."
+        ]
+      },
+      {
+        "h": "Intellectual property",
+        "body": [
+          "The structure of this site, its text, its typographic and graphic design, and the illustrations made for it are the property of GreDami and are protected by French and international copyright. Reproducing or reusing them, whole or in part, needs written permission.",
+          "Product names, logos and trademarks belonging to other companies remain the property of their respective owners and appear here only to identify the work described."
+        ]
+      },
+      {
+        "h": "Links to other sites",
+        "body": [
+          "Where this site links elsewhere, it links to pages we do not control and are not answerable for. A link is not an endorsement of everything behind it."
+        ]
+      },
+      {
+        "h": "Liability",
+        "body": [
+          "The information on this site is kept current with reasonable care, but it describes services and past work rather than promising a result. It is not a contractual offer: the scope, the price and the terms of a project are what the written proposal for that project says they are.",
+          "We make no warranty that the site will be available without interruption, and we are not liable for indirect loss arising from its use."
+        ]
+      },
+      {
+        "h": "Personal data",
+        "body": [
+          "How this site handles personal data is set out in full in the [privacy notice](PRIVACY)."
+        ]
+      },
+      {
+        "h": "Governing law",
+        "body": [
+          "This notice is governed by French law. Failing an amicable settlement, disputes fall to the competent French courts."
+        ]
+      }
+    ],
+    "nf.meta.title": "Page not found — GreDami",
+    "nf.meta.desc": "That address does not exist on this site",
+    "nf.title": "There is nothing at this address",
+    "nf.sub": "The link may be old, or the address may have a typo in it. Everything below is still where it was",
+    "nf.home": "Home",
+    "nf.services": "Services",
+    "nf.work": "What we build",
+    "nf.contact": "Start a project"
   },
   "ru": {
     "meta.title": "GreDami — сайты, приложения и SaaS-продукты, которые помогают расти",
@@ -571,7 +716,152 @@
     "chip.responsive": "Адаптивный",
     "chip.ownDomain": "Свой домен",
     "chip.staticHost": "Статический хостинг",
-    "chip.cloudSync": "Облачная синхронизация"
+    "chip.cloudSync": "Облачная синхронизация",
+    "consent.title": "Об измерении посещаемости",
+    "consent.body": "Мы хотели бы считать визиты, чтобы понимать, какие страницы полезны. Ничего не загружается и никакие cookie не записываются до вашего согласия, а изменить решение можно в любой момент внизу страницы. [Конфиденциальность](PRIVACY)",
+    "consent.accept": "Разрешить",
+    "consent.decline": "Нет, спасибо",
+    "consent.reopen": "Выбор cookie",
+    "footer.privacy": "Конфиденциальность",
+    "footer.legal": "Правовая информация",
+    "priv.meta.title": "Конфиденциальность — GreDami",
+    "priv.meta.desc": "Что собирает GreDami, зачем, сколько это хранится и какие у вас есть права",
+    "priv.label": "Конфиденциальность",
+    "priv.title": "Что мы собираем и зачем",
+    "priv.sub": "Коротко: мы храним то, что вы нам присылаете, чтобы ответить, считаем визиты только с вашего согласия и ничего никому не продаём",
+    "priv.updated": "Обновлено 2 сентября 2026 года",
+    "priv.sections": [
+      {
+        "h": "Кто отвечает за данные",
+        "body": [
+          "GreDami — независимая студия, работающая из Парижа, Франция, — решает, что происходит с описанными здесь данными: это **оператор персональных данных** в терминах GDPR.",
+          "{{Укажите здесь официальное наименование, организационно-правовую форму и юридический адрес — политика конфиденциальности обязана точно идентифицировать оператора.}}",
+          "По любым вопросам, связанным с этой страницей: [contact@gredami.com](mailto:contact@gredami.com)."
+        ]
+      },
+      {
+        "h": "Какие данные собираются",
+        "body": [
+          "**Когда вы нам пишете.** Форма запрашивает имя и адрес электронной почты, а также — по желанию — компанию и телефон. Вместе с ними передаются текст сообщения, выбранный вид работ и языковая версия сайта, которую вы читали.",
+          "**Если вы разрешили измерение.** Аналитика фиксирует открытые страницы, приблизительное местоположение, тип устройства и браузера, а также сайт, откуда вы пришли. Она никогда не получает ваше имя или почту и вообще не загружается без вашего согласия.",
+          "**Что записывает сервер.** Хостинг ведёт обычные журналы обращений: IP-адрес, время, запрошенная страница. Мы ими не управляем и не пользуемся.",
+          "Больше мы ничего не спрашиваем. Здесь нет регистрации, нет трекинговых пикселей и нет рекламных сетей."
+        ]
+      },
+      {
+        "h": "Цели и правовые основания",
+        "body": [
+          "- **Чтобы вам ответить.** Всё, что собирает форма, существует затем, чтобы человек это прочитал и ответил. Основание — преддоговорные действия, предпринятые по вашей просьбе, и наш законный интерес вести студию, которая отвечает на письма: статьи 6(1)(b) и 6(1)(f) GDPR.",
+          "- **Чтобы понимать, какие страницы полезны.** Аналитика работает исключительно на вашем согласии — статья 6(1)(a) GDPR. Отказ ничего вам не стоит: сайт ведёт себя точно так же."
+        ]
+      },
+      {
+        "h": "Cookie и аналитика",
+        "body": [
+          "До вашего ответа на баннер не записывается ни один cookie и не загружается ни один счётчик. При отказе сайт вообще не обращается к Google.",
+          "Если вы разрешаете, мы используем Google Analytics 4 с включённой анонимизацией IP-адресов. Отозвать согласие можно в любой момент: ссылка **Выбор cookie** внизу каждой страницы открывает вопрос заново, и отказ прекращает сбор с этого момента.",
+          "Шрифты сайта отдаются с нашего собственного домена, поэтому чтение страницы никогда не сообщает о вашем визите поставщику шрифтов."
+        ]
+      },
+      {
+        "h": "Кому ещё видны эти данные",
+        "body": [
+          "- **Хостинг.** Сайт отдаётся через GitHub Pages (GitHub, Inc., США), который неизбежно обрабатывает запрос, чтобы на него ответить. Передача за пределы ЕС опирается на стандартные договорные условия Европейской комиссии.",
+          "- **Google.** Только если вы разрешили измерение, и только в объёме, описанном выше.",
+          "- **Сервис, доставляющий форму.** {{Укажите сервис, который принимает заявки из формы, и где он их хранит, когда новый механизм будет настроен.}}",
+          "Больше никому. Мы не продаём, не сдаём в аренду и не обмениваем то, что вы нам присылаете, и не используем это для рекламы вам где-либо ещё."
+        ]
+      },
+      {
+        "h": "Сроки хранения",
+        "body": [
+          "- **Обращения:** три года с момента последнего обмена сообщениями — обычный срок коммерческой давности во Франции, — после чего удаляются.",
+          "- **Аналитика:** четырнадцать месяцев, минимальный срок, который предлагает Google Analytics 4.",
+          "- **Журналы хостинга:** столько, сколько их хранит хостинг; мы этот срок не продлеваем и журналы не читаем."
+        ]
+      },
+      {
+        "h": "Ваши права",
+        "body": [
+          "По GDPR вы вправе запросить копию данных о себе, потребовать их исправления или удаления, ограничить их обработку, получить их в переносимом виде или возразить против обработки. Там, где мы опираемся на согласие, вы можете отозвать его без объяснения причин — это не затрагивает законность того, что было сделано раньше.",
+          "Напишите на [contact@gredami.com](mailto:contact@gredami.com), и мы ответим в течение месяца. Если ответ вас не устроит, вы можете подать жалобу во французский надзорный орган [CNIL](https://www.cnil.fr/en/plaintes) или в надзорный орган страны вашего проживания."
+        ]
+      },
+      {
+        "h": "Изменения",
+        "body": [
+          "Если наши практики изменятся, изменится и эта страница, а дата ниже сдвинется. Ничего не применяется задним числом к данным, собранным по прежней редакции."
+        ]
+      }
+    ],
+    "legal.meta.title": "Правовая информация — GreDami",
+    "legal.meta.desc": "Издатель, ответственный за публикацию, хостинг и условия использования gredami.com",
+    "legal.label": "Правовая информация",
+    "legal.title": "Правовая информация",
+    "legal.sub": "Кто издаёт этот сайт, кто его размещает и что можно делать с его содержимым",
+    "legal.updated": "Обновлено 2 сентября 2026 года",
+    "legal.sections": [
+      {
+        "h": "Издатель сайта",
+        "body": [
+          "Сайт издаётся студией GreDami, работающей из Парижа, Франция.",
+          "{{Заполните блок издателя: официальное наименование, организационно-правовая форма (micro-entreprise, SASU, SARL…), юридический адрес, номер SIREN или регистрации в RCS, а также внутриевропейский номер НДС, если компания является плательщиком НДС.}}",
+          "Электронная почта: [contact@gredami.com](mailto:contact@gredami.com)"
+        ]
+      },
+      {
+        "h": "Ответственный за публикацию",
+        "body": [
+          "{{Укажите лицо, отвечающее за публикацию, — как правило, основателя или законного представителя.}}"
+        ]
+      },
+      {
+        "h": "Хостинг",
+        "body": [
+          "Сайт размещён на GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, США — [github.com](https://github.com)."
+        ]
+      },
+      {
+        "h": "Интеллектуальная собственность",
+        "body": [
+          "Структура сайта, его тексты, типографика и графическое оформление, а также сделанные для него иллюстрации принадлежат GreDami и охраняются французским и международным авторским правом. Воспроизведение или повторное использование, полностью или частично, требует письменного разрешения.",
+          "Названия продуктов, логотипы и товарные знаки других компаний остаются собственностью их правообладателей и приводятся здесь только для обозначения описанных работ."
+        ]
+      },
+      {
+        "h": "Ссылки на другие сайты",
+        "body": [
+          "Там, где этот сайт ссылается наружу, он ссылается на страницы, которые мы не контролируем и за которые не отвечаем. Ссылка не означает одобрения всего, что за ней стоит."
+        ]
+      },
+      {
+        "h": "Ответственность",
+        "body": [
+          "Информация на сайте поддерживается в актуальном состоянии с разумной тщательностью, но она описывает услуги и выполненные работы, а не обещает результат. Она не является офертой: объём, цена и условия проекта определяются письменным предложением по этому проекту.",
+          "Мы не гарантируем бесперебойную доступность сайта и не отвечаем за косвенные убытки, возникшие из его использования."
+        ]
+      },
+      {
+        "h": "Персональные данные",
+        "body": [
+          "Обработка персональных данных на этом сайте подробно описана в [политике конфиденциальности](PRIVACY)."
+        ]
+      },
+      {
+        "h": "Применимое право",
+        "body": [
+          "Настоящая правовая информация регулируется правом Франции. При недостижении мирового соглашения споры подлежат рассмотрению компетентными французскими судами."
+        ]
+      }
+    ],
+    "nf.meta.title": "Страница не найдена — GreDami",
+    "nf.meta.desc": "Такого адреса на этом сайте нет",
+    "nf.title": "По этому адресу ничего нет",
+    "nf.sub": "Возможно, ссылка устарела или в адресе опечатка. Всё перечисленное ниже осталось на своих местах",
+    "nf.home": "Главная",
+    "nf.services": "Услуги",
+    "nf.work": "Что мы делаем",
+    "nf.contact": "Начать проект"
   },
   "fr": {
     "meta.title": "GreDami — Sites, applications et produits SaaS conçus pour faire grandir",
@@ -858,7 +1148,152 @@
     "chip.responsive": "Responsive",
     "chip.ownDomain": "Domaine propre",
     "chip.staticHost": "Hébergement statique",
-    "chip.cloudSync": "Synchro cloud"
+    "chip.cloudSync": "Synchro cloud",
+    "consent.title": "Un mot sur la mesure d'audience",
+    "consent.body": "Nous aimerions compter les visites pour savoir quelles pages sont utiles. Rien n'est chargé et aucun cookie n'est déposé avant votre accord, et vous pouvez revenir sur votre choix à tout moment depuis le pied de page. [Confidentialité](PRIVACY)",
+    "consent.accept": "Autoriser",
+    "consent.decline": "Non merci",
+    "consent.reopen": "Choix des cookies",
+    "footer.privacy": "Confidentialité",
+    "footer.legal": "Mentions légales",
+    "priv.meta.title": "Confidentialité — GreDami",
+    "priv.meta.desc": "Ce que GreDami collecte, pourquoi, combien de temps ces données sont conservées et les droits dont vous disposez",
+    "priv.label": "Confidentialité",
+    "priv.title": "Ce que nous collectons, et pourquoi",
+    "priv.sub": "En résumé : nous conservons ce que vous nous envoyez pour pouvoir y répondre, nous comptons les visites uniquement si vous l'acceptez, et nous ne vendons rien à personne",
+    "priv.updated": "Dernière mise à jour le 2 septembre 2026",
+    "priv.sections": [
+      {
+        "h": "Responsable du traitement",
+        "body": [
+          "GreDami, studio indépendant établi à Paris, détermine ce qu'il advient des données décrites ici : c'est le **responsable du traitement** au sens du RGPD.",
+          "{{Indiquer ici la dénomination sociale, la forme juridique et l'adresse du siège — une politique de confidentialité doit identifier précisément le responsable du traitement.}}",
+          "Pour toute question relative à cette page : [contact@gredami.com](mailto:contact@gredami.com)."
+        ]
+      },
+      {
+        "h": "Données collectées",
+        "body": [
+          "**Lorsque vous nous écrivez.** Le formulaire de contact demande votre nom et votre adresse e-mail, et facultativement votre société et votre numéro de téléphone. Il transmet également le contenu de votre message, le type de prestation choisi et la version linguistique du site que vous consultiez.",
+          "**Si vous autorisez la mesure d'audience.** L'outil de statistiques enregistre les pages ouvertes, votre localisation approximative, le type d'appareil et de navigateur utilisé, ainsi que le site qui vous a orienté ici. Il ne reçoit jamais votre nom ni votre adresse e-mail, et il n'est pas chargé du tout sans votre accord.",
+          "**Ce que consigne le serveur.** Notre hébergeur conserve des journaux d'accès ordinaires : adresse IP, horodatage, page demandée. Nous ne les maîtrisons pas et ne les exploitons pas.",
+          "Nous ne demandons rien d'autre. Aucun compte à créer, aucun pixel de suivi, aucune régie publicitaire sur ce site."
+        ]
+      },
+      {
+        "h": "Finalités et bases légales",
+        "body": [
+          "- **Vous répondre.** Tout ce que recueille le formulaire existe pour qu'une personne le lise et y réponde. La base légale est l'exécution de mesures précontractuelles prises à votre demande, ainsi que notre intérêt légitime à faire fonctionner un studio qui répond à son courrier — articles 6.1.b et 6.1.f du RGPD.",
+          "- **Savoir quelles pages servent.** La mesure d'audience repose sur votre seul consentement — article 6.1.a du RGPD. Le refus ne vous coûte rien : le site se comporte exactement de la même façon."
+        ]
+      },
+      {
+        "h": "Cookies et mesure d'audience",
+        "body": [
+          "Aucun cookie n'est écrit et aucun script de mesure n'est téléchargé avant que vous ayez répondu à la bannière. En cas de refus, le site ne contacte jamais Google.",
+          "Si vous l'autorisez, nous utilisons Google Analytics 4 avec l'anonymisation des adresses IP activée. Vous pouvez retirer votre accord à tout moment : le lien **Choix des cookies** en bas de chaque page rouvre la question, et le refus interrompt la collecte à cet instant.",
+          "Les polices de caractères du site sont servies depuis notre propre domaine : consulter une page ne signale donc jamais votre visite à un fournisseur de polices."
+        ]
+      },
+      {
+        "h": "Destinataires",
+        "body": [
+          "- **Notre hébergeur.** Le site est servi par GitHub Pages (GitHub, Inc., États-Unis), qui traite nécessairement la requête pour y répondre. Les transferts hors Union européenne reposent sur les clauses contractuelles types de la Commission européenne.",
+          "- **Google.** Uniquement si vous avez autorisé la mesure d'audience, et uniquement pour les données décrites ci-dessus.",
+          "- **Le service qui achemine le formulaire.** {{Nommer le service qui reçoit les demandes envoyées par le formulaire, et le lieu de stockage, une fois le nouveau dispositif en place.}}",
+          "Personne d'autre. Nous ne vendons, ne louons ni n'échangeons ce que vous nous envoyez, et nous ne l'utilisons pas pour vous adresser de la publicité ailleurs."
+        ]
+      },
+      {
+        "h": "Durées de conservation",
+        "body": [
+          "- **Demandes de contact :** trois ans à compter de notre dernier échange, durée qui correspond à la prescription commerciale française, puis suppression.",
+          "- **Statistiques :** quatorze mois, la durée la plus courte que propose Google Analytics 4.",
+          "- **Journaux de l'hébergeur :** la durée retenue par celui-ci ; nous ne la prolongeons pas et ne les consultons pas."
+        ]
+      },
+      {
+        "h": "Vos droits",
+        "body": [
+          "Le RGPD vous permet de demander une copie des données vous concernant, leur rectification, leur effacement, la limitation de leur traitement, leur portabilité, ou de vous opposer purement et simplement à leur traitement. Lorsque nous nous fondons sur votre consentement, vous pouvez le retirer sans motif, sans que cela remette en cause ce qui était licite auparavant.",
+          "Écrivez à [contact@gredami.com](mailto:contact@gredami.com) : nous répondons sous un mois. Si notre réponse ne vous satisfait pas, vous pouvez saisir la [CNIL](https://www.cnil.fr/fr/plaintes) ou l'autorité de contrôle de votre pays de résidence."
+        ]
+      },
+      {
+        "h": "Modifications",
+        "body": [
+          "Si nos pratiques évoluent, cette page évolue avec elles et la date ci-dessous change. Rien n'est appliqué rétroactivement aux données déjà collectées sous une version antérieure."
+        ]
+      }
+    ],
+    "legal.meta.title": "Mentions légales — GreDami",
+    "legal.meta.desc": "Éditeur, directeur de la publication, hébergeur et conditions d'utilisation de gredami.com",
+    "legal.label": "Mentions légales",
+    "legal.title": "Mentions légales",
+    "legal.sub": "Qui édite ce site, qui l'héberge, et ce qui peut être fait de son contenu",
+    "legal.updated": "Dernière mise à jour le 2 septembre 2026",
+    "legal.sections": [
+      {
+        "h": "Éditeur du site",
+        "body": [
+          "Ce site est édité par GreDami, établi à Paris, France.",
+          "{{Compléter le bloc éditeur : dénomination sociale, forme juridique (micro-entreprise, SASU, SARL…), adresse du siège, numéro SIREN ou d'immatriculation au RCS, et numéro de TVA intracommunautaire si l'entreprise y est assujettie.}}",
+          "Courriel : [contact@gredami.com](mailto:contact@gredami.com)"
+        ]
+      },
+      {
+        "h": "Directeur de la publication",
+        "body": [
+          "{{Indiquer la personne responsable de la publication — en principe le fondateur ou le représentant légal.}}"
+        ]
+      },
+      {
+        "h": "Hébergeur",
+        "body": [
+          "Le site est hébergé par GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — [github.com](https://github.com)."
+        ]
+      },
+      {
+        "h": "Propriété intellectuelle",
+        "body": [
+          "La structure de ce site, ses textes, sa composition typographique et graphique ainsi que les illustrations réalisées pour lui sont la propriété de GreDami et sont protégés par le droit d'auteur français et international. Toute reproduction ou réutilisation, totale ou partielle, requiert une autorisation écrite.",
+          "Les noms de produits, logos et marques appartenant à d'autres sociétés demeurent la propriété de leurs titulaires respectifs et ne figurent ici que pour identifier les travaux décrits."
+        ]
+      },
+      {
+        "h": "Liens vers d'autres sites",
+        "body": [
+          "Lorsque ce site renvoie ailleurs, il renvoie vers des pages que nous ne contrôlons pas et dont nous ne répondons pas. Un lien ne vaut pas approbation de tout ce qui se trouve derrière."
+        ]
+      },
+      {
+        "h": "Responsabilité",
+        "body": [
+          "Les informations de ce site sont tenues à jour avec un soin raisonnable, mais elles décrivent des prestations et des réalisations passées plutôt qu'elles ne promettent un résultat. Elles ne constituent pas une offre contractuelle : le périmètre, le prix et les conditions d'un projet sont ceux qu'énonce la proposition écrite relative à ce projet.",
+          "Nous ne garantissons pas une disponibilité ininterrompue du site et ne répondons pas des préjudices indirects résultant de son utilisation."
+        ]
+      },
+      {
+        "h": "Données personnelles",
+        "body": [
+          "Le traitement des données personnelles par ce site est détaillé dans la [politique de confidentialité](PRIVACY)."
+        ]
+      },
+      {
+        "h": "Droit applicable",
+        "body": [
+          "Les présentes mentions sont régies par le droit français. À défaut de règlement amiable, les litiges relèvent des tribunaux français compétents."
+        ]
+      }
+    ],
+    "nf.meta.title": "Page introuvable — GreDami",
+    "nf.meta.desc": "Cette adresse n'existe pas sur ce site",
+    "nf.title": "Il n'y a rien à cette adresse",
+    "nf.sub": "Le lien est peut-être ancien, ou l'adresse comporte une faute de frappe. Tout ce qui suit est resté à sa place",
+    "nf.home": "Accueil",
+    "nf.services": "Services",
+    "nf.work": "Ce que nous construisons",
+    "nf.contact": "Démarrer un projet"
   },
   "es": {
     "meta.title": "GreDami — Sitios, apps y productos SaaS creados para crecer",
@@ -1145,6 +1580,151 @@
     "chip.responsive": "Responsive",
     "chip.ownDomain": "Dominio propio",
     "chip.staticHost": "Alojamiento estático",
-    "chip.cloudSync": "Sincronización en la nube"
+    "chip.cloudSync": "Sincronización en la nube",
+    "consent.title": "Unas palabras sobre la medición",
+    "consent.body": "Nos gustaría contar las visitas para saber qué páginas resultan útiles. No se carga nada ni se instala ninguna cookie hasta que usted lo acepte, y puede cambiar de opinión en cualquier momento desde el pie de página. [Privacidad](PRIVACY)",
+    "consent.accept": "Permitir",
+    "consent.decline": "No, gracias",
+    "consent.reopen": "Elección de cookies",
+    "footer.privacy": "Privacidad",
+    "footer.legal": "Aviso legal",
+    "priv.meta.title": "Privacidad — GreDami",
+    "priv.meta.desc": "Qué recoge GreDami, por qué, cuánto tiempo lo conserva y qué derechos tiene usted sobre ello",
+    "priv.label": "Privacidad",
+    "priv.title": "Qué recogemos, y por qué",
+    "priv.sub": "En resumen: guardamos lo que usted nos envía para poder responderle, contamos las visitas solo si nos da permiso, y no vendemos nada a nadie",
+    "priv.updated": "Última actualización: 2 de septiembre de 2026",
+    "priv.sections": [
+      {
+        "h": "Quién es el responsable",
+        "body": [
+          "GreDami, estudio independiente que trabaja desde París (Francia), decide qué ocurre con los datos descritos aquí: es el **responsable del tratamiento** en los términos del RGPD.",
+          "{{Añada aquí la denominación social, la forma jurídica y el domicilio social — una política de privacidad debe identificar con precisión al responsable del tratamiento.}}",
+          "Para cualquier cuestión relativa a esta página: [contact@gredami.com](mailto:contact@gredami.com)."
+        ]
+      },
+      {
+        "h": "Qué datos recogemos",
+        "body": [
+          "**Cuando nos escribe.** El formulario pide su nombre y su dirección de correo electrónico y, opcionalmente, su empresa y su teléfono. Transmite además el texto de su mensaje, el tipo de trabajo que ha elegido y la versión lingüística del sitio que estaba leyendo.",
+          "**Si autoriza la medición.** La herramienta de estadísticas registra las páginas abiertas, su ubicación aproximada, el tipo de dispositivo y navegador y el sitio que le trajo hasta aquí. Nunca recibe su nombre ni su correo electrónico, y no se carga en absoluto sin su consentimiento.",
+          "**Lo que anota el servidor.** Nuestro proveedor de alojamiento conserva registros de acceso ordinarios: dirección IP, marca de tiempo y página solicitada. No los controlamos ni los utilizamos.",
+          "No pedimos nada más. No hay cuenta que crear, ni píxeles de seguimiento, ni redes publicitarias en este sitio."
+        ]
+      },
+      {
+        "h": "Finalidades y bases jurídicas",
+        "body": [
+          "- **Para responderle.** Todo lo que recoge el formulario existe para que una persona lo lea y conteste. La base es la aplicación de medidas precontractuales adoptadas a petición suya, junto con nuestro interés legítimo en dirigir un estudio que responde a su correspondencia — artículos 6.1.b y 6.1.f del RGPD.",
+          "- **Para saber qué páginas sirven.** La medición se apoya únicamente en su consentimiento — artículo 6.1.a del RGPD. Negarse no le cuesta nada: el sitio se comporta exactamente igual."
+        ]
+      },
+      {
+        "h": "Cookies y medición",
+        "body": [
+          "No se escribe ninguna cookie ni se descarga ningún script de medición antes de que responda al aviso. Si lo rechaza, el sitio no contacta con Google en ningún momento.",
+          "Si lo autoriza, utilizamos Google Analytics 4 con la anonimización de IP activada. Puede retirar ese permiso cuando quiera: el enlace **Elección de cookies** al pie de cada página vuelve a abrir la pregunta, y la negativa detiene la recogida desde ese instante.",
+          "Las tipografías del sitio se sirven desde nuestro propio dominio, de modo que leer una página nunca anuncia su visita a un proveedor de fuentes."
+        ]
+      },
+      {
+        "h": "Quién más lo ve",
+        "body": [
+          "- **Nuestro alojamiento.** El sitio se sirve mediante GitHub Pages (GitHub, Inc., Estados Unidos), que necesariamente trata la petición para poder responderla. Las transferencias fuera de la Unión Europea se amparan en las cláusulas contractuales tipo de la Comisión Europea.",
+          "- **Google.** Solo si ha autorizado la medición, y solo con los datos descritos más arriba.",
+          "- **El servicio que transporta el formulario.** {{Indique el servicio que recibe los envíos del formulario, y dónde los almacena, una vez esté implantado el nuevo.}}",
+          "Nadie más. No vendemos, alquilamos ni intercambiamos lo que usted nos envía, ni lo usamos para dirigirle publicidad en otros sitios."
+        ]
+      },
+      {
+        "h": "Cuánto tiempo lo conservamos",
+        "body": [
+          "- **Consultas:** tres años desde nuestro último intercambio con usted, que es el plazo habitual de prescripción mercantil en Francia; después se eliminan.",
+          "- **Estadísticas:** catorce meses, el periodo de conservación más corto que ofrece Google Analytics 4.",
+          "- **Registros del alojamiento:** el tiempo que los conserve el proveedor; nosotros no lo prolongamos ni los consultamos."
+        ]
+      },
+      {
+        "h": "Sus derechos",
+        "body": [
+          "El RGPD le permite pedirnos una copia de los datos que tenemos sobre usted, solicitar su rectificación o supresión, pedir que limitemos su tratamiento, obtenerlos en un formato portable u oponerse al tratamiento por completo. Cuando nos basamos en su consentimiento, puede retirarlo sin dar motivos y sin que ello afecte a la licitud de lo hecho anteriormente.",
+          "Escriba a [contact@gredami.com](mailto:contact@gredami.com) y responderemos en el plazo de un mes. Si nuestra respuesta no le satisface, puede reclamar ante la autoridad de control francesa, la [CNIL](https://www.cnil.fr/en/plaintes), o ante la autoridad de su país de residencia."
+        ]
+      },
+      {
+        "h": "Cambios en este aviso",
+        "body": [
+          "Si nuestras prácticas cambian, esta página cambia con ellas y la fecha de abajo se actualiza. Nada se aplica retroactivamente a datos ya recogidos bajo una versión anterior."
+        ]
+      }
+    ],
+    "legal.meta.title": "Aviso legal — GreDami",
+    "legal.meta.desc": "Editor, director de publicación, alojamiento y condiciones de uso de gredami.com",
+    "legal.label": "Aviso legal",
+    "legal.title": "Aviso legal",
+    "legal.sub": "Quién edita este sitio, quién lo aloja y qué puede hacerse con su contenido",
+    "legal.updated": "Última actualización: 2 de septiembre de 2026",
+    "legal.sections": [
+      {
+        "h": "Editor del sitio",
+        "body": [
+          "Este sitio está editado por GreDami, con actividad en París (Francia).",
+          "{{Complete el bloque del editor: denominación social, forma jurídica (micro-entreprise, SASU, SARL…), domicilio social, número SIREN o de inscripción en el RCS, y número de IVA intracomunitario si la empresa está sujeta a IVA.}}",
+          "Correo electrónico: [contact@gredami.com](mailto:contact@gredami.com)"
+        ]
+      },
+      {
+        "h": "Director de la publicación",
+        "body": [
+          "{{Indique la persona responsable de la publicación — normalmente el fundador o el representante legal.}}"
+        ]
+      },
+      {
+        "h": "Alojamiento",
+        "body": [
+          "El sitio está alojado por GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, Estados Unidos — [github.com](https://github.com)."
+        ]
+      },
+      {
+        "h": "Propiedad intelectual",
+        "body": [
+          "La estructura de este sitio, sus textos, su composición tipográfica y gráfica y las ilustraciones realizadas para él son propiedad de GreDami y están protegidas por el derecho de autor francés e internacional. Su reproducción o reutilización, total o parcial, requiere autorización escrita.",
+          "Los nombres de productos, logotipos y marcas pertenecientes a otras empresas siguen siendo propiedad de sus respectivos titulares y aparecen aquí únicamente para identificar los trabajos descritos."
+        ]
+      },
+      {
+        "h": "Enlaces a otros sitios",
+        "body": [
+          "Cuando este sitio enlaza hacia fuera, enlaza a páginas que no controlamos y de las que no respondemos. Un enlace no supone la aprobación de todo lo que hay detrás."
+        ]
+      },
+      {
+        "h": "Responsabilidad",
+        "body": [
+          "La información de este sitio se mantiene actualizada con diligencia razonable, pero describe servicios y trabajos ya realizados en lugar de prometer un resultado. No constituye una oferta contractual: el alcance, el precio y las condiciones de un proyecto son los que establece la propuesta escrita de ese proyecto.",
+          "No garantizamos la disponibilidad ininterrumpida del sitio y no respondemos de los daños indirectos derivados de su uso."
+        ]
+      },
+      {
+        "h": "Datos personales",
+        "body": [
+          "El tratamiento de datos personales por este sitio se detalla íntegramente en la [política de privacidad](PRIVACY)."
+        ]
+      },
+      {
+        "h": "Ley aplicable",
+        "body": [
+          "El presente aviso se rige por la ley francesa. A falta de acuerdo amistoso, los litigios corresponden a los tribunales franceses competentes."
+        ]
+      }
+    ],
+    "nf.meta.title": "Página no encontrada — GreDami",
+    "nf.meta.desc": "Esa dirección no existe en este sitio",
+    "nf.title": "No hay nada en esta dirección",
+    "nf.sub": "Puede que el enlace sea antiguo o que la dirección tenga una errata. Todo lo que sigue continúa en su sitio",
+    "nf.home": "Inicio",
+    "nf.services": "Servicios",
+    "nf.work": "Lo que construimos",
+    "nf.contact": "Iniciar un proyecto"
   }
 }
