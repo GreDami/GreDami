@@ -404,7 +404,13 @@
       overflow: hidden;
       /* fills a laptop screen, but capped so a tall display
          does not turn the hero into an empty band */
+      /* svh, not vh: on a phone browser vh is the tall viewport, the one you
+         only get once the address bar has scrolled away, so everything sized
+         in vh reserves more room than the screen is actually showing and the
+         picture lands under the fold. The vh line stays first as the fallback
+         for anything that does not know svh. */
       min-height: min(760px, calc(90vh - var(--nav-h)));
+      min-height: min(760px, calc(90svh - var(--nav-h)));
       display: flex;
       align-items: center;
       padding: clamp(48px, 7vw, 88px) 0;
@@ -667,6 +673,7 @@
            a little less than the picture is tall: the bird's head clears the
            fold on a phone, and the rest of him is the reason to scroll. */
         padding-bottom: clamp(250px, 38vh, 440px);
+        padding-bottom: clamp(230px, 34svh, 420px);
       }
       /* the rule over the proof line closes up: on a phone the copy has to
          hand over to the picture inside one screen */
@@ -700,6 +707,7 @@
         right: 50%;
         transform: translateX(50%);
         height: clamp(300px, 46vh, 520px);
+        height: clamp(290px, 44svh, 500px);
         /* here the height leads and the width follows it, the other way round
            from the wide band: what a phone has to ration is vertical room */
         width: auto;
@@ -735,20 +743,78 @@
 
     /* Phones: the picture takes what width is left after the gutters, so the
        bird is not a stamp in the middle of a field. */
+    /* ── phones ──
+       A phone screen is not tall enough to hold this copy set at reading size
+       and then a picture underneath it, so on a phone the hero is closed up
+       until it is: the two buttons share a row instead of stacking, and every
+       gap in the block comes in. What that buys is the room the picture needs,
+       which is given as a fraction of the small viewport so it is room the
+       screen really has. The picture is then made taller than that room, so it
+       starts above the fold and the bird is on the first screen rather than
+       under it — the rest of him is the reason to scroll. */
     @media (max-width: 560px) {
-      /* the picture is given more height than the room reserved under the
-         copy, so it starts above the fold rather than at it: what a phone
-         shows first is the bird and not the top of an empty band */
-      #hero { padding-bottom: clamp(210px, 32vh, 400px); }
-      .hero-art::after { height: clamp(290px, 44vh, 440px); }
+      #hero {
+        min-height: calc(100vh - var(--nav-h));
+        min-height: calc(100svh - var(--nav-h));
+        padding-bottom: clamp(200px, 32vh, 400px);
+        padding-bottom: clamp(185px, 29svh, 370px);
+      }
+      .hero-art::after {
+        height: clamp(280px, 44vh, 440px);
+        height: clamp(265px, 43svh, 430px);
+        /* a longer fade at its head, because up here it runs behind the last
+           line of copy rather than starting clear of it */
+        -webkit-mask-image:
+          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
+          linear-gradient(180deg, transparent 0%, #000 36%);
+                mask-image:
+          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
+          linear-gradient(180deg, transparent 0%, #000 36%);
+      }
+      .hero-title { margin-bottom: 16px; }
+      .hero-sub { font-size: 16px; margin-bottom: 20px; max-width: none; }
+      .hero-proof {
+        margin-top: 18px; padding-top: 13px;
+        font-size: 12.5px; gap: 6px 18px;
+      }
+      /* the id keeps this ahead of the 640px rule that stacks them full width */
+      /* side by side while they fit, and stacked the moment they do not —
+         nowrap here ran them off the edge of a 360 screen */
+      #hero .hero-cta { gap: 10px; }
+      #hero .hero-cta .btn {
+        width: auto; flex: 0 1 auto; padding: 12px 16px;
+        font-size: 14.5px; white-space: nowrap;
+      }
+      #hero .hero-cta .btn-arrow { gap: 9px; padding: 6px 6px 6px 16px; }
+      #hero .hero-cta .btn-arrow svg { padding: 6px; }
+    }
+
+    /* the narrowest phones: the pair only shares a row if the labels shrink */
+    @media (max-width: 380px) {
+      #hero .hero-cta .btn { padding: 10px 12px; font-size: 13.5px; }
+      #hero .hero-cta .btn-arrow { gap: 8px; padding: 5px 5px 5px 12px; }
+      #hero .hero-cta .btn-arrow svg { width: 13px; height: 13px; padding: 5px; }
     }
 
     /* A short window has no room to stand the picture up under the copy, so
        the band goes back to reading across: the copy takes the left, the
-       picture keeps the right, and the hero stays one screen tall. */
-    @media (max-width: 1040px) and (max-height: 620px) {
-      #hero { padding-bottom: clamp(48px, 7vw, 88px); align-items: center; }
+       picture keeps the right, and the hero stays one screen tall.
+       Landscape only. On height alone this also caught a small phone held
+       upright — a 360x600 screen is under 620 too — and handed it a 60% copy
+       column and a full-height picture down one side, which is the one shape
+       that cannot work at that width. */
+    @media (max-width: 1040px) and (max-height: 620px) and (orientation: landscape) {
+      #hero {
+        padding-top: clamp(20px, 3vw, 40px);
+        padding-bottom: clamp(20px, 3vw, 40px);
+        align-items: center;
+      }
       .hero-inner, .hero-proof { max-width: 60%; }
+      /* a landscape phone has about 320px of height to give: the display face
+         comes down to something that leaves room for the sentence under it */
+      .hero-title { font-size: clamp(26px, 4.4vw, 40px); margin-bottom: 12px; }
+      .hero-sub { font-size: 15px; margin-bottom: 18px; }
+      .hero-proof { margin-top: 16px; padding-top: 12px; font-size: 12.5px; }
       .hero-art::after {
         top: 0; bottom: 0; right: 0; left: auto;
         height: auto; transform: none;
