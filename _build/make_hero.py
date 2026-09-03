@@ -34,7 +34,7 @@ import random
 from PIL import Image, ImageChops, ImageEnhance, ImageFilter, ImageStat
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SRC = ROOT / "_build" / "src" / "halo2.jpg"
+SRC = ROOT / "_build" / "src" / "halo3.jpg"
 OUT = ROOT / "halo-hero.webp"
 SMALL = ROOT / "halo-hero-sm.webp"
 
@@ -48,8 +48,8 @@ BARE = (545, 30, 875, 640)
 W, H = 3200, 1100                 # the band, at hero-band height
 ART_H = 0.90                      # the drawing, as a multiple of band height
 BLEED_R = 30                      # how far it runs off the right edge
-HAZE = 0.42                       # the haze at the join, before it dies off
-HAZE_END = 0.40                   # where it has died out, as a fraction of W
+HAZE = 0.62                       # the haze at the join, before it dies off
+HAZE_END = 0.52                   # where it has died out, as a fraction of W
 
 random.seed(7)
 
@@ -106,7 +106,7 @@ JOIN = ax / W
 # the page colour it is barely there, which is the point — you should read it
 # as paper, not as texture.
 bare = sheet.crop(BARE)
-base = tuple(int(c + (p - c) * 0.55)
+base = tuple(int(c + (p - c) * 0.82)
              for c, p in zip(ImageStat.Stat(bare).mean, PAPER))
 field = Image.new("RGB", (W, H), base)
 for mag in (2.6, 1.7, 1.1):
@@ -123,9 +123,19 @@ field = Image.blend(field, Image.new("RGB", (W, H), base), 0.35)
 # ── the haze ─────────────────────────────────────────────────────────────────
 # The drawing itself, blurred until nothing in it can be named and stretched
 # sideways so even its rhythm is gone, carried leftwards off the join. All that
-# survives is the warmth: ochre leaving the drawing instead of stopping at it.
+# should survive is the warmth: ochre leaving the drawing instead of stopping
+# at it.
+#
+# Blurring alone does not give you that. The drawing is ochre wash over grey
+# ink, and a wide blur averages the two into a flat grey — which then spread
+# across the middle of the band as a smudge that was neither paper nor picture.
+# So the blur is lifted most of the way to the paper first, which takes the ink
+# out of it, and only then is the colour brought back up: what is left is the
+# wash's own hue at paper's own lightness. Desaturating instead — which is what
+# this did — keeps the grey and throws away the one thing worth carrying.
 haze = art.filter(ImageFilter.GaussianBlur(int(aw * 0.16)))
-haze = ImageEnhance.Color(haze).enhance(0.66)
+haze = Image.blend(haze, Image.new("RGB", haze.size, base), 0.62)
+haze = ImageEnhance.Color(haze).enhance(1.9)
 hw = int(aw * 2.9)
 haze = haze.resize((hw, H), Image.LANCZOS)
 veil = Image.new("RGB", (W, H), base)
@@ -155,12 +165,17 @@ canvas = Image.new("RGB", (W, H), PAPER)
 canvas.paste(field, (0, 0))
 canvas.paste(art, (ax, (H - ah) // 2), edges(aw, ah, 0.17, 0.11))
 
-# sink the whole band into the page colour — a little everywhere so the paper
-# never sits brighter or duller than the sections under it, and more at the far
-# left, where there is nothing to see and the copy has to be legible over it
+# Sink the band into the page colour, and at the far left sink it all the way.
+# This used to hold a little of the field everywhere, on the theory that the
+# headline should stand on the drawing's paper — but the drawing's paper is a
+# scan, three or four points below --paper and faintly olive, and a hero that
+# sits that far under the sections below it does not read as paper. It reads as
+# dirty. So the left two-thirds are now the page's own paper exactly, and the
+# sheet arrives late: nothing until the copy has ended, then quickly.
 canvas = Image.composite(
     canvas, Image.new("RGB", (W, H), PAPER),
-    ramp([(0.00, 0.42), (0.34, 0.52), (0.62, 0.72), (0.82, 0.90), (1.00, 0.94)]))
+    ramp([(0.00, 0.00), (0.46, 0.00), (0.62, 0.12), (0.72, 0.38),
+          (JOIN, 0.80), (0.86, 1.00), (1.00, 1.00)]))
 
 # paper grain, so the thin areas do not band once webp has had them
 grain = Image.merge("RGB", [Image.effect_noise((W, H), 6).filter(
