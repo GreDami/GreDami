@@ -386,13 +386,12 @@
        ══════════════════════════════════════════ */
     /* Tall hero, copy vertically centred in a left-hand column —
        the arrangement Seapoint uses: max-w-3xl block, narrower paragraph. */
-    /* No backdrop. The band carried a painting for a while, and then a drawing,
-       and both of them were work to keep out of the way of the words — masked,
-       tinted, veiled back over, retuned every time the type moved. The band is
-       bare paper now and the headline is the only thing in it, which is what
-       the arrangement was always doing when it worked. Nothing is layered
-       behind the copy, so there is no z-index, no isolation and no second
-       element here: just the band and its colour. */
+    /* The drawing is a figure here, not a backdrop. Two backdrops came before
+       it and both had the same fault: the sheet went behind the headline, and
+       everything after that was undoing it — a mask, a tint, a veil dragged
+       back over the copy column, and a retune every time the type moved. Given
+       a column of its own it needs none of that. Nothing is behind the words,
+       so the band keeps its plain colour and no element is stacked in it. */
     #hero {
       /* fills a laptop screen, but capped so a tall display
          does not turn the hero into an empty band */
@@ -406,11 +405,40 @@
        sections below, which sit on a centred 1080 column rather than on the
        page gutter. The max() tracks that edge at every width: the column wins
        on a wide screen, the gutter takes over once 1080 no longer fits. */
+    /* Copy and drawing side by side, the drawing spanning both rows so it is
+       centred on the whole block and not on the headline alone. The columns are
+       real, so the copy can never run under the picture at any width — which is
+       what every masked-and-veiled version was trying to prevent by hand. */
     #hero .shell {
       width: 100%;
       padding-inline: max(var(--gut), calc((100% - var(--col)) / 2));
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(320px, 33%, 470px);
+      grid-template-areas: "copy art" "proof art";
+      align-items: center;
+      column-gap: clamp(32px, 5vw, 76px);
     }
-    .hero-inner { max-width: 768px; }
+    .hero-inner { grid-area: copy; max-width: 768px; }
+    .hero-proof { grid-area: proof; }
+    /* The picture's own proportions, so it is never stretched, and the radius
+       the cards in the sections below use, so it belongs to the same page. It
+       is opaque and saturated to its corners — nothing to dissolve into the
+       paper, and nothing gained by trying: it reads as a picture, and a
+       picture on this page is a card. */
+    .hero-art {
+      grid-area: art;
+      aspect-ratio: 940 / 1253;
+      max-height: min(74vh, 660px);
+      /* no justify-self here: it would take the box off `stretch` and size it
+         to its contents, and the contents of a div carrying a background image
+         are nothing at all — the column stays, the picture collapses. */
+      background-image: var(--img-art);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 18px;
+      box-shadow: var(--shadow-lift);
+    }
 
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 9px;
@@ -450,9 +478,6 @@
 
 
     .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-    /* this one stands on the painting, where the usual filled hover punches a
-       white hole in the wash — it stays clear and answers with its border */
-    .hero-cta .btn-ghost:hover { background: transparent; }
 
     .hero-proof {
       display: flex; flex-wrap: wrap; gap: 10px 26px;
@@ -559,6 +584,31 @@
 
     @media (max-height: 680px) {
       #hero { min-height: 0; }
+    }
+
+    /* Under this the columns stop being columns — the headline needs the whole
+       width, and a picture squeezed into what is left is worth less than the
+       room it costs. It goes below the copy rather than away: this one is the
+       loudest thing on the page and a phone should not be the one screen that
+       does not get it. Laid down, it is cropped to about a square, which is
+       where a tall picture has to end up when the space it is given is wide. */
+    @media (max-width: 1040px) {
+      #hero .shell {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "copy" "art" "proof";
+      }
+      .hero-art {
+        aspect-ratio: auto;
+        height: min(46vh, 420px);
+        max-height: none;
+        margin-top: 44px;
+        border-radius: 16px;
+        /* Centring the crop cuts the bird off at the chest: it sits low in the
+           frame, and a wide box takes its slice out of the middle of a tall
+           picture. Biased down, the slice holds the bird and the cornice it is
+           standing on, which is the whole subject. */
+        background-position: center 62%;
+      }
     }
 
     /* ══════════════════════════════════════════

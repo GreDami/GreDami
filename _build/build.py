@@ -68,11 +68,13 @@ def css_head(prefix):
         return (":root{\n"
                 "  --ic-gobag: " + data_uri("gobag-icon.webp", "image/webp") + ";\n"
                 "  --ic-fw: " + data_uri("FW.webp", "image/webp") + ";\n"
-                "  --ic-mark: " + data_uri("mark.webp", "image/webp") + ";\n}\n\n")
+                "  --ic-mark: " + data_uri("mark.webp", "image/webp") + ";\n"
+                "  --img-art: " + data_uri("halo-art.webp", "image/webp") + ";\n}\n\n")
     return (":root{\n"
             '  --ic-gobag: url("%(p)sgobag-icon.webp");\n'
             '  --ic-fw: url("%(p)sFW.webp");\n'
-            '  --ic-mark: url("%(p)smark.webp");\n}\n\n' % {"p": prefix})
+            '  --ic-mark: url("%(p)smark.webp");\n'
+            '  --img-art: url("%(p)shalo-art.webp");\n}\n\n' % {"p": prefix})
 
 
 def stylesheet(prefix):
@@ -997,6 +999,8 @@ def home(lang):
           </div>
         </div>
         </div>
+
+        <div class="hero-art" role="img" aria-label="{e(t["hero.art.alt"])}"></div>
 
         <div class="hero-proof">
           <span>{e(t["hero.proof1"])}</span>

@@ -421,7 +421,8 @@
     "nf.home": "Home",
     "nf.services": "Services",
     "nf.work": "What we build",
-    "nf.contact": "Start a project"
+    "nf.contact": "Start a project",
+    "hero.art.alt": "A blue pigeon in green sunglasses perched on the cornice of an ochre building"
   },
   "ru": {
     "meta.title": "GreDami — сайты, приложения и SaaS-продукты, которые помогают расти",
@@ -845,7 +846,8 @@
     "nf.home": "Главная",
     "nf.services": "Услуги",
     "nf.work": "Что мы делаем",
-    "nf.contact": "Начать проект"
+    "nf.contact": "Начать проект",
+    "hero.art.alt": "Синий голубь в зелёных солнечных очках на карнизе охристого здания"
   },
   "fr": {
     "meta.title": "GreDami — Sites, applications et produits SaaS conçus pour faire grandir",
@@ -1269,7 +1271,8 @@
     "nf.home": "Accueil",
     "nf.services": "Services",
     "nf.work": "Ce que nous construisons",
-    "nf.contact": "Démarrer un projet"
+    "nf.contact": "Démarrer un projet",
+    "hero.art.alt": "Un pigeon bleu à lunettes de soleil vertes posé sur la corniche d'un immeuble ocre"
   },
   "es": {
     "meta.title": "GreDami — Sitios, apps y productos SaaS creados para crecer",
@@ -1693,6 +1696,7 @@
     "nf.home": "Inicio",
     "nf.services": "Servicios",
     "nf.work": "Lo que construimos",
-    "nf.contact": "Iniciar un proyecto"
+    "nf.contact": "Iniciar un proyecto",
+    "hero.art.alt": "Una paloma azul con gafas de sol verdes posada en la cornisa de un edificio ocre"
   }
 }
