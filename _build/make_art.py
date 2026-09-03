@@ -12,9 +12,10 @@ own corners, with no paper in it and no lighting to correct. Every one of those
 steps would now be damage.
 
 So the picture is passed through as it was drawn. It is only resized, to about
-twice the width it is ever displayed at, and encoded. The corners are rounded
-in CSS rather than here, so the radius stays a property of the layout and can
-follow the cards in the sections below it.
+twice the width it is ever displayed at, and encoded. Nothing is cropped here
+either: the hero decides how much of the picture it shows, and it decides that
+differently on a phone and on a wide display, so the file has to hold all of
+it.
 
     python3 _build/make_art.py
 """
@@ -26,7 +27,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "_build" / "src" / "halo3.png"
 OUT = ROOT / "halo-art.webp"
 
-WIDTH = 940                       # ~2x the widest the column ever gives it
+# The picture is the hero band now rather than a card in a column, and the band
+# gives it up to 880 CSS px on a wide screen — so 940 was barely 1x there and
+# short of it on a retina display. It is written at the source's own width,
+# which is as much as there is.
+WIDTH = 1086
 
 art = Image.open(SRC).convert("RGB")
 if art.width > WIDTH:

@@ -457,60 +457,133 @@
     /* ══════════════════════════════════════════
        Hero
        ══════════════════════════════════════════ */
-    /* Tall hero, copy vertically centred in a left-hand column —
-       the arrangement Seapoint uses: max-w-3xl block, narrower paragraph. */
-    /* The drawing is a figure here, not a backdrop. Two backdrops came before
-       it and both had the same fault: the sheet went behind the headline, and
-       everything after that was undoing it — a mask, a tint, a veil dragged
-       back over the copy column, and a retune every time the type moved. Given
-       a column of its own it needs none of that. Nothing is behind the words,
-       so the band keeps its plain colour and no element is stacked in it. */
+    /* Tall hero, copy vertically centred in a left-hand column.
+       The drawing is the band now, not a card standing in it. It runs the full
+       width of the page, edge to edge, and the copy is laid on it. Two earlier
+       backdrops failed at exactly this and for the same reason both times: a
+       tint was laid over the whole picture and then had to be taken off again
+       wherever the words fell. This one does not tint the picture at all. It
+       lays paper on it — the same --paper the sections below are drawn on —
+       opaque under the headline, thinning across the middle, and gone before
+       it reaches the bird. So the copy is on the page's own ground, the
+       picture is at full strength where it is the picture, and the join
+       between them is a long fall rather than a line. */
     #hero {
+      position: relative;
+      /* the layers below stack against the band and not against the page */
+      isolation: isolate;
+      /* the picture is sized to the band, so anything the crop leaves over
+         the edge is the band's business */
+      overflow: hidden;
       /* fills a laptop screen, but capped so a tall display
          does not turn the hero into an empty band */
-      min-height: min(720px, calc(88vh - var(--nav-h)));
+      min-height: min(760px, calc(90vh - var(--nav-h)));
       display: flex;
       align-items: center;
       padding: clamp(48px, 7vw, 88px) 0;
       background-color: var(--paper);
     }
     /* The copy column stands on the same edge as the card grids in the
-       sections below, which sit on a centred 1080 column rather than on the
+       sections below, which sit on a centred 1240 column rather than on the
        page gutter. The max() tracks that edge at every width: the column wins
-       on a wide screen, the gutter takes over once 1080 no longer fits. */
-    /* Copy and drawing side by side, the drawing spanning both rows so it is
-       centred on the whole block and not on the headline alone. The columns are
-       real, so the copy can never run under the picture at any width — which is
-       what every masked-and-veiled version was trying to prevent by hand. */
+       on a wide screen, the gutter takes over once 1240 no longer fits. */
     #hero .shell {
+      position: relative;
+      z-index: 1;
       width: 100%;
       padding-inline: max(var(--gut), calc((100% - var(--col)) / 2));
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) clamp(320px, 33%, 470px);
-      grid-template-areas: "copy art" "proof art";
-      align-items: center;
-      column-gap: clamp(32px, 5vw, 76px);
     }
-    .hero-inner { grid-area: copy; max-width: 768px; }
-    .hero-proof { grid-area: proof; }
-    /* The picture's own proportions, so it is never stretched, and the radius
-       the cards in the sections below use, so it belongs to the same page. It
-       is opaque and saturated to its corners — nothing to dissolve into the
-       paper, and nothing gained by trying: it reads as a picture, and a
-       picture on this page is a card. */
+    /* The copy stops where the paper stops. Both are fractions of the band, so
+       the words and the ground they are on widen and narrow together and the
+       headline can never reach the part of the picture that is at full
+       strength. */
+    .hero-inner { max-width: min(52%, 700px); }
+    .hero-proof { max-width: min(56%, 760px); }
+
+    /* ── the picture ──
+       It runs the whole width of the page, and it does that in two layers,
+       because a tall picture cannot simply be stretched across a wide band:
+       `cover` on a screen-wide strip blows the bird up to the height of the
+       band and crops away everything that told you what he was standing on.
+       So the picture keeps its own proportions and stands at the right, and
+       the width beside it is filled by the same picture again — thrown far out
+       of focus and scaled up until it is only its colour. The field is the
+       artwork's own light, so the two never disagree, and there is no invented
+       wall anywhere in it. */
     .hero-art {
-      grid-area: art;
-      aspect-ratio: 940 / 1253;
-      max-height: min(74vh, 660px);
-      /* no justify-self here: it would take the box off `stretch` and size it
-         to its contents, and the contents of a div carrying a background image
-         are nothing at all — the column stays, the picture collapses. */
-      background-image: var(--img-art);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 18px;
-      box-shadow: var(--shadow-lift);
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    /* the field: the picture as colour alone, out past every edge so the blur
+       has something to draw from and does not thin at the sides */
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      inset: -14%;
+      /* the crop the colour is taken from is the wall, high in the picture,
+         not the bird: the field wants the warm light of the drawing and not a
+         grey-blue smear of the figure in the middle of it */
+      background: var(--img-art) 46% 22% / cover no-repeat;
+      filter: blur(84px) saturate(1.24) brightness(1.04);
+      /* turned over, so the wall's own light falls towards the copy and the
+         shadowed side stays under the picture */
+      transform: scaleX(-1.08);
+    }
+    /* the picture itself, at its own height, standing on the right edge.
+       Its left side is dissolved rather than cut, so the shutter and the
+       downpipe at that edge go back into the field instead of ending on a
+       line, and the cornice runs out of the frame the way it does in the
+       drawing. */
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      /* The box is the picture and nothing else: the full height of the band,
+         standing on the right edge, and a width that is a fraction of the page
+         rather than a product of that height. Tied to the height it stayed the
+         same 600-odd pixels on a laptop and on a 27-inch display, and on the
+         big one that left a wide flat stretch of field between the copy and
+         the bird with nothing in it. Set this way the picture grows with the
+         page and the gap never opens, and `cover` decides which way to crop —
+         on a wide screen the wall at the sides, on a short one the sky and the
+         roof. Giving the box the picture's own width, rather than the whole
+         band's, is also what keeps the fade below on the picture. */
+      top: 0; right: 0; bottom: 0;
+      width: clamp(400px, 38vw, 880px);
+      background: var(--img-art) 50% 48% / cover no-repeat;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 32%, #000 100%);
+              mask-image: linear-gradient(90deg, transparent 0%, #000 32%, #000 100%);
+    }
+    /* The paper the words stand on, and the two soft edges that keep the band
+       from ending in a ruled line. It sits above both layers of the picture
+       and below the copy. */
+    #hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        /* the copy side: full paper under the headline, thinning across the
+           middle of the band, gone before it reaches the bird */
+        linear-gradient(97deg,
+          var(--paper) 0%,
+          var(--paper) 30%,
+          color-mix(in srgb, var(--paper) 88%, transparent) 44%,
+          color-mix(in srgb, var(--paper) 46%, transparent) 58%,
+          transparent 74%),
+        /* under the bar, so the glass at the top of the page is not asked to
+           blur a saturated yellow */
+        linear-gradient(180deg,
+          color-mix(in srgb, var(--paper) 55%, transparent) 0%,
+          transparent 18%),
+        /* and out the bottom, so the band hands over to the section below
+           instead of being cut off from it */
+        linear-gradient(0deg,
+          var(--paper) 0%,
+          color-mix(in srgb, var(--paper) 62%, transparent) 7%,
+          transparent 22%);
     }
 
     .hero-eyebrow {
@@ -659,28 +732,116 @@
       #hero { min-height: 0; }
     }
 
-    /* Under this the columns stop being columns — the headline needs the whole
-       width, and a picture squeezed into what is left is worth less than the
-       room it costs. It goes below the copy rather than away: this one is the
-       loudest thing on the page and a phone should not be the one screen that
-       does not get it. Laid down, it is cropped to about a square, which is
-       where a tall picture has to end up when the space it is given is wide. */
+    /* ── narrow ──
+       Side by side stops working long before a phone: the paper would have to
+       cover almost the whole band to hold the headline, and covering the
+       picture is the one thing this hero does not do. So the arrangement turns
+       through ninety degrees. The copy keeps the top of the band on plain
+       paper; the picture stands up out of the bottom of it, still at its own
+       proportions, still dissolved into the field on the sides it does not
+       fill. It is the same band read down the page instead of across it. */
     @media (max-width: 1040px) {
-      #hero .shell {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "copy" "art" "proof";
+      #hero {
+        align-items: flex-start;
+        min-height: 0;
+        padding-top: clamp(28px, 5vw, 64px);
+        /* The room the picture stands up in, under the copy. It is deliberately
+           a little less than the picture is tall: the bird's head clears the
+           fold on a phone, and the rest of him is the reason to scroll. */
+        padding-bottom: clamp(250px, 38vh, 440px);
       }
-      .hero-art {
+      /* the rule over the proof line closes up: on a phone the copy has to
+         hand over to the picture inside one screen */
+      .hero-proof { margin-top: 30px; padding-top: 20px; }
+      .hero-inner, .hero-proof { max-width: none; }
+      /* the field is taken from higher up the wall on a narrow screen, and
+         closer in, so what washes past the picture is the drawing's light and
+         not a blurred second copy of the bird */
+      .hero-art::before {
+        background-size: auto 190%;
+        background-position: 42% 14%;
+        transform: scaleX(1.08);
+      }
+      .hero-art::after {
+        /* Anchored to the foot of the band rather than filling its height, so
+           the bird stays the size he is in the drawing however tall the phone
+           is, and centred rather than pushed to one edge: a column of field
+           down one side of a narrow screen is not a composition, it is a
+           margin. */
+        top: auto;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(50%);
+        height: clamp(300px, 46vh, 520px);
+        /* here the height leads and the width follows it, the other way round
+           from the wide band: what a phone has to ration is vertical room */
+        width: auto;
+        aspect-ratio: 940 / 1253;
+        max-width: 92%;
+        /* three edges to dissolve now instead of one: the two sides and the
+           top, all of them at once rather than one after the other */
+        -webkit-mask-image:
+          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
+          linear-gradient(180deg, transparent 0%, #000 28%);
+        -webkit-mask-composite: source-in;
+                mask-image:
+          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
+          linear-gradient(180deg, transparent 0%, #000 28%);
+                mask-composite: intersect;
+      }
+      #hero::after {
+        background:
+          linear-gradient(178deg,
+            var(--paper) 0%,
+            var(--paper) 38%,
+            color-mix(in srgb, var(--paper) 78%, transparent) 52%,
+            color-mix(in srgb, var(--paper) 26%, transparent) 66%,
+            transparent 80%),
+          /* the band still closes on paper at the foot, or the picture ends on
+             a ruled line where the next section starts */
+          linear-gradient(0deg,
+            var(--paper) 0%,
+            color-mix(in srgb, var(--paper) 58%, transparent) 6%,
+            transparent 20%);
+      }
+    }
+
+    /* Phones: the picture takes what width is left after the gutters, so the
+       bird is not a stamp in the middle of a field. */
+    @media (max-width: 560px) {
+      /* the picture is given more height than the room reserved under the
+         copy, so it starts above the fold rather than at it: what a phone
+         shows first is the bird and not the top of an empty band */
+      #hero { padding-bottom: clamp(210px, 32vh, 400px); }
+      .hero-art::after { height: clamp(290px, 44vh, 440px); }
+    }
+
+    /* A short window has no room to stand the picture up under the copy, so
+       the band goes back to reading across: the copy takes the left, the
+       picture keeps the right, and the hero stays one screen tall. */
+    @media (max-width: 1040px) and (max-height: 620px) {
+      #hero { padding-bottom: clamp(48px, 7vw, 88px); align-items: center; }
+      .hero-inner, .hero-proof { max-width: 60%; }
+      .hero-art::after {
+        top: 0; bottom: 0; right: 0; left: auto;
+        height: auto; transform: none;
+        width: clamp(340px, 40vw, 620px);
         aspect-ratio: auto;
-        height: min(46vh, 420px);
-        max-height: none;
-        margin-top: 44px;
-        border-radius: 16px;
-        /* Centring the crop cuts the bird off at the chest: it sits low in the
-           frame, and a wide box takes its slice out of the middle of a tall
-           picture. Biased down, the slice holds the bird and the cornice it is
-           standing on, which is the whole subject. */
-        background-position: center 62%;
+        max-width: none;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 32%);
+        -webkit-mask-composite: source-over;
+                mask-image: linear-gradient(90deg, transparent 0%, #000 32%);
+                mask-composite: add;
+      }
+      #hero::after {
+        background:
+          linear-gradient(97deg,
+            var(--paper) 0%,
+            var(--paper) 34%,
+            color-mix(in srgb, var(--paper) 82%, transparent) 50%,
+            color-mix(in srgb, var(--paper) 30%, transparent) 66%,
+            transparent 80%),
+          linear-gradient(0deg, var(--paper) 0%, transparent 16%);
       }
     }
 

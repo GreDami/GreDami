@@ -985,6 +985,7 @@ def home(lang):
   <main id="main">
 
     <section id="hero">
+      <div class="hero-art" role="img" aria-label="{e(t["hero.art.alt"])}"></div>
       <div class="shell">
         <div class="hero-inner">
         <h1 class="hero-title">{t["hero.title"]}</h1>
@@ -999,8 +1000,6 @@ def home(lang):
           </div>
         </div>
         </div>
-
-        <div class="hero-art" role="img" aria-label="{e(t["hero.art.alt"])}"></div>
 
         <div class="hero-proof">
           <span>{e(t["hero.proof1"])}</span>
