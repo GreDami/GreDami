@@ -462,29 +462,46 @@
     }
     /* The paper the words stand on, and the soft edges that keep the band from
        ending in a ruled line. It sits above the picture and below the copy. */
+    /* The band is the picture, all of it. There used to be paper laid across
+       the copy side — a wide white panel that the headline stood on and the
+       wall started after — and with a drawn wall out there now that panel was
+       covering the thing it was meant to make room for. It is gone. What is
+       left here closes the foot of the band into the section below, and
+       nothing else. The copy holds its own against the wall by being darker,
+       not by having the wall taken away from under it. */
     #hero::after {
       content: "";
       position: absolute;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background:
-        /* the copy side: full paper under the headline, thinning across the
-           middle of the band, gone before it reaches the bird. It is pulled
-           back from where it used to fall — with a wall out there now instead
-           of a wash there is something worth not covering. */
-        linear-gradient(97deg,
-          var(--paper) 0%,
-          var(--paper) 24%,
-          color-mix(in srgb, var(--paper) 90%, transparent) 38%,
-          color-mix(in srgb, var(--paper) 50%, transparent) 52%,
-          transparent 68%),
-        /* and out the bottom, so the band hands over to the section below
-           instead of being cut off from it */
-        linear-gradient(0deg,
-          var(--paper) 0%,
-          color-mix(in srgb, var(--paper) 62%, transparent) 7%,
-          transparent 22%);
+      background: linear-gradient(0deg,
+        var(--paper) 0%,
+        color-mix(in srgb, var(--paper) 52%, transparent) 4%,
+        transparent 12%);
+    }
+
+    /* ── the copy, standing on the wall ──
+       The ochre is bright, so black type clears it easily and the violet has
+       better than 6:1 on it. The two greys the copy used on paper do not, and
+       both step down to near-ink here. This is the whole cost of taking the
+       panel away. */
+    #hero .hero-sub { color: #262130; }
+    #hero .hero-proof {
+      color: #453F4E;
+      border-top-color: rgba(15, 14, 19, 0.16);
+    }
+    /* the outlined button was a hairline on white; on a wall it needs a plate
+       under it or it reads as a gap in the picture */
+    #hero .btn-ghost {
+      background: rgba(255, 255, 255, 0.74);
+      border-color: rgba(15, 14, 19, 0.14);
+      -webkit-backdrop-filter: blur(6px);
+              backdrop-filter: blur(6px);
+    }
+    #hero .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(15, 14, 19, 0.24);
     }
 
     .hero-eyebrow {
@@ -707,20 +724,12 @@
         -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 4%, transparent 16%);
                 mask-image: linear-gradient(180deg, #000 0%, #000 4%, transparent 16%);
       }
+      /* the field carries the whole band here too — only the foot closes */
       #hero::after {
-        background:
-          linear-gradient(178deg,
-            var(--paper) 0%,
-            var(--paper) 38%,
-            color-mix(in srgb, var(--paper) 78%, transparent) 52%,
-            color-mix(in srgb, var(--paper) 26%, transparent) 66%,
-            transparent 80%),
-          /* the band still closes on paper at the foot, or the picture ends on
-             a ruled line where the next section starts */
-          linear-gradient(0deg,
-            var(--paper) 0%,
-            color-mix(in srgb, var(--paper) 58%, transparent) 6%,
-            transparent 20%);
+        background: linear-gradient(0deg,
+          var(--paper) 0%,
+          color-mix(in srgb, var(--paper) 58%, transparent) 6%,
+          transparent 20%);
       }
     }
 
@@ -752,14 +761,7 @@
                 mask-composite: add;
       }
       #hero::after {
-        background:
-          linear-gradient(97deg,
-            var(--paper) 0%,
-            var(--paper) 34%,
-            color-mix(in srgb, var(--paper) 82%, transparent) 50%,
-            color-mix(in srgb, var(--paper) 30%, transparent) 66%,
-            transparent 80%),
-          linear-gradient(0deg, var(--paper) 0%, transparent 16%);
+        background: linear-gradient(0deg, var(--paper) 0%, transparent 16%);
       }
     }
 

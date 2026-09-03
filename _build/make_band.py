@@ -144,6 +144,18 @@ for _ in range(CALM):
 calm = calm.filter(ImageFilter.GaussianBlur(190))
 wall = Image.composite(wall, ImageChops.blend(light, wall, 0.34), calm)
 
+# And it settles as it runs away from the picture. The copy stands on this end
+# of the band, and a headline set over blotches the size of the words is a
+# headline you read twice; the far wall keeps its light and its cracks but
+# gives up most of its contrast, which is what distance does to a wall anyway.
+ease = Image.new("L", (EW, 1))
+ep = ease.load()
+for x in range(EW):
+    t = min(1.0, x / (EW * 0.66))          # full strength by two thirds across
+    ep[x, 0] = round(255 * t * t)
+wall = Image.composite(wall, ImageChops.blend(light, wall, 0.30),
+                       ease.resize((EW, BAND_H)))
+
 # the plaster keeps its grain; the light under it is the drawing's
 wall = ImageChops.add(
     ImageChops.subtract(wall, wall.filter(ImageFilter.GaussianBlur(TONE_R)), 1, 128),
