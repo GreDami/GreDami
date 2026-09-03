@@ -73,6 +73,10 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Anything the script hides stays hidden. A rule further down that sets a
+   display — .consent and .mic-btn both do — otherwise outranks the browser's
+   own [hidden] rule and the element can never be put away. */
+[hidden] { display: none !important; }
 
     /* ══════════════════════════════════════════
        Tokens — light is the base
@@ -836,22 +840,46 @@
        under it — the rest of him is the reason to scroll. */
     @media (max-width: 560px) {
       #hero {
-        min-height: calc(100vh - var(--nav-h));
-        min-height: calc(100svh - var(--nav-h));
-        padding-bottom: clamp(200px, 32vh, 400px);
-        padding-bottom: clamp(185px, 29svh, 370px);
+        /* Not a full screen any more. Held to the whole height, the band put
+           a stretch of empty wall between the copy and the picture, because
+           the picture is anchored to the foot of it — the bird ended up under
+           the text rather than beside it however the picture was sized. Let
+           the band close up on its contents and the bird comes up level with
+           the last lines. What is left of the screen shows the top of the
+           section below, which is no loss. */
+        min-height: calc(74vh - var(--nav-h));
+        min-height: calc(74svh - var(--nav-h));
+        padding-bottom: clamp(105px, 17vh, 230px);
+        padding-bottom: clamp(100px, 17svh, 220px);
       }
+      /* Standing on the right and running off that edge, the way it does on a
+         wide screen, rather than centred under the copy. Not a column of its
+         own: at this width a column would leave the sentence about 180px to
+         wrap in, which is nine or ten lines, and the hero would come out
+         taller with a smaller bird in it. Instead the copy keeps the full
+         width and the picture comes up beside its last two lines, which are
+         the short ones. Its height is what keeps them apart — tall enough and
+         the bird would be behind the buttons. */
       .hero-art::after {
-        height: clamp(280px, 44vh, 440px);
-        height: clamp(265px, 43svh, 430px);
-        /* a longer fade at its head, because up here it runs behind the last
-           line of copy rather than starting clear of it */
+        /* Off the edge rather than flush to it. Flush, the bird's head landed
+           on the end of the proof line; pushed out, he clears it without
+           having to be made smaller, and what goes off-screen is the wall to
+           his right, which is the part with nothing in it. */
+        right: -8%;
+        transform: none;
+        max-width: 86%;
+        height: clamp(255px, 40vh, 390px);
+        height: clamp(255px, 40svh, 390px);
+        /* the right edge runs off the screen, so only two edges are dissolved
+           now: the left, and the head where it passes the copy */
         -webkit-mask-image:
-          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
-          linear-gradient(180deg, transparent 0%, #000 36%);
+          linear-gradient(90deg, transparent 0%, #000 28%),
+          linear-gradient(180deg, transparent 0%, #000 34%);
+        -webkit-mask-composite: source-in;
                 mask-image:
-          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
-          linear-gradient(180deg, transparent 0%, #000 36%);
+          linear-gradient(90deg, transparent 0%, #000 28%),
+          linear-gradient(180deg, transparent 0%, #000 34%);
+                mask-composite: intersect;
       }
       .hero-title { margin-bottom: 16px; }
       .hero-sub { font-size: 16px; margin-bottom: 20px; max-width: none; }
