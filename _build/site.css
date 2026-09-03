@@ -458,13 +458,20 @@
     #hero::before {
       content: "";
       position: absolute;
-      inset: 0;
+      /* Only as tall as the blur reaches, rather than the whole band with the
+         mask doing the limiting. WebKit has a long history of applying a
+         backdrop-filter to an element's full box and ignoring the mask on it,
+         and the failure there would be the entire hero going soft. Bounded
+         this way the worst case is a blurred top strip with a hard edge, which
+         is the intent minus the fade. */
+      inset: 0 0 auto 0;
+      height: 27%;
       z-index: 0;
       pointer-events: none;
       -webkit-backdrop-filter: blur(34px);
               backdrop-filter: blur(34px);
-      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 6%, transparent 27%);
-              mask-image: linear-gradient(180deg, #000 0%, #000 6%, transparent 27%);
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 22%, transparent 100%);
+              mask-image: linear-gradient(180deg, #000 0%, #000 22%, transparent 100%);
     }
     /* The paper the words stand on, and the soft edges that keep the band from
        ending in a ruled line. It sits above the picture and below the copy. */
@@ -727,10 +734,11 @@
       /* the picture starts lower down here, so the blur at the head of the band
          has less to do — it only takes the edge off what shows past the copy */
       #hero::before {
+        height: 16%;
         -webkit-backdrop-filter: blur(20px);
                 backdrop-filter: blur(20px);
-        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 4%, transparent 16%);
-                mask-image: linear-gradient(180deg, #000 0%, #000 4%, transparent 16%);
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 25%, transparent 100%);
+                mask-image: linear-gradient(180deg, #000 0%, #000 25%, transparent 100%);
       }
       /* the field carries the whole band here too — only the foot closes */
       #hero::after {
