@@ -9,7 +9,8 @@ All copy lives in _build/site.json. Edit that file, then run:
 Sources in _build/ : site.json (all copy), site.css, site.js, contact.js,
 fonts.css (written by fetch_fonts.py). The mark and the icon set are not built
 here: make_mark.py cuts them out of the painting in _build/src and writes them
-to the root, and this only points at them. Writes: index.html, services.html,
+to the root, make_art.py and make_band.py write the two hero plates beside
+them, and this only points at all of them. Writes: index.html, services.html,
 websites.html, apps.html, saas.html, methodology.html, about.html, start.html,
 privacy.html, legal.html, the same ten under {fr,ru,es}/, plus 404.html,
 sitemap.xml, robots.txt, site.webmanifest and assets/site.<hash>.css.
@@ -69,12 +70,14 @@ def css_head(prefix):
                 "  --ic-gobag: " + data_uri("gobag-icon.webp", "image/webp") + ";\n"
                 "  --ic-fw: " + data_uri("FW.webp", "image/webp") + ";\n"
                 "  --ic-mark: " + data_uri("mark.webp", "image/webp") + ";\n"
-                "  --img-art: " + data_uri("halo-art.webp", "image/webp") + ";\n}\n\n")
+                "  --img-art: " + data_uri("halo-art.webp", "image/webp") + ";\n"
+                "  --img-band: " + data_uri("halo-band.webp", "image/webp") + ";\n}\n\n")
     return (":root{\n"
             '  --ic-gobag: url("%(p)sgobag-icon.webp");\n'
             '  --ic-fw: url("%(p)sFW.webp");\n'
             '  --ic-mark: url("%(p)smark.webp");\n'
-            '  --img-art: url("%(p)shalo-art.webp");\n}\n\n' % {"p": prefix})
+            '  --img-art: url("%(p)shalo-art.webp");\n'
+            '  --img-band: url("%(p)shalo-band.webp");\n}\n\n' % {"p": prefix})
 
 
 def stylesheet(prefix):
