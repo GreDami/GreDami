@@ -68,8 +68,6 @@
   --ic-gobag: url("../gobag-icon.webp");
   --ic-fw: url("../FW.webp");
   --ic-mark: url("../mark.webp");
-  --img-hero: url("../halo-hero.webp");
-  --img-hero-sm: url("../halo-hero-sm.webp");
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -460,6 +458,13 @@
        ══════════════════════════════════════════ */
     /* Tall hero, copy vertically centred in a left-hand column —
        the arrangement Seapoint uses: max-w-3xl block, narrower paragraph. */
+    /* No backdrop. The band carried a painting for a while, and then a drawing,
+       and both of them were work to keep out of the way of the words — masked,
+       tinted, veiled back over, retuned every time the type moved. The band is
+       bare paper now and the headline is the only thing in it, which is what
+       the arrangement was always doing when it worked. Nothing is layered
+       behind the copy, so there is no z-index, no isolation and no second
+       element here: just the band and its colour. */
     #hero {
       /* fills a laptop screen, but capped so a tall display
          does not turn the hero into an empty band */
@@ -467,40 +472,8 @@
       display: flex;
       align-items: center;
       padding: clamp(48px, 7vw, 88px) 0;
-
-      /* painted backdrop — the watercolour holds the right of the band and its
-         wall carries on behind the copy, so the headline sits on the painting's
-         paper. The page keeps its light reading; nothing outside #hero changes. */
-      position: relative;
-      isolation: isolate;
       background-color: var(--paper);
     }
-    /* One image spans the band: the drawing at its right, the sheet it is on
-       carried leftwards under the copy, built by _build/make_hero.py.
-       Pinned right so the birds keep their place and the bare paper is what a
-       narrower window eats into. Only the top and bottom edges are dissolved
-       here — those depend on the band's height, which the image cannot know. */
-    #hero::before {
-      content: ""; position: absolute; z-index: -1;
-      inset: 0;
-      background-image: var(--img-hero);
-      /* Just over cover. The drawing is pinned to the right edge and is already
-         a third of the image, so it needs none of the enlargement the old
-         painting did — that enlargement is what put a bird behind the headline.
-         The few percent over the band's height are only so the vertical
-         position has somewhere to travel, and so the cornices are cropped by
-         the window rather than floating clear of it. */
-      background-size: auto 104%;
-      background-position: 100% 46%;
-      background-repeat: no-repeat;
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 11%, #000 84%, transparent 100%);
-              mask-image: linear-gradient(to bottom, transparent 0, #000 11%, #000 84%, transparent 100%);
-    }
-    /* There is no second layer here any more. Both backdrops before this one
-       needed paper dragged back over the copy column, because both laid a tint
-       across the whole band and then had to take it off again where the words
-       fell. The image now arrives as --paper on its left two-thirds — the same
-       paper as the sections below — so there is nothing to take off. */
     /* The copy column stands on the same edge as the card grids in the
        sections below, which sit on a centred 1080 column rather than on the
        page gutter. The max() tracks that edge at every width: the column wins
@@ -658,23 +631,6 @@
 
     @media (max-height: 680px) {
       #hero { min-height: 0; }
-    }
-
-    /* between the wide layout and the phone the copy column reaches into the
-       painting, so it steps back and thins out before it is dropped entirely */
-    @media (max-width: 1280px) {
-      #hero::before { opacity: 0.62; }
-      #hero::after {
-        background: linear-gradient(96deg,
-          rgba(250, 250, 251, 0.80) 0%,
-          rgba(250, 250, 251, 0.72) 26%,
-          rgba(250, 250, 251, 0.42) 52%,
-          rgba(250, 250, 251, 0) 74%);
-      }
-    }
-
-    @media (max-width: 1040px) {
-      #hero::before { opacity: 0.42; }
     }
 
     /* ══════════════════════════════════════════
@@ -897,18 +853,6 @@
       .steps { grid-template-columns: 1fr; }
       .footer-in { grid-template-columns: 1fr; }
       .hero-cta .btn { width: 100%; justify-content: center; }
-      /* no room beside the copy on a phone: the drawing pulls back to the upper
-         corner, clear of the headline. It is a line drawing on bare paper, so
-         it survives being this faint better than the old painting did — but the
-         crop has to hold a bird, or all that is left is an ochre smudge. */
-      #hero::before {
-        background-image: var(--img-hero-sm);
-        background-position: 100% 8%;
-        background-size: auto 74%;
-        opacity: 0.42;
-        -webkit-mask-image: radial-gradient(76% 56% at 84% 16%, #000 0%, #000 22%, transparent 82%);
-                mask-image: radial-gradient(76% 56% at 84% 16%, #000 0%, #000 22%, transparent 82%);
-      }
       .footer-bottom { flex-direction: column; gap: 8px; }
       /* stacked and left-aligned, a short centred rule no longer lines up
          with anything: it runs the width of the copy it sits over */
@@ -1792,10 +1736,8 @@ nav::after {
 }
 nav.scrolled::after { opacity: 1; }
 
-/* ── hero ──
-   No wash of its own: the band is the painting and the paper it thins into.
-   The overflow rule stays — the painting is pinned past the band's right edge. */
-#hero { overflow: hidden; }
+/* the closing card's slow travel — the hero used to share it, back when it had
+   a painting pinned past its right edge to move */
 @keyframes drift {
   from { transform: translate3d(-2%, 1.5%, 0) scale(1); }
   to   { transform: translate3d(4%, -3%, 0) scale(1.09); }

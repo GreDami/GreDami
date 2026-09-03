@@ -68,17 +68,11 @@ def css_head(prefix):
         return (":root{\n"
                 "  --ic-gobag: " + data_uri("gobag-icon.webp", "image/webp") + ";\n"
                 "  --ic-fw: " + data_uri("FW.webp", "image/webp") + ";\n"
-                "  --ic-mark: " + data_uri("mark.webp", "image/webp") + ";\n"
-                "  --img-hero: " + data_uri("halo-hero.webp", "image/webp") + ";\n"
-                # inlining the small one too would double the weight to save
-                # nothing: standalone is a preview, not the deployed site
-                "  --img-hero-sm: var(--img-hero);\n}\n\n")
+                "  --ic-mark: " + data_uri("mark.webp", "image/webp") + ";\n}\n\n")
     return (":root{\n"
             '  --ic-gobag: url("%(p)sgobag-icon.webp");\n'
             '  --ic-fw: url("%(p)sFW.webp");\n'
-            '  --ic-mark: url("%(p)smark.webp");\n'
-            '  --img-hero: url("%(p)shalo-hero.webp");\n'
-            '  --img-hero-sm: url("%(p)shalo-hero-sm.webp");\n}\n\n' % {"p": prefix})
+            '  --ic-mark: url("%(p)smark.webp");\n}\n\n' % {"p": prefix})
 
 
 def stylesheet(prefix):
