@@ -682,15 +682,19 @@
        proportions, still dissolved into the field on the sides it does not
        fill. It is the same band read down the page instead of across it. */
     @media (max-width: 1040px) {
+      /* The blur at the head of the band comes off. It is there to soften the
+         picture's top edge under the bar, and from here down there is no such
+         edge — the band opens on the field, which is already out of focus.
+         Left on it would sit exactly where the bird now is, and a blurred bird
+         is the one thing this arrangement cannot afford. */
+      #hero::before { display: none; }
       #hero {
         align-items: flex-start;
+        /* With the bird at the head of the band there is nothing to reserve
+           room for underneath it, so the band closes on its contents. */
         min-height: 0;
         padding-top: clamp(28px, 5vw, 64px);
-        /* The room the picture stands up in, under the copy. It is deliberately
-           a little less than the picture is tall: the bird's head clears the
-           fold on a phone, and the rest of him is the reason to scroll. */
-        padding-bottom: clamp(250px, 38vh, 440px);
-        padding-bottom: clamp(230px, 34svh, 420px);
+        padding-bottom: clamp(48px, 7vw, 96px);
       }
       /* the rule over the proof line closes up: on a phone the copy has to
          hand over to the picture inside one screen */
@@ -710,35 +714,48 @@
         filter: blur(84px) saturate(1.24) brightness(1.04);
         transform: scaleX(1.08);
       }
+      /* Top right, beside the headline — the same reading as the wide band,
+         where the copy takes the left and the bird holds the right. Off the
+         right edge rather than flush to it: flush, his head landed on the end
+         of the longest line of copy, and pushed out he clears it without being
+         made smaller. What goes off-screen is the wall to his right, the part
+         with nothing in it.
+
+         The lift is a transform and not a `top`, because a percentage on `top`
+         is a percentage of the band and this has to be a fraction of the
+         picture: the bird sits at 42-76% of his own frame, so lifting the
+         frame by a third of itself brings him to the head of the band whatever
+         height the frame is given. Everything above him is wall, and the band
+         clips it.
+
+         The height is led by the width of the screen and only capped by its
+         height. That is what keeps him clear of the sentence at every size:
+         the headline's own size tracks the viewport width too, so the two grow
+         together and the bird's foot stays above the first line of body copy
+         from 360px all the way to 1040. */
       .hero-art::after {
         content: "";
         position: absolute;
         background: var(--img-art) 50% 48% / cover no-repeat;
-        /* Anchored to the foot of the band rather than filling its height, so
-           the bird stays the size he is in the drawing however tall the phone
-           is, and centred rather than pushed to one edge: a column of field
-           down one side of a narrow screen is not a composition, it is a
-           margin. */
-        top: auto;
-        bottom: 0;
-        right: 50%;
-        transform: translateX(50%);
-        height: clamp(300px, 46vh, 520px);
-        height: clamp(290px, 44svh, 500px);
-        /* here the height leads and the width follows it, the other way round
-           from the wide band: what a phone has to ration is vertical room */
+        top: 0;
+        bottom: auto;
+        right: -8%;
+        transform: translateY(-33%);
         width: auto;
         aspect-ratio: 940 / 1253;
-        max-width: 92%;
-        /* three edges to dissolve now instead of one: the two sides and the
-           top, all of them at once rather than one after the other */
+        max-width: 86%;
+        height: min(clamp(300px, 60vw, 600px), 56vh);
+        height: min(clamp(300px, 60vw, 600px), 56svh);
+        /* the right edge runs off the screen and the top is clipped, so the
+           two that are dissolved are the left, and the foot where the cornice
+           passes behind the sentence */
         -webkit-mask-image:
-          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
-          linear-gradient(180deg, transparent 0%, #000 28%);
+          linear-gradient(90deg, transparent 0%, #000 28%),
+          linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
         -webkit-mask-composite: source-in;
                 mask-image:
-          linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%),
-          linear-gradient(180deg, transparent 0%, #000 28%);
+          linear-gradient(90deg, transparent 0%, #000 28%),
+          linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
                 mask-composite: intersect;
       }
       /* the picture starts lower down here, so the blur at the head of the band
@@ -770,63 +787,22 @@
        screen really has. The picture is then made taller than that room, so it
        starts above the fold and the bird is on the first screen rather than
        under it — the rest of him is the reason to scroll. */
+    /* ── phones ──
+       The arrangement is the one set above; what changes here is that a phone
+       screen has no slack in it. The copy is closed up until the picture fits
+       beside it — the two buttons share a row instead of stacking full width,
+       and every gap in the block comes in — and the picture is held to a
+       narrower range of heights than the width-led one above would give it,
+       because down here the sentence runs the full width of the screen and
+       there is nothing to spare between it and the bird. */
     @media (max-width: 560px) {
-      /* The blur at the head of the band comes off here. It is there to soften
-         the picture's top edge under the bar, and on a phone there is no such
-         edge to soften — the band opens on the field, which is already out of
-         focus. Left on, it would be sitting exactly where the bird now is, and
-         a blurred bird is the one thing this arrangement cannot afford. */
-      #hero::before { display: none; }
       #hero {
-        /* With the bird up at the head of the band there is nothing left to
-           reserve room for underneath, so the band simply closes on its
-           contents. Held to a screen height it would only be adding wall under
-           the proof line. */
-        min-height: 0;
         padding-bottom: clamp(44px, 7vh, 84px);
         padding-bottom: clamp(44px, 7svh, 84px);
       }
-      /* Standing on the right and running off that edge, the way it does on a
-         wide screen, rather than centred under the copy. Not a column of its
-         own: at this width a column would leave the sentence about 180px to
-         wrap in, which is nine or ten lines, and the hero would come out
-         taller with a smaller bird in it. Instead the copy keeps the full
-         width and the picture comes up beside its last two lines, which are
-         the short ones. Its height is what keeps them apart — tall enough and
-         the bird would be behind the buttons. */
       .hero-art::after {
-        /* Top right, beside the headline. Off the right edge rather than flush
-           to it: flush, the bird's head landed on the end of the longest line
-           of copy, and pushed out he clears it without having to be made
-           smaller — what goes off-screen is the wall to his right, the part
-           with nothing in it.
-
-           The lift is a transform and not a `top`, because a percentage on
-           `top` would be a percentage of the band and this has to be a
-           fraction of the picture: the bird sits at 42-76% of his own frame,
-           so lifting the frame by a third of itself brings him to the top of
-           the band whatever height the frame is given. Everything above him
-           is wall, and the band clips it. */
-        top: 0;
-        bottom: auto;
-        right: -8%;
-        transform: translateY(-33%);
-        max-width: 86%;
-        /* held to a narrow range: the taller this gets the further down the
-           bird lands, and the copy underneath him has no give in it */
         height: clamp(250px, 34vh, 340px);
         height: clamp(250px, 34svh, 340px);
-        /* the right edge runs off the screen and the top is clipped, so the
-           two that are dissolved are the left, and the foot where the cornice
-           passes behind the sentence */
-        -webkit-mask-image:
-          linear-gradient(90deg, transparent 0%, #000 28%),
-          linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
-        -webkit-mask-composite: source-in;
-                mask-image:
-          linear-gradient(90deg, transparent 0%, #000 28%),
-          linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
-                mask-composite: intersect;
       }
       .hero-title { margin-bottom: 16px; }
       .hero-sub { font-size: 16px; margin-bottom: 20px; max-width: none; }
@@ -834,9 +810,9 @@
         margin-top: 18px; padding-top: 13px;
         font-size: 12.5px; gap: 6px 18px;
       }
-      /* the id keeps this ahead of the 640px rule that stacks them full width */
-      /* side by side while they fit, and stacked the moment they do not —
-         nowrap here ran them off the edge of a 360 screen */
+      /* side by side while they fit, and stacked the moment they do not.
+         The id keeps this ahead of the 640px rule that stacks them full
+         width; nowrap ran them off the edge of a 360 screen. */
       #hero .hero-cta { gap: 10px; }
       #hero .hero-cta .btn {
         width: auto; flex: 0 1 auto; padding: 12px 16px;
@@ -2194,7 +2170,7 @@ nav.scrolled::after { opacity: 1; }
    used to be. */
 .nf {
   padding-top: clamp(0px, 1.5vw, 18px);
-  padding-bottom: clamp(56px, 8vw, 104px);
+  padding-bottom: clamp(16px, 2.5vw, 40px);
   position: relative; isolation: isolate;
 }
 /* a wash of the accent behind the numeral, so the block has a light source
