@@ -426,7 +426,8 @@
        on a wide screen, the gutter takes over once 1240 no longer fits. */
     #hero .shell {
       position: relative;
-      z-index: 1;
+      /* clear of the blur at the head of the band, which is at 2 */
+      z-index: 3;
       width: 100%;
       padding-inline: max(var(--gut), calc((100% - var(--col)) / 2));
     }
@@ -470,7 +471,12 @@
          is the intent minus the fade. */
       inset: 0 0 auto 0;
       height: 27%;
-      z-index: 0;
+      /* Above the picture, and that is the whole of it. ::before is generated
+         as the band's FIRST child, so at the same z-index it painted before
+         .hero-art and the only thing behind it to filter was the flat
+         background colour — the blur was a no-op for as long as it was there.
+         A backdrop-filter has to be above what it is meant to be filtering. */
+      z-index: 2;
       pointer-events: none;
       -webkit-backdrop-filter: blur(34px);
               backdrop-filter: blur(34px);
@@ -765,18 +771,20 @@
        starts above the fold and the bird is on the first screen rather than
        under it — the rest of him is the reason to scroll. */
     @media (max-width: 560px) {
+      /* The blur at the head of the band comes off here. It is there to soften
+         the picture's top edge under the bar, and on a phone there is no such
+         edge to soften — the band opens on the field, which is already out of
+         focus. Left on, it would be sitting exactly where the bird now is, and
+         a blurred bird is the one thing this arrangement cannot afford. */
+      #hero::before { display: none; }
       #hero {
-        /* Not a full screen any more. Held to the whole height, the band put
-           a stretch of empty wall between the copy and the picture, because
-           the picture is anchored to the foot of it — the bird ended up under
-           the text rather than beside it however the picture was sized. Let
-           the band close up on its contents and the bird comes up level with
-           the last lines. What is left of the screen shows the top of the
-           section below, which is no loss. */
-        min-height: calc(74vh - var(--nav-h));
-        min-height: calc(74svh - var(--nav-h));
-        padding-bottom: clamp(105px, 17vh, 230px);
-        padding-bottom: clamp(100px, 17svh, 220px);
+        /* With the bird up at the head of the band there is nothing left to
+           reserve room for underneath, so the band simply closes on its
+           contents. Held to a screen height it would only be adding wall under
+           the proof line. */
+        min-height: 0;
+        padding-bottom: clamp(44px, 7vh, 84px);
+        padding-bottom: clamp(44px, 7svh, 84px);
       }
       /* Standing on the right and running off that edge, the way it does on a
          wide screen, rather than centred under the copy. Not a column of its
@@ -787,24 +795,37 @@
          the short ones. Its height is what keeps them apart — tall enough and
          the bird would be behind the buttons. */
       .hero-art::after {
-        /* Off the edge rather than flush to it. Flush, the bird's head landed
-           on the end of the proof line; pushed out, he clears it without
-           having to be made smaller, and what goes off-screen is the wall to
-           his right, which is the part with nothing in it. */
+        /* Top right, beside the headline. Off the right edge rather than flush
+           to it: flush, the bird's head landed on the end of the longest line
+           of copy, and pushed out he clears it without having to be made
+           smaller — what goes off-screen is the wall to his right, the part
+           with nothing in it.
+
+           The lift is a transform and not a `top`, because a percentage on
+           `top` would be a percentage of the band and this has to be a
+           fraction of the picture: the bird sits at 42-76% of his own frame,
+           so lifting the frame by a third of itself brings him to the top of
+           the band whatever height the frame is given. Everything above him
+           is wall, and the band clips it. */
+        top: 0;
+        bottom: auto;
         right: -8%;
-        transform: none;
+        transform: translateY(-33%);
         max-width: 86%;
-        height: clamp(255px, 40vh, 390px);
-        height: clamp(255px, 40svh, 390px);
-        /* the right edge runs off the screen, so only two edges are dissolved
-           now: the left, and the head where it passes the copy */
+        /* held to a narrow range: the taller this gets the further down the
+           bird lands, and the copy underneath him has no give in it */
+        height: clamp(250px, 34vh, 340px);
+        height: clamp(250px, 34svh, 340px);
+        /* the right edge runs off the screen and the top is clipped, so the
+           two that are dissolved are the left, and the foot where the cornice
+           passes behind the sentence */
         -webkit-mask-image:
           linear-gradient(90deg, transparent 0%, #000 28%),
-          linear-gradient(180deg, transparent 0%, #000 34%);
+          linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
         -webkit-mask-composite: source-in;
                 mask-image:
           linear-gradient(90deg, transparent 0%, #000 28%),
-          linear-gradient(180deg, transparent 0%, #000 34%);
+          linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
                 mask-composite: intersect;
       }
       .hero-title { margin-bottom: 16px; }
@@ -2160,21 +2181,134 @@ nav.scrolled::after { opacity: 1; }
 
 /* ══════════════════════════════════════════
    404
-   ══════════════════════════════════════════ */
-.nf { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; }
+   ══════════════════════════════════════════
+   The page is built around the address that failed rather than around an
+   apology. The numeral says which error it is — the nought is the halo, the
+   same ring as the mark, with a dashed orbit still going round looking for the
+   page — and under it the address the visitor actually asked for is set out
+   with the part this site does not know underlined the way a spell-checker
+   underlines a word. The suggestion that follows completes that figure: the
+   script measures the address against every real page and offers the nearest
+   one. Everything the script adds is written hidden and revealed; with no
+   script the page is the headline and the four cards, which is the page it
+   used to be. */
+.nf {
+  padding-top: clamp(0px, 1.5vw, 18px);
+  padding-bottom: clamp(56px, 8vw, 104px);
+  position: relative; isolation: isolate;
+}
+/* a wash of the accent behind the numeral, so the block has a light source
+   rather than sitting flat on the paper */
+.nf::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: -12vw; top: -14%; width: min(760px, 82vw); aspect-ratio: 1;
+  background: radial-gradient(circle, var(--accent2-soft), transparent 68%);
+}
+.nf .eyebrow { display: block; margin-bottom: clamp(14px, 2vw, 20px); }
+
+/* ── the numeral ──
+   Two outlined fours with the halo between them. The digits are hollow so the
+   ring is the only solid thing in the line and the eye lands there. */
 .nf-code {
+  display: flex; align-items: center; gap: clamp(2px, 0.8vw, 10px);
   font-family: var(--f-display); font-weight: 800;
-  font-size: clamp(64px, 13vw, 132px); line-height: 1;
-  letter-spacing: -0.045em; color: var(--accent-soft);
-  -webkit-text-stroke: 1px var(--accent-line);
-  margin-bottom: clamp(10px, 2vw, 18px);
+  font-size: clamp(76px, 15vw, 168px); line-height: 0.86;
+  letter-spacing: -0.05em;
+  margin-bottom: clamp(18px, 3vw, 32px);
 }
-.nf-links { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 30px; }
-.nf-links a {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 14.5px; font-weight: 500; color: var(--mid);
+.nf-code span {
+  color: var(--accent-soft);
+  -webkit-text-stroke: 1.5px var(--accent-line);
 }
-.nf-links a:hover { color: var(--accent); }
+.nf-halo { width: 0.88em; height: 0.88em; display: block; flex: none; }
+.nf-halo-orbit {
+  transform-box: view-box; transform-origin: 50% 50%;
+  animation: nf-orbit 22s linear infinite;
+}
+@keyframes nf-orbit { to { transform: rotate(360deg); } }
+
+/* ── the address ──
+   Written by the script, so it is hidden until there is something true to put
+   in it: opened from a file, or reached at /404 directly, there is no address
+   worth reporting and the card never appears. */
+.nf-addr {
+  display: flex; align-items: flex-start; gap: 12px;
+  max-width: 640px; margin-top: clamp(26px, 4vw, 38px);
+  padding: 13px 17px;
+  background: var(--surface); border: 1px solid var(--hair);
+  border-radius: 12px; box-shadow: var(--shadow);
+}
+.nf-addr > svg { flex: none; margin-top: 2px; color: var(--faint); }
+.nf-addr-in { min-width: 0; }
+.nf-addr-lbl {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--faint); margin-bottom: 5px;
+}
+.nf-url {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 14px; line-height: 1.5; color: var(--mid);
+  word-break: break-all;
+}
+/* the segment this site has no page for, marked the way a misspelling is */
+.nf-bad {
+  color: #B42318; font-weight: 600;
+  text-decoration: underline wavy #B42318;
+  text-decoration-thickness: 1.5px; text-underline-offset: 3px;
+}
+.nf-guess {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px;
+  margin-top: 16px; font-size: 14.5px; color: var(--mid);
+}
+.nf-guess a {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 7px 15px 7px 14px; border-radius: 100px;
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  color: var(--accent); font-weight: 600; font-size: 14px;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.nf-guess a:hover { background: var(--surface); border-color: var(--accent); }
+.nf-guess a svg { transition: transform 0.24s cubic-bezier(0.2, 0.75, 0.25, 1); }
+.nf-guess a:hover svg { transform: translateX(3px); }
+
+/* ── the four ways on ──
+   The service cards' row, four across: same edge, same pool under the
+   pointer, same lift, so the page a visitor lands on by accident behaves like
+   every page they meant to reach. */
+.nf-pick {
+  display: flex; align-items: center; gap: 18px;
+  margin: clamp(44px, 6vw, 72px) 0 clamp(14px, 2vw, 20px);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--faint);
+}
+.nf-pick::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+.nf-grid { grid-template-columns: repeat(4, 1fr); }
+.nf-card { gap: 0; }
+.nf-card h2 {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(17px, 1.9vw, 19.5px); letter-spacing: -0.016em;
+  line-height: 1.2; margin-bottom: 8px;
+}
+.nf-card p {
+  font-size: 14px; line-height: 1.55; color: var(--mid); margin-bottom: 18px;
+}
+.nf-card-go {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: auto; font-size: 13.5px; font-weight: 600; color: var(--accent);
+}
+.nf-card-go svg { transition: transform 0.24s cubic-bezier(0.2, 0.75, 0.25, 1); }
+.nf-card:hover .nf-card-go svg { transform: translateX(4px); }
+
+@media (max-width: 1080px) {
+  .nf-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .nf-grid { grid-template-columns: 1fr; }
+  .nf-code { font-size: clamp(66px, 21vw, 110px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf-halo-orbit { animation: none; }
+  .nf-guess a svg, .nf-card-go svg { transition: none; }
+}
 
 /* ══════════════════════════════════════════
    Consent

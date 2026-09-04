@@ -56,6 +56,7 @@ def data_uri(rel, mime):
 
 SITE_JS = read("_build/site.js")
 CONTACT_JS = read("_build/contact.js")
+NF_JS = read("_build/nf.js")
 FONT_CSS = read("_build/fonts.css")
 
 # The pictures the stylesheet reaches for. Deployed they are ordinary files the
@@ -544,6 +545,27 @@ def footer(lang, t, extra_js=""):
 </body>
 </html>
 """
+
+
+# ── the nought in 404 ──
+# The mark is a halo and a halo is a nought, so the middle digit is the ring
+# itself, with a dashed orbit outside it still going round — the page has not
+# stopped looking for the address, it just has not got one. Drawn here rather
+# than reused from the painted mark, because it has to take the accent from the
+# stylesheet and turn.
+HALO_SVG = """<svg class="nf-halo" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="nf-sweep" x1="14" y1="8" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="var(--accent-deep, #36187C)"/>
+                  <stop offset="1" stop-color="var(--accent2-lit, #36187C)"/>
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="31" stroke="url(#nf-sweep)" stroke-width="11"/>
+              <g class="nf-halo-orbit">
+                <circle cx="50" cy="50" r="45" stroke="var(--accent-line, rgba(54,24,124,0.22))" stroke-width="1.4" stroke-dasharray="3 9" stroke-linecap="round"/>
+                <circle cx="50" cy="5" r="3.4" fill="var(--accent2, #36187C)" stroke="none"/>
+              </g>
+            </svg>"""
 
 
 ARROW = '<svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -1268,30 +1290,109 @@ def not_found():
     """GitHub Pages hands this back for any address it cannot match, at any
     depth and in any language. It is built in English with every link written
     from the site root, because the address it is answering is unknown — and it
-    is marked noindex, since it is not a page anyone should arrive at twice."""
+    is marked noindex, since it is not a page anyone should arrive at twice.
+
+    What the page cannot know at build time it works out in the browser: the
+    address that failed is read out of the bar, the part of it this site has no
+    page for is marked, and the nearest real page — in the language the address
+    was already in — is offered. The index that comparison runs against is
+    written into the page, because forty names is a smaller thing to send than
+    any request that would go and look them up."""
     global ABS
     ABS = True
     lang = "en"
     t = T[lang]
-    links = [(href(lang, lang, "index.html"), t["nf.home"]),
-             (href(lang, lang, SERVICES), t["nf.services"]),
-             (href(lang, lang, CAT_PAGE["sites"]), t["nf.work"]),
-             (href(lang, lang, CONTACT), t["nf.contact"])]
+
+    # The names a page is looked for under but is not filed as, so a link typed
+    # from memory lands on the right suggestion. Latin and language-neutral:
+    # the four sites share one set of file names, and it is a file name any
+    # address is a guess at.
+    aliases = {
+        "index.html": ["home", "index", "main", "accueil", "inicio", "glavnaya"],
+        SERVICES: ["service", "pricing", "prices", "offer", "whatwedo",
+                   "servicios", "precios", "tarifs", "prestations", "uslugi"],
+        CAT_PAGE["sites"]: ["work", "portfolio", "projects", "sites", "websites",
+                            "casestudies", "showcase", "proyectos", "realisations"],
+        CAT_PAGE["apps"]: ["apps", "application", "applications", "macos",
+                           "mobile", "appstore", "aplicaciones", "prilozheniya"],
+        CAT_PAGE["saas"]: ["platform", "platforms", "webapp", "plataforma",
+                           "plateforme"],
+        METHOD: ["process", "method", "methode", "howwework", "approach",
+                 "metodologia", "protsess"],
+        ABOUT: ["about", "team", "studio", "whoweare", "company", "aboutus",
+                "apropos", "sobrenosotros", "equipo", "equipe", "onas", "kompaniya"],
+        CONTACT: ["contact", "contacts", "kontakt", "kontakty", "contacto",
+                  "contactez", "getintouch", "hire", "quote", "brief", "enquiry",
+                  "devis", "presupuesto"],
+        PRIVACY: ["privacy", "privacypolicy", "cookies", "gdpr", "rgpd",
+                  "confidentialite", "privacidad", "konfidentsialnost"],
+        LEGAL: ["legal", "terms", "legalnotice", "imprint", "impressum",
+                "mentionslegales", "avisolegal", "tos", "conditions"],
+    }
+
+    # Every page in every language, as the site addresses them, for the guess
+    # the script makes. The label is in that page's own language: an address
+    # under /ru/ is answered with a Russian page under its Russian name.
+    index = []
+    for l in LANGS:
+        tl = T[l]
+        for page, key in [("index.html", "nav.home"), (SERVICES, "nav.services"),
+                          (CAT_PAGE["sites"], "cat.sites.label"),
+                          (CAT_PAGE["apps"], "cat.apps.label"),
+                          (CAT_PAGE["saas"], "cat.saas.label"),
+                          (METHOD, "nav.process"), (ABOUT, "nav.about"),
+                          (CONTACT, "cta.start"), (PRIVACY, "footer.privacy"),
+                          (LEGAL, "footer.legal")]:
+            index.append({"p": href(lang, l, page), "l": tl[key], "g": l,
+                          "k": aliases[page]})
+
+    nf_js = (NF_JS
+             .replace("__PAGES__", json.dumps(index, ensure_ascii=False))
+             .replace("__LANGS__", json.dumps(LANGS)))
+
+    cards = [(href(lang, lang, "index.html"), t["nf.home"], t["nf.home.d"]),
+             (href(lang, lang, SERVICES), t["nf.services"], t["nf.services.d"]),
+             (href(lang, lang, CAT_PAGE["sites"]), t["nf.work"], t["nf.work.d"]),
+             (href(lang, lang, CONTACT), t["nf.contact"], t["nf.contact.d"])]
     rows = "\n".join(
-        '          <a href="' + h + '">' + ARROW_SM + " <span>" + e(label)
-        + "</span></a>" for h, label in links)
+        '          <a class="line nf-card" href="' + h + '">\n'
+        '            <h2>' + e(name) + '</h2>\n'
+        '            <p>' + e(desc) + '</p>\n'
+        '            <span class="nf-card-go">' + e(h) + " " + ARROW_SM + "</span>\n"
+        '          </a>' for h, name, desc in cards)
 
     body = f"""
   <main id="main">
     <section>
       <div class="shell">
         <div class="nf">
-          <p class="nf-code" aria-hidden="true">404</p>
+          <span class="eyebrow">{e(t["nf.eyebrow"])}</span>
+
+          <p class="nf-code" aria-hidden="true">
+            <span>4</span>
+            {HALO_SVG}
+            <span>4</span>
+          </p>
+
           <div class="page-head" style="margin-bottom:0;">
             <h1 class="page-title">{e(t["nf.title"])}</h1>
             <p class="page-sub">{e(t["nf.sub"])}</p>
           </div>
-          <div class="nf-links">
+
+          <div class="nf-addr" id="nf-addr" hidden>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <div class="nf-addr-in">
+              <p class="nf-addr-lbl">{e(t["nf.asked"])}</p>
+              <p class="nf-url" id="nf-url"></p>
+              <p class="nf-guess" id="nf-guess" hidden>
+                <span>{e(t["nf.guess"])}</span>
+                <a id="nf-guess-link" href="{href(lang, lang, "index.html")}"><span id="nf-guess-label"></span> {ARROW_SM}</a>
+              </p>
+            </div>
+          </div>
+
+          <p class="nf-pick">{e(t["nf.pick"])}</p>
+          <div class="line-grid nf-grid">
 {rows}
           </div>
         </div>
@@ -1305,7 +1406,8 @@ def not_found():
     out = (head(lang, "", t["nf.meta.title"], t["nf.meta.desc"],
                 noindex=True, canonical=False)
            + nav(lang, "404.html", t, lang_page="index.html")
-           + body + footer(lang, t))
+           + body
+           + footer(lang, t, extra_js='\n  <script>\n' + nf_js + '\n  </script>'))
     ABS = False
     return out
 

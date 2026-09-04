@@ -422,6 +422,14 @@
     "nf.services": "Services",
     "nf.work": "What we build",
     "nf.contact": "Start a project",
+    "nf.eyebrow": "Error 404",
+    "nf.asked": "The address you asked for",
+    "nf.guess": "Did you mean",
+    "nf.pick": "Or pick the page up from here",
+    "nf.home.d": "The studio, the work, and where a project starts",
+    "nf.services.d": "What we take on, and what each engagement includes",
+    "nf.work.d": "Websites, apps and SaaS platforms already shipped",
+    "nf.contact.d": "Tell us what you need — a reply within a day or two",
     "hero.art.alt": "A blue pigeon in green sunglasses perched on the cornice of an ochre building"
   },
   "ru": {
@@ -847,6 +855,14 @@
     "nf.services": "Услуги",
     "nf.work": "Что мы делаем",
     "nf.contact": "Начать проект",
+    "nf.eyebrow": "Ошибка 404",
+    "nf.asked": "Запрошенный адрес",
+    "nf.guess": "Возможно, вы искали",
+    "nf.pick": "Или продолжите с одной из этих страниц",
+    "nf.home.d": "Студия, работы и с чего начинается проект",
+    "nf.services.d": "Чем мы занимаемся и что входит в каждую работу",
+    "nf.work.d": "Сайты, приложения и SaaS-платформы, которые уже работают",
+    "nf.contact.d": "Расскажите, что нужно — ответим за день-два",
     "hero.art.alt": "Синий голубь в зелёных солнечных очках на карнизе охристого здания"
   },
   "fr": {
@@ -1272,6 +1288,14 @@
     "nf.services": "Services",
     "nf.work": "Ce que nous construisons",
     "nf.contact": "Démarrer un projet",
+    "nf.eyebrow": "Erreur 404",
+    "nf.asked": "L'adresse demandée",
+    "nf.guess": "Vous cherchiez peut-être",
+    "nf.pick": "Ou reprenez par l'une de ces pages",
+    "nf.home.d": "Le studio, les projets et le point de départ",
+    "nf.services.d": "Ce que nous prenons en charge, et ce que comprend chaque mission",
+    "nf.work.d": "Sites, applications et plateformes SaaS déjà livrés",
+    "nf.contact.d": "Dites-nous ce dont vous avez besoin — réponse sous un ou deux jours",
     "hero.art.alt": "Un pigeon bleu à lunettes de soleil vertes posé sur la corniche d'un immeuble ocre"
   },
   "es": {
@@ -1697,6 +1721,14 @@
     "nf.services": "Servicios",
     "nf.work": "Lo que construimos",
     "nf.contact": "Iniciar un proyecto",
+    "nf.eyebrow": "Error 404",
+    "nf.asked": "La dirección solicitada",
+    "nf.guess": "Quizá buscabas",
+    "nf.pick": "O continúa por una de estas páginas",
+    "nf.home.d": "El estudio, los proyectos y por dónde empieza todo",
+    "nf.services.d": "Lo que hacemos y qué incluye cada proyecto",
+    "nf.work.d": "Webs, apps y plataformas SaaS ya publicadas",
+    "nf.contact.d": "Cuéntanos qué necesitas — respuesta en uno o dos días",
     "hero.art.alt": "Una paloma azul con gafas de sol verdes posada en la cornisa de un edificio ocre"
   }
 }
