@@ -1444,6 +1444,17 @@ input:focus, select:focus, textarea:focus {
 }
 
 .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* The honeypot. Off the canvas rather than display:none, which the
+   better bots read as "skip this one" — the point is that they fill it. */
+.hp {
+  position: absolute; left: -9999px; width: 1px; height: 1px;
+  overflow: hidden;
+}
+/* Turnstile draws itself into this and the form gap spaces it. Blocked
+   or not yet rendered it is empty, and an empty box should not leave a
+   22px hole above the button. */
+.cf-turnstile:empty { display: none; }
 .textarea-wrap { position: relative; }
 
 .mic-btn {

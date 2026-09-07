@@ -156,6 +156,14 @@ CAT_PAGE = {"sites": "websites.html", "apps": "apps.html", "saas": "saas.html"}
 CATS = ["sites", "apps", "saas"]
 SITE = "https://gredami.com"
 EMAIL = "contact@gredami.com"
+
+# The contact form posts here instead of writing to a database from the
+# browser. The Worker holds the mail key and does the spam checks; its
+# source is _build/worker.js, deployed by hand in the Cloudflare dashboard.
+FORM_ENDPOINT = "https://gredami-lead.gredami.workers.dev/"
+# Public by design — it is read off the page by Turnstile itself. The
+# secret half never leaves the Worker.
+TURNSTILE_KEY = "0x4AAAAAAErH7m3RCSdPGelk"
 LOCALE = {"en": "en_US", "fr": "fr_FR", "ru": "ru_RU", "es": "es_ES"}
 
 
@@ -1454,6 +1462,7 @@ def contact(lang):
         <div class="contact-layout">
           <div class="form-card">
             <form id="inquiryForm"
+                  data-endpoint="{FORM_ENDPOINT}"
                   data-page-lang="{lang}"
                   data-sending="{e(t["c.sending"])}"
                   data-send="{e(t["c.submit"])}"
@@ -1462,6 +1471,14 @@ def contact(lang):
                   data-lang-ru="{e(T["ru"]["lang.name"])}"
                   data-lang-fr="{e(T["fr"]["lang.name"])}"
                   data-lang-es="{e(T["es"]["lang.name"])}">
+
+              <!-- Not display:none — some bots skip what is not rendered, and
+                   fill everything else. Off-screen with the tab order and the
+                   autofill both told to leave it alone. -->
+              <div class="hp" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+              </div>
 
               <div class="row-2">
                 <div>
@@ -1509,6 +1526,8 @@ def contact(lang):
               </div>
 
               <p class="error-msg" id="errorMsg" role="alert">{e(t["c.error"])} <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+
+              <div class="cf-turnstile" data-sitekey="{TURNSTILE_KEY}" data-language="{lang}"></div>
 
               <div>
                 <button type="submit" class="submit-btn" id="submitBtn">
@@ -1565,7 +1584,7 @@ def contact(lang):
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script>\n{CONTACT_JS}\n  </script>
 
 """

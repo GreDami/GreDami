@@ -46,7 +46,7 @@
   <meta name="twitter:image" content="https://gredami.com/og-image.png" />
 
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/site.81c5357ec0.css">
+  <link rel="stylesheet" href="assets/site.5bd64c3e56.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 
@@ -123,6 +123,7 @@
         <div class="contact-layout">
           <div class="form-card">
             <form id="inquiryForm"
+                  data-endpoint="https://gredami-lead.gredami.workers.dev/"
                   data-page-lang="en"
                   data-sending="Sending…"
                   data-send="Send your request"
@@ -131,6 +132,14 @@
                   data-lang-ru="Русский"
                   data-lang-fr="Français"
                   data-lang-es="Español">
+
+              <!-- Not display:none — some bots skip what is not rendered, and
+                   fill everything else. Off-screen with the tab order and the
+                   autofill both told to leave it alone. -->
+              <div class="hp" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+              </div>
 
               <div class="row-2">
                 <div>
@@ -186,6 +195,8 @@
               </div>
 
               <p class="error-msg" id="errorMsg" role="alert">Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@gredami.com">contact@gredami.com</a></p>
+
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAErH7m3RCSdPGelk" data-language="en"></div>
 
               <div>
                 <button type="submit" class="submit-btn" id="submitBtn">
@@ -258,7 +269,7 @@
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script>
 (function () {
   'use strict';
@@ -267,120 +278,154 @@
   if (!form) return;
   var S = form.dataset;          // localized strings come from data-* on the form
 
+  // Used to tell a person filling in a form from a script posting one. Read at
+  // parse time, which is as close to "the page appeared" as this script gets.
+  var OPENED = Date.now();
+
   /* ── dictation ───────────────────────────────────────────── */
-  (function () {
-    var micBtn = document.getElementById('micBtn');
-    var desc = document.getElementById('details');
-    var micNote = document.getElementById('micNote');
-    var micLangRow = document.getElementById('micLangRow');
-    var langBtns = document.querySelectorAll('.mic-lang-btn');
-    var Impl = window.SpeechRecognition || window.webkitSpeechRecognition;
+  // Wrapped: dictation is a nicety, sending the form is not. If speech
+  // recognition throws on some browser we have not seen, the submit handler
+  // below must still be installed.
+  try {
+    (function () {
+      var micBtn = document.getElementById('micBtn');
+      var desc = document.getElementById('details');
+      var micNote = document.getElementById('micNote');
+      var micLangRow = document.getElementById('micLangRow');
+      var langBtns = document.querySelectorAll('.mic-lang-btn');
+      var Impl = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    if (!Impl) { micBtn.hidden = true; micLangRow.hidden = true; return; }
+      if (!Impl) { micBtn.hidden = true; micLangRow.hidden = true; return; }
 
-    var LOCALES = { en: 'en-US', ru: 'ru-RU', fr: 'fr-FR', es: 'es-ES' };
-    var NAMES = { en: S.langEn, ru: S.langRu, fr: S.langFr, es: S.langEs };
-    var current = LOCALES[S.pageLang] ? S.pageLang : 'en';
-    var recognition = null, listening = false, baseText = '', restart = false;
+      var LOCALES = { en: 'en-US', ru: 'ru-RU', fr: 'fr-FR', es: 'es-ES' };
+      var NAMES = { en: S.langEn, ru: S.langRu, fr: S.langFr, es: S.langEs };
+      var current = LOCALES[S.pageLang] ? S.pageLang : 'en';
+      var recognition = null, listening = false, baseText = '', restart = false;
 
-    function setActive() {
-      langBtns.forEach(function (b) {
-        b.classList.toggle('active', b.dataset.lang === current);
+      function setActive() {
+        langBtns.forEach(function (b) {
+          b.classList.toggle('active', b.dataset.lang === current);
+        });
+      }
+      setActive();
+
+      langBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.dataset.lang === current) return;
+          current = btn.dataset.lang;
+          setActive();
+          if (listening) { restart = true; recognition.stop(); }
+        });
       });
-    }
-    setActive();
 
-    langBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        if (btn.dataset.lang === current) return;
-        current = btn.dataset.lang;
-        setActive();
-        if (listening) { restart = true; recognition.stop(); }
+      function start() {
+        baseText = desc.value.trim() ? desc.value.trim() + ' ' : '';
+        recognition = new Impl();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = LOCALES[current] || 'en-US';
+
+        recognition.onstart = function () {
+          listening = true;
+          micBtn.classList.add('listening');
+          micNote.textContent = (S.listening || '').replace('{lang}', NAMES[current] || current);
+          micNote.style.display = 'block';
+        };
+        recognition.onresult = function (e) {
+          var t = '';
+          for (var i = 0; i < e.results.length; i++) t += e.results[i][0].transcript;
+          desc.value = baseText + t;
+        };
+        recognition.onerror = function (e) { console.warn('Speech recognition:', e.error); };
+        recognition.onend = function () {
+          listening = false;
+          micBtn.classList.remove('listening');
+          micNote.style.display = 'none';
+          if (restart) { restart = false; start(); }
+        };
+        recognition.start();
+      }
+
+      micBtn.addEventListener('click', function () {
+        if (listening) recognition.stop(); else start();
       });
-    });
-
-    function start() {
-      baseText = desc.value.trim() ? desc.value.trim() + ' ' : '';
-      recognition = new Impl();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = LOCALES[current] || 'en-US';
-
-      recognition.onstart = function () {
-        listening = true;
-        micBtn.classList.add('listening');
-        micNote.textContent = (S.listening || '').replace('{lang}', NAMES[current] || current);
-        micNote.style.display = 'block';
-      };
-      recognition.onresult = function (e) {
-        var t = '';
-        for (var i = 0; i < e.results.length; i++) t += e.results[i][0].transcript;
-        desc.value = baseText + t;
-      };
-      recognition.onerror = function (e) { console.warn('Speech recognition:', e.error); };
-      recognition.onend = function () {
-        listening = false;
-        micBtn.classList.remove('listening');
-        micNote.style.display = 'none';
-        if (restart) { restart = false; start(); }
-      };
-      recognition.start();
-    }
-
-    micBtn.addEventListener('click', function () {
-      if (listening) recognition.stop(); else start();
-    });
-  })();
+    })();
+  } catch (err) {
+    console.warn('Dictation unavailable:', err);
+  }
 
   /* ── submit ──────────────────────────────────────────────── */
-  var supabaseClient = window.supabase.createClient(
-    'https://kpqvfaqtxaglzaufqzcu.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwcXZmYXF0eGFnbHphdWZxemN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNzM3MDMsImV4cCI6MjA5Nzk0OTcwM30.u0X9WybIZHBk260gdpFFSOd4qP6fLNjGAxEikPOEbSE'
-  );
+  var btn = document.getElementById('submitBtn');
+  var btnText = document.getElementById('submitBtnText');
+  var errorMsg = document.getElementById('errorMsg');
+
+  function fail() {
+    btn.disabled = false;
+    btnText.textContent = S.send || 'Send';
+    errorMsg.style.display = 'block';
+    // A Turnstile token is single-use and expires; whatever went wrong, the
+    // one in the form is spent. Without this a second attempt always fails.
+    if (window.turnstile) { try { window.turnstile.reset(); } catch (e) { /* not rendered */ } }
+  }
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
-    var btn = document.getElementById('submitBtn');
-    var btnText = document.getElementById('submitBtnText');
-    var errorMsg = document.getElementById('errorMsg');
-
     var f = form.elements;
-    var name = f.name.value.trim();
-    var email = f.email.value.trim();
-    var company = f.company.value.trim();
-    var phone = f.phone.value.trim();
-    var service = f.service.value;
-    var details = f.details.value.trim();
-
-    // the leads table has four columns — keep the extra fields inside description
-    var description = details;
-    var extra = [];
-    if (company) extra.push('Company: ' + company);
-    if (phone) extra.push('Phone: ' + phone);
-    extra.push('Language: ' + (S.pageLang || 'en'));
-    description += '\n\n---\n' + extra.join('\n');
+    var token = f['cf-turnstile-response'] ? f['cf-turnstile-response'].value : '';
 
     errorMsg.style.display = 'none';
     btn.disabled = true;
     btnText.textContent = S.sending || 'Sending…';
 
-    var res = await supabaseClient.from('leads').insert({
-      type: service, description: description, name: name, email: email
-    });
+    // No token means Turnstile never ran — usually a blocker or a dead
+    // network. The server would refuse it anyway; failing here saves a
+    // round trip and shows the same message, which carries the email address.
+    if (!token) { fail(); return; }
 
-    if (res.error) {
-      console.error(res.error);
-      btn.disabled = false;
-      btnText.textContent = S.send || 'Send';
-      errorMsg.style.display = 'block';
+    var payload = {
+      name: f.name.value.trim(),
+      email: f.email.value.trim(),
+      company: f.company.value.trim(),
+      phone: f.phone.value.trim(),
+      service: f.service.value,
+      details: f.details.value.trim(),
+      website: f.website ? f.website.value : '',   // honeypot: people leave it empty
+      elapsed: Date.now() - OPENED,
+      lang: S.pageLang || 'en',
+      turnstile: token
+    };
+
+    var res;
+    try {
+      res = await fetch(S.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      // Offline, DNS, a blocked request. Without this the button sat disabled
+      // on "Sending…" for ever and the person had nothing to act on.
+      console.error('Contact form:', err);
+      fail();
+      return;
+    }
+
+    if (!res.ok) {
+      console.error('Contact form:', res.status);
+      fail();
       return;
     }
 
     document.getElementById('formView').style.display = 'none';
-    document.getElementById('successBox').style.display = 'block';
+    var box = document.getElementById('successBox');
+    box.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // The form it was reading has just been hidden, so a screen reader or a
+    // keyboard is left with no position on the page. This is what the
+    // tabindex="-1" on the box is for.
+    box.focus();
   });
 })();
 
