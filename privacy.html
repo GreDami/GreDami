@@ -125,6 +125,7 @@
           <p>You can reach us about anything on this page at <a href="mailto:contact@gredami.com">contact@gredami.com</a>.</p>
           <h2>What we collect</h2>
           <p><b>When you write to us.</b> The enquiry form asks for your name and email address, and optionally your company and phone number. It also carries whatever you type into the message, the kind of work you picked, and which language version of the site you were reading.</p>
+          <p><b>When the form is sent.</b> An anti-spam check reads your IP address and a few signals from your browser, so that a person can be told apart from a script. It is not used to identify you, or to follow you from one site to another.</p>
           <p><b>If you allow measurement.</b> Analytics records the pages you opened, roughly where in the world you are, the kind of device and browser you used, and the site that sent you here. It never receives your name or your email address, and it is not loaded at all unless you allow it.</p>
           <p><b>What the server writes down.</b> Our host keeps ordinary access logs — an IP address, a timestamp, the page requested. We do not control these and do not use them.</p>
           <p>We do not ask for anything else. There is no account to create, no tracking pixel, and no advertising network anywhere on this site.</p>
@@ -141,7 +142,8 @@
           <ul>
             <li><b>Our host.</b> The site is served by GitHub Pages (GitHub, Inc., United States), which necessarily handles the request in order to answer it. Transfers outside the EU rest on the European Commission&#x27;s standard contractual clauses.</li>
             <li><b>Google.</b> Only if you allowed measurement, and only the analytics data described above.</li>
-            <li><b>Whoever carries the enquiry form.</b></li>
+            <li><b>Cloudflare.</b> The enquiry form posts to a Cloudflare Worker, and Cloudflare Turnstile checks that a person and not a script is sending it — for which it sees your IP address and a few signals from your browser. Cloudflare, Inc. is established in the United States; transfers rest on the European Commission&#x27;s standard contractual clauses.</li>
+            <li><b>Resend.</b> Carries your enquiry to our mailbox as email. We send from Resend&#x27;s European region, so the message itself is processed inside the European Union.</li>
           </ul>
           <p>Nobody else. We do not sell, rent or trade what you send us, and we do not use it to advertise to you elsewhere.</p>
           <h2>How long we keep it</h2>
@@ -155,7 +157,7 @@
           <p>Write to <a href="mailto:contact@gredami.com">contact@gredami.com</a> and we will answer within a month. If our answer does not satisfy you, you may complain to the French supervisory authority, the <a href="https://www.cnil.fr/en/plaintes" target="_blank" rel="noopener">CNIL</a>, or to the authority where you live.</p>
           <h2>Changes to this notice</h2>
           <p>If what we do changes, this page changes with it and the date below moves. Nothing here is applied retroactively to data already collected under an earlier version.</p>
-          <p class="prose-updated">Last updated 2 September 2026</p>
+          <p class="prose-updated">Last updated 7 September 2026</p>
         </div>
       </div>
     </section>

@@ -297,7 +297,7 @@
     "priv.label": "Privacy",
     "priv.title": "What we collect, and why",
     "priv.sub": "Short version: we keep what you send us so we can answer it, we count visits only if you say yes, and we sell nothing to anyone",
-    "priv.updated": "Last updated 2 September 2026",
+    "priv.updated": "Last updated 7 September 2026",
     "priv.sections": [
       {
         "h": "Who is responsible",
@@ -310,6 +310,7 @@
         "h": "What we collect",
         "body": [
           "**When you write to us.** The enquiry form asks for your name and email address, and optionally your company and phone number. It also carries whatever you type into the message, the kind of work you picked, and which language version of the site you were reading.",
+          "**When the form is sent.** An anti-spam check reads your IP address and a few signals from your browser, so that a person can be told apart from a script. It is not used to identify you, or to follow you from one site to another.",
           "**If you allow measurement.** Analytics records the pages you opened, roughly where in the world you are, the kind of device and browser you used, and the site that sent you here. It never receives your name or your email address, and it is not loaded at all unless you allow it.",
           "**What the server writes down.** Our host keeps ordinary access logs — an IP address, a timestamp, the page requested. We do not control these and do not use them.",
           "We do not ask for anything else. There is no account to create, no tracking pixel, and no advertising network anywhere on this site."
@@ -335,7 +336,8 @@
         "body": [
           "- **Our host.** The site is served by GitHub Pages (GitHub, Inc., United States), which necessarily handles the request in order to answer it. Transfers outside the EU rest on the European Commission's standard contractual clauses.",
           "- **Google.** Only if you allowed measurement, and only the analytics data described above.",
-          "- **Whoever carries the enquiry form.**",
+          "- **Cloudflare.** The enquiry form posts to a Cloudflare Worker, and Cloudflare Turnstile checks that a person and not a script is sending it — for which it sees your IP address and a few signals from your browser. Cloudflare, Inc. is established in the United States; transfers rest on the European Commission's standard contractual clauses.",
+          "- **Resend.** Carries your enquiry to our mailbox as email. We send from Resend's European region, so the message itself is processed inside the European Union.",
           "Nobody else. We do not sell, rent or trade what you send us, and we do not use it to advertise to you elsewhere."
         ]
       },
@@ -730,7 +732,7 @@
     "priv.label": "Конфиденциальность",
     "priv.title": "Что мы собираем и зачем",
     "priv.sub": "Коротко: мы храним то, что вы нам присылаете, чтобы ответить, считаем визиты только с вашего согласия и ничего никому не продаём",
-    "priv.updated": "Обновлено 2 сентября 2026 года",
+    "priv.updated": "Обновлено 7 сентября 2026 года",
     "priv.sections": [
       {
         "h": "Кто отвечает за данные",
@@ -743,6 +745,7 @@
         "h": "Какие данные собираются",
         "body": [
           "**Когда вы нам пишете.** Форма запрашивает имя и адрес электронной почты, а также — по желанию — компанию и телефон. Вместе с ними передаются текст сообщения, выбранный вид работ и языковая версия сайта, которую вы читали.",
+          "**При отправке формы.** Проверка на спам считывает ваш IP-адрес и несколько признаков браузера, чтобы отличить человека от скрипта. Она не используется для того, чтобы вас опознать или отследить на других сайтах.",
           "**Если вы разрешили измерение.** Аналитика фиксирует открытые страницы, приблизительное местоположение, тип устройства и браузера, а также сайт, откуда вы пришли. Она никогда не получает ваше имя или почту и вообще не загружается без вашего согласия.",
           "**Что записывает сервер.** Хостинг ведёт обычные журналы обращений: IP-адрес, время, запрошенная страница. Мы ими не управляем и не пользуемся.",
           "Больше мы ничего не спрашиваем. Здесь нет регистрации, нет трекинговых пикселей и нет рекламных сетей."
@@ -768,7 +771,8 @@
         "body": [
           "- **Хостинг.** Сайт отдаётся через GitHub Pages (GitHub, Inc., США), который неизбежно обрабатывает запрос, чтобы на него ответить. Передача за пределы ЕС опирается на стандартные договорные условия Европейской комиссии.",
           "- **Google.** Только если вы разрешили измерение, и только в объёме, описанном выше.",
-          "- **Сервис, доставляющий форму.**",
+          "- **Cloudflare.** Заявку принимает Cloudflare Worker, а Cloudflare Turnstile проверяет, что её отправил человек, а не скрипт, — для этого он видит ваш IP-адрес и несколько признаков браузера. Компания Cloudflare, Inc. находится в США; передача опирается на стандартные договорные условия Европейской комиссии.",
+          "- **Resend.** Доставляет вашу заявку в наш почтовый ящик письмом. Отправка идёт через европейский регион Resend, поэтому само письмо обрабатывается в Европейском союзе.",
           "Больше никому. Мы не продаём, не сдаём в аренду и не обмениваем то, что вы нам присылаете, и не используем это для рекламы вам где-либо ещё."
         ]
       },
@@ -1163,7 +1167,7 @@
     "priv.label": "Confidentialité",
     "priv.title": "Ce que nous collectons, et pourquoi",
     "priv.sub": "En résumé : nous conservons ce que vous nous envoyez pour pouvoir y répondre, nous comptons les visites uniquement si vous l'acceptez, et nous ne vendons rien à personne",
-    "priv.updated": "Dernière mise à jour le 2 septembre 2026",
+    "priv.updated": "Dernière mise à jour le 7 septembre 2026",
     "priv.sections": [
       {
         "h": "Responsable du traitement",
@@ -1176,6 +1180,7 @@
         "h": "Données collectées",
         "body": [
           "**Lorsque vous nous écrivez.** Le formulaire de contact demande votre nom et votre adresse e-mail, et facultativement votre société et votre numéro de téléphone. Il transmet également le contenu de votre message, le type de prestation choisi et la version linguistique du site que vous consultiez.",
+          "**À l'envoi du formulaire.** Un contrôle anti-spam lit votre adresse IP et quelques signaux de votre navigateur, afin de distinguer une personne d'un script. Il ne sert ni à vous identifier, ni à vous suivre d'un site à l'autre.",
           "**Si vous autorisez la mesure d'audience.** L'outil de statistiques enregistre les pages ouvertes, votre localisation approximative, le type d'appareil et de navigateur utilisé, ainsi que le site qui vous a orienté ici. Il ne reçoit jamais votre nom ni votre adresse e-mail, et il n'est pas chargé du tout sans votre accord.",
           "**Ce que consigne le serveur.** Notre hébergeur conserve des journaux d'accès ordinaires : adresse IP, horodatage, page demandée. Nous ne les maîtrisons pas et ne les exploitons pas.",
           "Nous ne demandons rien d'autre. Aucun compte à créer, aucun pixel de suivi, aucune régie publicitaire sur ce site."
@@ -1201,7 +1206,8 @@
         "body": [
           "- **Notre hébergeur.** Le site est servi par GitHub Pages (GitHub, Inc., États-Unis), qui traite nécessairement la requête pour y répondre. Les transferts hors Union européenne reposent sur les clauses contractuelles types de la Commission européenne.",
           "- **Google.** Uniquement si vous avez autorisé la mesure d'audience, et uniquement pour les données décrites ci-dessus.",
-          "- **Le service qui achemine le formulaire.**",
+          "- **Cloudflare.** Le formulaire est reçu par un Worker Cloudflare, et Cloudflare Turnstile vérifie qu'il est envoyé par une personne et non par un script — ce pour quoi il voit votre adresse IP et quelques signaux de votre navigateur. Cloudflare, Inc. est établie aux États-Unis ; les transferts reposent sur les clauses contractuelles types de la Commission européenne.",
+          "- **Resend.** Achemine votre demande jusqu'à notre boîte mail. Nous émettons depuis la région européenne de Resend : le message lui-même est donc traité dans l'Union européenne.",
           "Personne d'autre. Nous ne vendons, ne louons ni n'échangeons ce que vous nous envoyez, et nous ne l'utilisons pas pour vous adresser de la publicité ailleurs."
         ]
       },
@@ -1596,7 +1602,7 @@
     "priv.label": "Privacidad",
     "priv.title": "Qué recogemos, y por qué",
     "priv.sub": "En resumen: guardamos lo que usted nos envía para poder responderle, contamos las visitas solo si nos da permiso, y no vendemos nada a nadie",
-    "priv.updated": "Última actualización: 2 de septiembre de 2026",
+    "priv.updated": "Última actualización: 7 de septiembre de 2026",
     "priv.sections": [
       {
         "h": "Quién es el responsable",
@@ -1609,6 +1615,7 @@
         "h": "Qué datos recogemos",
         "body": [
           "**Cuando nos escribe.** El formulario pide su nombre y su dirección de correo electrónico y, opcionalmente, su empresa y su teléfono. Transmite además el texto de su mensaje, el tipo de trabajo que ha elegido y la versión lingüística del sitio que estaba leyendo.",
+          "**Al enviar el formulario.** Una comprobación antispam lee su dirección IP y algunas señales de su navegador para distinguir a una persona de un script. No se utiliza para identificarle ni para seguirle de un sitio a otro.",
           "**Si autoriza la medición.** La herramienta de estadísticas registra las páginas abiertas, su ubicación aproximada, el tipo de dispositivo y navegador y el sitio que le trajo hasta aquí. Nunca recibe su nombre ni su correo electrónico, y no se carga en absoluto sin su consentimiento.",
           "**Lo que anota el servidor.** Nuestro proveedor de alojamiento conserva registros de acceso ordinarios: dirección IP, marca de tiempo y página solicitada. No los controlamos ni los utilizamos.",
           "No pedimos nada más. No hay cuenta que crear, ni píxeles de seguimiento, ni redes publicitarias en este sitio."
@@ -1634,7 +1641,8 @@
         "body": [
           "- **Nuestro alojamiento.** El sitio se sirve mediante GitHub Pages (GitHub, Inc., Estados Unidos), que necesariamente trata la petición para poder responderla. Las transferencias fuera de la Unión Europea se amparan en las cláusulas contractuales tipo de la Comisión Europea.",
           "- **Google.** Solo si ha autorizado la medición, y solo con los datos descritos más arriba.",
-          "- **El servicio que transporta el formulario.**",
+          "- **Cloudflare.** El formulario lo recibe un Worker de Cloudflare, y Cloudflare Turnstile comprueba que lo envía una persona y no un script, para lo cual ve su dirección IP y algunas señales de su navegador. Cloudflare, Inc. tiene su sede en Estados Unidos; las transferencias se amparan en las cláusulas contractuales tipo de la Comisión Europea.",
+          "- **Resend.** Lleva su consulta hasta nuestro buzón en forma de correo electrónico. Enviamos desde la región europea de Resend, de modo que el mensaje se trata dentro de la Unión Europea.",
           "Nadie más. No vendemos, alquilamos ni intercambiamos lo que usted nos envía, ni lo usamos para dirigirle publicidad en otros sitios."
         ]
       },
