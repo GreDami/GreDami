@@ -42,17 +42,23 @@ paint and is filled.
     the bird   crown to tail, ending where the coping crosses in front of him
     the coping the corner he is standing on, cut to a little either side of
                him — a ledge, not the building
-    the head   cropped close under the beak. At favicon sizes the bird's head
-               is four pixels of the height and the glasses vanish with it;
-               this throws away everything else to keep what is recognisable.
 
-and four files, because the places an icon lands do not agree on what to do
-with a transparent corner:
+One picture, and every file below is that picture at a different size. The
+icons used to be a second framing — the head alone, cropped under the beak —
+because a whole bird at sixteen pixels is four pixels of head and the glasses
+go with it. That is still true and it is still the cost: at 16 the green is
+two pixels and what is left is a blue bird on a bar. It buys the thing that
+matters more, which is that the tab, the home screen and the nav all carry the
+same mark, and at 32 — which is what a tab strip actually asks for on any
+screen worth having — the glasses are back and it reads.
 
-    mark.webp             bird and ledge, alpha kept — the stylesheet's mark
-    favicon.png/.ico      the head, alpha kept — a tab strip is any colour
-    apple-touch-icon.png  the head on page colour, opaque — iOS lays
-                          transparency on black and rounds corners itself
+Four files, because the places an icon lands do not agree on what to do with a
+transparent corner:
+
+    mark.webp             alpha kept — the stylesheet's mark
+    favicon.png/.ico      alpha kept — a tab strip is any colour
+    apple-touch-icon.png  on page colour, opaque — iOS lays transparency on
+                          black and rounds corners itself
     icon-maskable.webp    the same, pulled into Android's 80% safe circle
 
 Small sizes are sharpened after the resample: the glasses are the whole
@@ -77,10 +83,6 @@ BIRD = (392, 606, 848, 1140)
 # overhangs, and stopped on the right before the arm plunges out of the
 # picture. Any more and the mark is a building with a bird on it.
 LEDGE = (416, 984, 830, 1180)
-# The head, squared, for the sizes the body cannot survive. Cut under the beak
-# and just past the far temple: at 32 pixels this is two green lenses and a
-# blue head, which is as much as an icon that size can say.
-HEAD = (404, 618, 620, 834)
 
 PAGE = (250, 250, 251)           # --paper, what the opaque icons stand on
 
@@ -265,8 +267,6 @@ def square(im, size, inset=1.0, ground=None):
 
 
 mark = perched()
-head = cut(HEAD, bird_score, 46.0)
-head = head.crop(head.getbbox())
 
 written = []
 
@@ -283,17 +283,17 @@ def save(name, im, **kw):
 save("mark.webp", down(mark, 288), format="WEBP", quality=90, method=6,
      exact=True)
 
-save("favicon.png", square(head, 192, 0.98), format="PNG", optimize=True)
+save("favicon.png", square(mark, 192, 0.98), format="PNG", optimize=True)
 ico = ROOT / "favicon.ico"
-square(head, 48, 0.98).save(ico, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)])
+square(mark, 48, 0.98).save(ico, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)])
 written.append(("favicon.ico", (48, 48), ico.stat().st_size))
 
 # home screen: opaque, and held off the edges — iOS rounds the corners itself
-# and a bird touching them loses his beak to the mask
-save("apple-touch-icon.png", square(head, 180, 0.84, PAGE),
+# and a mark touching them loses its beak on one side and its ledge on the other
+save("apple-touch-icon.png", square(mark, 180, 0.84, PAGE),
      format="PNG", optimize=True)
 # Android maskable: everything that matters inside the middle 80%
-save("icon-maskable.webp", square(head, 512, 0.63, PAGE),
+save("icon-maskable.webp", square(mark, 512, 0.63, PAGE),
      format="WEBP", quality=88, method=6)
 
 for name, size, nbytes in written:

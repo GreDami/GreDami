@@ -9,19 +9,19 @@
   "theme_color": "#FAFAFB",
   "icons": [
     {
-      "src": "/favicon.png?v=6c1f8d8c",
+      "src": "/favicon.png?v=61bb9952",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "/apple-touch-icon.png?v=3be439fc",
+      "src": "/apple-touch-icon.png?v=5b231393",
       "type": "image/png",
       "sizes": "180x180",
       "purpose": "any"
     },
     {
-      "src": "/icon-maskable.webp?v=3e3662c6",
+      "src": "/icon-maskable.webp?v=7f8658ee",
       "type": "image/webp",
       "sizes": "512x512",
       "purpose": "maskable"
