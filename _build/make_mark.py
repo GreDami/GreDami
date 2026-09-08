@@ -284,8 +284,19 @@ save("mark.webp", down(mark, 288), format="WEBP", quality=90, method=6,
      exact=True)
 
 save("favicon.png", square(mark, 192, 0.98), format="PNG", optimize=True)
+
+# The .ico is what a tab strip actually reads, and it holds three pictures
+# rather than one. Handed a single image and a list of sizes, Pillow makes the
+# small frames by shrinking the large one — so 16 and 32 came out of a 48-pixel
+# square that had already lost most of the drawing, and the glasses with it.
+# Each frame is cut from the full-resolution mark instead, resampled once and
+# sharpened for the size it is going to be seen at. They are also given the
+# whole square: at 16 pixels a margin costs a pixel off the bird, and the
+# portrait shape leaves air down both sides regardless.
 ico = ROOT / "favicon.ico"
-square(mark, 48, 0.98).save(ico, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)])
+frames = {n: square(mark, n) for n in (48, 32, 16)}
+frames[48].save(ico, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)],
+                append_images=[frames[32], frames[16]])
 written.append(("favicon.ico", (48, 48), ico.stat().st_size))
 
 # home screen: opaque, and held off the edges — iOS rounds the corners itself
