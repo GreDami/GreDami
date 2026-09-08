@@ -98,8 +98,9 @@ CSS_HREF = "assets/site.%s.css" % hashlib.sha256(CSS.encode("utf-8")).hexdigest(
 # bird drawn again in curves: his outline traced off the plate the raster mark
 # is cut from, so the two are one shape and not two drawings of one bird. It is
 # squared off with a little air around it, so he never touches the edge of the
-# tab, and given lighter blues under a dark tab strip where the deep cobalt
-# would otherwise sink into the chrome.
+# tab, and given lighter blues, greens and greys under a dark tab strip where
+# the deep cobalt and the slate he stands on would otherwise sink into the
+# chrome.
 def favicon_svg():
     # square off the mark's own box and leave a margin, so the bird never
     # touches the edge of a tab whatever the drawing grows into
@@ -117,6 +118,9 @@ def favicon_svg():
       .s2 { stop-color: #4450C6; }
       .s3 { stop-color: #34BE83; }
       .s4 { stop-color: #1B8A55; }
+      .s5 { stop-color: #C2CBC6; }
+      .s6 { stop-color: #808B86; }
+      .s7 { stop-color: #5A6461; }
     }
   </style>
   <defs>""", 1)
@@ -791,7 +795,6 @@ def final_cta(lang, t, sec_href, sec_key):
     return f"""    <section id="contact">
       <div class="shell">
         <div class="final-cta">
-          <span class="eyebrow">{e(t["contact.label"])}</span>
           <h2 class="final-title">{e(t["contact.title"])}</h2>
           <p class="final-sub">{e(t["contact.sub"])}</p>
           <p class="final-body">{e(t["contact.body"])}</p>

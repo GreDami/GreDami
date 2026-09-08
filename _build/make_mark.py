@@ -11,37 +11,45 @@ one bird on this site and every place it appears it is the same one.
 
 Lifting him off that plate is a different problem from lifting him off paper.
 There is no sheet to flatten here and no lighting to correct; what there is, is
-a saturated ochre wall, a grey cornice he is perched on, and a bird painted in
-cobalt with a green frame over his eyes. Wall and cornice are warm — red above
-blue, every one of them, from the brightest render on the plaster to the shaded
-underside of the eave. The bird is cool everywhere he is not nearly black, and
-the near-black is his ink outline, which nothing in the building comes close
-to. So the key measures both: how cool a pixel is, and how dark. That separates
-him from the building in one pass and keeps the outline that makes the drawing
-read.
+a saturated ochre wall, a stone coping he is perched on, and a bird painted in
+cobalt with a green frame over his eyes. So there are two keys rather than one,
+because the bird and the coping are unlike the wall in different ways:
 
-What it does not do on its own is throw away the building's own line-work — the
-drawn edges of the cornice are as dark as his outline and score just as high.
-Those are dealt with by geometry rather than colour: the bird is one connected
-run of pixels and the cornice edges are others, so only the largest run is
-kept. That also settles the awkward part of the picture, which is that the roof
-crosses in front of his tail. Below the roof line he is simply not there, and
-the silhouette that comes out ends where the building starts — a bird sitting
-down, which is the shape he has in the illustration.
+    the bird   is cool — blue over red on the body, green over red on the
+               frames — everywhere he is not nearly black, and the near-black
+               is his ink outline, which nothing on that wall comes close to.
+               Cool or dark, then, against a wall that is neither.
+    the coping is neither cool nor warm: grey, and the only grey in the
+               picture. The wall reads about -170 on blue-minus-red and the
+               cream mouldings under the cap about -90, so a band either side
+               of zero takes the cap and leaves the building it belongs to.
 
-Two framings come out of the plate, because 16 pixels and 28 pixels do not want
-the same picture:
+Neither key throws away the drawn line-work of the building on its own — those
+edges are as dark as the bird's outline and score just as high. That is dealt
+with by geometry rather than colour: each piece is one connected run of pixels
+and the stray edges are others, so only the largest run is kept.
 
-    the bird   crown to tail, bounded underneath by the roof he is standing
-               on. A whole animal. This is the mark.
+Two things then have to be put back that the keys are too strict about. The
+first is the pale specular light on the bird's shoulder and breast, which is
+near-white and so scores as though it were wall; left alone it punches holes
+that are invisible on paper and show as violet freckles the moment the mark
+goes on the footer. The second is the reverse, and must not be put back: the
+wall genuinely does show through the gap under the brow bar. Both are enclosed
+pockets, so what separates them is what colour they are — a pocket of ochre is
+the wall seen through the drawing and stays open, a pocket of anything else is
+paint and is filled.
+
+    the bird   crown to tail, ending where the coping crosses in front of him
+    the coping the corner he is standing on, cut to a little either side of
+               him — a ledge, not the building
     the head   cropped close under the beak. At favicon sizes the bird's head
                is four pixels of the height and the glasses vanish with it;
-               this throws away the body to keep the part that is recognisable.
+               this throws away everything else to keep what is recognisable.
 
 and four files, because the places an icon lands do not agree on what to do
 with a transparent corner:
 
-    mark.webp             the bird, alpha kept — the stylesheet's mark
+    mark.webp             bird and ledge, alpha kept — the stylesheet's mark
     favicon.png/.ico      the head, alpha kept — a tab strip is any colour
     apple-touch-icon.png  the head on page colour, opaque — iOS lays
                           transparency on black and rounds corners itself
@@ -63,6 +71,12 @@ SRC = ROOT / "_build" / "src" / "halo3.png"
 # The bird entire, from the top of the frames to the tip of the tail, plus a
 # few pixels of wall on every side so the key has somewhere to start.
 BIRD = (392, 606, 848, 1140)
+# The corner of the coping he is standing on. The cap runs the length of the
+# roof and turns out of frame at both ends; this is the part of it that is a
+# base for a bird — a little wider than he is on the left, where his breast
+# overhangs, and stopped on the right before the arm plunges out of the
+# picture. Any more and the mark is a building with a bird on it.
+LEDGE = (416, 984, 830, 1180)
 # The head, squared, for the sizes the body cannot survive. Cut under the beak
 # and just past the far temple: at 32 pixels this is two green lenses and a
 # blue head, which is as much as an icon that size can say.
@@ -70,14 +84,12 @@ HEAD = (404, 618, 620, 834)
 
 PAGE = (250, 250, 251)           # --paper, what the opaque icons stand on
 
-# Below LO a pixel is the building; above HI it is the bird. Bare plaster sits
-# around -170 and the shaded cornice around -90, so the gap either side of this
-# pair is wide — these are not delicate numbers.
-LO, HI = 8.0, 46.0
+NEIGHBOURS = ((1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1))
+CROSS = ((1, 0), (-1, 0), (0, 1), (0, -1))
 
 
-def coolness(rgb):
-    """How far a pixel is from anything in the building.
+def bird_score(rgb):
+    """How far a pixel is from anything on the wall behind the bird.
 
     Blue over red carries the body, green over red the frames, and the last
     term carries the ink outline — which is neutral, and so scores nothing on
@@ -88,8 +100,23 @@ def coolness(rgb):
     return (b - r) + (g - r) * 0.35 + max(0.0, 60 - lum) * 1.5
 
 
+def stone_score(rgb):
+    """The same, for the coping: grey, and nothing else up there is.
+
+    Warm is the wall and the cream mouldings; cool is the bird, whose body
+    crosses this crop and must not be dragged into it. What is left in the
+    middle is the cap and its drawn edges.
+    """
+    r, g, b = rgb
+    lum = (r * 299 + g * 587 + b * 114) / 1000
+    if lum > 178:
+        return -100.0
+    return min(35 - abs(b - r), 40 + (g - r)) * 2.0
+
+
 def largest_run(solid, w, h):
-    """The biggest connected run of `solid` pixels — the bird, not the roof."""
+    """The biggest connected run of `solid` pixels — the subject, not the
+    building's line-work around it."""
     seen = [[False] * w for _ in range(h)]
     best = []
     for sy in range(h):
@@ -102,7 +129,8 @@ def largest_run(solid, w, h):
             while queue:
                 x, y = queue.popleft()
                 run.append((x, y))
-                for nx, ny in ((x+1, y), (x-1, y), (x, y+1), (x, y-1)):
+                for dx, dy in CROSS:
+                    nx, ny = x + dx, y + dy
                     if 0 <= nx < w and 0 <= ny < h and solid[ny][nx] and not seen[ny][nx]:
                         seen[ny][nx] = True
                         queue.append((nx, ny))
@@ -111,54 +139,108 @@ def largest_run(solid, w, h):
     return best
 
 
-NEIGHBOURS = ((1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1))
+def close_pockets(keep, src, w, h):
+    """Fill the enclosed gaps that are paint rather than wall.
+
+    A pocket the key left open is either light the key was too strict about —
+    the specular on the shoulder, the glare on a lens — or it is a genuine
+    hole in the drawing with the ochre wall behind it. Ochre is the whole
+    difference, so that is what is measured.
+    """
+    outside = [[False] * w for _ in range(h)]
+    queue = deque()
+    border = ([(x, 0) for x in range(w)] + [(x, h - 1) for x in range(w)]
+              + [(0, y) for y in range(h)] + [(w - 1, y) for y in range(h)])
+    for x, y in border:
+        if not keep[y][x] and not outside[y][x]:
+            outside[y][x] = True
+            queue.append((x, y))
+    while queue:
+        x, y = queue.popleft()
+        for dx, dy in CROSS:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < w and 0 <= ny < h and not keep[ny][nx] and not outside[ny][nx]:
+                outside[ny][nx] = True
+                queue.append((nx, ny))
+
+    seen = [[False] * w for _ in range(h)]
+    for sy in range(h):
+        for sx in range(w):
+            if keep[sy][sx] or outside[sy][sx] or seen[sy][sx]:
+                continue
+            queue = deque([(sx, sy)])
+            seen[sy][sx] = True
+            pocket = []
+            while queue:
+                x, y = queue.popleft()
+                pocket.append((x, y))
+                for dx, dy in CROSS:
+                    nx, ny = x + dx, y + dy
+                    if (0 <= nx < w and 0 <= ny < h and not keep[ny][nx]
+                            and not outside[ny][nx] and not seen[ny][nx]):
+                        seen[ny][nx] = True
+                        queue.append((nx, ny))
+            ochre = sum(1 for p in pocket if src[p][0] - src[p][2] > 60)
+            if ochre * 4 < len(pocket):
+                for x, y in pocket:
+                    keep[y][x] = True
 
 
-def key(im):
-    """Lift the bird off the building."""
+def key(im, score, hi, lo=8.0):
+    """Lift one piece of the picture off the wall behind it."""
     w, h = im.size
     src = im.load()
-    sc = [[coolness(src[x, y]) for x in range(w)] for y in range(h)]
-    solid = [[sc[y][x] >= HI for x in range(w)] for y in range(h)]
+    sc = [[score(src[x, y]) for x in range(w)] for y in range(h)]
+    solid = [[sc[y][x] >= hi for x in range(w)] for y in range(h)]
 
     keep = [[False] * w for _ in range(h)]
     for x, y in largest_run(solid, w, h):
         keep[y][x] = True
+    close_pockets(keep, src, w, h)
 
     out = Image.new("RGBA", (w, h))
     dst = out.load()
-    span = HI - LO
+    span = hi - lo
     for y in range(h):
         for x in range(w):
             if keep[y][x]:
                 dst[x, y] = src[x, y] + (255,)
                 continue
             # One ring of half-lit pixels around him, and no more: anything
-            # not touching the bird is wall, however it scored.
-            edge = [(x+dx, y+dy) for dx, dy in NEIGHBOURS
-                    if 0 <= x+dx < w and 0 <= y+dy < h and keep[y+dy][x+dx]]
+            # not touching the subject is wall, however it scored.
+            edge = [(x + dx, y + dy) for dx, dy in NEIGHBOURS
+                    if 0 <= x + dx < w and 0 <= y + dy < h and keep[y + dy][x + dx]]
             if not edge:
                 dst[x, y] = (0, 0, 0, 0)
                 continue
-            t = min(1.0, max(0.0, (sc[y][x] - LO) / span))
+            t = min(1.0, max(0.0, (sc[y][x] - lo) / span))
             a = t * t * (3 - 2 * t)
             if a <= 0.004:
                 dst[x, y] = (0, 0, 0, 0)
                 continue
-            # These pixels are part bird and part ochre wall. Left as they are
-            # they ring him in warm light, which is exactly what shows up the
-            # moment the mark is put on the dark footer — so the fringe is
-            # given the colour of the bird it touches and only its opacity is
+            # These pixels are part subject and part ochre wall. Left as they
+            # are they ring him in warm light, which is exactly what shows up
+            # the moment the mark is put on the dark footer — so the fringe is
+            # given the colour of what it touches and only its opacity is
             # allowed to fall away.
             mix = [sum(c) // len(edge) for c in zip(*(src[p] for p in edge))]
             dst[x, y] = tuple(mix) + (int(round(a * 255)),)
     return out
 
 
-def prepare(box):
-    """Crop, lift him off the building, then trim back to the paint."""
-    art = key(Image.open(SRC).convert("RGB").crop(box))
-    return art.crop(art.getbbox())
+def cut(box, score, hi):
+    return key(Image.open(SRC).convert("RGB").crop(box), score, hi)
+
+
+def perched():
+    """The bird on his ledge, back in the positions the plate has them in."""
+    bird = cut(BIRD, bird_score, 46.0)
+    ledge = cut(LEDGE, stone_score, 30.0)
+    x0, y0 = min(BIRD[0], LEDGE[0]), min(BIRD[1], LEDGE[1])
+    out = Image.new("RGBA", (max(BIRD[2], LEDGE[2]) - x0, max(BIRD[3], LEDGE[3]) - y0))
+    out.alpha_composite(ledge, (LEDGE[0] - x0, LEDGE[1] - y0))
+    out.alpha_composite(bird, (BIRD[0] - x0, BIRD[1] - y0))
+    return out.crop(out.getbbox())
 
 
 def down(im, size, sharpen=True):
@@ -182,8 +264,9 @@ def square(im, size, inset=1.0, ground=None):
     return canvas.convert("RGB") if ground else canvas
 
 
-bird = prepare(BIRD)
-head = prepare(HEAD)
+mark = perched()
+head = cut(HEAD, bird_score, 46.0)
+head = head.crop(head.getbbox())
 
 written = []
 
@@ -194,9 +277,10 @@ def save(name, im, **kw):
     written.append((name, im.size, path.stat().st_size))
 
 
-# the mark: the bird at his own proportions, no square to fit. The nav shows
-# him 29px tall and the footer 38, so 288 covers a 3x screen with room over
-save("mark.webp", down(bird, 288), format="WEBP", quality=90, method=6,
+# the mark: bird and ledge at their own proportions, no square to fit. The nav
+# shows them 34px tall and the footer 44, so 288 covers a 3x screen with room
+# over
+save("mark.webp", down(mark, 288), format="WEBP", quality=90, method=6,
      exact=True)
 
 save("favicon.png", square(head, 192, 0.98), format="PNG", optimize=True)
