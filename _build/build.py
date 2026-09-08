@@ -8,9 +8,9 @@ All copy lives in _build/site.json. Edit that file, then run:
 
 Sources in _build/ : site.json (all copy), site.css, site.js, contact.js,
 fonts.css (written by fetch_fonts.py). The mark and the icon set are not built
-here: make_mark.py cuts them out of the painting in _build/src and writes them
-to the root, make_art.py and make_band.py write the two hero plates beside
-them, and this only points at all of them. Writes: index.html, services.html,
+here: make_mark.py cuts them out of the hero illustration in _build/src and
+writes them to the root, make_art.py and make_band.py write the two hero plates
+beside them, and this only points at all of them. Writes: index.html, services.html,
 websites.html, apps.html, saas.html, methodology.html, about.html, start.html,
 privacy.html, legal.html, the same ten under {fr,ru,es}/, plus 404.html,
 sitemap.xml, robots.txt, site.webmanifest and assets/site.<hash>.css.
@@ -94,10 +94,12 @@ CSS_HREF = "assets/site.%s.css" % hashlib.sha256(CSS.encode("utf-8")).hexdigest(
 
 
 # Safari's pinned tab wants a vector, and it wants one it can flatten to a
-# single colour — a painting is no use to it. So the drawn bird stays on as the
-# mask icon: the same bird as the painting, squared off with a little air around
-# it so it never touches the edge of the tab, and lighter blues under a dark tab
-# strip where the deep gradient would otherwise sink into the chrome.
+# single colour — an illustration is no use to it. So the mask icon is the same
+# bird drawn again in curves: his outline traced off the plate the raster mark
+# is cut from, so the two are one shape and not two drawings of one bird. It is
+# squared off with a little air around it, so he never touches the edge of the
+# tab, and given lighter blues under a dark tab strip where the deep cobalt
+# would otherwise sink into the chrome.
 def favicon_svg():
     # square off the mark's own box and leave a margin, so the bird never
     # touches the edge of a tab whatever the drawing grows into
@@ -108,19 +110,13 @@ def favicon_svg():
     box = 'viewBox="%.2f %.2f %.2f %.2f"' % (
         x + w / 2 - side / 2, y + h / 2 - side / 2, side, side)
     s = s.replace(m.group(0), box, 1)
-    # and turned to face the same way as the painting. This is the only place
-    # the drawn bird still appears, so left to itself it was the one mark on
-    # the site looking the other way — and on a pinned tab, right beside the
-    # tabs carrying the painted one.
-    s = s.replace("</defs>", '</defs>\n  <g transform="translate(%.2f 0) scale(-1 1)">'
-                  % (2 * (x + w / 2 - side / 2) + side), 1)
-    s = s.replace("</svg>", "</g>\n</svg>", 1)
     return s.replace("<defs>", """<style>
     @media (prefers-color-scheme: dark) {
-      .s0 { stop-color: #7DA0FF; }
-      .s1 { stop-color: #8C86F2; }
-      .s2 { stop-color: #A98BFA; }
-      .s3 { fill: #A78BFA; stroke: #A78BFA; }
+      .s0 { stop-color: #8FA6FF; }
+      .s1 { stop-color: #6273E4; }
+      .s2 { stop-color: #4450C6; }
+      .s3 { stop-color: #34BE83; }
+      .s4 { stop-color: #1B8A55; }
     }
   </style>
   <defs>""", 1)
@@ -789,7 +785,9 @@ def steps_html(t):
 
 def final_cta(lang, t, sec_href, sec_key):
     """Closing call to action — the same block on the home page and on the
-    pages that carry the work and the methodology."""
+    pages that carry the work and the methodology. It is a full-bleed band
+    rather than a card: the section paints the violet ground edge to edge and
+    only the copy inside is held to a readable measure."""
     return f"""    <section id="contact">
       <div class="shell">
         <div class="final-cta">
@@ -799,7 +797,7 @@ def final_cta(lang, t, sec_href, sec_key):
           <p class="final-body">{e(t["contact.body"])}</p>
           <div class="final-actions">
             <a href="{href(lang, lang, CONTACT)}" class="btn btn-primary">
-              <span>{e(t["cta.start"])}</span> {ARROW}
+              <span>{e(t["cta.consult"])}</span> {ARROW}
             </a>
             <a href="{sec_href}" class="btn btn-ghost">{e(t[sec_key])}</a>
           </div>

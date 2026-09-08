@@ -41,6 +41,14 @@
       --accent2-lit:  var(--accent);
       --accent2-soft: rgba(54,24,124,0.09);
       --accent2-line: rgba(54,24,124,0.26);
+
+      /* The closing band. The footer below it is the accent at full strength;
+         this is the same violet let almost all the way out, so the page warms
+         into its ending over two steps instead of switching colour at the very
+         last edge. Light enough that the ink, the mid grey and the faint grey
+         all keep their contrast on it. */
+      --cta-top:    #F5F2FC;
+      --cta-ground: #E9E2F7;
       /* the travel from deep to light, reused by every moving edge */
       --sweep: linear-gradient(90deg, var(--accent-deep), var(--accent) 30%, var(--accent-lit) 62%, var(--accent2-lit) 100%);
       --shadow:      0 1px 2px rgba(15,14,19,0.05), 0 8px 24px rgba(15,14,19,0.05);
@@ -962,7 +970,6 @@
     /* ══════════════════════════════════════════
        Contact
        ══════════════════════════════════════════ */
-    #contact { padding-bottom: clamp(56px, 7vw, 92px); }
     .contact-box {
       background: var(--surface);
       border: 1px solid var(--hair);
@@ -1257,12 +1264,11 @@
     /* ══════════════════════════════════════════
        Final CTA
        ══════════════════════════════════════════ */
+    /* The band runs the full width of the page — no card, no gutter — and
+       the copy inside is what is held to a measure. This is the flat ground;
+       the gradient that lifts it towards the footer is added further down. */
+    #contact { background-color: var(--cta-ground); }
     .final-cta {
-      background: var(--surface);
-      border: 1px solid var(--hair);
-      border-top: 3px solid var(--accent);
-      border-radius: 18px;
-      padding: clamp(30px, 3.6vw, 46px) clamp(24px, 4vw, 52px);
       text-align: center;
       max-width: 820px; margin-inline: auto;
     }
@@ -1285,6 +1291,15 @@
       display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
     }
     .final-note { font-size: 13px; color: var(--faint); margin-top: 16px; }
+    /* a hairline outline is legible on paper and disappears on the wash, so
+       the second button gets a plate under it — the same fix the hero makes */
+    #contact .btn-ghost {
+      background: rgba(255,255,255,0.78);
+      border-color: var(--accent-line);
+    }
+    #contact .btn-ghost:hover {
+      background: var(--surface); border-color: var(--accent2-line);
+    }
 
     /* ══════════════════════════════════════════
        Footer additions
@@ -2101,25 +2116,25 @@ nav.scrolled::after { opacity: 1; }
   to   { left: 118%; }
 }
 
-/* ── closing card ──
-   The top edge travels from deep violet to light, and the same slow drift as
-   the hero sits behind the copy */
-.final-cta {
+/* ── closing band ──
+   The top edge travels from deep violet to light across the whole page, the
+   ground lifts from near-paper to the wash on the way down to the footer, and
+   the same slow drift as the hero sits behind the copy */
+#contact {
   position: relative; isolation: isolate; overflow: hidden;
-  border-top-color: transparent;
-  background-image: var(--sweep);
-  background-repeat: no-repeat;
-  background-size: 100% 3px;
-  background-position: 0 0;
-  background-origin: border-box;
-  background-clip: border-box;
+  background-image:
+    var(--sweep),
+    linear-gradient(180deg, var(--cta-top) 0%, var(--cta-ground) 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 3px, 100% 100%;
+  background-position: 0 0, 0 0;
 }
-.final-cta::after {
+#contact::after {
   content: ""; position: absolute; inset: -30% -12%; z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(42% 40% at 20% 12%, rgba(54,24,124,0.13), transparent 70%),
-    radial-gradient(40% 38% at 84% 88%, rgba(54,24,124,0.20), transparent 70%);
+    radial-gradient(42% 40% at 20% 12%, rgba(54,24,124,0.07), transparent 70%),
+    radial-gradient(40% 38% at 84% 88%, rgba(54,24,124,0.11), transparent 70%);
   animation: drift 28s ease-in-out infinite alternate;
 }
 
@@ -2362,7 +2377,7 @@ nav.scrolled::after { opacity: 1; }
    pointer pool and the wiping edges are dropped, and every element is left
    in the state it would have ended in. */
 @media (prefers-reduced-motion: reduce) {
-  .final-cta::after { animation: none; }
+  #contact::after { animation: none; }
   .hero-proof span::before, .eyebrow::before { animation: none; opacity: 1; transform: none; }
   .line::after { display: none; }
   .line::before,
