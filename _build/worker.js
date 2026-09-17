@@ -18,12 +18,21 @@
  *   NOTIFY_TO          plain text — where the lead is mailed
  */
 
-const ORIGINS = ['https://gredami.com', 'https://www.gredami.com'];
+/* CabiStock's contact form (its /a-propos page) posts here too: the app is the
+   studio's, and its correspondence belongs in the same inbox. Its host must
+   also be listed on the Turnstile widget, or the token never gets issued. */
+const ORIGINS = [
+  'https://gredami.com',
+  'https://www.gredami.com',
+  'https://cabistock.gredami.workers.dev',
+];
 
-/* The four the form offers. The values are deliberately untranslated in
-   build.py so a Spanish and a Russian enquiry arrive under the same name;
-   anything else means the payload was not built by our form. */
-const SERVICES = ['web', 'app', 'saas', 'design', 'growth', 'unsure'];
+/* The values the forms send. The first six are the options on gredami.com,
+   deliberately untranslated in build.py so a Spanish and a Russian enquiry
+   arrive under the same name. `cabistock` is sent by the CabiStock form, which
+   has no service picker, so its messages are recognisable in the subject line.
+   Anything else means the payload was not built by one of our forms. */
+const SERVICES = ['web', 'app', 'saas', 'design', 'growth', 'unsure', 'cabistock'];
 const LANGS = ['en', 'fr', 'ru', 'es'];
 
 const MAX = { name: 120, email: 200, company: 160, phone: 60, details: 8000 };
