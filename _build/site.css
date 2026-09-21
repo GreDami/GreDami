@@ -301,7 +301,9 @@
     .burger { display: none; }
 
     .drawer {
-      position: fixed; inset: 0; z-index: 200;
+      /* over the cookie notice (250) too: the drawer is modal, and on a phone
+         the notice covered the languages at its foot */
+      position: fixed; inset: 0; z-index: 260;
       background: var(--paper);
       display: flex; flex-direction: column;
       padding: 0 var(--gut) 40px;
