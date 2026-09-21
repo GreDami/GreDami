@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Builds the company mark and the whole icon set out of the hero illustration.
+Builds the company mark and the whole icon set out of the hero picture.
 
 The mark used to be a second bird — a watercolour pigeon in green aviators,
 painted on cream paper, kept in _build/src/mark.png. It was a good drawing and
@@ -9,38 +9,35 @@ carried a paler, softer, differently drawn animal, and a visitor had to be told
 they were the same character. So the mark is cut from the hero itself. There is
 one bird on this site and every place it appears it is the same one.
 
-Lifting him off that plate is a different problem from lifting him off paper.
-There is no sheet to flatten here and no lighting to correct; what there is, is
-a saturated ochre wall, a stone coping he is perched on, and a bird painted in
-cobalt with a green frame over his eyes. So there are two keys rather than one,
-because the bird and the coping are unlike the wall in different ways:
+The picture is low-poly — every face one flat colour, no brush and no line —
+and what the bird has to be lifted off is a yellow wall, the grey gutter along
+the ridge he is perched on, and the cream faces of the building under it. So
+there are two keys rather than one, because the bird and the gutter are unlike
+the wall in different ways:
 
     the bird   is cool — blue over red on the body, green over red on the
                frames — everywhere he is not nearly black, and the near-black
-               is his ink outline, which nothing on that wall comes close to.
-               Cool or dark, then, against a wall that is neither.
-    the coping is neither cool nor warm: grey, and the only grey in the
+               is the glass in his frames, which nothing on that wall comes
+               close to. Cool or dark, then, against a wall that is neither.
+    the gutter is neither cool nor warm: grey, and the only grey in the
                picture. The wall reads about -170 on blue-minus-red and the
-               cream mouldings under the cap about -90, so a band either side
-               of zero takes the cap and leaves the building it belongs to.
+               cream faces of the building -55 to -80, while even the gutter
+               face the light falls on stays within 30 of zero, so a band
+               either side of zero takes the gutter and leaves the building it
+               belongs to. The light face is also as bright as the cream, so
+               warmth decides it and not lightness.
 
-Neither key throws away the drawn line-work of the building on its own — those
-edges are as dark as the bird's outline and score just as high. That is dealt
-with by geometry rather than colour: each piece is one connected run of pixels
-and the stray edges are others, so only the largest run is kept.
+Each piece is then one connected run of pixels, and anything else either key
+happens to catch is another run, so only the largest is kept.
 
-Two things then have to be put back that the keys are too strict about. The
-first is the pale specular light on the bird's shoulder and breast, which is
-near-white and so scores as though it were wall; left alone it punches holes
-that are invisible on paper and show as violet freckles the moment the mark
-goes on the footer. The second is the reverse, and must not be put back: the
-wall genuinely does show through the gap under the brow bar. Both are enclosed
-pockets, so what separates them is what colour they are — a pocket of ochre is
-the wall seen through the drawing and stays open, a pocket of anything else is
-paint and is filled.
+Enclosed pockets the keys leave open are either paint they were too strict
+about — the one-pixel line where two faces of the gutter meet at the ridge —
+or the wall genuinely showing through, as it does between his breast and the
+gutter. Ochre is the whole difference, so that is what is measured: a pocket of
+ochre stays open, a pocket of anything else is paint and is filled.
 
-    the bird   crown to tail, ending where the coping crosses in front of him
-    the coping the corner he is standing on, cut to a little either side of
+    the bird   crown to tail, standing on the gutter
+    the gutter the ridge he is standing on, cut straight down at the ends of
                him — a ledge, not the building
 
 One picture, and every file below is that picture at a different size. The
@@ -64,25 +61,31 @@ transparent corner:
 Small sizes are sharpened after the resample: the glasses are the whole
 recognition down there and they need their edge back.
 
+And a fifth, halo-mark.svg, the vector build.py squares off into Safari's
+pinned-tab icon. A picture made of flat straight-edged faces traces cleanly,
+so it is not drawn again by hand: each piece's outline is traced off this same
+cut and kept to its corners, and the two are one shape.
+
     python3 _build/make_mark.py
 """
+import math
 import pathlib
 from collections import deque
 
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageOps
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SRC = ROOT / "_build" / "src" / "halo3.png"
+SRC = ROOT / "_build" / "src" / "halo4.png"
 
 # The bird entire, from the top of the frames to the tip of the tail, plus a
 # few pixels of wall on every side so the key has somewhere to start.
-BIRD = (392, 606, 848, 1140)
-# The corner of the coping he is standing on. The cap runs the length of the
-# roof and turns out of frame at both ends; this is the part of it that is a
-# base for a bird — a little wider than he is on the left, where his breast
-# overhangs, and stopped on the right before the arm plunges out of the
-# picture. Any more and the mark is a building with a bird on it.
-LEDGE = (416, 984, 830, 1180)
+BIRD = (1338, 312, 1632, 634)
+# The ridge he is standing on. The gutter runs down both arms of the roof and
+# out of the picture; this is the part of it that is a base for a bird, cut
+# straight down at the far edge of his glasses and the tip of his tail. That
+# makes the mark as wide as he is and no wider, which is the shape the nav and
+# the footer set aside for it. Any more and it is a roof with a bird on it.
+LEDGE = (1346, 540, 1624, 704)
 
 PAGE = (250, 250, 251)           # --paper, what the opaque icons stand on
 
@@ -94,8 +97,8 @@ def bird_score(rgb):
     """How far a pixel is from anything on the wall behind the bird.
 
     Blue over red carries the body, green over red the frames, and the last
-    term carries the ink outline — which is neutral, and so scores nothing on
-    hue, but is darker than any plaster or shadow on the wall behind it.
+    term carries the glass — which is barely coloured, and so scores little on
+    hue, but is darker than any face of the wall behind it.
     """
     r, g, b = rgb
     lum = (r * 299 + g * 587 + b * 114) / 1000
@@ -103,17 +106,18 @@ def bird_score(rgb):
 
 
 def stone_score(rgb):
-    """The same, for the coping: grey, and nothing else up there is.
+    """The same, for the gutter: grey, and nothing else down there is.
 
-    Warm is the wall and the cream mouldings; cool is the bird, whose body
-    crosses this crop and must not be dragged into it. What is left in the
-    middle is the cap and its drawn edges.
+    Warm is the wall and the cream faces of the building; cool is the bird,
+    whose tail crosses this crop and must not be dragged into it. What is left
+    in the middle is the gutter, the face in the light included — which is
+    why the band is 45 wide and only near-white is ruled out on lightness.
     """
     r, g, b = rgb
     lum = (r * 299 + g * 587 + b * 114) / 1000
-    if lum > 178:
+    if lum > 212:
         return -100.0
-    return min(35 - abs(b - r), 40 + (g - r)) * 2.0
+    return min(45 - abs(b - r), 40 + (g - r)) * 2.0
 
 
 def largest_run(solid, w, h):
@@ -144,10 +148,10 @@ def largest_run(solid, w, h):
 def close_pockets(keep, src, w, h):
     """Fill the enclosed gaps that are paint rather than wall.
 
-    A pocket the key left open is either light the key was too strict about —
-    the specular on the shoulder, the glare on a lens — or it is a genuine
-    hole in the drawing with the ochre wall behind it. Ochre is the whole
-    difference, so that is what is measured.
+    A pocket the key left open is either paint the key was too strict about —
+    a one-pixel line where two faces meet — or it is a genuine gap in the
+    picture with the ochre wall behind it. Ochre is the whole difference, so
+    that is what is measured.
     """
     outside = [[False] * w for _ in range(h)]
     queue = deque()
@@ -235,14 +239,20 @@ def cut(box, score, hi):
 
 
 def perched():
-    """The bird on his ledge, back in the positions the plate has them in."""
+    """The bird on his ledge, back in the positions the plate has them in —
+    and the two pieces apart, on the same canvas, for the tracing."""
     bird = cut(BIRD, bird_score, 46.0)
     ledge = cut(LEDGE, stone_score, 30.0)
     x0, y0 = min(BIRD[0], LEDGE[0]), min(BIRD[1], LEDGE[1])
-    out = Image.new("RGBA", (max(BIRD[2], LEDGE[2]) - x0, max(BIRD[3], LEDGE[3]) - y0))
-    out.alpha_composite(ledge, (LEDGE[0] - x0, LEDGE[1] - y0))
-    out.alpha_composite(bird, (BIRD[0] - x0, BIRD[1] - y0))
-    return out.crop(out.getbbox())
+    size = (max(BIRD[2], LEDGE[2]) - x0, max(BIRD[3], LEDGE[3]) - y0)
+    pieces = []
+    for im, box in ((ledge, LEDGE), (bird, BIRD)):
+        layer = Image.new("RGBA", size)
+        layer.alpha_composite(im, (box[0] - x0, box[1] - y0))
+        pieces.append(layer)
+    out = Image.alpha_composite(*pieces)
+    box = out.getbbox()
+    return out.crop(box), [piece.crop(box) for piece in pieces]
 
 
 def down(im, size, sharpen=True):
@@ -266,7 +276,169 @@ def square(im, size, inset=1.0, ground=None):
     return canvas.convert("RGB") if ground else canvas
 
 
-mark = perched()
+RING = ((1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1))
+
+
+def walk(solid, w, h, start):
+    """The edge of the run `start` is the top-left pixel of, clockwise, as
+    the pixels along it (Moore-neighbour tracing)."""
+    def on(x, y):
+        return 0 <= x < w and 0 <= y < h and solid[y * w + x]
+
+    c, b = start, (start[0] - 1, start[1])
+    ring, first = [], None
+    while True:
+        i = RING.index((b[0] - c[0], b[1] - c[1]))
+        prev = b
+        for k in range(1, 9):
+            dx, dy = RING[(i + k) % 8]
+            n = (c[0] + dx, c[1] + dy)
+            if on(*n):
+                c, b = n, prev
+                break
+            prev = n
+        else:
+            return [start]
+        if (c, b) == first:
+            return ring
+        if first is None:
+            first = (c, b)
+        ring.append(c)
+
+
+def corners(pts, eps):
+    """A closed outline kept to its corners: every point within `eps` of the
+    straight run between the points either side of it goes (Douglas-Peucker,
+    worked from a stack so a long edge cannot run out the recursion)."""
+    n = len(pts)
+    far = max(range(n), key=lambda j: (pts[j][0] - pts[0][0]) ** 2
+              + (pts[j][1] - pts[0][1]) ** 2)
+    keep = {0, far}
+    todo = [(0, far), (far, n)]
+    while todo:
+        a, z = todo.pop()
+        if z - a < 2:
+            continue
+        (x0, y0), (x1, y1) = pts[a], pts[z % n]
+        dx, dy = x1 - x0, y1 - y0
+        span = math.hypot(dx, dy) or 1e-9
+        worst, at = -1.0, a
+        for j in range(a + 1, z):
+            d = abs((pts[j][0] - x0) * dy - (pts[j][1] - y0) * dx) / span
+            if d > worst:
+                worst, at = d, j
+        if worst > eps:
+            keep.add(at)
+            todo += [(a, at), (at, z)]
+    return [pts[j] for j in sorted(keep)]
+
+
+def outlines(matte, least=60, k=4):
+    """Every separate piece of a matte as a closed polygon in the matte's own
+    pixels, largest first. The matte is enlarged k times and read at half, so
+    the outline runs between pixels where the edge in the picture really runs;
+    then it is kept to its corners — anything within a pixel of a straight run
+    goes, which is the key's own wobble — and for a figure made of
+    straight-edged faces the corners are what it is."""
+    w, h = matte.width * k, matte.height * k
+    solid = bytearray(v >= 128 for v in
+                      matte.resize((w, h), Image.BILINEAR).getdata())
+    seen = bytearray(w * h)
+    found = []
+    for i in range(w * h):
+        if not solid[i] or seen[i]:
+            continue
+        seen[i] = 1
+        queue, area = deque([i]), 0
+        while queue:
+            j = queue.popleft()
+            area += 1
+            x, y = j % w, j // w
+            for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                m = ny * w + nx
+                if 0 <= nx < w and 0 <= ny < h and solid[m] and not seen[m]:
+                    seen[m] = 1
+                    queue.append(m)
+        if area < least * k * k:
+            continue
+        edge = walk(solid, w, h, (i % w, i // w))
+        found.append((area, corners([((x + 0.5) / k, (y + 0.5) / k) for x, y in edge], 1.0)))
+    return [poly for _, poly in sorted(found, key=lambda f: -f[0])]
+
+
+def tones(im, matte, *at):
+    """The colours a piece has at given lightnesses, from its own solid
+    pixels: 0 is its darkest, 1 its lightest."""
+    px = [c for c, a in zip(im.convert("RGB").getdata(), matte.getdata()) if a >= 250]
+    px.sort(key=lambda c: c[0] * 299 + c[1] * 587 + c[2] * 114)
+    return ["#%02X%02X%02X" % px[min(len(px) - 1, int(t * len(px)))] for t in at]
+
+
+def vector(ledge, bird):
+    """halo-mark.svg: the same cut, in outline. The four fills and the
+    classes on their stops are the ones build.py already lightens for a dark
+    tab strip."""
+    # the glasses are the part of him that is greener than it is blue; the
+    # rims run 150 and up in green, the glass under 110 reflections and all
+    frames = Image.new("L", bird.size)
+    glass = Image.new("L", bird.size)
+    for i, (r, g, b, a) in enumerate(bird.getdata()):
+        if a >= 128 and g > b and g - r > 25:
+            xy = (i % bird.width, i // bird.width)
+            frames.putpixel(xy, 255)
+            if g < 125:
+                glass.putpixel(xy, 255)
+    nothing = Image.new("L", bird.size)
+    body = Image.composite(bird.getchannel("A"), nothing, ImageOps.invert(frames))
+    rims = Image.composite(frames, nothing, ImageOps.invert(glass))
+    hb = tones(bird, body, 0.85, 0.45, 0.08)
+    gf = tones(bird, rims, 0.8, 0.2)
+    gl = tones(bird, glass, 0.85, 0.1)
+    st = tones(ledge, ledge.getchannel("A"), 0.9, 0.4, 0.05)
+
+    def path(poly):
+        return "M " + " L ".join("%.1f %.1f" % p for p in poly) + " Z"
+
+    w, h = bird.size
+    lines = [
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-label="GreDami">' % (w, h),
+        '  <!-- written by _build/make_mark.py, traced off the same cut as mark.webp -->',
+        '  <defs>',
+        '    <!-- the body: lit from the top left, as he is in the picture -->',
+        '    <linearGradient id="hb" x1="0.15" y1="0" x2="0.85" y2="1">',
+        '      <stop class="s0" offset="0" stop-color="%s"/>' % hb[0],
+        '      <stop class="s1" offset="0.5" stop-color="%s"/>' % hb[1],
+        '      <stop class="s2" offset="1" stop-color="%s"/>' % hb[2],
+        '    </linearGradient>',
+        '    <linearGradient id="gf" x1="0.1" y1="0" x2="0.7" y2="1">',
+        '      <stop class="s3" offset="0" stop-color="%s"/>' % gf[0],
+        '      <stop class="s4" offset="1" stop-color="%s"/>' % gf[1],
+        '    </linearGradient>',
+        '    <linearGradient id="gl" x1="0.2" y1="0" x2="0.6" y2="1">',
+        '      <stop offset="0" stop-color="%s"/>' % gl[0],
+        '      <stop offset="1" stop-color="%s"/>' % gl[1],
+        '    </linearGradient>',
+        '    <!-- the gutter: the light along its top face, slate down its front -->',
+        '    <linearGradient id="st" x1="0" y1="0" x2="0.25" y2="1">',
+        '      <stop class="s5" offset="0" stop-color="%s"/>' % st[0],
+        '      <stop class="s6" offset="0.5" stop-color="%s"/>' % st[1],
+        '      <stop class="s7" offset="1" stop-color="%s"/>' % st[2],
+        '    </linearGradient>',
+        '  </defs>',
+        '  <!-- the ledge first and the bird over it, as the picture has them; its',
+        '       stroke closes the hair between his outline and the top of the gutter -->',
+        '  <path d="%s" fill="url(#st)" stroke="url(#st)" stroke-width="1.2" stroke-linejoin="round"/>'
+        % path(outlines(ledge.getchannel("A"))[0]),
+        '  <path d="%s" fill="url(#hb)"/>' % path(outlines(bird.getchannel("A"))[0]),
+        '  <path d="%s" fill="url(#gf)"/>' % path(outlines(frames)[0]),
+    ]
+    for lens in outlines(glass, least=20)[:2]:
+        lines.append('  <path d="%s" fill="url(#gl)"/>' % path(lens))
+    lines.append("</svg>")
+    return "\n".join(lines) + "\n"
+
+
+mark, (ledge_piece, bird_piece) = perched()
 
 written = []
 
@@ -306,6 +478,10 @@ save("apple-touch-icon.png", square(mark, 180, 0.84, PAGE),
 # Android maskable: everything that matters inside the middle 80%
 save("icon-maskable.webp", square(mark, 512, 0.63, PAGE),
      format="WEBP", quality=88, method=6)
+
+svg = ROOT / "halo-mark.svg"
+svg.write_text(vector(ledge_piece, bird_piece), encoding="utf-8")
+written.append(("halo-mark.svg", ledge_piece.size, svg.stat().st_size))
 
 for name, size, nbytes in written:
     print("%-22s %4dx%-4d %6.1f KB" % (name, size[0], size[1], nbytes / 1024))

@@ -95,8 +95,8 @@ CSS_HREF = "assets/site.%s.css" % hashlib.sha256(CSS.encode("utf-8")).hexdigest(
 
 # Safari's pinned tab wants a vector, and it wants one it can flatten to a
 # single colour — an illustration is no use to it. So the mask icon is the same
-# bird drawn again in curves: his outline traced off the plate the raster mark
-# is cut from, so the two are one shape and not two drawings of one bird. It is
+# bird in outline: make_mark.py traces him off the very cut the raster mark is
+# made from, so the two are one shape and not two drawings of one bird. It is
 # squared off with a little air around it, so he never touches the edge of the
 # tab, and given lighter blues, greens and greys under a dark tab strip where
 # the deep cobalt and the slate he stands on would otherwise sink into the
