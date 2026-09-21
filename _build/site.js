@@ -60,6 +60,14 @@
     if (e.key === 'Escape') { closeDrawer(); closeLang(); }
   });
 
+  /* a language picked here is remembered, and outranks the system's when an
+     English page sends a newcomer on to their own (build.py) */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('#langMenu a[hreflang], .drawer-langs a[hreflang]') : null;
+    if (!a) return;
+    try { localStorage.setItem('gredami-lang', a.getAttribute('hreflang')); } catch (err) { /* private mode */ }
+  });
+
   /* ── scroll state ── */
   var nav = document.getElementById('nav');
   var backTop = document.getElementById('back-top');
@@ -182,6 +190,18 @@
   var CONSENT_KEY = 'gd-consent';
   var GA_ID = document.documentElement.getAttribute('data-ga');
 
+  /* A page that sent the visitor on here before it was drawn (build.py) left
+     behind the referrer it was reached from: that is where this visit came
+     from, not the page that did the sending. The page doing the sending has
+     no id by now, so it never takes what it left for the next one. */
+  var arrivedFrom = null;
+  if (GA_ID) {
+    try {
+      arrivedFrom = sessionStorage.getItem('gd-ref');
+      sessionStorage.removeItem('gd-ref');
+    } catch (err) { /* private mode */ }
+  }
+
   function remember(value) {
     try { localStorage.setItem(CONSENT_KEY, value); } catch (err) { /* private mode */ }
   }
@@ -200,7 +220,9 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', GA_ID, { anonymize_ip: true });
+    var config = { anonymize_ip: true };
+    if (arrivedFrom) config.page_referrer = arrivedFrom;
+    gtag('config', GA_ID, config);
   }
 
   var banner = document.getElementById('consent');

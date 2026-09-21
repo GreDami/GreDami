@@ -262,15 +262,71 @@ def lang_links(lang, page, indent):
 # canonical points at the clean URL; this sends the address bar there too,
 # before the analytics tag fires, so the pageview is recorded against the clean
 # URL. Skipped off http(s): on file:// the file name is the address.
-CLEAN_URL = """  <script>
+#
+# An English page is also the x-default: where a visitor lands when nothing
+# says which language they read. It sends a newcomer on to the same page in the
+# first language of their system's list that the site speaks, and to the clean
+# address of it, in one step. A French, Russian or Spanish address is never
+# redirected — whoever wrote the link chose it — and neither is Googlebot,
+# which reads in English and so still reaches every version. A language picked
+# from the switcher outranks the system's (site.js keeps it), and a visitor
+# arriving from another page of the site has already been placed, so is left
+# where they are.
+#
+# Either way the page is left before it is drawn or counted: it is hidden, its
+# analytics id is taken off so site.js loads nothing, and the referrer it
+# arrived with is handed on for the next page to report as its own.
+ARRIVE_JS = """  <script>
     (function () {
       if (location.protocol.indexOf('http') !== 0) return;
-      var p = location.pathname, c = null;
-      if (p.slice(-11) === '/index.html') c = p.slice(0, -10);
-      else if (p.slice(-5) === '.html') c = p.slice(0, -5);
-      if (c) location.replace(c + location.search + location.hash);
+      var p = location.pathname, ref = document.referrer, to = null;%(lang)s
+      if (!to) {
+        if (p.slice(-11) === '/index.html') to = p.slice(0, -10);
+        else if (p.slice(-5) === '.html') to = p.slice(0, -5);
+      }
+      if (!to) return;
+      var root = document.documentElement;
+      root.style.visibility = 'hidden';
+      setTimeout(function () { root.style.visibility = ''; }, 3000);
+      root.removeAttribute('data-ga');
+      if (ref) { try { sessionStorage.setItem('%(ref)s', ref); } catch (e) {} }
+      var m = document.createElement('meta');
+      m.name = 'referrer'; m.content = 'no-referrer';
+      document.head.appendChild(m);
+      location.replace(to + location.search + location.hash);
     })();
   </script>"""
+
+LANG_JS = """
+      var go = %(go)s, want = null;
+      if (!ref || ref.split('/')[2] !== location.host) {
+        try { want = localStorage.getItem('%(key)s'); } catch (e) {}
+        if (want !== 'en' && !go.hasOwnProperty(want)) {
+          want = null;
+          var prefs = navigator.languages && navigator.languages.length
+            ? navigator.languages : [navigator.language];
+          for (var i = 0; i < prefs.length && !want; i++) {
+            var l = String(prefs[i]).toLowerCase().split(/[-_]/)[0];
+            if (l === 'en' || go.hasOwnProperty(l)) want = l;
+          }
+        }
+        if (want && want !== 'en') to = go[want];
+      }"""
+
+# the key the old one-page site kept a chosen language under, so a choice made
+# there still holds
+LANG_KEY = "gredami-lang"
+REF_KEY = "gd-ref"
+
+
+def arrive(lang, page, canonical):
+    """Only a page with language alternates has anywhere to send a reader, so
+    404.html — English, but answering every language's misses — only tidies."""
+    lang_js = ""
+    if lang == "en" and canonical:
+        go = {l: href(lang, l, page or "index.html") for l in LANGS if l != lang}
+        lang_js = LANG_JS % {"go": json.dumps(go), "key": LANG_KEY}
+    return ARRIVE_JS % {"lang": lang_js, "ref": REF_KEY}
 
 
 # ── head ────────────────────────────────────────────────────────────────
@@ -308,7 +364,7 @@ def head(lang, page, title, desc, extra="", noindex=False, canonical=True):
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{e(title)}</title>
-{CLEAN_URL}
+{arrive(lang, page, canonical)}
 
   <link rel="icon" href="{asset(lang, ver("favicon.ico"))}" sizes="32x32">
   <link rel="icon" type="image/png" href="{asset(lang, ver("favicon.png"))}" sizes="192x192">
