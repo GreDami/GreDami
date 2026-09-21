@@ -525,11 +525,11 @@
 
     /* ── the picture ──
        It runs the whole width of the page, and it is the picture the whole
-       way: the wall is carried on past the drawing's left edge, the cornice
-       with it, out to the far side of the screen. That continuation is drawn
-       into halo-band.webp rather than faked here — see _build/make_band.py for
-       what is taken from the drawing and how. What is left for the stylesheet
-       is where the plate sits: anchored to the right, so that whatever a given
+       way: the wall is carried on past the picture's left edge, facet by
+       facet, out to the far side of the screen. That continuation is drawn
+       into halo-band.webp rather than faked here — see _build/make_band.py and
+       _build/facets.py for how it is cut. What is left for the stylesheet is
+       where the plate sits: anchored to the right, so that whatever a given
        screen has to crop is taken off the far end of the wall, where there is
        nothing to lose, and never off the bird. */
     .hero-art {
@@ -590,7 +590,7 @@
     }
 
     /* ── the copy, standing on the wall ──
-       The ochre is bright, so black type clears it easily and the violet has
+       The yellow is bright, so black type clears it easily and the violet has
        better than 6:1 on it. The two greys the copy used on paper do not, and
        both step down to near-ink here. This is the whole cost of taking the
        panel away. */
@@ -786,8 +786,9 @@
       .hero-proof { margin-top: 30px; padding-top: 20px; }
       .hero-inner, .hero-proof { max-width: none; }
       /* The wide plate is the wrong shape here — cropped to a phone it is all
-         wall and no bird. The band goes back to the drawing's own file, thrown
-         out of focus to make the field, with the picture standing on it. */
+         wall and no bird. The band goes to the tall plate instead, the picture
+         framed 3:4 around the bird (_build/make_art.py), thrown out of focus to
+         make the field, with the picture standing on it. */
       .hero-art {
         background: none;
       }
