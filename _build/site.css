@@ -1195,6 +1195,7 @@
     .build p {
       font-size: 14.5px; line-height: 1.55; color: var(--mid); margin-bottom: 16px;
     }
+    .build p:last-child { margin-bottom: 0; }
     .build-link {
       display: inline-flex; align-items: center; gap: 7px; margin-top: auto;
       font-size: 14px; font-weight: 600; color: var(--accent);
@@ -1229,14 +1230,7 @@
        ground is tinted, not that the words have to shout over it */
     .build-grid .build h3 { color: var(--ink); }
     .build-grid .build p { color: var(--mid); }
-    .build-grid .build .build-n,
-    .build-grid .build .build-link { color: var(--accent); }
-
-    /* the panels opt out of the shared card motion entirely */
-    .build .build-link::after { display: none; }
-    .build .build-link:hover { border-bottom-color: currentColor; }
-    .build .build-link svg { transition: none; }
-    .build .build-link:hover svg { transform: none; }
+    .build-grid .build .build-n { color: var(--accent); }
 
     /* ── the panels stand up ──
        Each one turns toward the pointer as it grows. Hover only: nothing
@@ -1307,7 +1301,7 @@
     /* ══════════════════════════════════════════
        Footer additions
        ══════════════════════════════════════════ */
-    .footer-in { grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)); }
+    .footer-in { grid-template-columns: minmax(0, 1.7fr) repeat(2, minmax(0, 1fr)); }
     .footer-tag {
       font-family: var(--f-display); font-style: italic; font-weight: 500;
       font-size: 13.5px; color: var(--faint); letter-spacing: -0.005em;
@@ -1366,6 +1360,9 @@
     @media (max-width: 1000px) {
       .build-grid { grid-template-columns: 1fr; }
       .footer-in { grid-template-columns: 1fr 1fr; }
+      /* two link columns: the brand takes the first row to itself, so they
+         sit side by side under it rather than one trailing alone */
+      .footer-in > :first-child { grid-column: 1 / -1; }
     }
     @media (max-width: 640px) {
       .footer-in { grid-template-columns: 1fr; }

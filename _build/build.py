@@ -408,8 +408,8 @@ def nav(lang, page, t, lang_page=None):
     anchor = (lambda a: "#" + a) if page == "" else (lambda a: home + "#" + a)
     # Home leads the menu: an in-page jump on the home page, a link back to it
     # from anywhere else. Work and the methodology keep pages of their own, but
-    # they are reached from the cards on the home page and from the footer, not
-    # from the menu.
+    # they are reached from the cards on the home page (and the methodology from
+    # the footer), not from the menu.
     items = [
         ("#hero" if page == "" else home, "nav.home", False),
         (anchor("build"), "nav.build", False),
@@ -551,9 +551,6 @@ def consent(lang, t):
 def footer(lang, t, extra_js=""):
     home = href(lang, lang, "index.html")
     svc = href(lang, lang, SERVICES)
-    cat_links = "\n".join(
-        '        <a href="' + href(lang, lang, CAT_PAGE[k]) + '">'
-        + e(t["proj.cat." + k]) + "</a>" for k in CATS)
     return f"""  <footer>
     <div class="footer-in">
       <div>
@@ -572,14 +569,6 @@ def footer(lang, t, extra_js=""):
         <a href="{svc}">{e(t["sp.4.name"])}</a>
         <a href="{svc}">{e(t["sp.1.name"])}</a>
         <a href="{svc}">{e(t["sp.5.name"])}</a>
-      </div>
-
-      <div class="footer-col">
-        <p class="footer-col-lbl">{e(t["footer.workLabel"])}</p>
-{cat_links}
-        <a href="https://apps.apple.com/app/id6760232332" target="_blank" rel="noopener">GoBag+</a>
-        <a href="https://apps.apple.com/app/id6767314346" target="_blank" rel="noopener">FinWall</a>
-        <a href="https://lokalshot.com" target="_blank" rel="noopener">LokalShot</a>
       </div>
 
       <div class="footer-col">
@@ -1050,9 +1039,6 @@ def home(lang):
             <p class="build-n">0{i + 1}</p>
             <h3>{e(t["build." + k + ".name"])}</h3>
             <p>{e(t["build." + k + ".desc"])}</p>
-            <a class="build-link" href="{href(lang, lang, CAT_PAGE[cat])}">
-              <span>{e(t["build." + k + ".cta"])}</span> {ARROW_SM}
-            </a>
           </article>
 
 """
