@@ -19,11 +19,14 @@
  */
 
 /* CabiStock's contact form (its /a-propos page) posts here too: the app is the
-   studio's, and its correspondence belongs in the same inbox. Its host must
-   also be listed on the Turnstile widget, or the token never gets issued. */
+   studio's, and its correspondence belongs in the same inbox. Its hosts must
+   also be listed on the Turnstile widget, or the token never gets issued.
+   cabistock.com is its address; the workers.dev one still serves the same
+   site, because the iOS 2.0 build links to it. */
 const ORIGINS = [
   'https://gredami.com',
   'https://www.gredami.com',
+  'https://cabistock.com',
   'https://cabistock.gredami.workers.dev',
 ];
 
