@@ -1333,7 +1333,11 @@ def legal_page(lang, kind):
   </main>
 
 """
-    return (head(lang, page, t[k + "meta.title"], t[k + "meta.desc"])
+    # The legal notice is noindex, and not in the sitemap: it carries the
+    # publisher's postal address and telephone number, which the law wants one
+    # click from every page — the footer — not in the results of a search for
+    # the name.
+    return (head(lang, page, t[k + "meta.title"], t[k + "meta.desc"], noindex=(kind == "legal"))
             + nav(lang, page, t) + body + footer(lang, t))
 
 
@@ -1636,7 +1640,7 @@ def contact(lang):
 
 
 # ── write ───────────────────────────────────────────────────────────────
-PRIORITY = {"": "1.0", CONTACT: "0.9", PRIVACY: "0.3", LEGAL: "0.3"}
+PRIORITY = {"": "1.0", CONTACT: "0.9", PRIVACY: "0.3"}
 
 
 def main():
@@ -1670,9 +1674,10 @@ def main():
     (ROOT / "404.html").write_text(not_found(), encoding="utf-8")
     written.append("404.html")
 
+    # Every page but the legal notice, which is noindex (see legal_page).
     rows = []
     for page in (["", SERVICES] + [CAT_PAGE[k] for k in CATS]
-                 + [METHOD, ABOUT, CONTACT, PRIVACY, LEGAL]):
+                 + [METHOD, ABOUT, CONTACT, PRIVACY]):
         for lang in LANGS:
             # x-default names the version to serve a visitor whose language the
             # site does not speak. The pages have carried it since they were

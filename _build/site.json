@@ -296,12 +296,12 @@
     "priv.label": "Privacy",
     "priv.title": "What we collect, and why",
     "priv.sub": "Short version: we keep what you send us so we can answer it, we count visits only if you say yes, and we sell nothing to anyone",
-    "priv.updated": "Last updated 7 September 2026",
+    "priv.updated": "Last updated 5 October 2026",
     "priv.sections": [
       {
         "h": "Who is responsible",
         "body": [
-          "GreDami, an independent studio working from Paris, France, decides what happens to the data described here — it is the **data controller** in the wording of the GDPR.",
+          "Grégory Dementev, entrepreneur individuel (EI) trading as GreDami, decides what happens to the data described here and is the **data controller** in the wording of the GDPR. The controller's address, phone number and registration details are in the [legal notice](LEGAL).",
           "You can reach us about anything on this page at [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -367,19 +367,30 @@
     "legal.label": "Legal notice",
     "legal.title": "Legal notice",
     "legal.sub": "Who publishes this site, who hosts it, and what may be done with what is on it",
-    "legal.updated": "Last updated 2 September 2026",
+    "legal.updated": "Last updated 5 October 2026",
     "legal.sections": [
       {
         "h": "Publisher",
         "body": [
-          "This site is published by GreDami, working from Paris, France.",
-          "Email: [contact@gredami.com](mailto:contact@gredami.com)"
+          "This site is published by **Grégory Dementev**, entrepreneur individuel (EI) — a French sole proprietorship — trading as GreDami.",
+          "- **Address:** 72 rue du Colonel de Rochebrune, 92380 Garches, France",
+          "- **Phone:** [+33 6 82 72 27 07](tel:+33682722707)",
+          "- **Email:** [contact@gredami.com](mailto:contact@gredami.com)",
+          "- **SIREN:** 819 038 860, French national business register (RNE)",
+          "- **APE code:** 62.01Z",
+          "- **VAT:** not applicable, article 293 B of the French General Tax Code (CGI)"
+        ]
+      },
+      {
+        "h": "Director of publication",
+        "body": [
+          "Grégory Dementev."
         ]
       },
       {
         "h": "Host",
         "body": [
-          "The site is hosted by GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States — [github.com](https://github.com)."
+          "The site is hosted by GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States — phone [+1 (877) 448-4820](tel:+18774484820) — [github.com](https://github.com)."
         ]
       },
       {
@@ -730,12 +741,12 @@
     "priv.label": "Конфиденциальность",
     "priv.title": "Что мы собираем и зачем",
     "priv.sub": "Коротко: мы храним то, что вы нам присылаете, чтобы ответить, считаем визиты только с вашего согласия и ничего никому не продаём",
-    "priv.updated": "Обновлено 7 сентября 2026 года",
+    "priv.updated": "Обновлено 5 октября 2026 года",
     "priv.sections": [
       {
         "h": "Кто отвечает за данные",
         "body": [
-          "GreDami — независимая студия, работающая из Парижа, Франция, — решает, что происходит с описанными здесь данными: это **оператор персональных данных** в терминах GDPR.",
+          "Grégory Dementev — entrepreneur individuel (EI) под коммерческим наименованием GreDami — решает, что происходит с описанными здесь данными: это **оператор персональных данных** в терминах GDPR. Адрес, телефон и регистрационные данные оператора указаны в разделе [«Правовая информация»](LEGAL).",
           "По любым вопросам, связанным с этой страницей: [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -801,19 +812,30 @@
     "legal.label": "Правовая информация",
     "legal.title": "Правовая информация",
     "legal.sub": "Кто издаёт этот сайт, кто его размещает и что можно делать с его содержимым",
-    "legal.updated": "Обновлено 2 сентября 2026 года",
+    "legal.updated": "Обновлено 5 октября 2026 года",
     "legal.sections": [
       {
         "h": "Издатель сайта",
         "body": [
-          "Сайт издаётся студией GreDami, работающей из Парижа, Франция.",
-          "Электронная почта: [contact@gredami.com](mailto:contact@gredami.com)"
+          "Сайт издаёт **Grégory Dementev** — entrepreneur individuel (EI), то есть индивидуальный предприниматель по французскому праву, — под коммерческим наименованием GreDami.",
+          "- **Адрес:** 72 rue du Colonel de Rochebrune, 92380 Garches, France",
+          "- **Телефон:** [+33 6 82 72 27 07](tel:+33682722707)",
+          "- **Электронная почта:** [contact@gredami.com](mailto:contact@gredami.com)",
+          "- **SIREN:** 819 038 860, Национальный реестр предприятий Франции (RNE)",
+          "- **Код APE:** 62.01Z",
+          "- **НДС:** не применяется, ст. 293 B Общего налогового кодекса Франции (CGI)"
+        ]
+      },
+      {
+        "h": "Директор публикации",
+        "body": [
+          "Grégory Dementev."
         ]
       },
       {
         "h": "Хостинг",
         "body": [
-          "Сайт размещён на GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, США — [github.com](https://github.com)."
+          "Сайт размещён на GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, США — телефон [+1 (877) 448-4820](tel:+18774484820) — [github.com](https://github.com)."
         ]
       },
       {
@@ -1164,12 +1186,12 @@
     "priv.label": "Confidentialité",
     "priv.title": "Ce que nous collectons, et pourquoi",
     "priv.sub": "En résumé : nous conservons ce que vous nous envoyez pour pouvoir y répondre, nous comptons les visites uniquement si vous l'acceptez, et nous ne vendons rien à personne",
-    "priv.updated": "Dernière mise à jour le 7 septembre 2026",
+    "priv.updated": "Dernière mise à jour le 5 octobre 2026",
     "priv.sections": [
       {
         "h": "Responsable du traitement",
         "body": [
-          "GreDami, studio indépendant établi à Paris, détermine ce qu'il advient des données décrites ici : c'est le **responsable du traitement** au sens du RGPD.",
+          "Grégory Dementev, entrepreneur individuel (EI) exerçant sous le nom commercial GreDami, détermine ce qu'il advient des données décrites ici et agit en qualité de **responsable du traitement** au sens du RGPD. Son adresse, son téléphone et son immatriculation figurent dans les [mentions légales](LEGAL).",
           "Pour toute question relative à cette page : [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -1235,19 +1257,30 @@
     "legal.label": "Mentions légales",
     "legal.title": "Mentions légales",
     "legal.sub": "Qui édite ce site, qui l'héberge, et ce qui peut être fait de son contenu",
-    "legal.updated": "Dernière mise à jour le 2 septembre 2026",
+    "legal.updated": "Dernière mise à jour le 5 octobre 2026",
     "legal.sections": [
       {
         "h": "Éditeur du site",
         "body": [
-          "Ce site est édité par GreDami, établi à Paris, France.",
-          "Courriel : [contact@gredami.com](mailto:contact@gredami.com)"
+          "Ce site est édité par **Grégory Dementev**, entrepreneur individuel (EI), exerçant sous le nom commercial GreDami.",
+          "- **Adresse :** 72 rue du Colonel de Rochebrune, 92380 Garches, France",
+          "- **Téléphone :** [06 82 72 27 07](tel:+33682722707)",
+          "- **Courriel :** [contact@gredami.com](mailto:contact@gredami.com)",
+          "- **SIREN :** 819 038 860, Registre national des entreprises (RNE)",
+          "- **Code APE :** 62.01Z",
+          "- **TVA :** non applicable, art. 293 B du CGI"
+        ]
+      },
+      {
+        "h": "Directeur de la publication",
+        "body": [
+          "Grégory Dementev."
         ]
       },
       {
         "h": "Hébergeur",
         "body": [
-          "Le site est hébergé par GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — [github.com](https://github.com)."
+          "Le site est hébergé par GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — téléphone : [+1 (877) 448-4820](tel:+18774484820) — [github.com](https://github.com)."
         ]
       },
       {
@@ -1598,12 +1631,12 @@
     "priv.label": "Privacidad",
     "priv.title": "Qué recogemos, y por qué",
     "priv.sub": "En resumen: guardamos lo que usted nos envía para poder responderle, contamos las visitas solo si nos da permiso, y no vendemos nada a nadie",
-    "priv.updated": "Última actualización: 7 de septiembre de 2026",
+    "priv.updated": "Última actualización: 5 de octubre de 2026",
     "priv.sections": [
       {
         "h": "Quién es el responsable",
         "body": [
-          "GreDami, estudio independiente que trabaja desde París (Francia), decide qué ocurre con los datos descritos aquí: es el **responsable del tratamiento** en los términos del RGPD.",
+          "Grégory Dementev, entrepreneur individuel (EI) con el nombre comercial GreDami, decide qué ocurre con los datos descritos aquí y actúa como **responsable del tratamiento** en los términos del RGPD. Su dirección, su teléfono y sus datos de registro figuran en el [aviso legal](LEGAL).",
           "Para cualquier cuestión relativa a esta página: [contact@gredami.com](mailto:contact@gredami.com)."
         ]
       },
@@ -1669,19 +1702,30 @@
     "legal.label": "Aviso legal",
     "legal.title": "Aviso legal",
     "legal.sub": "Quién edita este sitio, quién lo aloja y qué puede hacerse con su contenido",
-    "legal.updated": "Última actualización: 2 de septiembre de 2026",
+    "legal.updated": "Última actualización: 5 de octubre de 2026",
     "legal.sections": [
       {
         "h": "Editor del sitio",
         "body": [
-          "Este sitio está editado por GreDami, con actividad en París (Francia).",
-          "Correo electrónico: [contact@gredami.com](mailto:contact@gredami.com)"
+          "Este sitio está editado por **Grégory Dementev**, entrepreneur individuel (EI) —la forma de empresa individual del derecho francés—, con el nombre comercial GreDami.",
+          "- **Dirección:** 72 rue du Colonel de Rochebrune, 92380 Garches, Francia",
+          "- **Teléfono:** [+33 6 82 72 27 07](tel:+33682722707)",
+          "- **Correo electrónico:** [contact@gredami.com](mailto:contact@gredami.com)",
+          "- **SIREN:** 819 038 860, Registro nacional de empresas de Francia (RNE)",
+          "- **Código APE:** 62.01Z",
+          "- **IVA:** no aplicable, art. 293 B del Código General de Impuestos francés (CGI)"
+        ]
+      },
+      {
+        "h": "Dirección de la publicación",
+        "body": [
+          "Grégory Dementev."
         ]
       },
       {
         "h": "Alojamiento",
         "body": [
-          "El sitio está alojado por GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, Estados Unidos — [github.com](https://github.com)."
+          "El sitio está alojado por GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, Estados Unidos — teléfono [+1 (877) 448-4820](tel:+18774484820) — [github.com](https://github.com)."
         ]
       },
       {
