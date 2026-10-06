@@ -1026,7 +1026,7 @@ def home(lang):
         "description": t["footer.tagline"],
         "email": EMAIL,
         "address": {"@type": "PostalAddress",
-                    "addressLocality": "Paris", "addressCountry": "FR"},
+                    "addressRegion": "Île-de-France", "addressCountry": "FR"},
         "knowsAbout": ["iOS Development", "SwiftUI", "Web Development", "SaaS",
                        "Product Design", "App Store Optimization", "Localization"],
         "availableLanguage": LANGS,
@@ -1258,7 +1258,7 @@ def about_page(lang):
             "description": t["about.desc"],
             "email": EMAIL,
             "address": {"@type": "PostalAddress",
-                        "addressLocality": "Paris", "addressCountry": "FR"},
+                        "addressRegion": "Île-de-France", "addressCountry": "FR"},
             "availableLanguage": LANGS,
         },
     }, ensure_ascii=False, indent=2)
